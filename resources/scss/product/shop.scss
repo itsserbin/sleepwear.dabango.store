@@ -3,7 +3,7 @@
     &__first-side {
         display: grid;
         grid-template-columns: 65px 1fr;
-        gap: 15px;
+        grid-column-gap: 15px;
         margin: 0 0 30px 0;
     }
     &__product-name {
@@ -62,7 +62,6 @@
             display: flex;
             justify-content: flex-start;
             flex-wrap: wrap;
-            gap: 5px;
             margin: 0 0 10px 0;
         }
     }
@@ -75,6 +74,9 @@
         width: 30px;
         height: 30px;
         background: #FFFFFF;
+        &:not(:last-child) {
+            margin: 0 5px 5px 0;
+        }
         input[type=radio] {
             display: none;
         }
@@ -170,7 +172,7 @@
             >.row {
                 display: grid;
                 grid-template-columns: 1fr 2fr;
-                gap: 10px;
+                grid-gap: 10px;
             }
         }
         &__button {
@@ -184,7 +186,7 @@
             >.row {
                 display: grid;
                 grid-template-columns: repeat(2,1fr);
-                gap: 15px;
+                grid-gap: 15px;
                 >.column {
                   grid-column: 1/3;
               }
