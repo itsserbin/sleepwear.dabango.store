@@ -1,0 +1,93 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+
+@import "shop";
+@import "advantages";
+@import "shipping-and-payment";
+@import "reviews";
+@import "relative";
+@import "product-list";
+
+html {
+    height: 100%;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Gilroy", "Arial";
+    height: 100%;
+    background-color: #fff;
+}
+
+body.lock {
+    overflow: hidden;
+
+    .arrow-to-top {
+        display: none;
+    }
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.content {
+    box-sizing: content-box;
+    margin: 0 auto;
+    padding: 0 20px;
+    max-width: 824px;
+}
+
+.main {
+    flex: 1 0 auto;
+}
+
+.footer {
+    flex: 0 0 auto;
+}
+
+.block-title {
+    font-weight: bold;
+    font-size: 22px;
+    text-align: center;
+    color: #000000;
+}
+
+.logo {
+    width: 100px;
+
+    img {
+        width: 100%;
+    }
+}
+
+.button {
+    font-weight: bold;
+    font-size: 24px;
+    text-transform: uppercase;
+
+    &--color {
+        &_red {
+            background: #E02424;
+        }
+    }
+
+    &--color-text {
+        &_white {
+            color: #FFFFFF;
+        }
+    }
+}
+
+@media (min-width: 864px) {
+    .content {
+        width: 830px;
+        margin: 0 auto;
+        padding: 0 30px;
+    }
+
+    .block-title {
+        font-size: 24px;
+    }
+}

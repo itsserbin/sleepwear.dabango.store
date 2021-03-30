@@ -1,0 +1,31 @@
+.header-burger {
+    transition: all 0.3s ease 0s;
+    width: auto;
+
+    span {
+        padding: 10px;
+        font-size: 30px;
+        cursor: pointer;
+        color: #C4C4C4;
+
+        &:last-child {
+            display: none;
+        }
+    }
+}
+
+.header-burger.active {
+    z-index: 999;
+
+    span {
+        font-size: 20px;
+
+        &:first-child {
+            display: none;
+        }
+
+        &:last-child {
+            display: inline;
+        }
+    }
+}

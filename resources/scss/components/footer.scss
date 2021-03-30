@@ -1,0 +1,76 @@
+.footer {
+    position: relative;
+    padding: 20px 0;
+    background: #161616;
+
+    &__title {
+        margin: 0 0 40px 0;
+        font-family: "Montserrat", sans-serif;
+        font-weight: bold;
+        font-size: 20px;
+        font-variant: small-caps;
+        color: #FFFFFF;
+    }
+
+    &__location {
+        margin: 0 0 32px 0;
+    }
+
+    &__address {
+        margin: 0 0 52px 0;
+    }
+
+    &-menu__link {
+        display: inline-block;
+        padding: 9px 0;
+        font-size: 14px;
+        font-variant: small-caps;
+        color: #fff;
+    }
+}
+
+.location {
+    a {
+        color: #FFFFFF;
+    }
+}
+
+.phonecall, .email {
+    font-family: Montserrat;
+    font-variant: small-caps;
+}
+
+.address {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.phonecall,
+.email {
+    color: #FFFFFF;
+    font-style: normal;
+}
+
+@media (min-width: 576px) {
+    .footer {
+        &__second-side {
+            display: block;
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .footer {
+        padding: 50px 0;
+
+        &__title {
+            font-size: 24px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-evenly;
+        }
+    }
+}
