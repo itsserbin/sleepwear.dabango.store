@@ -7,9 +7,9 @@
                         <img src="{{asset($product->preview)}}" alt="">
                     </div>
                     @foreach($productsPhoto as $photo)
-                        <div class="shop-products-slider-small__image">
-                            <img src="{{asset($photo->image)}}" alt="">
-                        </div>
+                    <div class="shop-products-slider-small__image">
+                        <img src="{{asset($photo->image)}}" alt="">
+                    </div>
                     @endforeach
                 </div>
                 <div class="shop-products-slider-big">
@@ -17,9 +17,9 @@
                         <img src="{{asset($product->preview)}}" alt="">
                     </div>
                     @foreach($productsPhoto as $photo)
-                        <div class="shop-products-slider-big__image">
-                            <img src="{{asset($photo->image)}}" alt="">
-                        </div>
+                    <div class="shop-products-slider-big__image">
+                        <img src="{{asset($photo->image)}}" alt="">
+                    </div>
                     @endforeach
                 </div>
             </div>
@@ -56,26 +56,7 @@
                             <label for="size-5">XXL</label>
                         </div>
                     </div>
-                    <div class="shop__colors">
-                        <div class="shop__characteristic-label">Выберите цвет:</div>
-                        <div class="row">
-                            <div class="shop__color shop__color--blue">
-                                <input id="color-1" type="radio" name="color" value="blue" form="order-form">
-                                <label for="color-1"></label>
-                            </div>
-                            <div class="shop__color shop__color--red">
-                                <input id="color-2" type="radio" name="color" value="red" form="order-form">
-                                <label for="color-2"></label>
-                            </div>
-                            <div class="shop__color shop__color--green">
-                                <input id="color-3" type="radio" name="color" value="green" form="order-form">
-                                <label for="color-3"></label>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-            </div>
-            <div class="column">
                 <div class="shop__description-title block-title">Описание</div>
                 <div class="shop__description">
                     {!! $product->content !!}

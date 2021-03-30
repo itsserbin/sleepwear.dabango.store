@@ -1,0 +1,63 @@
+.card {
+	padding: 0 0 20px 0;
+	.content {
+		>.row {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 20px;
+		}
+	}
+	&__product {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		border: 1px solid #e9e9e9;
+		padding: 15px;
+		width: 150px;
+	}
+	&__image {
+		display: flex;
+		justify-content: center;
+		margin: 0 auto 10px auto;
+		width: 120px;
+		height: 160px;
+		img {
+			width: 100%;
+			height: 100%;
+		}
+	}
+	&__label {
+		margin: 0 0 10px 0;
+		max-height: 28px;
+		font-weight: bold;
+		font-size: 14px;
+		color: #000;
+		overflow: hidden;
+		text-align: center;
+	}
+	&__price {
+		display: flex;
+		align-items: center;
+		gap: 5px;
+		flex-direction: column;
+	}
+	&__old-price {
+		font-weight: 500;
+		font-size: 14px;
+		-webkit-text-decoration-line: line-through;
+		text-decoration-line: line-through;
+		color: #A5A5A5;
+		&:after {
+			content: " ₴";
+		}
+	}
+	&__actual-price {
+		font-weight: bold;
+		font-size: 18px;
+		color: #000000;
+		&:after {
+			content: " ₴";
+		}
+	}
+}

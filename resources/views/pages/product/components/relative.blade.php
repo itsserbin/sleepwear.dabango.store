@@ -1,18 +1,20 @@
-<section class="relative">
-    <div class="container">
-        <div class="row">
-            <h2>Смотрите так же</h2>
+<section class="relative card">
+    <div class="content">
+        <div class="relative__title block-title">Смотрите также</div>
+        <div class="relative-slider">
             @foreach($products as $product)
-                <div class="col-12 col-sm-6 col-md-4">
-                    <div class="card m-3">
-                        <img src="{{asset($product->preview)}}" class="card-img-top" alt="...">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">{{$product->h1}}</h5>
-                            <a href="{{route('product', $product->id)}}" class="btn btn-primary">Посмотреть</a>
-                        </div>
-                    </div>
+            <a href="{{route('product', $product->id)}}" class="card__product">
+                <div class="card__image">
+                    <img src="{{asset($product->preview)}}" alt="">
                 </div>
-            @endforeach
+                <h5 class="card__label">{{$product->h1}}</h5>
+                <div class="card__price">
+                    <div class="card__old-price">{{$product->cost}}</div>
+                    <div class="card__actual-price">{{$product->sale_cost}}</div>
+                </div>
+                @endforeach
+            </a>
         </div>
     </div>
+</div>
 </section>

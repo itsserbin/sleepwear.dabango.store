@@ -3,7 +3,7 @@
     background: url("/storage/img/bg/shipping-and-payments_bg2.svg") no-repeat bottom -126px left 0;
 
     &__block-title {
-        margin: 0 0 11px 0;
+        margin: 0 0 20px 0;
     }
 
     .shipping-and-payment {
@@ -49,15 +49,12 @@
 
 @media (min-width: 768px) {
     .shipping-and-payment {
-        padding: 40px 0 115px 0;
 
-        &__block-title {
-            margin: 0 0 50px 0;
-        }
-
-        &__row {
-            display: flex;
-            justify-content: space-evenly;
+        .content {
+            >.row {
+                display: flex;
+                justify-content: space-evenly;
+            }
         }
 
         .shipping-and-payment {

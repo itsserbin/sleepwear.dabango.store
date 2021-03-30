@@ -79,7 +79,10 @@ body.lock {
         }
     }
 }
-
+.button-wrapper {
+    display: flex;
+    justify-content: center;
+}
 @media (min-width: 864px) {
     .content {
         width: 830px;
