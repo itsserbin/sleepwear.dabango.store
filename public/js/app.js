@@ -566,7 +566,6 @@ $(document).ready(function () {
   $('.shop-products-slider-big').slick({
     asNavFor: '.shop-products-slider-small',
     arrows: false,
-    dots: true,
     swipe: true,
     responsive: [{
       breakpoint: 990,
@@ -583,23 +582,17 @@ $(document).ready(function () {
     asNavFor: '.shop-products-slider-big',
     focusOnSelect: true,
     vertical: true,
-    arrows: false
+    arrows: false,
+    swipe: true
   });
   $('.reviews-slider').slick({
     infinite: true,
     autoplay: true,
     autoplaySpeed: 4000,
-    slidesToShow: 2,
-    slidesToScroll: 2,
+    slidesToShow: 1,
+    slidesToScroll: 1,
     dots: true,
-    adaptiveHeight: true,
-    responsive: [{
-      breakpoint: 768,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1
-      }
-    }]
+    adaptiveHeight: true
   });
   $('.relative-slider').slick({
     infinite: true,

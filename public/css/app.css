@@ -12605,7 +12605,7 @@ h1, h2, h3, h4, h5, h6 {
 .card__actual-price {
   font-weight: bold;
   font-size: 18px;
-  color: #000000;
+  color: #ff0000;
 }
 .card__actual-price:after {
   content: " ₴";
@@ -12682,11 +12682,6 @@ body.lock .arrow-to-top {
 }
 .button--color-text_white {
   color: #FFFFFF;
-}
-
-.button-wrapper {
-  display: flex;
-  justify-content: center;
 }
 
 @media (min-width: 864px) {
