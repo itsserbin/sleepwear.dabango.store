@@ -12820,6 +12820,10 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
 }
 
+.shop-products-slider-small {
+  display: flex;
+  align-items: center;
+}
 .shop-products-slider-small__image {
   margin: 0 auto;
   width: 40px;
@@ -12828,7 +12832,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
 }
 .shop-products-slider-small .slick-list {
-  height: 267px !important;
+  height: 226px !important;
   overflow-y: scroll;
 }
 
@@ -12855,7 +12859,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .shop-products-slider-small .slick-list {
-    height: 400px !important;
+    height: 341px !important;
   }
 }
 @media (min-width: 500px) {
@@ -12894,21 +12898,6 @@ h1, h2, h3, h4, h5, h6 {
   }
   .shop__button {
     width: 270px;
-  }
-
-  .shop-products-slider-big {
-    max-width: 300px;
-  }
-  .shop-products-slider-big__image {
-    max-width: 300px;
-  }
-}
-@media (min-width: 990px) {
-  .shop-products-slider-big {
-    max-width: 350px;
-  }
-  .shop-products-slider-big__image {
-    max-width: 350px;
   }
 }
 .advantages {
