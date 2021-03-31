@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Order;
+use App\Mail\OrderShipped;
 use App\Models\ProductsPhoto;
 use App\Models\Products;
 use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -42,4 +45,25 @@ class HomeController extends Controller
             'products' => $products
         ]);
     }
+
+    public function send_form(Request $request)
+    {
+//        $client = new Clients();
+//        $client->phone = $request->input('phone');
+//        $client->site = $request->input('site');
+//        $client->name = $request->input('name');
+//        $client->email = $request->input('email');
+//        $client->comment = $request->input('comment');
+//
+//        $client->save();
+
+        $name = $request->name;
+        $phone = $request->phone;
+        $size = $request->size;
+
+        Mail::to('serbin.ssd@gmail.com')->send(new Order($name, $phone, $size));
+
+        return back();
+    }
+
 }
