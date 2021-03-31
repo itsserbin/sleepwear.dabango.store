@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </div>
-            <button class="review-form__button review-button button button--color_green button--color-text_white">Оставить отзыв</button>
+            <button class="review-form__button review-button button button--color_red button--color-text_white">Оставить отзыв</button>
         </form>
     </div>
 </div>

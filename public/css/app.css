@@ -12350,14 +12350,6 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 9999;
 }
 
-.modal-order .modal {
-  border: 2px solid #E02424;
-}
-
-.modal-review .modal {
-  border: 2px solid #38AF44;
-}
-
 .modal {
   position: fixed;
   top: 20%;
@@ -12365,6 +12357,7 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateX(-50%);
   background: #fff;
   border-radius: 10px;
+  border: 2px solid #E02424;
   z-index: 9999;
   opacity: 1;
 }
