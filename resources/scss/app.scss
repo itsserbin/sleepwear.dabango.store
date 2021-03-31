@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
 @import "~slick-carousel/slick/slick";
 @import "~slick-carousel/slick/slick-theme.css";
 @import "components/nullstyle.scss";
@@ -8,6 +9,11 @@
 @import "components/footer.scss";
 @import "components/card.scss";
 @import "components/product-list.scss";
+@import "product/shop.scss";
+@import "product/advantages.scss";
+@import "product/shipping-and-payment.scss";
+@import "product/reviews.scss";
+@import "product/relative.scss";
 
 html {
     height: 100%;
@@ -22,7 +28,6 @@ body {
 
 body.lock {
     overflow: hidden;
-
     .arrow-to-top {
         display: none;
     }
@@ -66,12 +71,14 @@ body.lock {
 
 .button {
     font-weight: bold;
-    font-size: 24px;
     text-transform: uppercase;
 
     &--color {
         &_red {
             background: #E02424;
+        }
+        &_green {
+            background: #38AF44;
         }
     }
 
@@ -79,6 +86,38 @@ body.lock {
         &_white {
             color: #FFFFFF;
         }
+    }
+}
+.button-wrapper {
+    display: flex;
+    justify-content: center;
+}
+.order-button {
+    border-radius: 10px;
+    width: 170px;
+    height: 50px;
+    font-size: 22px;
+}
+.review-button {
+    border-radius: 10px;
+    width: 250px;
+    height: 50px;
+}
+.arrow-to-top {
+    position: fixed;
+    bottom: 5%;
+    right: 2%;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: rgba(196, 196, 196, 0.5);
+    border-radius: 50%;
+    span {
+        font-size: 18px;
+        color: #000;
     }
 }
 @media (min-width: 864px) {

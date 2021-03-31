@@ -1,4 +1,4 @@
-<section class="advantages">
+<section id="advantages" class="advantages">
     <div class="content">
         <div class="advantages__title block-title">Наши преимущества</div>
         <div class="row">

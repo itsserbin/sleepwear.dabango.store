@@ -1,7 +1,12 @@
 $(function () {
-    $('.modal-open').click(function() {
+    $('.order').click(function() {
         $('body').addClass('lock');
-        $('.modal-fade').fadeIn(0);
+        $('.modal-order').fadeIn(0);
+        return false;
+    });
+    $('.review').click(function() {
+        $('body').addClass('lock');
+        $('.modal-review').fadeIn(0);
         return false;
     });
     $('.modal-close').click(function() {

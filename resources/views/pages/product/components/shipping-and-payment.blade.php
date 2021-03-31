@@ -1,4 +1,4 @@
-<section class="shipping-and-payment">
+<section id="shipping-and-payment" class="shipping-and-payment">
     <div class="content">
         <h2 class="shipping-and-payment__block-title block-title">Доставка и оплата</h2>
         <div class="row">

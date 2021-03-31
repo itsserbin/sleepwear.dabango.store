@@ -510,10 +510,12 @@ $(function () {
 
 $(function () {
   $('.header-burger').click(function (event) {
-    $('.header-burger,.menu').toggleClass('active'); // $('body').toggleClass('lock');
+    $('.header-burger,.menu').toggleClass('active');
+    $('body').toggleClass('lock');
   });
   $('.menu__link').click(function (event) {
-    $('.header-burger,.menu').removeClass('active'); // $('body').removeClass('lock');
+    $('.header-burger,.menu').removeClass('active');
+    $('body').removeClass('lock');
   });
 });
 
@@ -526,9 +528,14 @@ $(function () {
 /***/ (() => {
 
 $(function () {
-  $('.modal-open').click(function () {
+  $('.order').click(function () {
     $('body').addClass('lock');
-    $('.modal-fade').fadeIn(0);
+    $('.modal-order').fadeIn(0);
+    return false;
+  });
+  $('.review').click(function () {
+    $('body').addClass('lock');
+    $('.modal-review').fadeIn(0);
     return false;
   });
   $('.modal-close').click(function () {
@@ -14684,9 +14691,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
 /******/ 			"/js/app": 0,
-/******/ 			"css/product/app": 0,
 /******/ 			"css/app": 0,
-/******/ 			"css/admin/app": 0
+/******/ 			"css/admin/app": 0,
+/******/ 			"css/product/app": 0
 /******/ 		};
 /******/ 		
 /******/ 		// no chunk on demand loading
@@ -14734,10 +14741,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/product/app","css/app","css/admin/app"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/product/app","css/app","css/admin/app"], () => (__webpack_require__("./resources/scss/app.scss")))
-/******/ 	__webpack_require__.O(undefined, ["css/product/app","css/app","css/admin/app"], () => (__webpack_require__("./resources/scss/product/app.scss")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/product/app","css/app","css/admin/app"], () => (__webpack_require__("./resources/css/app.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/admin/app","css/product/app"], () => (__webpack_require__("./resources/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/admin/app","css/product/app"], () => (__webpack_require__("./resources/scss/app.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/admin/app","css/product/app"], () => (__webpack_require__("./resources/scss/product/app.scss")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app","css/admin/app","css/product/app"], () => (__webpack_require__("./resources/css/app.css")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

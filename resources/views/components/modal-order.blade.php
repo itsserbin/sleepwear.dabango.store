@@ -1,9 +1,9 @@
-<div class="modal-fade">
+<div class="modal-fade modal-order">
     <div class="modal">
-        <a class="modal-close" href="#">
+        <button class="modal-close">
             <span class="icon-cross"></span>
-        </a>
-        <form action="#" method="POST" id="order-form" class="order-form">
+        </button>
+        <form action="#" method="POST" class="form order-form">
             <div class="order-form__size size">
                 <div class="size__label">Выберите размер:</div>
                 <div class="row">
@@ -32,7 +32,7 @@
             <input name="name" placeholder="Ваше имя*" required>
             <input type="tel" name="phone" placeholder="Ваш номер телефона*" class="input-phone" required>
             <input type="email" name="email" placeholder="Ваш E-mail">
-            <button class="order-form__button button button--color_red button--color-text_white">Заказать</button>
+            <button class="order-form__button order-button button button--color_red button--color-text_white">Заказать</button>
         </form>
     </div>
 </div>

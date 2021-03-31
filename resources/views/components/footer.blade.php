@@ -1,6 +1,6 @@
 <div class="content">
     <div class="row">
-        <div class="footer__first-side">
+        <div id="contacts" class="footer__first-side">
             <div class="footer__title">Контакты</div>
             <div class="footer__location location">
                 <a href="https://goo.gl/maps/t2PTuXMWEhXQq6D47" target="_blank">
@@ -15,11 +15,11 @@
         <div class="footer__second-side">
             <nav class="footer__menu footer-menu">
                 <ul>
-                    <li><a href="#" class="footer-menu__link">Характеристики</a></li>
-                    <li><a href="#" class="footer-menu__link">О нас</a></li>
-                    <li><a href="#" class="footer-menu__link">Доставка и оплата</a></li>
-                    <li><a href="#" class="footer-menu__link">Отзывы</a></li>
-                    <li><a href="#" class="footer-menu__link">Контакты</a></li>
+                    <li><a href="#specifications" class="footer-menu__link">Характеристики</a></li>
+                    <li><a href="#advantages" class="footer-menu__link">Наши преимущества</a></li>
+                    <li><a href="#shipping-and-payment" class="footer-menu__link">Доставка и оплата</a></li>
+                    <li><a href="#reviews" class="footer-menu__link">Отзывы</a></li>
+                    <li><a href="#contacts" class="footer-menu__link">Контакты</a></li>
                 </ul>
             </nav>
         </div>
