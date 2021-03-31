@@ -34,29 +34,14 @@
                     <button class="shop__button button button--color_red button--color-text_white modal-open">Купить
                     </button>
                 </div>
-                <div class="shop__size-and-color">
-                    <div class="shop__characteristic-label">Выберите размер:</div>
+                <div class="shop__available-sizes available-sizes">
+                    <div class="available-sizes__label">Доступные размеры:</div>
                     <div class="row">
-                        <div class="shop__size">
-                            <input id="size-1" type="radio" name="size" value="s" form="order-form">
-                            <label for="size-1">S</label>
-                        </div>
-                        <div class="shop__size">
-                            <input id="size-2" type="radio" name="size" value="m" form="order-form">
-                            <label for="size-2">M</label>
-                        </div>
-                        <div class="shop__size">
-                            <input id="size-3" type="radio" name="size" value="l" form="order-form">
-                            <label for="size-3">L</label>
-                        </div>
-                        <div class="shop__size">
-                            <input id="size-4" type="radio" name="size" value="xl" form="order-form">
-                            <label for="size-4">XL</label>
-                        </div>
-                        <div class="shop__size">
-                            <input id="size-5" type="radio" name="size" value="xxl" form="order-form">
-                            <label for="size-5">XXL</label>
-                        </div>
+                        <div class="available-sizes__element available-sizes__element--not-availale">S</div>
+                        <div class="available-sizes__element available-sizes__element--not-availale">M</div>
+                        <div class="available-sizes__element">L</div>
+                        <div class="available-sizes__element available-sizes__element--not-availale">XL</div>
+                        <div class="available-sizes__element">XXL</div>
                     </div>
                 </div>
             </div>

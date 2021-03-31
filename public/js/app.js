@@ -577,7 +577,7 @@ $(document).ready(function () {
   });
   $('.shop-products-slider-small').slick({
     infinite: false,
-    slidesToShow: 5,
+    slidesToShow: 10,
     slidesToScroll: 1,
     asNavFor: '.shop-products-slider-big',
     focusOnSelect: true,
