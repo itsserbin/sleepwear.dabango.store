@@ -1,13 +1,7 @@
 @component('mail::message')
 
-Name: {{$name}}
-Phone: {{$phone}}
-Size: {{$size}}
+    <p><b>Имя:</b> {{$name}}</p>
+    <p><b>Телефон:</b> <a href="tel:+{{$phone}}">{{$phone}}</a></p>
+    <p><b>Размер:</b> {{$size}}</p>
 
-@component('mail::button', ['url' => 'tel:{{$phone}}'])
-Позвонить
-@endcomponent
-
-Thanks,<br>
-{{ config('app.name') }}
 @endcomponent

@@ -1,15 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="d-flex justify-content-between">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Все продукты') }}
-            </h2>
-            <a href="{{route('admin.products.create')}}">
-                <button class="btn btn-success">
-                    Добавить товар
-                </button>
-            </a>
-        </div>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Клиенты') }}
+        </h2>
     </x-slot>
 
     <div class="py-12">
@@ -19,35 +12,45 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12">
-
                                 <table class="table">
                                     <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Превью</th>
-                                        <th scope="col">Название</th>
-                                        <th scope="col">Цена</th>
-                                        <th scope="col">Дата добавления</th>
-                                        <th scope="col">Действие</th>
                                         <th scope="col">Статус</th>
-                                        <th scope="col"></th>
+                                        <th scope="col">Имя</th>
+                                        <th scope="col">Телефон</th>
+                                        <th scope="col">Товар</th>
+                                        <th scope="col">Размер</th>
+                                        <th scope="col">Создан</th>
+                                        <th scope="col">Действия</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($products as $product)
+                                    @isset($clients)
+                                    @foreach($clients as $client)
                                         <tr style="vertical-align:middle;">
-                                            <th scope="row">{{$product->id}}</th>
-                                            <td><img width="100px" src="{{asset($product->preview ?? "")}}" alt=""></td>
-                                            <td>{{$product->h1 ?? ""}}</td>
-                                            <td>{{$product->cost ?? ""}}</td>
-                                            <td>{{$product->created_at->format('d.m.Y h:m')}}</td>
+                                            <th scope="row">{{$client->id}}</th>
                                             <td>
-                                                <form onsubmit="if(confirm('Удалить?')){ return true }else{ return false }"
-                                                      action="{{route('admin.products.destroy', $product)}}" method="POST">
+                                                @if($client->status == 'new')Новый@endif
+                                                @if($client->status == 'process')В процессе@endif
+                                                @if($client->status == 'done')Выполнен@endif
+                                            </td>
+                                            <td>{{$client->name}}</td>
+                                            <td><a href="tel:{{$client->phone}}">{{$client->phone}}</a></td>
+                                            <td><a href="{{route('product', $client)}}">{!! $client->product !!}</a></td>
+                                            <td>{{$client->size}}</td>
+                                            <td>{{$client->created_at->format('d.m.Y h:m')}}</td>
+                                            <td>
+                                                <form
+                                                    onsubmit="if(confirm('Удалить?')){ return true }else{ return false }"
+                                                    action="{{route('admin.clients.destroy', $client)}}"
+                                                    method="POST">
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     @csrf
-                                                    <a class="btn btn-default" href="{{route('admin.products.edit', $product)}}">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pen"
+                                                    <a class="btn btn-default"
+                                                       href="{{route('admin.clients.edit', $client)}}">
+                                                        <svg width="1em" height="1em" viewBox="0 0 16 16"
+                                                             class="bi bi-pen"
                                                              fill="currentColor"
                                                              xmlns="http://www.w3.org/2000/svg">
                                                             <path fill-rule="evenodd"
@@ -59,7 +62,8 @@
                                                         </svg>
                                                     </a>
                                                     <button type="submit" class="btn">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill"
+                                                        <svg width="1em" height="1em" viewBox="0 0 16 16"
+                                                             class="bi bi-trash-fill"
                                                              fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                             <path fill-rule="evenodd"
                                                                   d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
@@ -67,17 +71,9 @@
                                                     </button>
                                                 </form>
                                             </td>
-                                            <td>@if($product->status = 1) Активен @else На модерации @endif</td>
-                                            <td>
-                                                <a href="{{route('product', $product->id)}}" target="_blank">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-window" viewBox="0 0 16 16">
-                                                        <path d="M2.5 4a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm2-.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm1 .5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
-                                                        <path d="M2 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2zm13 2v2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zM2 14a1 1 0 0 1-1-1V6h14v7a1 1 0 0 1-1 1H2z"/>
-                                                    </svg>
-                                                </a>
-                                            </td>
                                         </tr>
                                     @endforeach
+                                    @endisset
                                     </tbody>
                                 </table>
                             </div>

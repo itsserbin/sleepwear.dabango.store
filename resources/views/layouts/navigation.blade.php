@@ -16,7 +16,10 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     <x-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.index')">
-                        {{ __('Products') }}
+                        {{ __('Товары') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin.clients.index')" :active="request()->routeIs('admin.clients.index')">
+                        {{ __('Клиенты') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -70,7 +73,10 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.index')">
-                {{ __('Products') }}
+                {{ __('Товары') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.clients.index')" :active="request()->routeIs('admin.clients.index')">
+                {{ __('Клиенты') }}
             </x-responsive-nav-link>
         </div>
 
