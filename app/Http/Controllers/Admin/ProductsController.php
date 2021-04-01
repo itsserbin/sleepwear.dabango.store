@@ -68,7 +68,7 @@ class ProductsController extends Controller
         $product->cost = $request->input('cost');
         $product->sale_cost = $request->input('sale_cost');
         $product->content = $request->input('content');
-
+        $product->save();
 
         $preview = $request->file('preview');
         if ($preview) {
@@ -92,15 +92,19 @@ class ProductsController extends Controller
             }
         }
         $product->save();
+//        if ($product) {
+//            return view('admin.product.edit', [
+//                'product' => $product,
+//            ])->with('success', 'Товар успешно создан');
+//        } else {
+//            return back()
+//                ->withInput()->with('danger', 'Ошибка сохранения');
+//        }
         if ($product) {
-            return view('admin.product.edit', [
-                'product' => $product
+            return redirect()->route('admin.products.edit', [
+                'product' => $product,
             ])->with('success', 'Товар успешно создан');
-        } else {
-            return back()
-                ->withInput()->with('danger', 'Ошибка сохранения');
         }
-
     }
 
     /**
@@ -169,14 +173,13 @@ class ProductsController extends Controller
                 $image_name = $image->getClientOriginalName();
 
                 $image->move(public_path('storage/product'), $image_name);
-
                 $productsPhoto = ProductsPhoto::find($product->id);
+                $productsPhoto->product_id = $product->id;
                 if ($productsPhoto) {
                     $productsPhoto->image = 'storage/product/' . $image_name;
                     $productsPhoto->update();
                 } else {
                     $productsPhoto = new ProductsPhoto();
-                    $productsPhoto->product_id = $product->id;
                     $productsPhoto->image = 'storage/product/' . $image_name;
                     $productsPhoto->save();
                 }
