@@ -4,6 +4,7 @@
         <option value="new" @if ($client->status == 'new') selected="" @endif>Новый</option>
         <option value="process" @if ($client->status == 'process') selected="" @endif>В процессе</option>
         <option value="done" @if ($client->status == 'done') selected="" @endif>Выполнен</option>
+        <option value="cancel" @if ($client->status == 'cancel') selected="" @endif>Отменен</option>
     </select>
 </div>
 
