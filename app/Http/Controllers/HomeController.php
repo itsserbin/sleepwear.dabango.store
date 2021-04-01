@@ -63,7 +63,7 @@ class HomeController extends Controller
 
         Mail::to('serbin.ssd@gmail.com')->send(new Order($name, $phone, $size));
 
-        return back();
+        return back()->with('success', 'Заявка успешно отправлена!');
     }
 
 }
