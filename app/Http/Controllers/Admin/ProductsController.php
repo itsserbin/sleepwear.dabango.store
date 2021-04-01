@@ -206,9 +206,9 @@ class ProductsController extends Controller
         $product = Products::destroy($id);
 
         if ($product) {
-            return back()->with('alert', 'Статья успешно удалена');
+            return back()->with('success', 'Статья успешно удалена');
         } else {
-            return back()->with('alert', 'Произошла ошибка удаления');
+            return back()->with('danger', 'Произошла ошибка удаления');
         }
     }
 }

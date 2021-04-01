@@ -51,13 +51,13 @@ class ClientsController extends Controller
         $data = $request->all();
         $client->update($data);
 
-        return back()->with('Save');
+        return back()->with('success', 'Информация успешно сохранена');
     }
 
     public function destroy($id)
     {
         Clients::destroy($id);
 
-        return back()->with('Успешно удалено');
+        return back()->with('success', 'Информация успешно удалена');
     }
 }
