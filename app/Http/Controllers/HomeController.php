@@ -55,11 +55,11 @@ class HomeController extends Controller
 
         $client->save();
 
-//        $name = $request->name;
-//        $phone = $request->phone;
-//        $size = $request->size;
-//
-//        Mail::to('serbin.ssd@gmail.com')->send(new Order($name, $phone, $size));
+        $name = $request->name;
+        $phone = $request->phone;
+        $size = $request->size;
+
+        Mail::to('serbin.ssd@gmail.com')->send(new Order($name, $phone, $size));
 
         return back();
     }
