@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Order;
 use App\Mail\OrderShipped;
 use App\Models\ProductsPhoto;
 use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Clients;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
