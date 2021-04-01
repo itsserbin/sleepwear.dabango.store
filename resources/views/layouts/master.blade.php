@@ -2,7 +2,6 @@
 <html lang="RU">
 <head>
 	@include('components.head')
-	@yield('head')
 </head>
 <body>
 	<a href="#top" class="arrow-to-top">
