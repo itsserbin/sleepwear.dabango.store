@@ -1,10 +1,11 @@
 @component('mail::message')
-# Introduction
 
-The body of your message.
+Name: {{$name}}
+Phone: {{$phone}}
+Size: {{$size}}
 
-@component('mail::button', ['url' => ''])
-Button Text
+@component('mail::button', ['url' => 'tel:{{$phone}}'])
+Позвонить
 @endcomponent
 
 Thanks,<br>
