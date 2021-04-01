@@ -55,7 +55,7 @@ class ProductsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return RedirectResponse
+     * @return Application|Factory|View|RedirectResponse
      */
     public function store(Request $request)
     {
@@ -68,7 +68,7 @@ class ProductsController extends Controller
         $product->cost = $request->input('cost');
         $product->sale_cost = $request->input('sale_cost');
         $product->content = $request->input('content');
-        $product->save();
+
 
         $preview = $request->file('preview');
         if ($preview) {
@@ -91,8 +91,15 @@ class ProductsController extends Controller
                 $productsPhoto->save();
             }
         }
-        return back();
-//        $product->save();
+        $product->save();
+        if ($product) {
+            return view('admin.product.edit', [
+                'product' => $product
+            ])->with('success', 'Товар успешно создан');
+        } else {
+            return back()
+                ->withInput()->with('danger', 'Ошибка сохранения');
+        }
 
     }
 
@@ -135,8 +142,15 @@ class ProductsController extends Controller
     public function update(Request $request, Products $products, $id)
     {
         $product = $this->ProductRepository->getEdit($id);
-        $data = $request->all();
-        $product->update($data);
+        $product->status = $request->input('status');
+        $product->h1 = $request->input('h1');
+        $product->title = $request->input('title');
+        $product->description = $request->input('description');
+        $product->characteristics = $request->input('characteristics');
+        $product->cost = $request->input('cost');
+        $product->sale_cost = $request->input('sale_cost');
+        $product->content = $request->input('content');
+        $product->update();
 
         if ($request->file('preview')) {
             $preview = $request->file('preview');
@@ -157,11 +171,10 @@ class ProductsController extends Controller
                 $image->move(public_path('storage/product'), $image_name);
 
                 $productsPhoto = ProductsPhoto::find($product->id);
-                if ($productsPhoto){
+                if ($productsPhoto) {
                     $productsPhoto->image = 'storage/product/' . $image_name;
                     $productsPhoto->update();
-                }
-                else{
+                } else {
                     $productsPhoto = new ProductsPhoto();
                     $productsPhoto->product_id = $product->id;
                     $productsPhoto->image = 'storage/product/' . $image_name;
@@ -171,13 +184,10 @@ class ProductsController extends Controller
         }
 
         if ($product) {
-            return redirect()
-                ->route('admin.products.index')
-                ->with('alert', 'Успешно сохранено');
+            return back()->with('success', 'Успешно сохранено');
         } else {
             return back()
-                ->withInput()
-                ->with('alert', 'Ошибка сохранения');
+                ->withInput()->with('danger', 'Ошибка сохранения');
         }
     }
 
