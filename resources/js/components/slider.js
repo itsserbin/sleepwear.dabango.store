@@ -2,7 +2,7 @@ $(document).ready(function(){
     $('.shop-products-slider-big').slick({
         asNavFor: '.shop-products-slider-small',
         arrows: false,
-        swipe: false,
+        swipe: true,
         responsive: [
         {
             breakpoint: 990,
@@ -14,17 +14,13 @@ $(document).ready(function(){
         ]
     });
     $('.shop-products-slider-small').slick({
-        infinite: true,
-        slidesToShow: 5,
+        infinite: false,
+        slidesToShow: 10,
         slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 4000,
         asNavFor: '.shop-products-slider-big',
         focusOnSelect: true,
         vertical: true,
-        arrows: true,
-        prevArrow:"<span class='icon-arrow-up2 prev'></span>",
-        nextArrow:"<span class='icon-arrow-down2 next'></span>",
+        arrows: false,
         swipe: true
     });
     $('.reviews-slider').slick({
