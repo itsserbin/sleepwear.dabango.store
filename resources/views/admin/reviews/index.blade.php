@@ -22,7 +22,6 @@
                                         <th scope="col">Дата добавления</th>
                                         <th scope="col">Действие</th>
                                         <th scope="col">Статус</th>
-                                        <th scope="col"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -31,7 +30,11 @@
                                             <th scope="row">{{$review->id}}</th>
                                             <td>{{$review->name}}</td>
                                             <td>{{$review->comment}}</td>
-                                            <td>{{$review->product_id}}</td>
+                                            <td>
+                                                <a href="{{route('product', $review->product_id)}}" target="_blank">
+                                                    {{$review->product_id}}
+                                                </a>
+                                            </td>
                                             <td>{{$review->created_at->format('d.m.Y h:m')}}</td>
                                             <td>
                                                 <form
@@ -67,19 +70,8 @@
                                                     Активен
                                                 @else
                                                     На модерации <br>
-                                                    <a href="{{route('review.accepted', ['id' => $review->id])}}">Одобрить</a>
+                                                    <a href="{{route('review.accepted', ['id' => $review->id])}}"><u>Одобрить</u></a>
                                                 @endif
-                                            </td>
-                                            <td>
-                                                <a href="{{route('product', $review->product_id)}}" target="_blank">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                         fill="currentColor" class="bi bi-window" viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M2.5 4a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm2-.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm1 .5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
-                                                        <path
-                                                            d="M2 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2zm13 2v2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zM2 14a1 1 0 0 1-1-1V6h14v7a1 1 0 0 1-1 1H2z"/>
-                                                    </svg>
-                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach

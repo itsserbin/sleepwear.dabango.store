@@ -41,7 +41,10 @@
             </div>
             <form action="{{route('logout')}}" method="POST">
                 @csrf
-                <button type="submit" class="btn btn-danger">Exit</button>
+                <button type="button" class="btn btn-success">
+                    <a href="{{route('home')}}" target="_blank" style="text-decoration: none; color: white;">Открыть сайт</a>
+                </button>
+                <button type="submit" class="btn btn-danger">Выйти</button>
             </form>
         </nav>
     </div>
