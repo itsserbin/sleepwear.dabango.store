@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Редактирование товара') }}
+            {{ __('Карточка клиента') }}
         </h2>
     </x-slot>
 
@@ -12,13 +12,13 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12">
-                                <form action="{{route('admin.products.update', $product->id)}}" method="post"
+                                <form action="{{route('admin.clients.update', $client->id)}}" method="post"
                                       enctype="multipart/form-data"
                                       multiple>
                                     @csrf
                                     @method('PATCH')
                                     {{-- Form include --}}
-                                    @include('admin.product.partials.form')
+                                    @include('admin.clients.partials.form')
                                     <button type="submit" class="btn btn-success">Сохранить</button>
                                 </form>
                             </div>

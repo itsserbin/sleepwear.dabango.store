@@ -2,7 +2,9 @@
 
 namespace App\Repositories;
 
-use App\Models\Products as Model;
+use App\Models\Clients;
+use App\Models\Clients as Model;
+use App\Models\Products;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use PhpParser\Node\Expr\AssignOp\Concat;
@@ -12,7 +14,7 @@ use PhpParser\Node\Expr\AssignOp\Concat;
  *
  * @package App\Repositories
  */
-class ProductRepository extends CoreRepository
+class ClientRepository extends CoreRepository
 {
     /**
      * @return string
@@ -45,13 +47,12 @@ class ProductRepository extends CoreRepository
     {
         $columns = [
             'id',
-            'description',
-            'cost',
-            'sale_cost',
-            'preview',
-            'h1',
+            'name',
+            'phone',
+            'status',
+            'product',
+            'size',
             'created_at',
-            'updated_at',
         ];
 
         return $this
@@ -59,9 +60,8 @@ class ProductRepository extends CoreRepository
             ->select($columns)
             ->paginate($perPage);
     }
-    public function getProduct($id)
+    public function getClient($id)
     {
         return $this->model::find($id);
     }
-
 }

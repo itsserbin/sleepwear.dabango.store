@@ -24,6 +24,11 @@ class Products extends Model
 
     public function ProductsPhoto()
     {
-        return $this->hasMany('App\ProductsPhoto', 'product_id', 'id');
+        return $this->hasMany('App\Models\ProductsPhoto', 'product_id', 'id');
+    }
+
+    public function Clients()
+    {
+        return $this->hasMany('App\Models\Clients', 'product', 'id');
     }
 }

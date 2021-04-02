@@ -1,8 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Все продукты') }}
-        </h2>
+        <div class="d-flex justify-content-between">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Все товары') }}
+            </h2>
+            <a href="{{route('admin.products.create')}}">
+                <button class="btn btn-success">
+                    Добавить товар
+                </button>
+            </a>
+        </div>
     </x-slot>
 
     <div class="py-12">
@@ -12,12 +19,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12">
-                                <h1>Все товары</h1>
-                                <a href="{{route('admin.products.create')}}">
-                                    <button class="btn btn-success">
-                                        Добавить товар
-                                    </button>
-                                </a>
+
                                 <table class="table">
                                     <thead>
                                     <tr>

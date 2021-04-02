@@ -78,12 +78,16 @@
 <div class="form-group my-3">
     <label for="images">Галлерея изображений</label>
     <input type="file" id="images" class="form-control mb-3" name="images[]" multiple>
-    @isset($productPhoto)
-        @foreach($productPhoto as $photo)
-            <picture>
-                <source srcset="{{asset($photo->image)}}" type="image/svg+xml">
-                <img src="{{asset($photo->image)}}" class="img-thumbnail w-25">
-            </picture>
-        @endforeach
-    @endisset
+    <div class="row">
+        @isset($productPhoto)
+            @foreach($productPhoto as $photo)
+                <div class="col-3">
+                    <picture>
+                        <source srcset="{{asset($photo->image)}}" type="image/svg+xml">
+                        <img src="{{asset($photo->image)}}" class="img-thumbnail my-3">
+                    </picture>
+                </div>
+            @endforeach
+        @endisset
+    </div>
 </div>
