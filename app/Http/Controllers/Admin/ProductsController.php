@@ -30,7 +30,7 @@ class ProductsController extends Controller
 
     public function index()
     {
-        $products = $this->ProductRepository->getAllWithPaginate(15);
+        $products = $this->ProductRepository->getAllWithPaginate();
 
         return view('admin.product.index', [
             'products' => $products
@@ -173,7 +173,8 @@ class ProductsController extends Controller
                 $image_name = $image->getClientOriginalName();
 
                 $image->move(public_path('storage/product'), $image_name);
-                $productsPhoto = ProductsPhoto::find($product->id);
+//                $productsPhoto = ProductsPhoto::find($product->id);
+                $productsPhoto = ProductsPhoto::where('product_id', $product->id);
                 $productsPhoto->product_id = $product->id;
                 if ($productsPhoto) {
                     $productsPhoto->image = 'storage/product/' . $image_name;
@@ -185,6 +186,7 @@ class ProductsController extends Controller
                 }
             }
         }
+
 
         if ($product) {
             return back()->with('success', 'Успешно сохранено');
