@@ -1,3 +1,4 @@
+@section('title')Все товары@endsection
 <x-app-layout>
     <x-slot name="header">
         <div class="d-flex justify-content-between">
