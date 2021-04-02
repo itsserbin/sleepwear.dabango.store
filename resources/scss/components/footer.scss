@@ -2,7 +2,6 @@
     position: relative;
     padding: 20px 0;
     background: #161616;
-
     &__title {
         margin: 0 0 40px 0;
         font-family: "Montserrat", sans-serif;
@@ -11,15 +10,12 @@
         font-variant: small-caps;
         color: #FFFFFF;
     }
-
     &__location {
         margin: 0 0 32px 0;
     }
-
     &__address {
         margin: 0 0 50px 0;
     }
-
     &-menu__link {
         display: inline-block;
         padding: 9px 0;
@@ -28,29 +24,29 @@
         color: #fff;
     }
 }
-
+.footer-menu {
+    li {
+        list-style-type: none;
+    }
+}
 .location {
     a {
         color: #FFFFFF;
     }
 }
-
 .phonecall, .email {
     font-family: Montserrat;
     font-variant: small-caps;
 }
-
 .address {
     display: flex;
     flex-direction: column;
 }
-
 .phonecall,
 .email {
     color: #FFFFFF;
     font-style: normal;
 }
-
 @media (min-width: 576px) {
     .footer {
         &__second-side {
@@ -58,7 +54,6 @@
         }
     }
 }
-
 @media (min-width: 768px) {
     .footer {
         padding: 50px 0;

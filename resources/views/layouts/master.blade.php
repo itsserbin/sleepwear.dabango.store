@@ -11,7 +11,7 @@
 		@include('components.header')
 	</header>
 	<main class="main">
-        @include('components.flash-message')
+		@include('components.flash-message')
 		@yield('content')
 	</main>
 	<footer class="footer">

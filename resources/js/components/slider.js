@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(window).on('load', function() {
     $('.shop-products-slider-big').slick({
         asNavFor: '.shop-products-slider-small',
         arrows: false,
@@ -18,9 +18,9 @@ $(document).ready(function(){
         slidesToShow: 10,
         slidesToScroll: 1,
         asNavFor: '.shop-products-slider-big',
+        arrows: false,
         focusOnSelect: true,
         vertical: true,
-        arrows: false,
         swipe: true
     });
     $('.reviews-slider').slick({
@@ -34,6 +34,7 @@ $(document).ready(function(){
     });
     $('.relative-slider').slick({
         infinite: true,
+        arrows: false,
         slidesToShow: 4,
         slidesToScroll: 2,
         responsive: [

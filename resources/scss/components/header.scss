@@ -1,17 +1,14 @@
 .header {
     padding: 18px 0;
-
     &__logo {
         margin: 0 auto 0 0;
     }
-
     .row {
         display: flex;
         align-items: center;
         flex-wrap: nowrap;
     }
 }
-
 .menu {
     background: #161616;
     position: fixed;
@@ -22,7 +19,6 @@
     left: 0;
     overflow: hidden;
     transition: all 0.3s ease 0s;
-
     &__list {
         display: flex;
         flex-direction: column;
@@ -30,7 +26,6 @@
         align-items: center;
         height: 100%;
     }
-
     &__link {
         display: inline-block;
         padding: 15px 0;
@@ -39,14 +34,15 @@
         text-align: center;
         color: #c4c4c4;
     }
+    li {
+        list-style-type: none;
+    }
 }
-
 .menu.active {
     top: 0;
     left: 0;
     transition: all 0.3s ease 0s;
 }
-
 @media (min-width: 864px) {
     .menu {
         &__link {

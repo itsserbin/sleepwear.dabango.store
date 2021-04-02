@@ -34,6 +34,24 @@ body.lock {
     }
 }
 
+ol,ul {
+    margin-left: 10px;
+    li {
+        &::marker {
+            font-size: 18px;
+        }
+    }
+}
+
+ul {
+    li {
+        list-style-type: revert;
+        &::marker {
+            color: #E02424;
+        }
+    }
+}
+
 .wrapper {
     display: flex;
     flex-direction: column;

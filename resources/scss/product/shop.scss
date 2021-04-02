@@ -106,17 +106,19 @@
         justify-content: center;
         align-items: center;
         border-radius: 7px;
-        border: 1px solid #C4C4C4;
+        border: 1px solid #000;
         width: 40px;
         height: 40px;
         font-size: 16px;
-        color: #C4C4C4;
+        color: #000;
         background: #FFFFFF;
         &:not(:last-child) {
             margin: 0 5px 5px 0;
         }
         &--not-availale {
             position: relative;
+            border: 1px solid #C4C4C4;
+            color: #C4C4C4;
             &::before {
                 content: '';
                 display: block;
