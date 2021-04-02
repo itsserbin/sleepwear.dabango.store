@@ -58,61 +58,23 @@
                 <div id="reviews" class="reviews">
                     <div class="reviews__title block-title">Отзывы</div>
                     <div class="reviews-slider">
-                        <div class="reviews-slider__slide">
-                            <div class="reviews-slider__name">Александра</div>
-                            <div class="reviews-slider__rating">
-                                <img src="{{asset('storage/img/icon/star.png')}}" alt="">
-                                <img src="{{asset('storage/img/icon/star.png')}}" alt="">
-                                <img src="{{asset('storage/img/icon/star.png')}}" alt="">
-                                <img src="{{asset('storage/img/icon/star.png')}}" alt="">
-                                <img src="{{asset('storage/img/icon/star.png')}}" alt="">
-                            </div>
-                            <div class="reviews-slider__text">Добрый день. Заказываю не первый раз. Ответ от продавца
-                                мгновенный, отправка в кратчайшие сроки. А главное - товар качественный, размеры четкие!
-                                Советую работать с данным продавцом.
-                            </div>
-                        </div>
-                        <div class="reviews-slider__slide">
-                            <div class="reviews-slider__name">Настя</div>
-                            <div class="reviews-slider__rating">
-                                <img src="{{asset('storage/img/icon/star.png')}}" alt="">
-                                <img src="{{asset('storage/img/icon/star.png')}}" alt="">
-                                <img src="{{asset('storage/img/icon/star.png')}}" alt="">
-                                <img src="{{asset('storage/img/icon/star.png')}}" alt="">
-                                <img src="{{asset('storage/img/icon/star.png')}}" alt="">
-                            </div>
-                            <div class="reviews-slider__text">Дуже гарний магазин!! Рекомендую! Товар який я замовляла
-                                мені не підійшов, обміняли відразу на потрібний. Дуже приємна дівчина продавець!
-                            </div>
-                        </div>
-                        <div class="reviews-slider__slide">
-                            <div class="reviews-slider__name">masha</div>
-                            <div class="reviews-slider__rating">
-                                <img src="{{asset('storage/img/icon/star.png')}}" alt="">
-                                <img src="{{asset('storage/img/icon/star.png')}}" alt="">
-                                <img src="{{asset('storage/img/icon/star.png')}}" alt="">
-                                <img src="{{asset('storage/img/icon/star.png')}}" alt="">
-                                <img src="{{asset('storage/img/icon/star.png')}}" alt="">
-                            </div>
-                            <div class="reviews-slider__text">Заказала купальник. В целом покупкой довольна. Пошив -
-                                качественный, менеджер - ответственный, доставка - быстрая. В дальнейшем буду заказывать
-                                у данного продавца. Рекомендую!
-                            </div>
-                        </div>
-                        <div class="reviews-slider__slide">
-                            <div class="reviews-slider__name">Violetta</div>
-                            <div class="reviews-slider__rating">
-                                <img src="{{asset('storage/img/icon/star.png')}}" alt="">
-                                <img src="{{asset('storage/img/icon/star.png')}}" alt="">
-                                <img src="{{asset('storage/img/icon/star.png')}}" alt="">
-                                <img src="{{asset('storage/img/icon/star.png')}}" alt="">
-                                <img src="{{asset('storage/img/icon/star.png')}}" alt="">
-                            </div>
-                            <div class="reviews-slider__text">Менеджер дуже приємна дівчина. Уточнила всі нюанси
-                                замовлення. Виконали дуже швидко і якісно. P.S РЕКОМЕНДУЮ. Внесли приємне різноманіття і
-                                перчинку в наше життя.
-                            </div>
-                        </div>
+                        @if(count($product->reviews))
+                            @foreach($product->reviews as $review)
+                                @if($review->status)
+                                    <div class="reviews-slider__slide">
+                                        <div class="reviews-slider__name">{{$review->name}}</div>
+{{--                                        <div class="reviews-slider__rating">--}}
+{{--                                            <img src="{{asset('storage/img/icon/star.png')}}" alt="">--}}
+{{--                                            <img src="{{asset('storage/img/icon/star.png')}}" alt="">--}}
+{{--                                            <img src="{{asset('storage/img/icon/star.png')}}" alt="">--}}
+{{--                                            <img src="{{asset('storage/img/icon/star.png')}}" alt="">--}}
+{{--                                            <img src="{{asset('storage/img/icon/star.png')}}" alt="">--}}
+{{--                                        </div>--}}
+                                        <div class="reviews-slider__text">{{$review->comment}}</div>
+                                    </div>
+                                @endif
+                            @endforeach
+                        @else Отзывы отсутсвуют! @endif
                     </div>
                     <div class="button-wrapper">
                         <button

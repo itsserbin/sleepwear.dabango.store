@@ -27,10 +27,6 @@ class ClientsController extends Controller
     public function index()
     {
         $clients = $this->ClientRepository->getAllWithPaginate(15);
-        foreach ($clients as $client){
-            Products::where('id', '=', $client->product)->select('h1')->first();
-        }
-
         return view('admin.clients.index', [
             'clients' => $clients,
         ]);

@@ -29,6 +29,23 @@ __webpack_require__(/*! ./components/slider */ "./resources/js/components/slider
 
 __webpack_require__(/*! ./components/modal */ "./resources/js/components/modal.js");
 
+__webpack_require__(/*! ./components/alert */ "./resources/js/components/alert.js");
+
+/***/ }),
+
+/***/ "./resources/js/components/alert.js":
+/*!******************************************!*\
+  !*** ./resources/js/components/alert.js ***!
+  \******************************************/
+/***/ (() => {
+
+// import $ from "jquery";
+$(function () {
+  setTimeout(function () {
+    $('.alert').fadeOut();
+  }, 3000);
+});
+
 /***/ }),
 
 /***/ "./resources/js/components/jquery.maskedinput.js":

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\Order;
 use App\Mail\OrderShipped;
 use App\Models\ProductsPhoto;
+use App\Models\Reviews;
 use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -28,7 +29,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        $products = $this->ProductRepository->getAllWithPaginate();
+        $products = $this->ProductRepository->getItemsWithPaginateOnProduction();
         return view('pages.home.index',[
             'products' => $products
         ]);
@@ -46,7 +47,7 @@ class HomeController extends Controller
         ]);
     }
 
-    public function send_form(Request $request)
+    public function sendForm(Request $request)
     {
         $client = new Clients();
         $client->name = $request->input('name');
@@ -66,4 +67,12 @@ class HomeController extends Controller
         return back()->with('success', 'Заявка успешно отправлена!');
     }
 
+    public function sendReview(Request $request)
+    {
+        $reviews = new Reviews();
+        $data = $request->all();
+        $reviews->create($data);
+//        dd($reviews);
+        return back()->with('success', 'Отзыв отправлен на модерацию');
+    }
 }

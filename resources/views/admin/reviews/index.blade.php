@@ -1,15 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="d-flex justify-content-between">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Все товары') }}
-            </h2>
-            <a href="{{route('admin.products.create')}}">
-                <button class="btn btn-success">
-                    Добавить товар
-                </button>
-            </a>
-        </div>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Отзывы') }}
+        </h2>
     </x-slot>
 
     <div class="py-12">
@@ -19,14 +12,13 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12">
-
                                 <table class="table">
                                     <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Превью</th>
-                                        <th scope="col">Название</th>
-                                        <th scope="col">Цена</th>
+                                        <th scope="col">Имя</th>
+                                        <th scope="col" class="w-25">Комментарий</th>
+                                        <th scope="col">Товар</th>
                                         <th scope="col">Дата добавления</th>
                                         <th scope="col">Действие</th>
                                         <th scope="col">Статус</th>
@@ -34,22 +26,21 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($products as $product)
+                                    @foreach($reviews as $review)
                                         <tr style="vertical-align:middle;">
-                                            <th scope="row">{{$product->id}}</th>
-                                            <td><img width="100px" src="{{asset($product->preview ?? "")}}" alt=""></td>
-                                            <td>{{$product->h1 ?? ""}}</td>
-                                            <td>{{$product->cost ?? ""}}</td>
-                                            <td>{{$product->created_at->format('d.m.Y h:m')}}</td>
+                                            <th scope="row">{{$review->id}}</th>
+                                            <td>{{$review->name}}</td>
+                                            <td>{{$review->comment}}</td>
+                                            <td>{{$review->product_id}}</td>
+                                            <td>{{$review->created_at->format('d.m.Y h:m')}}</td>
                                             <td>
                                                 <form
                                                     onsubmit="if(confirm('Удалить?')){ return true }else{ return false }"
-                                                    action="{{route('admin.products.destroy', $product)}}"
-                                                    method="POST">
+                                                    action="{{route('admin.reviews.destroy', $review)}}" method="POST">
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     @csrf
                                                     <a class="btn btn-default"
-                                                       href="{{route('admin.products.edit', $product)}}">
+                                                       href="{{route('admin.reviews.edit', $review)}}">
                                                         <svg width="1em" height="1em" viewBox="0 0 16 16"
                                                              class="bi bi-pen"
                                                              fill="currentColor"
@@ -72,15 +63,15 @@
                                                     </button>
                                                 </form>
                                             </td>
-                                            <td>
-                                                @if($product->status)
-                                                    Опубликован
+                                            <td>@if($review->status)
+                                                    Активен
                                                 @else
-                                                    Черновик
+                                                    На модерации <br>
+                                                    <a href="{{route('review.accepted', ['id' => $review->id])}}">Одобрить</a>
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{route('product', $product->id)}}" target="_blank">
+                                                <a href="{{route('product', $review->product_id)}}" target="_blank">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                          fill="currentColor" class="bi bi-window" viewBox="0 0 16 16">
                                                         <path

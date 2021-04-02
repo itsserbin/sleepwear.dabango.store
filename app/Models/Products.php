@@ -11,6 +11,7 @@ class Products extends Model
 
     protected $fillable = [
         'id',
+        'status',
         'title',
         'description',
         'h1',
@@ -29,6 +30,11 @@ class Products extends Model
 
     public function Clients()
     {
-        return $this->hasMany('App\Models\Clients', 'product', 'id');
+        return $this->hasMany(Clients::class, 'product', 'id');
+    }
+
+    public function Reviews()
+    {
+        return $this->hasMany(Reviews::class, 'product_id');
     }
 }

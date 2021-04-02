@@ -37,8 +37,11 @@
                                                     @if($client->status == 'cancel')Отменен@endif
                                                 </td>
                                                 <td>{{$client->name}}</td>
-                                                <td><a href="tel:{{$client->phone}}">{{$client->phone}}</a></td>
-                                                <td><a href="{{route('product', $client)}}">{!! $client->product !!}</a>
+                                                <td>
+                                                    <a href="tel:{{$client->phone}}">{{$client->phone}}</a></td>
+{{--                                                <td><a href="{{route('product', $client->product)}}" target="_blank">{!! $client->product !!}</a>--}}
+                                                <td>
+                                                    <a href="{{route('product', $client->product)}}" target="_blank">{{$client->product}}</a>
                                                 </td>
                                                 <td>{{$client->size}}</td>
                                                 <td>{{$client->created_at->format('d.m.Y h:m')}}</td>

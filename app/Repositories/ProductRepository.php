@@ -45,6 +45,7 @@ class ProductRepository extends CoreRepository
     {
         $columns = [
             'id',
+            'status',
             'description',
             'cost',
             'sale_cost',
@@ -64,4 +65,23 @@ class ProductRepository extends CoreRepository
         return $this->model::find($id);
     }
 
+    public function getItemsWithPaginateOnProduction($perPage = null)
+    {
+        $columns = [
+            'id',
+            'status',
+            'description',
+            'cost',
+            'sale_cost',
+            'preview',
+            'h1',
+            'created_at',
+        ];
+
+        return $this
+            ->startConditions()
+            ->where('status', '1')
+            ->select($columns)
+            ->paginate($perPage);
+    }
 }

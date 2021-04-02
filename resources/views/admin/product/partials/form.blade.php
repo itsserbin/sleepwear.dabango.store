@@ -1,7 +1,7 @@
 <div class="form-group">
     <label for="status">Статус</label>
     <select class="form-control" id="status" name="status">
-        @if (isset($product->id))--}}
+        @if (isset($product->id))
         <option value="0" @if ($product->status == 0) selected="" @endif>Не опубликовано</option>
         <option value="1" @if ($product->status == 1) selected="" @endif>Опубликовано</option>
         @else
