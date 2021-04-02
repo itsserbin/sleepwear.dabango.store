@@ -9,4 +9,3 @@ require('./components/mask-input')
 require('./components/slider')
 require('./components/modal')
 require('./components/alert')
-
