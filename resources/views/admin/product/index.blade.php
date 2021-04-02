@@ -5,7 +5,7 @@
                 {{ __('Все товары') }}
             </h2>
             <a href="{{route('admin.products.create')}}">
-                <button class="btn btn-success">
+                <button class="btn btn-light">
                     Добавить товар
                 </button>
             </a>
@@ -20,7 +20,7 @@
                         <div class="row">
                             <div class="col-12">
 
-                                <table class="table">
+                                <table class="table text-center align-center">
                                     <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -28,8 +28,8 @@
                                         <th scope="col">Название</th>
                                         <th scope="col">Цена</th>
                                         <th scope="col">Дата добавления</th>
-                                        <th scope="col">Действие</th>
                                         <th scope="col">Статус</th>
+                                        <th scope="col">Действие</th>
                                         <th scope="col"></th>
                                     </tr>
                                     </thead>
@@ -37,10 +37,17 @@
                                     @foreach($products as $product)
                                         <tr style="vertical-align:middle;">
                                             <th scope="row">{{$product->id}}</th>
-                                            <td><img width="100px" src="{{asset($product->preview ?? "")}}" alt=""></td>
-                                            <td>{{$product->h1 ?? ""}}</td>
+                                            <td><img class="mx-auto" style="width:75px;" src="{{asset($product->preview ?? "")}}" alt=""></td>
+                                            <td><a href="{{route('admin.products.edit', $product)}}">{{$product->h1 ?? ""}}</a></td>
                                             <td>{{$product->cost ?? ""}}</td>
                                             <td>{{$product->created_at->format('d.m.Y h:m')}}</td>
+                                            <td>
+                                                @if($product->status)
+                                                    Опубликован
+                                                @else
+                                                    Черновик
+                                                @endif
+                                            </td>
                                             <td>
                                                 <form
                                                     onsubmit="if(confirm('Удалить?')){ return true }else{ return false }"
@@ -71,13 +78,6 @@
                                                         </svg>
                                                     </button>
                                                 </form>
-                                            </td>
-                                            <td>
-                                                @if($product->status)
-                                                    Опубликован
-                                                @else
-                                                    Черновик
-                                                @endif
                                             </td>
                                             <td>
                                                 <a href="{{route('product', $product->id)}}" target="_blank">

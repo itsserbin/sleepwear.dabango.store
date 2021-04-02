@@ -8,7 +8,7 @@
                     aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <div class="collapse navbar-collapse justify-between" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : null }}"
@@ -27,25 +27,34 @@
                            href="{{route('admin.reviews.index')}}">Отзывы</a>
                     </li>
                 </ul>
-                <ul class="ms-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
+                <ul class="">
+                    <li class="nav-item dropstart">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
                             {{ Auth::user()->name }}
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">{{ Auth::user()->email }}</a>
-                        </div>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">{{ Auth::user()->email }}</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <form action="{{route('logout')}}" method="POST">
+                                    @csrf
+                                    <a href="{{route('home')}}" target="_blank"
+                                       style="text-decoration: none; color: white;">
+                                        <button type="button" class="dropdown-item">
+                                            Открыть сайт
+                                        </button>
+                                    </a>
+                                    <button type="submit" class="dropdown-item">Выйти</button>
+                                </form>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>
-            <form action="{{route('logout')}}" method="POST">
-                @csrf
-                <button type="button" class="btn btn-success">
-                    <a href="{{route('home')}}" target="_blank" style="text-decoration: none; color: white;">Открыть сайт</a>
-                </button>
-                <button type="submit" class="btn btn-danger">Выйти</button>
-            </form>
+
         </nav>
     </div>
 </div>

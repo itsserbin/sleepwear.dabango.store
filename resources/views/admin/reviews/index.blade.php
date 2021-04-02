@@ -12,7 +12,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12">
-                                <table class="table">
+                                <table class="table text-center align-center">
                                     <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -20,8 +20,8 @@
                                         <th scope="col" class="w-25">Комментарий</th>
                                         <th scope="col">Товар</th>
                                         <th scope="col">Дата добавления</th>
-                                        <th scope="col">Действие</th>
                                         <th scope="col">Статус</th>
+                                        <th scope="col">Действие</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -29,13 +29,20 @@
                                         <tr style="vertical-align:middle;">
                                             <th scope="row">{{$review->id}}</th>
                                             <td>{{$review->name}}</td>
-                                            <td>{{$review->comment}}</td>
+                                            <td class="text-start">{{$review->comment}}</td>
                                             <td>
                                                 <a href="{{route('product', $review->product_id)}}" target="_blank">
                                                     {{$review->product_id}}
                                                 </a>
                                             </td>
                                             <td>{{$review->created_at->format('d.m.Y h:m')}}</td>
+                                            <td>@if($review->status)
+                                                    Активен
+                                                @else
+                                                    На модерации <br>
+                                                    <a href="{{route('review.accepted', ['id' => $review->id])}}"><u>Одобрить</u></a>
+                                                @endif
+                                            </td>
                                             <td>
                                                 <form
                                                     onsubmit="if(confirm('Удалить?')){ return true }else{ return false }"
@@ -65,13 +72,6 @@
                                                         </svg>
                                                     </button>
                                                 </form>
-                                            </td>
-                                            <td>@if($review->status)
-                                                    Активен
-                                                @else
-                                                    На модерации <br>
-                                                    <a href="{{route('review.accepted', ['id' => $review->id])}}"><u>Одобрить</u></a>
-                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
