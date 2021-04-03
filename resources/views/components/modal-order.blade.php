@@ -16,6 +16,10 @@
                         <input id="size-2" type="radio" name="size" value="m" required>
                         <label for="size-2">M</label>
                     </div>
+                    <div class="size__element">
+                        <input id="size-3" type="radio" name="size" value="l" required>
+                        <label for="size-3">L</label>
+                    </div>
                 </div>
             </div>
             <input name="name" placeholder="Ваше имя*" required>
