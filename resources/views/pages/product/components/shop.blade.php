@@ -40,7 +40,7 @@
                     <div class="row">
                         <div class="available-sizes__element">S</div>
                         <div class="available-sizes__element">M</div>
-                        <div class="available-sizes__element available-sizes__element--not-availale">L</div>
+                        <div class="available-sizes__element">L</div>
                         <div class="available-sizes__element available-sizes__element--not-availale">XL</div>
                         <div class="available-sizes__element available-sizes__element--not-availale">XXL</div>
                     </div>
