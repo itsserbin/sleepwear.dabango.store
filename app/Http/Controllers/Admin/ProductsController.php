@@ -30,7 +30,7 @@ class ProductsController extends Controller
 
     public function index()
     {
-        $products = $this->ProductRepository->getAllWithPaginate(15);
+        $products = $this->ProductRepository->getAllWithPaginate();
 
         return view('admin.product.index', [
             'products' => $products
@@ -61,6 +61,11 @@ class ProductsController extends Controller
     {
         $product = new Products();
         $product->status = $request->input('status');
+        $product->s = $request->input('s');
+        $product->m = $request->input('m');
+        $product->l = $request->input('l');
+        $product->xl = $request->input('xl');
+        $product->xxl = $request->input('xxl');
         $product->h1 = $request->input('h1');
         $product->title = $request->input('title');
         $product->description = $request->input('description');
@@ -69,7 +74,7 @@ class ProductsController extends Controller
         $product->sale_cost = $request->input('sale_cost');
         $product->content = $request->input('content');
         $product->save();
-
+//        dd($product->s);
         $preview = $request->file('preview');
         if ($preview) {
             $preview_name = $preview->getClientOriginalName();
@@ -92,14 +97,7 @@ class ProductsController extends Controller
             }
         }
         $product->save();
-//        if ($product) {
-//            return view('admin.product.edit', [
-//                'product' => $product,
-//            ])->with('success', 'Товар успешно создан');
-//        } else {
-//            return back()
-//                ->withInput()->with('danger', 'Ошибка сохранения');
-//        }
+
         if ($product) {
             return redirect()->route('admin.products.edit', [
                 'product' => $product,
@@ -147,6 +145,11 @@ class ProductsController extends Controller
     {
         $product = $this->ProductRepository->getEdit($id);
         $product->status = $request->input('status');
+        $product->s = $request->input('s');
+        $product->m = $request->input('m');
+        $product->l = $request->input('l');
+        $product->xl = $request->input('xl');
+        $product->xxl = $request->input('xxl');
         $product->h1 = $request->input('h1');
         $product->title = $request->input('title');
         $product->description = $request->input('description');
@@ -173,7 +176,8 @@ class ProductsController extends Controller
                 $image_name = $image->getClientOriginalName();
 
                 $image->move(public_path('storage/product'), $image_name);
-                $productsPhoto = ProductsPhoto::find($product->id);
+//                $productsPhoto = ProductsPhoto::find($product->id);
+                $productsPhoto = ProductsPhoto::where('product_id', $product->id);
                 $productsPhoto->product_id = $product->id;
                 if ($productsPhoto) {
                     $productsPhoto->image = 'storage/product/' . $image_name;
@@ -185,6 +189,7 @@ class ProductsController extends Controller
                 }
             }
         }
+
 
         if ($product) {
             return back()->with('success', 'Успешно сохранено');

@@ -38,7 +38,7 @@ class HomeController extends Controller
     public function product($id)
     {
         $product = $this->ProductRepository->getProduct($id);
-        $products = $this->ProductRepository->getAllWithPaginate(20);
+        $products = $this->ProductRepository->getAllWithPaginate();
         $productsPhoto = ProductsPhoto::where('product_id', '=', $id)->get();
         return view('pages.product.index',[
             'product' => $product,
@@ -63,8 +63,9 @@ class HomeController extends Controller
         $size = $request->size;
 
         Mail::to('serbin.ssd@gmail.com')->send(new Order($name, $phone, $size));
+        Mail::to('youbrand_top@ukr.net')->send(new Order($name, $phone, $size));
 
-        return back()->with('success', 'Заявка успешно отправлена!');
+        return back()->with('success', 'Заявка успешно отправлена! Менеджер свяжется с вами в ближайшее время !!');
     }
 
     public function sendReview(Request $request)

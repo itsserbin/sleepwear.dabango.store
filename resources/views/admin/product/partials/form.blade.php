@@ -2,13 +2,37 @@
     <label for="status">Статус</label>
     <select class="form-control" id="status" name="status">
         @if (isset($product->id))
-        <option value="0" @if ($product->status == 0) selected="" @endif>Не опубликовано</option>
-        <option value="1" @if ($product->status == 1) selected="" @endif>Опубликовано</option>
+            <option value="0" @if ($product->status == 0) selected="" @endif>Не опубликовано</option>
+            <option value="1" @if ($product->status == 1) selected="" @endif>Опубликовано</option>
         @else
             <option value="0">Не опубликовано</option>
             <option value="1">Опубликовано</option>
         @endif
     </select>
+</div>
+
+<div class="form-group my-3">
+    <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+        <input type="checkbox" class="btn-check" name="s" id="s" autocomplete="off" value="1"
+               @if($product->s) checked @endif>
+        <label class="btn btn-outline-primary" for="s">S</label>
+
+        <input type="checkbox" class="btn-check" name="m" id="m" autocomplete="off" value="1"
+               @if($product->m) checked @endif>
+        <label class="btn btn-outline-primary" for="m">M</label>
+
+        <input type="checkbox" class="btn-check" name="l" id="l" autocomplete="off" value="1"
+               @if($product->l) checked @endif>
+        <label class="btn btn-outline-primary" for="l">L</label>
+
+        <input type="checkbox" class="btn-check" name="xl" id="xl" autocomplete="off" value="1"
+               @if($product->xl) checked @endif>
+        <label class="btn btn-outline-primary" for="xl">XL</label>
+
+        <input type="checkbox" class="btn-check" name="xxl" id="xxl" autocomplete="off" value="1"
+               @if($product->xxl) checked @endif>
+        <label class="btn btn-outline-primary" for="xxl">XXL</label>
+    </div>
 </div>
 
 <div class="form-group my-3">
