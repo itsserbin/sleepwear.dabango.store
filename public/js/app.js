@@ -31,6 +31,8 @@ __webpack_require__(/*! ./components/modal */ "./resources/js/components/modal.j
 
 __webpack_require__(/*! ./components/alert */ "./resources/js/components/alert.js");
 
+__webpack_require__(/*! ./components/radio-checked */ "./resources/js/components/radio-checked.js");
+
 /***/ }),
 
 /***/ "./resources/js/components/alert.js":
@@ -576,6 +578,19 @@ $(function () {
       $('input[type="text"]').val('');
     }
   });
+});
+
+/***/ }),
+
+/***/ "./resources/js/components/radio-checked.js":
+/*!**************************************************!*\
+  !*** ./resources/js/components/radio-checked.js ***!
+  \**************************************************/
+/***/ (() => {
+
+$('input:radio').click(function () {
+  $('input:radio').parent().removeClass('checked');
+  $(this).parent(this).addClass('checked');
 });
 
 /***/ }),
