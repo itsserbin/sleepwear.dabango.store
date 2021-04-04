@@ -30,7 +30,7 @@ class ProductsController extends Controller
 
     public function index()
     {
-        $products = $this->ProductRepository->getAllWithPaginate();
+        $products = $this->ProductRepository->getAllWithPaginate(15);
 
         return view('admin.product.index', [
             'products' => $products
