@@ -81,6 +81,7 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                {{ $reviews->links() }}
                             </div>
                         </div>
                     </div>
