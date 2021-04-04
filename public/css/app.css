@@ -490,7 +490,7 @@ h1, h2, h3, h4, h5, h6 {
 @font-face {
   font-family: "icomoon";
   src: url(/fonts/icomoon.eot?f3fa9ec91921405e4563f2283dc4599b);
-  src: url(/fonts/icomoon.eot?f3fa9ec91921405e4563f2283dc4599b) format("embedded-opentype"), url(/fonts/icomoon.woff?59f082c0aee00123b08ccf0386abfe45) format("woff"), url(/fonts/icomoon.ttf?25de864e3b8d18fdf8e525aa8c7f748d) format("truetype"), url(/fonts/icomoon.svg?986baf3a5da78c6f991955e6ff1a3b82) format("svg");
+  src: url(/fonts/icomoon.eot?f3fa9ec91921405e4563f2283dc4599b) format("embedded-opentype"), url(/fonts/icomoon.woff?59f082c0aee00123b08ccf0386abfe45) format("woff"), url(/fonts/icomoon.ttf?25de864e3b8d18fdf8e525aa8c7f748d) format("truetype"), url(/fonts/icomoon.svg?03951d621aa8de98e4a570f02e937d0b) format("svg");
   font-weight: normal;
   font-style: normal;
 }
