@@ -65,7 +65,7 @@ class HomeController extends Controller
         Mail::to('serbin.ssd@gmail.com')->send(new Order($name, $phone, $size));
         Mail::to('youbrand_top@ukr.net')->send(new Order($name, $phone, $size));
 
-        return back()->with('success', 'Заявка успешно отправлена!');
+        return back()->with('success', 'Заявка успешно отправлена! Менеджер свяжется с вами в ближайшее время !!');
     }
 
     public function sendReview(Request $request)
