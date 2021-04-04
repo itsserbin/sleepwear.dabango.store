@@ -5,3 +5,4 @@
 <meta name="description" content="@yield('description')">
 @yield('head')
 <link rel="stylesheet" href="{{asset('css/app.css')}}">
+<meta name="facebook-domain-verification" content="iwcc5klugzvznucuiqc4rxje76jo41" />
