@@ -637,9 +637,11 @@ $(window).on('load', function () {
   });
   $('.relative-slider').slick({
     infinite: true,
-    arrows: false,
+    arrows: true,
+    prevArrow: "<span class='icon-arrow-left2 arrow-prev'></span>",
+    nextArrow: "<span class='icon-arrow-right2 arrow-next'></span>",
     slidesToShow: 4,
-    slidesToScroll: 2,
+    slidesToScroll: 1,
     responsive: [{
       breakpoint: 768,
       settings: {

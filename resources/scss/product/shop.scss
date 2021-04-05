@@ -192,12 +192,13 @@
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
+        z-index: 999;
     }
     .arrow-prev {
-        top: -15px;
+        top: -33px;
     }
-    .arrow-nexct {
-        bottom: -15px;
+    .arrow-next {
+        bottom: -33px;
     }
 }
 .shop-products-slider-small.slick-vertical .slick-slide {

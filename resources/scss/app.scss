@@ -142,6 +142,11 @@ ul {
         color: #000;
     }
 }
+.arrow-prev,
+.arrow-next {
+    cursor: pointer;
+    padding: 10px;
+}
 @media (min-width: 864px) {
     .content {
         width: 830px;

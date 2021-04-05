@@ -12715,9 +12715,6 @@ h1, h2, h3, h4, h5, h6 {
   width: 180px;
   margin-bottom: 15px;
 }
-.card__product:not(:last-child) {
-  margin-right: 15px;
-}
 .card__image {
   margin: 0 auto 10px auto;
   width: 120px;
@@ -12769,6 +12766,9 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 22px;
   text-align: center;
   color: #000000;
+}
+.product-list .card__product:not(:last-child) {
+  margin-right: 15px;
 }
 
 .shop {
@@ -12933,12 +12933,13 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 999;
 }
 .shop-products-slider-small .arrow-prev {
-  top: -15px;
+  top: -33px;
 }
-.shop-products-slider-small .arrow-nexct {
-  bottom: -15px;
+.shop-products-slider-small .arrow-next {
+  bottom: -33px;
 }
 
 .shop-products-slider-small.slick-vertical .slick-slide {
@@ -13179,6 +13180,29 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 0 15px 0;
 }
 
+.relative-slider {
+  position: relative;
+}
+.relative-slider .arrow-prev,
+.relative-slider .arrow-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 999;
+}
+.relative-slider .arrow-prev {
+  left: -28px;
+}
+.relative-slider .arrow-next {
+  right: -28px;
+}
+.relative-slider .slick-slide {
+  margin: 0 10px;
+}
+.relative-slider .slick-list {
+  margin: 0 -10px;
+}
+
 .relative__product.slick-slide {
   display: flex;
 }
@@ -13304,6 +13328,12 @@ ul li::marker {
 .arrow-to-top span {
   font-size: 18px;
   color: #000;
+}
+
+.arrow-prev,
+.arrow-next {
+  cursor: pointer;
+  padding: 10px;
 }
 
 @media (min-width: 864px) {
