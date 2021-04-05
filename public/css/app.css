@@ -12572,9 +12572,10 @@ h1, h2, h3, h4, h5, h6 {
 .menu__list {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 100%;
+  padding-top: 50px;
 }
 .menu__link {
   display: inline-block;
@@ -12917,8 +12918,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .shop-products-slider-small {
-  display: flex;
-  align-items: center;
+  position: relative;
+  align-self: center;
 }
 .shop-products-slider-small__image {
   margin: 0 auto;
@@ -12927,9 +12928,17 @@ h1, h2, h3, h4, h5, h6 {
 .shop-products-slider-small__image img {
   width: 100%;
 }
-.shop-products-slider-small .slick-list {
-  height: 226px !important;
-  overflow-y: scroll;
+.shop-products-slider-small .arrow-prev,
+.shop-products-slider-small .arrow-next {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.shop-products-slider-small .arrow-prev {
+  top: -15px;
+}
+.shop-products-slider-small .arrow-nexct {
+  bottom: -15px;
 }
 
 .shop-products-slider-small.slick-vertical .slick-slide {
@@ -12957,10 +12966,6 @@ h1, h2, h3, h4, h5, h6 {
   }
   .shop-products-slider-big__image {
     max-width: 300px;
-  }
-
-  .shop-products-slider-small .slick-list {
-    height: 341px !important;
   }
 }
 @media (min-width: 500px) {
@@ -13189,10 +13194,12 @@ body {
   background-color: #fff;
 }
 
-body.lock {
+body.lock,
+body.menu-lock {
   overflow: hidden;
 }
-body.lock .arrow-to-top {
+body.lock .arrow-to-top,
+body.menu-lock .arrow-to-top {
   display: none;
 }
 

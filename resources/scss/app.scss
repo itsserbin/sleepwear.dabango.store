@@ -27,7 +27,8 @@ body {
     background-color: #fff;
 }
 
-body.lock {
+body.lock,
+body.menu-lock {
     overflow: hidden;
     .arrow-to-top {
         display: none;

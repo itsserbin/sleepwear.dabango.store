@@ -14,11 +14,13 @@ $(window).on('load', function() {
         ]
     });
     $('.shop-products-slider-small').slick({
-        infinite: false,
-        slidesToShow: 10,
+        infinite: true,
+        slidesToShow: 4,
         slidesToScroll: 1,
         asNavFor: '.shop-products-slider-big',
-        arrows: false,
+        arrows: true,
+        prevArrow: "<span class='icon-arrow-up2 arrow-prev'></span>",
+        nextArrow: "<span class='icon-arrow-down2 arrow-next'></span>",
         focusOnSelect: true,
         vertical: true,
         swipe: true
