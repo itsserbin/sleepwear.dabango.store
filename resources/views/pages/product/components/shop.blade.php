@@ -29,9 +29,12 @@
                     <div class="shop__product-availability">Товар в наличии</div>
                 </div>
                 <div class="shop__price">
+                    @if(isset($product->sale_cost))
                     <div class="shop__old-price">{{$product->cost}}</div>
                     <div class="shop__actual-price">{{$product->sale_cost}}</div>
+                    @else
                     <div class="shop__price-without-discount">4000</div>
+                    @endif
                     <button class="shop__button order-button button button--color_red button--color-text_white order">
                         Купить
                     </button>
