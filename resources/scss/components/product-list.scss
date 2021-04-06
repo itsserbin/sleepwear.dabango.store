@@ -6,4 +6,11 @@
 		text-align: center;
 		color: #000000;
 	}
+	.card {
+		&__product {
+			&:not(:last-child) {
+				margin-right: 15px;
+			}
+		}
+	}
 }

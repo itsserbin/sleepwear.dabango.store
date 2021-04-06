@@ -22,9 +22,10 @@
     &__list {
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         height: 100%;
+        padding-top: 50px;
     }
     &__link {
         display: inline-block;

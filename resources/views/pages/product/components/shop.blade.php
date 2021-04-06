@@ -31,6 +31,7 @@
                 <div class="shop__price">
                     <div class="shop__old-price">{{$product->cost}}</div>
                     <div class="shop__actual-price">{{$product->sale_cost}}</div>
+                    <div class="shop__price-without-discount">4000</div>
                     <button class="shop__button order-button button button--color_red button--color-text_white order">
                         Купить
                     </button>
@@ -60,6 +61,15 @@
                         </div>
                     </div>
                 </div>
+
+            <!--                 <div class="shop__available-colors available-colors">
+                    <div class="available-colors__label">Доступные цвета:</div>
+                    <div class="row">
+                        <div class="available-colors__element available-colors__element--blue"></div>
+                        <div class="available-colors__element available-colors__element--red"></div>
+                        <div class="available-colors__element available-colors__element--green"></div>
+                    </div>
+                </div> -->
                 @if(isset($product->content))
                     <div class="shop__description-title block-title">Описание</div>
                     <div class="shop__description">
@@ -68,10 +78,10 @@
                 @endif
             </div>
             @if(isset($product->characteristics))
-            <div class="column">
-                <div id="specifications" class="shop__specifications-title block-title">Характеристики</div>
-                {!! $product->characteristics !!}
-            </div>
+                <div class="column">
+                    <div id="specifications" class="shop__specifications-title block-title">Характеристики</div>
+                    {!! $product->characteristics !!}
+                </div>
             @endif
             <div class="column">
                 <div id="reviews" class="reviews">

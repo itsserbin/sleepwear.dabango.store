@@ -31,6 +31,8 @@ __webpack_require__(/*! ./components/modal */ "./resources/js/components/modal.j
 
 __webpack_require__(/*! ./components/alert */ "./resources/js/components/alert.js");
 
+__webpack_require__(/*! ./components/radio-checked */ "./resources/js/components/radio-checked.js");
+
 /***/ }),
 
 /***/ "./resources/js/components/alert.js":
@@ -528,11 +530,11 @@ $(function () {
 $(function () {
   $('.header-burger').click(function (event) {
     $('.header-burger,.menu').toggleClass('active');
-    $('body').toggleClass('lock');
+    $('body').toggleClass('menu-lock');
   });
   $('.menu__link').click(function (event) {
     $('.header-burger,.menu').removeClass('active');
-    $('body').removeClass('lock');
+    $('body').removeClass('menu-lock');
   });
 });
 
@@ -580,6 +582,19 @@ $(function () {
 
 /***/ }),
 
+/***/ "./resources/js/components/radio-checked.js":
+/*!**************************************************!*\
+  !*** ./resources/js/components/radio-checked.js ***!
+  \**************************************************/
+/***/ (() => {
+
+$('input:radio').click(function () {
+  $('input:radio').parent().removeClass('checked');
+  $(this).parent(this).addClass('checked');
+});
+
+/***/ }),
+
 /***/ "./resources/js/components/slider.js":
 /*!*******************************************!*\
   !*** ./resources/js/components/slider.js ***!
@@ -600,11 +615,13 @@ $(window).on('load', function () {
     }]
   });
   $('.shop-products-slider-small').slick({
-    infinite: false,
-    slidesToShow: 10,
+    infinite: true,
+    slidesToShow: 4,
     slidesToScroll: 1,
     asNavFor: '.shop-products-slider-big',
-    arrows: false,
+    arrows: true,
+    prevArrow: "<span class='icon-arrow-up2 arrow-prev'></span>",
+    nextArrow: "<span class='icon-arrow-down2 arrow-next'></span>",
     focusOnSelect: true,
     vertical: true,
     swipe: true
@@ -620,9 +637,11 @@ $(window).on('load', function () {
   });
   $('.relative-slider').slick({
     infinite: true,
-    arrows: false,
+    arrows: true,
+    prevArrow: "<span class='icon-arrow-left2 arrow-prev'></span>",
+    nextArrow: "<span class='icon-arrow-right2 arrow-next'></span>",
     slidesToShow: 4,
-    slidesToScroll: 2,
+    slidesToScroll: 1,
     responsive: [{
       breakpoint: 768,
       settings: {

@@ -27,7 +27,8 @@ body {
     background-color: #fff;
 }
 
-body.lock {
+body.lock,
+body.menu-lock {
     overflow: hidden;
     .arrow-to-top {
         display: none;
@@ -37,6 +38,7 @@ body.lock {
 ol,ul {
     margin-left: 10px;
     li {
+        margin: 0 0 5px 0;
         &::marker {
             font-size: 18px;
         }
@@ -45,6 +47,7 @@ ol,ul {
 
 ul {
     li {
+        margin: 0 0 5px 0;
         list-style-type: revert;
         &::marker {
             color: #E02424;
@@ -138,6 +141,11 @@ ul {
         font-size: 18px;
         color: #000;
     }
+}
+.arrow-prev,
+.arrow-next {
+    cursor: pointer;
+    padding: 5px;
 }
 @media (min-width: 864px) {
     .content {
