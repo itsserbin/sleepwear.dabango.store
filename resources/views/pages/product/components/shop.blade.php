@@ -31,6 +31,7 @@
                 <div class="shop__price">
                     <div class="shop__old-price">{{$product->cost}}</div>
                     <div class="shop__actual-price">{{$product->sale_cost}}</div>
+                    <div class="shop__price-without-discount">4000</div>
                     <button class="shop__button order-button button button--color_red button--color-text_white order">
                         Купить
                     </button>

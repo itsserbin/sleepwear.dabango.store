@@ -25,12 +25,12 @@
     &__price {
         display: grid;
         grid-template-columns: 1fr 4fr;
-        grid-gap: 5px;
+        grid-column-gap: 15px;
+        grid-row-gap: 5px;
         margin: 0 0 30px 0;
     }
     &__actual-price {
         grid-column: 1/2;
-        margin: 0 9px 0 0;
         font-weight: bold;
         font-size: 24px;
         color: #ff0000;
@@ -39,12 +39,21 @@
         }
     }
     &__old-price {
-        margin: 0 15px 0 0;
         font-weight: 500;
         font-size: 22px;
         -webkit-text-decoration-line: line-through;
         text-decoration-line: line-through;
         color: #A5A5A5;
+        &::after {
+            content: '₴';
+        }
+    }
+    &__price-without-discount {
+        grid-row: 1/3;
+        align-self: center;
+        font-weight: bold;
+        font-size: 24px;
+        color: #000;
         &::after {
             content: '₴';
         }
@@ -192,13 +201,12 @@
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-        z-index: 999;
     }
     .arrow-prev {
-        top: -33px;
+        top: -28px;
     }
     .arrow-next {
-        bottom: -33px;
+        bottom: -28px;
     }
 }
 .shop-products-slider-small.slick-vertical .slick-slide {
