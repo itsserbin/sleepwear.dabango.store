@@ -13,6 +13,7 @@
                 <div class="card__price">
                     <div class="card__old-price">{{$product->cost}}</div>
                     <div class="card__actual-price">{{$product->sale_cost}}</div>
+                    <div class="card__price-without-discount">4000</div>
                 </div>
             </a>
             @endforeach
