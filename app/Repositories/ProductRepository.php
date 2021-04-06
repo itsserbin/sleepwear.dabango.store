@@ -58,6 +58,7 @@ class ProductRepository extends CoreRepository
         return $this
             ->startConditions()
             ->select($columns)
+            ->orderBy('created_at', 'desc')
             ->paginate($perPage);
     }
     public function getProduct($id)

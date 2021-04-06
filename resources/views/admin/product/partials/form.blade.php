@@ -83,7 +83,7 @@
         <div class="form-group">
             <label for="sale_cost">Цена со скидкой</label>
             <input type="text" class="form-control" id="sale_cost" name="sale_cost" placeholder="Цена услуги"
-                   value="{{$product->sale_cost ?? ""}}" required>
+                   value="{{$product->sale_cost ?? ""}}">
         </div>
     </div>
 </div>
