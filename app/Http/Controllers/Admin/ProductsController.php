@@ -174,17 +174,20 @@ class ProductsController extends Controller
         if ($images) {
             foreach ($images as $image) {
                 $image_name = $image->getClientOriginalName();
-
                 $image->move(public_path('storage/product'), $image_name);
-//                $productsPhoto = ProductsPhoto::find($product->id);
-                $productsPhoto = ProductsPhoto::where('product_id', $product->id);
-                $productsPhoto->product_id = $product->id;
+
+                $productsPhoto = ProductsPhoto::where([
+                    ['image', '=', 'storage/product/' . $image_name],
+                    ['product_id', '=', $product->id],
+                ])->first();
+
                 if ($productsPhoto) {
                     $productsPhoto->image = 'storage/product/' . $image_name;
                     $productsPhoto->update();
                 } else {
                     $productsPhoto = new ProductsPhoto();
                     $productsPhoto->image = 'storage/product/' . $image_name;
+                    $productsPhoto->product_id = $product->id;
                     $productsPhoto->save();
                 }
             }
@@ -196,6 +199,19 @@ class ProductsController extends Controller
         } else {
             return back()
                 ->withInput()->with('danger', 'Ошибка сохранения');
+        }
+    }
+
+    public function destroyImage(Request $request)
+    {
+        $product = $request->input('product_id');
+//        dd($product);
+        $productsPhoto = ProductsPhoto::destroy($product);
+
+        if ($productsPhoto) {
+            return back()->with('success', 'Фото успешно удалено');
+        } else {
+            return back()->with('danger', 'Произошла ошибка удаления');
         }
     }
 

@@ -41,6 +41,7 @@ Route::group(['middleware' => 'auth'],function () {
         ->where('id', '\d+')
         ->name('review.accepted');
     Route::post('img-upload', [ProductsController::class, 'store'])->name('uploads.photo.post');
+    Route::post('del-img', [ProductsController::class, 'destroyImage'])->name('destroy.image');
 });
 
 require __DIR__.'/auth.php';
