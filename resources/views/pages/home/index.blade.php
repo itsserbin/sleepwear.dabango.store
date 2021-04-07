@@ -11,9 +11,12 @@
                 </div>
                 <h5 class="card__label">{{$product->h1}}</h5>
                 <div class="card__price">
-                    <div class="card__old-price">{{$product->cost}}</div>
-                    <div class="card__actual-price">{{$product->sale_cost}}</div>
-                    <div class="card__price-without-discount">4000</div>
+                    @if(isset($product->sale_cost))
+                        <div class="card__old-price">{{$product->cost}}</div>
+                        <div class="card__actual-price">{{$product->sale_cost}}</div>
+                    @else
+                        <div class="card__price-without-discount">{{$product->cost}}</div>
+                    @endif
                 </div>
             </a>
             @endforeach
