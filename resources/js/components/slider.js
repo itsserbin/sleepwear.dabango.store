@@ -3,6 +3,7 @@ $(window).on('load', function() {
         asNavFor: '.shop-products-slider-small',
         arrows: false,
         swipe: true,
+        lazyLoad: 'ondemand',
         responsive: [
         {
             breakpoint: 990,
