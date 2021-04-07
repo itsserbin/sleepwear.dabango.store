@@ -205,7 +205,6 @@ class ProductsController extends Controller
     public function destroyImage(Request $request)
     {
         $product = $request->input('product_id');
-//        dd($product);
         $productsPhoto = ProductsPhoto::destroy($product);
 
         if ($productsPhoto) {

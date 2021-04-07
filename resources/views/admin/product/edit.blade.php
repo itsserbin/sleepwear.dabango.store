@@ -20,8 +20,11 @@
                                     @method('PATCH')
                                     {{-- Form include --}}
                                     @include('admin.product.partials.form')
+
                                     <button type="submit" class="btn btn-success">Сохранить</button>
                                 </form>
+                                {{-- Images --}}
+                                @include('admin.product.partials.product-images')
                             </div>
                         </div>
                     </div>
