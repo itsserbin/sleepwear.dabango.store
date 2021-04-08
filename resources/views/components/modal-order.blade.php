@@ -7,13 +7,13 @@
             @csrf
             <div class="order-form__size size">
 {{--                <div class="row">--}}
-                    <div class="size__label">Выберите цвет:</div>
-                    @foreach($ProductsColor as $item)
-                        <label class="label--checkbox" for="{{$item->color}}">
-                            <input type="checkbox" name="color[]" id="{{$item->color}}" class="checkbox checkbox-color" value="{{$item->color}}">
-                            {{$item->color}}
-                        </label>
-                    @endforeach
+{{--                    <div class="size__label">Выберите цвет:</div>--}}
+{{--                    @foreach($ProductsColor as $item)--}}
+{{--                        <label class="label--checkbox" for="{{$item->color}}">--}}
+{{--                            <input type="checkbox" name="color[]" id="{{$item->color}}" class="checkbox checkbox-color" value="{{$item->color}}">--}}
+{{--                            {{$item->color}}--}}
+{{--                        </label>--}}
+{{--                    @endforeach--}}
 {{--                </div>--}}
                 <div class="size__label">Выберите размер:</div>
                 <div class="row">
