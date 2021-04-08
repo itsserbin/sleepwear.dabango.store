@@ -14,6 +14,7 @@ class Order extends Mailable
     protected $name;
     protected $phone;
     protected $size;
+    protected $color;
 
     /**
      * Create a new message instance.
@@ -39,6 +40,7 @@ class Order extends Mailable
             'name' => $this->name,
             'phone' => $this->phone,
             'size' => $this->size,
+            'color' => $this->color,
         ])->subject('Новая заявка на купальник');;
     }
 }

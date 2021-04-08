@@ -65,7 +65,9 @@ class HomeController extends Controller
         $name = $request->name;
         $phone = $request->phone;
         $size = $request->size;
-        Mail::to('serbin.ssd@gmail.com')->send(new Order($name, $phone, $size));
+        $color = $request->color;
+//        dd($color);
+        Mail::to('serbin.ssd@gmail.com')->send(new Order($name, $phone, $size, $color));
         Mail::to('youbrand_top@ukr.net')->send(new Order($name, $phone, $size));
 
         return back()->with('success', 'Заявка успешно отправлена! Менеджер свяжется с вами в ближайшее время !!');
