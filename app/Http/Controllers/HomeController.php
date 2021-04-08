@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\Order;
 use App\Mail\OrderShipped;
+use App\Models\ProductsColor;
 use App\Models\ProductsPhoto;
 use App\Models\Reviews;
 use App\Repositories\ProductRepository;
@@ -40,10 +41,13 @@ class HomeController extends Controller
         $product = $this->ProductRepository->getProduct($id);
         $products = $this->ProductRepository->getAllWithPaginate();
         $productsPhoto = ProductsPhoto::where('product_id', '=', $id)->get();
+        $ProductsColor = ProductsColor::where('product_id', '=', $id)->get();
+
         return view('pages.product.index',[
             'product' => $product,
             'productsPhoto' => $productsPhoto,
-            'products' => $products
+            'products' => $products,
+            'ProductsColor' => $ProductsColor
         ]);
     }
 
@@ -61,8 +65,9 @@ class HomeController extends Controller
         $name = $request->name;
         $phone = $request->phone;
         $size = $request->size;
-
-        Mail::to('serbin.ssd@gmail.com')->send(new Order($name, $phone, $size));
+        $color = $request->color;
+//        dd($color);
+        Mail::to('serbin.ssd@gmail.com')->send(new Order($name, $phone, $size, $color));
         Mail::to('youbrand_top@ukr.net')->send(new Order($name, $phone, $size));
 
         return back()->with('success', 'Заявка успешно отправлена! Менеджер свяжется с вами в ближайшее время !!');

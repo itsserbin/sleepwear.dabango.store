@@ -20,11 +20,12 @@ class Order extends Mailable
      *
      * @return void
      */
-    public function __construct($name, $phone, $size)
+    public function __construct($name, $phone, $size, $color)
     {
         $this->name = $name;
         $this->phone = $phone;
         $this->size = $size;
+        $this->color = $color;
     }
 
     /**
@@ -37,7 +38,8 @@ class Order extends Mailable
         return $this->markdown('emails.orders.shipped')->with([
             'name' => $this->name,
             'phone' => $this->phone,
-            'size' => $this->size
+            'size' => $this->size,
+            'color' => $this->color,
         ])->subject('Новая заявка на купальник');;
     }
 }

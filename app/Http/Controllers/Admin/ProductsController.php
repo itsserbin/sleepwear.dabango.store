@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Products;
+use App\Models\ProductsColor;
 use App\Models\ProductsPhoto;
 use App\Repositories\ProductRepository;
 use Illuminate\Contracts\Foundation\Application;
@@ -74,7 +75,16 @@ class ProductsController extends Controller
         $product->sale_cost = $request->input('sale_cost');
         $product->content = $request->input('content');
         $product->save();
-//        dd($product->s);
+
+        $ProductsColor = $request->input('color');
+        foreach ($ProductsColor as $item){
+            $color = $item;
+            $item = new ProductsColor();
+            $item->color = $color;
+            $item->product_id = $product->id;
+            $item->save();
+        }
+
         $preview = $request->file('preview');
         if ($preview) {
             $preview_name = $preview->getClientOriginalName();
@@ -126,10 +136,12 @@ class ProductsController extends Controller
     {
         $product = $this->ProductRepository->getEdit($id);
         $productPhoto = ProductsPhoto::where('product_id', '=', $id)->get();
+        $ProductsColor = ProductsColor::where('product_id', '=', $id)->get();
 
         return view('admin.product.edit', [
             'product' => $product,
-            'productPhoto' => $productPhoto
+            'productPhoto' => $productPhoto,
+            'ProductsColor' => $ProductsColor
         ]);
     }
 
@@ -158,6 +170,25 @@ class ProductsController extends Controller
         $product->sale_cost = $request->input('sale_cost');
         $product->content = $request->input('content');
         $product->update();
+
+
+
+//        $ProductsColor->destroy($product->id);
+//        dd($ProductsColor);
+
+        $Color = $request->input('color');
+        $ProductsColor = ProductsColor::where('product_id', $product->id)->get();
+        ProductsColor::destroy($ProductsColor);
+        if ($Color){
+            foreach ($Color as $item){
+                $color = $item;
+                $item = new ProductsColor();
+                $item->color = $color;
+                $item->product_id = $product->id;
+                $item->save();
+            }
+        }
+
 
         if ($request->file('preview')) {
             $preview = $request->file('preview');

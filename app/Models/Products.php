@@ -28,6 +28,11 @@ class Products extends Model
         return $this->hasMany('App\Models\ProductsPhoto', 'product_id', 'id');
     }
 
+    public function ProductsColor()
+    {
+        return $this->hasMany('App\Models\ProductsColor', 'product_id', 'id');
+    }
+
     public function Clients()
     {
         return $this->hasMany(Clients::class, 'product', 'id');

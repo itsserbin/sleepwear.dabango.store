@@ -36,6 +36,56 @@
 </div>
 
 <div class="form-group my-3">
+    <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+        <div class="row">
+            <h3>Актиные цвета</h3>
+            <div class="col-12">
+                @foreach($ProductsColor as $item)
+                    <input type="checkbox" class="btn-check" name="color[]" id="{{$item->color}}" autocomplete="off"
+                           value="{{$item->color}}"
+                           @if($item->color) checked @endif>
+                    <label class="btn btn-outline-primary" for="{{$item->color}}">{!! $item->color !!}</label>
+                @endforeach
+            </div>
+
+        </div>
+        <div class="row">
+            <h3>Все цвета:</h3>
+            <div class="col-12">
+
+                <input type="checkbox" class="btn-check" name="color[]" id="white" autocomplete="off" value="Белый">
+                <label class="btn btn-outline-primary" for="white">Белый</label>
+
+                <input type="checkbox" class="btn-check" name="color[]" id="gray" autocomplete="off" value="Серый">
+                <label class="btn btn-outline-primary" for="gray">Серый</label>
+
+                <input type="checkbox" class="btn-check" name="color[]" id="red" autocomplete="off" value="Красный">
+                <label class="btn btn-outline-primary" for="red">Красный</label>
+
+                <input type="checkbox" class="btn-check" name="color[]" id="burgundy" autocomplete="off"
+                       value="Бордовый">
+                <label class="btn btn-outline-primary" for="burgundy">Бордовый</label>
+
+                <input type="checkbox" class="btn-check" name="color[]" id="blue" autocomplete="off" value="Синий">
+                <label class="btn btn-outline-primary" for="blue">Синий</label>
+
+                <input type="checkbox" class="btn-check" name="color[]" id="green" autocomplete="off" value="Зеленый">
+                <label class="btn btn-outline-primary" for="green">Зеленый</label>
+
+                <input type="checkbox" class="btn-check" name="color[]" id="turquoise" autocomplete="off"
+                       value="Бирюзовый">
+                <label class="btn btn-outline-primary" for="turquoise">Бирюзовый</label>
+
+                <input type="checkbox" class="btn-check" name="color[]" id="yellow" autocomplete="off" value="Желтый">
+                <label class="btn btn-outline-primary" for="yellow">Желтый</label>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="form-group my-3">
     <label for="name">Title</label>
     <input type="text" class="form-control" id="title" name="title" placeholder="Title"
            value="{{$product->title ?? ""}}" required>

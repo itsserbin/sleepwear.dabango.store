@@ -3,5 +3,8 @@
     <p><b>Имя:</b> {{$name}}</p>
     <p><b>Телефон:</b> <a href="tel:+{{$phone}}">{{$phone}}</a></p>
     <p><b>Размер:</b> {{$size}}</p>
+    <p><b>Размер:</b> @foreach($color as $item){
+        {{$item}}
+    @endforeach
 
 @endcomponent
