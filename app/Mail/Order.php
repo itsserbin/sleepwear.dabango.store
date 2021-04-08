@@ -14,19 +14,17 @@ class Order extends Mailable
     protected $name;
     protected $phone;
     protected $size;
-    protected $color;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($name, $phone, $size, $color)
+    public function __construct($name, $phone, $size)
     {
         $this->name = $name;
         $this->phone = $phone;
         $this->size = $size;
-        $this->color = $color;
     }
 
     /**
@@ -40,7 +38,6 @@ class Order extends Mailable
             'name' => $this->name,
             'phone' => $this->phone,
             'size' => $this->size,
-            'color' => $this->color,
         ])->subject('Новая заявка на купальник');;
     }
 }
