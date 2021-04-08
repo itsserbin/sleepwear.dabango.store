@@ -52,6 +52,8 @@
         <div class="row">
             <h3>Все цвета:</h3>
             <div class="col-12">
+                <input type="checkbox" class="btn-check" name="color[]" id="black" autocomplete="off" value="Черный">
+                <label class="btn btn-outline-primary" for="black">Черный</label>
 
                 <input type="checkbox" class="btn-check" name="color[]" id="white" autocomplete="off" value="Белый">
                 <label class="btn btn-outline-primary" for="white">Белый</label>
