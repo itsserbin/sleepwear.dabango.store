@@ -64,6 +64,12 @@
                 <input type="checkbox" class="btn-check" name="color[]" id="red" autocomplete="off" value="Красный">
                 <label class="btn btn-outline-primary" for="red">Красный</label>
 
+                <input type="checkbox" class="btn-check" name="color[]" id="pink" autocomplete="off" value="Розовый">
+                <label class="btn btn-outline-primary" for="pink">Розовый</label>
+
+                <input type="checkbox" class="btn-check" name="color[]" id="powdery" autocomplete="off" value="Пудровый">
+                <label class="btn btn-outline-primary" for="powdery">Пудровый</label>
+
                 <input type="checkbox" class="btn-check" name="color[]" id="burgundy" autocomplete="off"
                        value="Бордовый">
                 <label class="btn btn-outline-primary" for="burgundy">Бордовый</label>
