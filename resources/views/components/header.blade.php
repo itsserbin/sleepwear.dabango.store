@@ -1,6 +1,7 @@
 <div class="content">
     <div class="row">
         <div class="header__logo logo">
+            <a href="{{route('home')}}"></a>
             <img src="{{asset('storage/img/content/logo.png')}}" alt="">
         </div>
         <div class="header-burger">
