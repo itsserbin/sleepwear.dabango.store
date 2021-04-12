@@ -6,3 +6,10 @@
 @yield('head')
 <link rel="stylesheet" href="{{asset('css/app.css')}}">
 <meta name="facebook-domain-verification" content="iwcc5klugzvznucuiqc4rxje76jo41" />
+
+<meta property="og:locale" content="ru_RU">
+<meta property="og:type" content="og:product">
+<meta property="og:title" content="@yield('title')">
+<meta property="og:image" content="{{asset('storage/img/content/logo.png')}}">
+<meta property="og:description" content="@yield('description')">
+<meta property="og:url" content="{{url()->current()}}">
