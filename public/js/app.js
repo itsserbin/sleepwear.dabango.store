@@ -516,7 +516,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /***/ (() => {
 
 $(function () {
-  $('.input-phone').mask('+38 (099) 999-99-99');
+  $('.input-phone').mask('+38 (999) 999-99-99');
 });
 
 /***/ }),
@@ -605,13 +605,11 @@ $(window).on('load', function () {
   $('.shop-products-slider-big').slick({
     asNavFor: '.shop-products-slider-small',
     arrows: false,
-    swipe: true,
     lazyLoad: 'ondemand',
     responsive: [{
       breakpoint: 990,
       settings: {
-        dots: false,
-        swipe: false
+        dots: false
       }
     }]
   });
@@ -625,6 +623,7 @@ $(window).on('load', function () {
     nextArrow: "<span class='icon-arrow-down2 arrow-next'></span>",
     focusOnSelect: true,
     vertical: true,
+    verticalSwiping: true,
     swipe: true
   });
   $('.reviews-slider').slick({
