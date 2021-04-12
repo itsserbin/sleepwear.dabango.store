@@ -15,6 +15,7 @@
         <div class="footer__second-side">
             <nav class="footer__menu footer-menu">
                 <ul>
+                    <li><a href="{{route('home')}}" class="footer-menu__link">Главная</a></li>
                     <li><a href="#specifications" class="footer-menu__link">Характеристики</a></li>
                     <li><a href="#advantages" class="footer-menu__link">Наши преимущества</a></li>
                     <li><a href="#shipping-and-payment" class="footer-menu__link">Доставка и оплата</a></li>
