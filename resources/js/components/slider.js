@@ -2,14 +2,12 @@ $(window).on('load', function() {
     $('.shop-products-slider-big').slick({
         asNavFor: '.shop-products-slider-small',
         arrows: false,
-        swipe: true,
         lazyLoad: 'ondemand',
         responsive: [
         {
             breakpoint: 990,
             settings: {
-                dots: false,
-                swipe: false
+                dots: false
             }
         }
         ]
@@ -24,6 +22,7 @@ $(window).on('load', function() {
         nextArrow: "<span class='icon-arrow-down2 arrow-next'></span>",
         focusOnSelect: true,
         vertical: true,
+        verticalSwiping:true,
         swipe: true
     });
     $('.reviews-slider').slick({
