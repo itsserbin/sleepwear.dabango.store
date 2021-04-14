@@ -68,10 +68,9 @@ class HomeController extends Controller
         $phone = $request->phone;
         $size = $request->size;
 
-//        Mail::to('serbin.ssd@gmail.com')->send(new Order($name, $phone, $size));
-//        Mail::to('youbrand_top@ukr.net')->send(new Order($name, $phone, $size));
+        Mail::to('serbin.ssd@gmail.com')->send(new Order($name, $phone, $size));
+        Mail::to('youbrand_top@ukr.net')->send(new Order($name, $phone, $size));
 
-//        return back()->with('success', 'Заявка успешно отправлена! Менеджер свяжется с вами в ближайшее время !!');
         return view('pages.order.index');
     }
 
@@ -80,7 +79,7 @@ class HomeController extends Controller
         $reviews = new Reviews();
         $data = $request->all();
         $reviews->create($data);
-//        dd($reviews);
+
         return back()->with('success', 'Отзыв отправлен на модерацию');
     }
 }
