@@ -7,14 +7,37 @@
 		color: #000000;
 	}
 }
-@media(min-width: 430px) {
+@media(min-width: 400px) {
 	.product-list {
 		.content {
 			>.row {
-				display: grid;
-				grid-template-columns:  repeat(auto-fill, 140px);
+				display: flex;
+				flex-wrap: wrap;
 				justify-content: center;
-				grid-gap: 15px;
+			}
+		}
+		.card {
+			&__product {
+				margin: 10px;
+				flex-basis: 44%;
+			}
+		}
+	}
+}
+@media(min-width: 576px) {
+	.product-list {
+		.card {
+			&__product {
+				flex-basis: 29%;
+			}
+		}
+	}
+}
+@media(min-width: 768px) {
+	.product-list {
+		.card {
+			&__product {
+				flex-basis: 22%;
 			}
 		}
 	}

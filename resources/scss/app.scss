@@ -59,7 +59,7 @@ ul {
 .wrapper {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    min-height: 100%;
 }
 
 .content {
@@ -147,6 +147,17 @@ ul {
 .arrow-next {
     cursor: pointer;
     padding: 5px;
+}
+.social-buttons {
+    display: flex;
+    a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &:not(:last-child) {
+            margin: 0 10px 0 0;
+        }
+    }
 }
 @media (min-width: 864px) {
     .content {

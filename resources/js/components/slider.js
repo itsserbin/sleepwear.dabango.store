@@ -43,13 +43,13 @@ $(window).on('load', function() {
         slidesToScroll: 1,
         responsive: [
         {
-            breakpoint: 800,
+            breakpoint: 1366,
             settings: {
                 slidesToShow: 4
             }
         },
         {
-            breakpoint: 600,
+            breakpoint: 700,
             settings: {
                 slidesToShow: 3
             }
