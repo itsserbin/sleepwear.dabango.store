@@ -31,15 +31,17 @@ class HomeController extends Controller
     public function index()
     {
         $products = $this->ProductRepository->getItemsWithPaginateOnProduction();
+        $reviews = Reviews::orderBy('created_at')->get();
         return view('pages.home.index',[
-            'products' => $products
+            'products' => $products,
+            'reviews' => $reviews,
         ]);
     }
 
     public function product($id)
     {
         $product = $this->ProductRepository->getProduct($id);
-        $products = $this->ProductRepository->getAllWithPaginate();
+        $products = $this->ProductRepository->getItemsWithPaginateOnProduction();
         $productsPhoto = ProductsPhoto::where('product_id', '=', $id)->get();
         $ProductsColor = ProductsColor::where('product_id', '=', $id)->get();
 
@@ -66,10 +68,11 @@ class HomeController extends Controller
         $phone = $request->phone;
         $size = $request->size;
 
-        Mail::to('serbin.ssd@gmail.com')->send(new Order($name, $phone, $size));
-        Mail::to('youbrand_top@ukr.net')->send(new Order($name, $phone, $size));
+//        Mail::to('serbin.ssd@gmail.com')->send(new Order($name, $phone, $size));
+//        Mail::to('youbrand_top@ukr.net')->send(new Order($name, $phone, $size));
 
-        return back()->with('success', 'Заявка успешно отправлена! Менеджер свяжется с вами в ближайшее время !!');
+//        return back()->with('success', 'Заявка успешно отправлена! Менеджер свяжется с вами в ближайшее время !!');
+        return view('pages.order.index');
     }
 
     public function sendReview(Request $request)

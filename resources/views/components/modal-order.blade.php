@@ -54,23 +54,6 @@
                     @endif
                 </div>
             </div>
-            <!--             <div class="order-form__color-selection color-selection">
-                            <div class="color-selection__label">Выберите цвет:</div>
-                            <div class="row">
-                                <div class="color-selection__element color-selection__element--blue">
-                                    <input id="color-1" type="radio" name="color" value="blue" required>
-                                    <label for="color-1"></label>
-                                </div>
-                                <div class="color-selection__element color-selection__element--red">
-                                    <input id="color-2" type="radio" name="color" value="red" required>
-                                    <label for="color-2"></label>
-                                </div>
-                                <div class="color-selection__element color-selection__element--green">
-                                    <input id="color-3" type="radio" name="color" value="green" required>
-                                    <label for="color-3"></label>
-                                </div>
-                            </div>
-                        </div> -->
             <input name="name" placeholder="Ваше имя*" required>
             <input type="tel" name="phone" placeholder="Ваш номер телефона*" class="input-phone" required>
             <input type="hidden" name="product" value="{{$product->id}}">

@@ -17,10 +17,10 @@
                                 <div class="card__price-without-discount">{{$product->cost}}</div>
                             @endif
                         </div>
+                        <span class="card__button">Подробнее</span>
                     </a>
                 @endif
             @endforeach
         </div>
-    </div>
     </div>
 </section>

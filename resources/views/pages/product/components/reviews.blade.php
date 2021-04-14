@@ -7,13 +7,13 @@
                     @if($review->status = 1)
                     <div class="reviews-slider__slide">
                         <div class="reviews-slider__name">{{$review->name}}</div>
-                        <div class="reviews-slider__rating">
-                            <img src="{{asset('storage/img/icon/star.png')}}" alt="">
-                            <img src="{{asset('storage/img/icon/star.png')}}" alt="">
-                            <img src="{{asset('storage/img/icon/star.png')}}" alt="">
-                            <img src="{{asset('storage/img/icon/star.png')}}" alt="">
-                            <img src="{{asset('storage/img/icon/star.png')}}" alt="">
-                        </div>
+{{--                        <div class="reviews-slider__rating">--}}
+{{--                            <img src="{{asset('storage/img/icon/star.png')}}" alt="">--}}
+{{--                            <img src="{{asset('storage/img/icon/star.png')}}" alt="">--}}
+{{--                            <img src="{{asset('storage/img/icon/star.png')}}" alt="">--}}
+{{--                            <img src="{{asset('storage/img/icon/star.png')}}" alt="">--}}
+{{--                            <img src="{{asset('storage/img/icon/star.png')}}" alt="">--}}
+{{--                        </div>--}}
                         <div class="reviews-slider__text">{{$review->comment}}
                         </div>
                     </div>
