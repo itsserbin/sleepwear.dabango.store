@@ -83,6 +83,7 @@ class ProductRepository extends CoreRepository
             ->startConditions()
             ->where('status', '1')
             ->select($columns)
+            ->orderBy('updated_at', 'DESC')
             ->paginate($perPage);
     }
 }

@@ -31,7 +31,7 @@ class HomeController extends Controller
     public function index()
     {
         $products = $this->ProductRepository->getItemsWithPaginateOnProduction();
-        $reviews = Reviews::orderBy('created_at', 'desc')->get();
+        $reviews = Reviews::orderBy('created_at')->get();
         return view('pages.home.index',[
             'products' => $products,
             'reviews' => $reviews,
@@ -79,7 +79,6 @@ class HomeController extends Controller
         $reviews = new Reviews();
         $data = $request->all();
         $reviews->create($data);
-
         return back()->with('success', 'Отзыв отправлен на модерацию');
     }
 }
