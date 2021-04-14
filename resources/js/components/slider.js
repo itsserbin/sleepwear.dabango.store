@@ -31,7 +31,7 @@ $(window).on('load', function() {
         autoplaySpeed: 4000,
         slidesToShow: 1,
         slidesToScroll: 1,
-        dots: true,
+        dots: false,
         adaptiveHeight: true
     });
     $('.relative-slider').slick({
