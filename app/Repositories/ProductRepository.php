@@ -77,6 +77,7 @@ class ProductRepository extends CoreRepository
             'preview',
             'h1',
             'created_at',
+            'updated_at'
         ];
 
         return $this
