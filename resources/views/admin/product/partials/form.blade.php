@@ -38,16 +38,17 @@
 <div class="form-group my-3">
     <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
         <div class="row">
-            <h3>Актиные цвета</h3>
             <div class="col-12">
-                @foreach($ProductsColor as $item)
-                    <input type="checkbox" class="btn-check" name="color[]" id="{{$item->color}}" autocomplete="off"
-                           value="{{$item->color}}"
-                           @if($item->color) checked @endif>
-                    <label class="btn btn-outline-primary my-1" for="{{$item->color}}">{!! $item->color !!}</label>
-                @endforeach
+                @if(isset($ProductsColor))
+                    <h3>Актиные цвета</h3>
+                    @foreach($ProductsColor as $item)
+                        <input type="checkbox" class="btn-check" name="color[]" id="{{$item->color}}" autocomplete="off"
+                               value="{{$item->color}}"
+                               @if($item->color) checked @endif>
+                        <label class="btn btn-outline-primary my-1" for="{{$item->color}}">{!! $item->color !!}</label>
+                    @endforeach
+                @endif
             </div>
-
         </div>
         <div class="row">
             <h3>Все цвета:</h3>
@@ -67,7 +68,8 @@
                 <input type="checkbox" class="btn-check" name="color[]" id="pink" autocomplete="off" value="Розовый">
                 <label class="btn btn-outline-primary my-1" for="pink">Розовый</label>
 
-                <input type="checkbox" class="btn-check" name="color[]" id="powdery" autocomplete="off" value="Пудровый">
+                <input type="checkbox" class="btn-check" name="color[]" id="powdery" autocomplete="off"
+                       value="Пудровый">
                 <label class="btn btn-outline-primary my-1" for="powdery">Пудровый</label>
 
                 <input type="checkbox" class="btn-check" name="color[]" id="burgundy" autocomplete="off"
