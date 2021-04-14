@@ -90,12 +90,17 @@
                        value="Мятный">
                 <label class="btn btn-outline-primary my-1" for="mint">Мятный</label>
 
+                <input type="checkbox" class="btn-check" name="color[]" id="khaki" autocomplete="off" value="Хаки">
+                <label class="btn btn-outline-primary my-1" for="khaki">Хаки</label>
+
                 <input type="checkbox" class="btn-check" name="color[]" id="yellow" autocomplete="off" value="Желтый">
                 <label class="btn btn-outline-primary my-1" for="yellow">Желтый</label>
 
                 <input type="checkbox" class="btn-check" name="color[]" id="citric" autocomplete="off" value="Лимонный">
                 <label class="btn btn-outline-primary my-1" for="citric">Лимонный</label>
 
+                <input type="checkbox" class="btn-check" name="color[]" id="purple" autocomplete="off" value="Фиолетовый">
+                <label class="btn btn-outline-primary my-1" for="purple">Фиолетовый</label>
             </div>
         </div>
 
