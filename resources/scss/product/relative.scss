@@ -6,6 +6,15 @@
 }
 .relative-slider {
 	position: relative;
+	.card {
+		&__image {
+			height: 160px;
+		}
+		&__label {
+			height: 48px;
+			overflow: hidden;
+		}
+	}
 	.arrow-prev,
 	.arrow-next {
 		position: absolute;

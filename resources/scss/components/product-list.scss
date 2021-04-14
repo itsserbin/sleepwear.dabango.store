@@ -6,10 +6,15 @@
 		text-align: center;
 		color: #000000;
 	}
-	.card {
-		&__product {
-			&:not(:last-child) {
-				margin-right: 15px;
+}
+@media(min-width: 430px) {
+	.product-list {
+		.content {
+			>.row {
+				display: grid;
+				grid-template-columns:  repeat(auto-fill, 140px);
+				justify-content: center;
+				grid-gap: 15px;
 			}
 		}
 	}
