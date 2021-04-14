@@ -66,14 +66,18 @@
                 </div>
 
                 @if(count($ProductsColor))
-                <div class="shop__available-colors available-colors">
-                    <div class="available-colors__label"><b>Доступные цвета:</b></div>
-                    <div class="row">
-                        @foreach($ProductsColor as $item)
-                            <div class="available-colors__element">{{$item->color}}</div>
-                        @endforeach
+                    <div class="shop__available-colors available-colors">
+                        <div class="available-colors__label"><b>Доступные цвета:</b></div>
+                        <div class="row">
+                            @foreach($ProductsColor as $item)
+                                <ul>
+                                    <li>
+                                        <div class="available-colors__element">{{$item->color}}</div>
+                                    </li>
+                                </ul>
+                            @endforeach
+                        </div>
                     </div>
-                </div>
                 @endif
                 @if(isset($product->content))
                     <div class="shop__description-title block-title">Описание</div>
