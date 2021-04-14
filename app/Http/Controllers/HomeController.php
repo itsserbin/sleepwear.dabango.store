@@ -30,7 +30,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        $products = $this->ProductRepository->getItemsWithPaginateOnProduction();
+        $products = $this->ProductRepository->getItemsWithPaginateOnProduction(30);
         $reviews = Reviews::orderBy('created_at')->get();
         return view('pages.home.index',[
             'products' => $products,
@@ -41,7 +41,7 @@ class HomeController extends Controller
     public function product($id)
     {
         $product = $this->ProductRepository->getProduct($id);
-        $products = $this->ProductRepository->getItemsWithPaginateOnProduction();
+        $products = $this->ProductRepository->getItemsWithPaginateOnProduction(30);
         $productsPhoto = ProductsPhoto::where('product_id', '=', $id)->get();
         $ProductsColor = ProductsColor::where('product_id', '=', $id)->get();
 
