@@ -102,6 +102,9 @@
                 <input type="checkbox" class="btn-check" name="color[]" id="beige" autocomplete="off" value="Бежевый">
                 <label class="btn btn-outline-primary my-1" for="beige">Бежевый</label>
 
+                <input type="checkbox" class="btn-check" name="color[]" id="orange" autocomplete="off" value="Оранжевый">
+                <label class="btn btn-outline-primary my-1" for="orange">Оранжевый</label>
+
                 <input type="checkbox" class="btn-check" name="color[]" id="purple" autocomplete="off" value="Фиолетовый">
                 <label class="btn btn-outline-primary my-1" for="purple">Фиолетовый</label>
             </div>
