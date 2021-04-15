@@ -13,16 +13,24 @@
     }
 }
 .modal {
+    animation: order-form-animation .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
     position: fixed;
     top: 20%;
     left: 50%;
-    transform: translateX(-50%);
     background: #fff;
     border-radius: 10px;
     border: 2px solid #E02424;
     z-index: 9999;
+}
+@keyframes order-form-animation {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+}
+100% {
+    transform: scale(1) translateX(-50%);
     opacity: 1;
-    transition: opacity 500ms ease-in;
+}
 }
 .modal-close {
     position: absolute;

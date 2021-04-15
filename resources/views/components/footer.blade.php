@@ -19,17 +19,5 @@
         </a>
       </div>
     </div>
-    <div class="column">
-      <div class="footer__title">Меню</div>
-      <nav class="footer-menu">
-        <ul>
-          <li><a href="#shop" class="footer-menu__link">Характеристики</a></li>
-          <li><a href="#brand-story" class="footer-menu__link">О нас</a></li>
-          <li><a href="#shipping-and-payment" class="footer-menu__link">Доставка и оплата</a></li>
-          <li><a href="#reviews" class="footer-menu__link">Отзывы</a></li>
-          <li><a href="#footer" class="footer-menu__link">Контакты</a></li>
-        </ul>
-      </nav>
-    </div>
   </div>
 </div>

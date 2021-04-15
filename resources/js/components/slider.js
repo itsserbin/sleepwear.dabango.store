@@ -27,6 +27,7 @@ $(window).on('load', function() {
     });
     $('.reviews-slider').slick({
         infinite: true,
+        arrows: true,
         autoplay: true,
         autoplaySpeed: 4000,
         slidesToShow: 1,
@@ -58,6 +59,12 @@ $(window).on('load', function() {
             breakpoint: 500,
             settings: {
                 slidesToShow: 2
+            }
+        },
+        {
+            breakpoint: 360,
+            settings: {
+                slidesToShow: 1
             }
         }
         ]

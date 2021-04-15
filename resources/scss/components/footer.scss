@@ -4,12 +4,7 @@
     .content {
         >.row {
             display: flex;
-            flex-direction: column;
-            >.column {
-                &:first-child {
-                    margin: 0 0 30px 0;
-                }
-            }
+            justify-content: center;
         }
     }
     &__title {
@@ -17,6 +12,7 @@
         font-family: "Montserrat", sans-serif;
         font-weight: bold;
         font-size: 20px;
+        text-align: center;
         font-variant: small-caps;
         color: #FFFFFF;
     }
@@ -24,6 +20,10 @@
         margin: 0 0 20px 0;
         .phonecall {
             margin: 0 0 5px 0;
+        }
+        .phonecall,
+        .email {
+            text-align: center;
         }
     }
     &__social-buttons {}
@@ -54,21 +54,6 @@
 .email {
     color: #FFFFFF;
     font-style: normal;
-}
-@media (min-width: 576px) {
-    .footer {
-        .content {
-            >.row {
-                flex-direction: row;
-                justify-content: space-evenly;
-                >.column {
-                    &:first-child {
-                        margin: 0;
-                    }
-                }
-            }
-        }
-    }
 }
 @media (min-width: 768px) {
     .footer {

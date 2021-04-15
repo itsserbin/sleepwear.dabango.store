@@ -18,7 +18,6 @@
                 <li><a href="#advantages" class="menu__link">Наши преимущества</a></li>
                 <li><a href="#shipping-and-payment" class="menu__link">Доставка и оплата</a></li>
                 <li><a href="#reviews" class="menu__link">Отзывы</a></li>
-                <li><a href="#contacts" class="menu__link">Контакты</a></li>
             </ul>
         </nav>
         <div class="header__contacts">

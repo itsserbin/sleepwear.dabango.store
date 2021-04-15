@@ -6,6 +6,11 @@
 		text-align: center;
 		color: #000000;
 	}
+	.card {
+		&__product {
+			margin-bottom: 10px;
+		}
+	}
 }
 @media(min-width: 400px) {
 	.product-list {
@@ -18,7 +23,7 @@
 		}
 		.card {
 			&__product {
-				margin: 10px;
+				margin: 5px;
 				flex-basis: 44%;
 			}
 		}
