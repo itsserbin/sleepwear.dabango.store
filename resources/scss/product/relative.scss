@@ -8,12 +8,13 @@
 	position: relative;
 	.card {
 		&__image {
+			margin: 0 auto 10px auto;
 			width: 105px;
 			height: 160px;
 		}
-		&__label {
-			height: 48px;
-			overflow: hidden;
+		&__label,
+		&__price {
+			margin: 0 0 10px 0;
 		}
 	}
 	.arrow-prev,

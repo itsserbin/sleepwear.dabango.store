@@ -22,6 +22,7 @@
     border: 2px solid #E02424;
     z-index: 9999;
     opacity: 1;
+    transition: opacity 500ms ease-in;
 }
 .modal-close {
     position: absolute;

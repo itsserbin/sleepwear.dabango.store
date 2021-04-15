@@ -1,28 +1,21 @@
 .header-burger {
-    position: fixed;
-    top: 1%;
-    right: 1%;
     z-index: 999;
     display: flex;
     justify-content: center;
     align-items: center;
     transition: all 0.3s ease 0s;
-    border-radius: 5px;
     width: 40px;
     height: 40px;
-    background: rgba(255, 255, 255, 0.5);
     span {
         font-size: 30px;
         cursor: pointer;
-        color: #C4C4C4;
-
+        color: #c4c4c4;
         &:last-child {
             display: none;
         }
     }
 }
 .header-burger.active {
-    background: transparent;
     span {
         font-size: 20px;
         &:first-child {
