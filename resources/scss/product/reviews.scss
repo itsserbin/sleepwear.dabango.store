@@ -1,7 +1,5 @@
 .reviews {
-    .content {
-        padding: 0 40px;
-    }
+    padding: 0 20px;
     &__title {
         margin: 0 0 10px 0;
     }
@@ -47,6 +45,9 @@
     }
 }
 @media(min-width: 768px) {
+    .reviews {
+        padding: 0;
+    }
     .reviews-slider {
         width: 250px;
     }

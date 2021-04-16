@@ -1,5 +1,8 @@
 .relative {
 	padding: 0 0 20px 0;
+	.content {
+		padding: 0 40px;
+	}
 	&__title {
 		margin: 0 0 15px 0;
 	}

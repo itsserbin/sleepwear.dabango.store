@@ -111,6 +111,7 @@
                     <div class="button-wrapper">
                         <button
                             class="shop__button review-button button button--color_red button--color-text_white review">
+                            <span class="icon-file-text2"></span>
                             <span>Оставить отзыв</span>
                         </button>
                     </div>

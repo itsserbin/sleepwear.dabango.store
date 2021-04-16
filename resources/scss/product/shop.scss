@@ -263,8 +263,7 @@
             >.row {
                 display: grid;
                 grid-template-columns: 3fr 2fr;
-                grid-column-gap: 25px;
-                grid-row-gap: 20px;
+                grid-gap: 20px;
                 >.column {
                     &:nth-child(2) {
                       grid-column: 2/3;
