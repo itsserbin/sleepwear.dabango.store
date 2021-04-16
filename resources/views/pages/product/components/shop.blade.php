@@ -36,7 +36,8 @@
                         <div class="shop__price-without-discount">{{$product->cost}}</div>
                     @endif
                     <button class="shop__button order-button button button--color_red button--color-text_white order">
-                        Купить
+                        <span class="icon-cart"></span>
+                        <span>Купить</span>
                     </button>
                 </div>
                 <div class="shop__available-sizes available-sizes">
@@ -110,7 +111,7 @@
                     <div class="button-wrapper">
                         <button
                             class="shop__button review-button button button--color_red button--color-text_white review">
-                            Оставить отзыв
+                            <span>Оставить отзыв</span>
                         </button>
                     </div>
                 </div>

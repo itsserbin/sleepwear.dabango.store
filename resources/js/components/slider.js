@@ -28,6 +28,8 @@ $(window).on('load', function() {
     $('.reviews-slider').slick({
         infinite: true,
         arrows: true,
+        prevArrow: "<span class='icon-arrow-left2 arrow-prev'></span>",
+        nextArrow: "<span class='icon-arrow-right2 arrow-next'></span>",
         autoplay: true,
         autoplaySpeed: 4000,
         slidesToShow: 1,

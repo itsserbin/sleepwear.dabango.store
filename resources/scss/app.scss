@@ -65,12 +65,13 @@ ul {
 .content {
     box-sizing: content-box;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 35px;
     max-width: 824px;
 }
 
 .main {
     flex: 1 0 auto;
+    margin: 50px 0 0 0;
 }
 
 .footer {
@@ -85,10 +86,11 @@ ul {
 }
 
 .logo {
-    width: 100px;
-
+    a {
+        display: inline-block;
+    }
     img {
-        width: 100%;
+        width: 65px;
     }
 }
 
@@ -115,13 +117,64 @@ ul {
     display: flex;
     justify-content: center;
 }
-.order-button {
+.order-button,
+.order-button-modal {
     border-radius: 10px;
     width: 170px;
     height: 50px;
     font-size: 22px;
 }
-.review-button {
+.order-button,
+.order-button-modal,
+.review-button-modal {
+    position: relative;
+    &:hover {
+        span {
+            &:first-child {
+                visibility: visible;
+            }
+        }
+    }
+    span {
+        &:first-child {
+            position: absolute;
+            top: 50%;
+            left: -22px;
+            transform: translateY(-50%);
+            transition: all 200ms ease;
+            visibility: hidden;
+        }
+    }
+}
+.order-button {
+    &:hover {
+        span {
+            &:first-child {
+                left: 10px;
+            }
+        }
+    }
+}
+.order-button-modal,
+.review-button-modal {
+    &:hover {
+        span {
+            &:first-child {
+                left: 0px;
+                background: rgba(255, 255, 255, 0.3);
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 30px;
+                border-top-right-radius: 100%;
+                border-bottom-right-radius: 100%;
+            }
+        }
+    }
+}
+.review-button,
+.review-button-modal {
     border-radius: 10px;
     width: 250px;
     height: 50px;

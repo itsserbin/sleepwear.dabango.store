@@ -92,8 +92,14 @@
         tr {
             display: grid;
             grid-template-columns: 2fr 1fr;
-            padding: 5px 0;
+            align-items: center;
+            padding: 10px 0;
+            &:nth-child(2n) {
+                border-radius: 5px;
+                background: rgba(224, 36, 36, 0.1);
+            }
             td {
+                padding: 0 10px;
                 &:first-child {
                     font-weight: 600;
                 }
@@ -202,6 +208,7 @@
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
+        font-size: 20px;
     }
     .arrow-prev {
         top: -28px;
@@ -256,7 +263,8 @@
             >.row {
                 display: grid;
                 grid-template-columns: 3fr 2fr;
-                grid-gap: 20px;
+                grid-column-gap: 25px;
+                grid-row-gap: 20px;
                 >.column {
                     &:nth-child(2) {
                       grid-column: 2/3;
