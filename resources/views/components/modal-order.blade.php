@@ -27,33 +27,34 @@
 
                     @if(isset($product->m))
                     <div class="size__element">
-                        <input id="size-2" type="radio" name="size" value="m" required>
+                        <input id="size-2" type="radio" name="size" value="m">
                         <label for="size-2">M</label>
                     </div>
                     @endif
 
                     @if(isset($product->l))
                     <div class="size__element">
-                        <input id="size-3" type="radio" name="size" value="l" required>
+                        <input id="size-3" type="radio" name="size" value="l">
                         <label for="size-3">L</label>
                     </div>
                     @endif
 
                     @if(isset($product->xl))
                     <div class="size__element">
-                        <input id="size-4" type="radio" name="size" value="xl" required>
+                        <input id="size-4" type="radio" name="size" value="xl">
                         <label for="size-4">XL</label>
                     </div>
                     @endif
 
                     @if(isset($product->xxl))
                     <div class="size__element">
-                        <input id="size-5" type="radio" name="size" value="xxl" required>
+                        <input id="size-5" type="radio" name="size" value="xxl">
                         <label for="size-5">XXL</label>
                     </div>
                     @endif
                 </div>
             </div>
+            <label id="requestType-error" class="error" for="size"></label>
             <input name="name" placeholder="Ваше имя*" required>
             <input type="tel" name="phone" placeholder="Ваш номер телефона*" class="input-phone" required>
             <input type="hidden" name="product" value="{{$product->id}}">

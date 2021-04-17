@@ -94,6 +94,7 @@
         font-weight: 600;
     }
     &__element {
+        position: relative;
         width: 40px;
         height: 40px;
         background: #FFFFFF;
@@ -101,7 +102,10 @@
             margin: 0 5px 5px 0;
         }
         input[type=radio] {
-            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
         }
         input[type=radio]:checked + label {
             border: 2px solid #000;
