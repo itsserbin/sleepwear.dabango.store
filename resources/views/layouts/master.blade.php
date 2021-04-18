@@ -29,7 +29,7 @@ product: http://ogp.me/ns/product#">
     </noscript>
     <!-- End Google Tag Manager (noscript) -->
     <div class="wrapper">
-        <a href="#top" class="arrow-to-top">
+        <a href="#shop" class="arrow-to-top">
             <span class="icon-arrow-up2"></span>
         </a>
         <header class="header">
@@ -42,6 +42,8 @@ product: http://ogp.me/ns/product#">
         <footer class="footer">
             @include('components.footer')
         </footer>
+        @include('components.modal-order')
+        @include('components.modal-review')
     </div>
 </body>
 @include('components.footer-scripts')

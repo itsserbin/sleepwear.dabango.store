@@ -35,7 +35,7 @@
                     @else
                         <div class="shop__price-without-discount">{{$product->cost}}</div>
                     @endif
-                    <button class="shop__button order-button button button--color_red button--color-text_white order">
+                    <button id="order" class="shop__button order-button button button--color_red button--color-text_white">
                         <span class="icon-cart"></span>
                         <span>Купить</span>
                     </button>
@@ -109,8 +109,7 @@
                         @else Отзывы отсутсвуют! @endif
                     </div>
                     <div class="button-wrapper">
-                        <button
-                            class="shop__button review-button button button--color_red button--color-text_white review">
+                        <button id="review" class="shop__button review-button button button--color_red button--color-text_white">
                             <span class="icon-file-text2"></span>
                             <span>Оставить отзыв</span>
                         </button>

@@ -20,7 +20,7 @@
 
 html {
     height: 100%;
-    scroll-behavior: smooth;
+    // scroll-behavior: smooth;
 }
 
 body {
@@ -72,7 +72,10 @@ ul {
 
 .main {
     flex: 1 0 auto;
-    margin: 50px 0 0 0;
+    margin: 45px 0 0 0;
+    &.filter {
+        filter: grayscale(100%);
+    }
 }
 
 .footer {
@@ -91,7 +94,7 @@ ul {
         display: inline-block;
     }
     img {
-        width: 65px;
+        width: 55px;
     }
 }
 

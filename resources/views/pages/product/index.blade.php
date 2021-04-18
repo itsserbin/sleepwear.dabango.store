@@ -8,8 +8,6 @@
 @section('description'){{$product->description}}@endsection
 
 @section('content')
-@include('components.modal-order')
-@include('components.modal-review')
 @include('components.modal-burger-menu')
 @include('pages.product.components.shop')
 @include('pages.product.components.relative')

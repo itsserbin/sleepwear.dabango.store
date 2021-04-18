@@ -1,5 +1,5 @@
-<div class="modal-fade modal-order">
-    <div class="modal">
+<div id="modal-order" class="modal">
+    <div class="modal-content">
         <button class="modal-close">
             <span class="icon-cross"></span>
         </button>

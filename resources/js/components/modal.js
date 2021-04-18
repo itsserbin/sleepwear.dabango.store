@@ -1,33 +1,53 @@
 $(function () {
-    $('.order').click(function() {
+    $('#order').click(function() {
         $('body').addClass('lock');
-        $('.modal-order').fadeIn(0);
-        return false;
+        $('#modal-order').addClass('show');
+        if ($('#modal-order').hasClass('show')) {
+            $('.header').addClass('filter');
+            $('.main').addClass('filter');
+        }
     });
-    $('.review').click(function() {
+    $('#review').click(function() {
         $('body').addClass('lock');
-        $('.modal-review').fadeIn(0);
-        return false;
+        $('#modal-review').addClass('show');
+        if ($('#modal-review').hasClass('show')) {
+            $('.header').addClass('filter');
+            $('.main').addClass('filter');
+        }
     });
     $('.modal-close').click(function() {
-        $(this).parents('.modal-fade').fadeOut(0);
+        $('#modal-order').removeClass('show');
+        $('#modal-review').removeClass('show');
         $('body').removeClass('lock');
-        $('input[type="text"]').val('');
-        return false;
+        $('.header').removeClass('filter');
+        $('.main').removeClass('filter');
+        $('input').val('');
+        $('textarea').val('');
+        $('input[name="size"]').prop('checked', false);
     });
     $(document).keydown(function(e) {
         if (e.keyCode === 27) {
             e.stopPropagation();
-            $('.modal-fade').fadeOut(0);
+            $('#modal-order').removeClass('show');
+            $('#modal-review').removeClass('show');
             $('body').removeClass('lock');
-            $('input[type="text"]').val('');
+            $('.header').removeClass('filter');
+            $('.main').removeClass('filter');
+            $('input').val('');
+            $('textarea').val('');
+            $('input[name="size"]').prop('checked', false);
         }
     });
-    $('.modal-fade').click(function(e) {
-        if ($(e.target).closest('.modal').length == 0) {
-            $(this).fadeOut(0);
+    $('.modal').click(function(e) {
+        if ($(e.target).closest('.modal-content').length == 0) {
+            $('#modal-order').removeClass('show');
+            $('#modal-review').removeClass('show');
             $('body').removeClass('lock');
-            $('input[type="text"]').val('');
+            $('.header').removeClass('filter');
+            $('.main').removeClass('filter');
+            $('input').val('');
+            $('textarea').val('');
+            $('input[name="size"]').prop('checked', false);
         }
     });
 });
