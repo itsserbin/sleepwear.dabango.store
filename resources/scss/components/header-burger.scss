@@ -1,9 +1,5 @@
 .header-burger {
-    position: absolute;
-    z-index: 999;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
+    position: relative;
     width: 25px;
     height: 18px;
     transition: all 0.3s ease 0s;
@@ -33,7 +29,6 @@
     }
 }
 .header-burger.active {
-    top: 30px;
     &::before {
         transform: rotate(45deg);
         top: 4px;

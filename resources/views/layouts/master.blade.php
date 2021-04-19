@@ -29,9 +29,9 @@ product: http://ogp.me/ns/product#">
     </noscript>
     <!-- End Google Tag Manager (noscript) -->
     <div class="wrapper">
-        <a href="#shop" class="arrow-to-top">
+        <button onclick="topFunction()" id="myBtn" class="arrow-to-top">
             <span class="icon-arrow-up2"></span>
-        </a>
+        </button>
         <header class="header">
             @include('components.header')
         </header>
@@ -42,9 +42,26 @@ product: http://ogp.me/ns/product#">
         <footer class="footer">
             @include('components.footer')
         </footer>
-        @include('components.modal-order')
-        @include('components.modal-review')
     </div>
-</body>
+    <script>
+        mybutton = document.getElementById("myBtn");
+
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+          if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }
+
+    function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+  }
+</script>
+<script src="https://unpkg.com/smoothscroll-anchor-polyfill"></script>
 @include('components.footer-scripts')
+</body>
 </html>
