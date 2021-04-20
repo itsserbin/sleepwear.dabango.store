@@ -11,9 +11,16 @@ $(function () {
         if ($('#modal-review').hasClass('show')) {
         }
     });
+    $('#sizes').click(function() {
+        $('body').addClass('lock');
+        $('#modal-sizes').addClass('show');
+        if ($('#modal-sizes').hasClass('show')) {
+        }
+    });
     $('.modal-close').click(function() {
         $('#modal-order').removeClass('show');
         $('#modal-review').removeClass('show');
+        $('#modal-sizes').removeClass('show');
         $('body').removeClass('lock');
         $('input').val('');
         $('textarea').val('');
@@ -24,6 +31,7 @@ $(function () {
             e.stopPropagation();
             $('#modal-order').removeClass('show');
             $('#modal-review').removeClass('show');
+            $('#modal-sizes').removeClass('show');
             $('body').removeClass('lock');
             $('input').val('');
             $('textarea').val('');
@@ -34,6 +42,7 @@ $(function () {
         if ($(e.target).closest('.modal-content').length == 0) {
             $('#modal-order').removeClass('show');
             $('#modal-review').removeClass('show');
+            $('#modal-sizes').removeClass('show');
             $('body').removeClass('lock');
             $('input').val('');
             $('textarea').val('');

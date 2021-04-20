@@ -65,6 +65,10 @@
     </div>
 </div>
 </div>
+<button id="sizes" class="shop__sizes-table">
+    <span class="icon-table"></span>
+    <span>Таблица размеров</span>
+</button>
 
 @if(count($ProductsColor))
 <div class="shop__available-colors available-colors">

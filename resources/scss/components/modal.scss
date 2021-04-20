@@ -21,6 +21,15 @@
         }
     }
 }
+.modal-sizes {
+    .modal-content {
+        padding: 5px;
+    }
+    .modal-close {
+        top: -35px;
+        right: -10px;
+    }
+}
 .modal-content {
     position: fixed;
     top: 20%;
@@ -29,26 +38,6 @@
     border: 2px solid #E02424;
     border-radius: 10px;
     background: #fff;
-}
-@-webkit-keyframes slide-top {
-  0% {
-    -webkit-transform: translate(0 0);
-    transform: translate(0 0);
-}
-100% {
-    -webkit-transform: translate(-50%, 50%);
-    transform: translate(-50%, 50%);
-}
-}
-@keyframes slide-top {
-  0% {
-    -webkit-transform: translate(0 0);
-    transform: translate(0 0);
-}
-100% {
-    -webkit-transform: translate(-50%, 50%);
-    transform: translate(-50%, 50%);
-}
 }
 .modal-close {
     position: absolute;

@@ -1,0 +1,33 @@
+.sizes-table {
+	border-collapse: collapse;
+	font-size: 12px;
+	tr {
+		&:first-child {
+			th {
+				border-bottom-width: 3px;
+			}
+		}
+	}
+	th,
+	td {
+		border: 1px solid #C4C4C4;
+		padding: 15px;
+	}
+}
+@media(min-width: 400px) {
+	.sizes-table {
+		font-size: 16px;
+		th,
+		td {
+			padding: 15px 20px;
+		}
+	}
+}
+@media(min-width: 450px) {
+	.sizes-table {
+		th,
+		td {
+			min-width: 105px;
+		}
+	}
+}
