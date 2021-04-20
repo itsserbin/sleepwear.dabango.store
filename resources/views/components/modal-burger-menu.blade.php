@@ -1,8 +1,8 @@
 <div class="burger-menu">
     <nav class="menu">
         <ul class="menu__list">
-            <li><a href="{{route('home')}}" class="menu__link">Главная</a></li>
             @if(\Illuminate\Support\Facades\Route::is('product'))
+                <li><a href="{{route('home')}}" class="menu__link">Главная</a></li>
                 <li><a href="#specifications" class="menu__link">Характеристики</a></li>
                 <li><a href="#advantages" class="menu__link">Наши преимущества</a></li>
                 <li><a href="#shipping-and-payment" class="menu__link">Доставка и оплата</a></li>
