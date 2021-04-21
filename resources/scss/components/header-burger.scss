@@ -27,17 +27,17 @@
         width: 100%;
         height: 2px;
     }
-}
-.header-burger.active {
-    &::before {
-        transform: rotate(45deg);
-        top: 4px;
-    }
-    &::after {
-        transform: rotate(-45deg);
-        bottom: 12px;
-    }
-    span {
-        display: none;
+    &.active {
+        &::before {
+            transform: rotate(45deg);
+            top: 4px;
+        }
+        &::after {
+            transform: rotate(-45deg);
+            bottom: 12px;
+        }
+        span {
+            display: none;
+        }
     }
 }
