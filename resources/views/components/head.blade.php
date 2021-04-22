@@ -21,6 +21,8 @@
 <meta name="msapplication-TileImage" content="{{asset('storage/favicon/ms-icon-144x144.png')}}">
 <meta name="theme-color" content="#ffffff">
 
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 <title>@yield('title')</title>
 <meta name="description" content="@yield('description')">
 @yield('head')
