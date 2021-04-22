@@ -65,10 +65,12 @@
     </div>
 </div>
 </div>
-<button id="sizes" class="shop__sizes-table">
-    <span class="icon-table"></span>
-    <span>Таблица размеров</span>
-</button>
+<div class="shop__delivery-info">
+    <button id="sizes" class="shop__sizes-table">
+        <span class="icon-table"></span>
+        <span>Таблица размеров</span>
+    </button>
+</div>
 
 @if(count($ProductsColor))
 <div class="shop__available-colors available-colors">
@@ -90,10 +92,10 @@
     {!! $product->content !!}
 </div>
 @endif
-<div class="shop__delivery-info">
+{{-- <div class="shop__delivery-info">
     <span class="icon-info2"></span>
     <span>Отправляем товар Новой Почтой в этот же день</span>
-</div>
+</div> --}}
 </div>
 @if(isset($product->characteristics))
 <div class="shop__col">

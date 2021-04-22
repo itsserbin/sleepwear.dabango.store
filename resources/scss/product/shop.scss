@@ -91,7 +91,6 @@
     &__sizes-table {
         display: flex;
         align-items: center;
-        margin-bottom: 10px;
         background: transparent;
         span {
             &:first-child {
@@ -128,11 +127,11 @@
         justify-content: center;
         align-items: center;
         border: 3px solid #E02424;
-        padding: 3px 10px;
+        padding: 5px 0;
         border-radius: 10px;
-        max-width: 350px;
-        margin: 0 auto 30px auto;
+        max-width: 230px;
         font-family: 'Gilroy', sans-serif;
+        margin: 10px 0;
 
         span {
             color: #424242;
@@ -356,9 +355,6 @@
         &:nth-child(4) {
             grid-column: 2/3;
         }
-    }
-    &__delivery-info {
-        margin: 0 auto;
     }
     &__button {
         width: 270px;
