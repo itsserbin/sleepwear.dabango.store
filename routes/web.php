@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ClientsController;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\ReviewsController;
 use App\Http\Controllers\HomeController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,20 +18,16 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-//
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-//
-//Route::get('/dashboard', function () {
-//    return view('dashboard');
-//})->middleware(['auth'])->name('dashboard');
-
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/product/{id?}', [HomeController::class, 'product'])->name('product');
 Route::post('send-form', [HomeController::class, 'sendForm'])->name('send.form');
 Route::post('send-review', [HomeController::class, 'sendReview'])->name('send.review');
+
+Route::get('/token', function (Request $request) {
+    $token = $request->session()->token();
+    $token = csrf_token();
+});
 
 Route::group(['middleware' => 'auth'],function () {
     Route::get('dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
