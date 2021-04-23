@@ -24,10 +24,10 @@ Route::get('/product/{id?}', [HomeController::class, 'product'])->name('product'
 Route::post('send-form', [HomeController::class, 'sendForm'])->name('send.form');
 Route::post('send-review', [HomeController::class, 'sendReview'])->name('send.review');
 
-//Route::get('/token', function (Request $request) {
-//    $token = $request->session()->token();
-//    $token = csrf_token();
-//});
+Route::get('/token', function (Request $request) {
+    $token = $request->session()->token();
+    $token = csrf_token();
+});
 
 Route::group(['middleware' => 'auth'],function () {
     Route::get('dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
