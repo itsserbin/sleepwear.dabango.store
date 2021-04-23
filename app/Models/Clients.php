@@ -11,7 +11,9 @@ class Clients extends Model
 
     protected $fillable = [
         'comment',
-        'status'
+        'status',
+        'name',
+        'phone',
     ];
 
     public function Product()

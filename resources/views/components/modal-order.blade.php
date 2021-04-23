@@ -58,6 +58,8 @@
             <input name="name" placeholder="Ваше имя*" required>
             <input type="tel" name="phone" placeholder="Ваш номер телефона*" class="input-phone" required>
             <input type="hidden" name="product" value="{{$product->id}}">
+            <input type="hidden" name="product_name" value="{{$product->h1}}">
+            <input type="hidden" name="url" value="{{url()->current()}}">
             <input type="hidden" name="status" value="new">
             <button class="order-form__button order-button-modal button button--color_red button--color-text_white" type="submit">
                 <span class="icon-arrow-right2"></span>
