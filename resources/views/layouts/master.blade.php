@@ -2,9 +2,9 @@
 <html lang="RU">
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# product: http://ogp.me/ns/product#">
 @include('components.head')
-{{$head_scripts}}
+{!! $head_scripts !!}
 <body>
-{{$after_body_scripts}}
+{!! $after_body_scripts !!}
 <div class="wrapper">
     <button onclick="topFunction()" id="myBtn" class="arrow-to-top">
         <span class="icon-arrow-up2"></span>
@@ -42,6 +42,6 @@
 </script>
 <script src="https://unpkg.com/smoothscroll-anchor-polyfill"></script>
 @include('components.footer-scripts')
-{{$footer_scripts}}
+{!! $footer_scripts !!}
 </body>
 </html>
