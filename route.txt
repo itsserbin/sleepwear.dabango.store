@@ -1,0 +1,259 @@
++--------+-----------+----------------------------------+----------------------------------+-------------------------------------------------------------------------+--------------------+
+| Domain | Method    | URI                              | Name                             | Action                                                                  | Middleware         |
++--------+-----------+----------------------------------+----------------------------------+-------------------------------------------------------------------------+--------------------+
+|        | GET|HEAD  | /                                | home                             | App\Http\Controllers\HomeController@index                               | web                |
+|        | GET|HEAD  | api/user                         | generated::Gz7CtDJxCDPlXKUc      | Closure                                                                 | api                |
+|        |           |                                  |                                  |                                                                         | auth:api           |
+|        | GET|HEAD  | bookkeeping                      | admin.bookkeeping.index          | App\Http\Controllers\Bookkeeping\BookkeepingController@index            | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | POST      | bookkeeping                      | admin.bookkeeping.store          | App\Http\Controllers\Bookkeeping\BookkeepingController@store            | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | POST      | bookkeeping/costs                | admin.bookkeeping.costs.store    | App\Http\Controllers\Bookkeeping\CostsController@store                  | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | GET|HEAD  | bookkeeping/costs                | admin.bookkeeping.costs.index    | App\Http\Controllers\Bookkeeping\CostsController@index                  | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | GET|HEAD  | bookkeeping/costs/create         | admin.bookkeeping.costs.create   | App\Http\Controllers\Bookkeeping\CostsController@create                 | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | DELETE    | bookkeeping/costs/{cost}         | admin.bookkeeping.costs.destroy  | App\Http\Controllers\Bookkeeping\CostsController@destroy                | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | PUT|PATCH | bookkeeping/costs/{cost}         | admin.bookkeeping.costs.update   | App\Http\Controllers\Bookkeeping\CostsController@update                 | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | GET|HEAD  | bookkeeping/costs/{cost}         | admin.bookkeeping.costs.show     | App\Http\Controllers\Bookkeeping\CostsController@show                   | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | GET|HEAD  | bookkeeping/costs/{cost}/edit    | admin.bookkeeping.costs.edit     | App\Http\Controllers\Bookkeeping\CostsController@edit                   | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | GET|HEAD  | bookkeeping/create               | admin.bookkeeping.create         | App\Http\Controllers\Bookkeeping\BookkeepingController@create           | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | POST      | bookkeeping/profit               | admin.bookkeeping.profit.store   | App\Http\Controllers\Bookkeeping\ProfitController@store                 | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | GET|HEAD  | bookkeeping/profit               | admin.bookkeeping.profit.index   | App\Http\Controllers\Bookkeeping\ProfitController@index                 | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | GET|HEAD  | bookkeeping/profit/create        | admin.bookkeeping.profit.create  | App\Http\Controllers\Bookkeeping\ProfitController@create                | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | GET|HEAD  | bookkeeping/profit/{profit}      | admin.bookkeeping.profit.show    | App\Http\Controllers\Bookkeeping\ProfitController@show                  | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | DELETE    | bookkeeping/profit/{profit}      | admin.bookkeeping.profit.destroy | App\Http\Controllers\Bookkeeping\ProfitController@destroy               | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | PUT|PATCH | bookkeeping/profit/{profit}      | admin.bookkeeping.profit.update  | App\Http\Controllers\Bookkeeping\ProfitController@update                | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | GET|HEAD  | bookkeeping/profit/{profit}/edit | admin.bookkeeping.profit.edit    | App\Http\Controllers\Bookkeeping\ProfitController@edit                  | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | GET|HEAD  | bookkeeping/{}                   | admin.bookkeeping.show           | App\Http\Controllers\Bookkeeping\BookkeepingController@show             | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | DELETE    | bookkeeping/{}                   | admin.bookkeeping.destroy        | App\Http\Controllers\Bookkeeping\BookkeepingController@destroy          | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | PUT|PATCH | bookkeeping/{}                   | admin.bookkeeping.update         | App\Http\Controllers\Bookkeeping\BookkeepingController@update           | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | GET|HEAD  | bookkeeping/{}/edit              | admin.bookkeeping.edit           | App\Http\Controllers\Bookkeeping\BookkeepingController@edit             | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | GET|HEAD  | clients                          | admin.clients.index              | App\Http\Controllers\Admin\ClientsController@index                      | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | POST      | clients                          | admin.clients.store              | App\Http\Controllers\Admin\ClientsController@store                      | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | GET|HEAD  | clients/create                   | admin.clients.create             | App\Http\Controllers\Admin\ClientsController@create                     | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | GET|HEAD  | clients/{client}                 | admin.clients.show               | App\Http\Controllers\Admin\ClientsController@show                       | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | PUT|PATCH | clients/{client}                 | admin.clients.update             | App\Http\Controllers\Admin\ClientsController@update                     | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | DELETE    | clients/{client}                 | admin.clients.destroy            | App\Http\Controllers\Admin\ClientsController@destroy                    | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | GET|HEAD  | clients/{client}/edit            | admin.clients.edit               | App\Http\Controllers\Admin\ClientsController@edit                       | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | GET|HEAD  | confirm-password                 | password.confirm                 | App\Http\Controllers\Auth\ConfirmablePasswordController@show            | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | POST      | confirm-password                 | generated::Q0DzEg6Q5rqaHBZM      | App\Http\Controllers\Auth\ConfirmablePasswordController@store           | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | GET|HEAD  | dashboard                        | admin.dashboard                  | App\Http\Controllers\Admin\AdminController@index                        | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | POST      | del-img                          | destroy.image                    | App\Http\Controllers\Admin\ProductsController@destroyImage              | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | POST      | email/verification-notification  | verification.send                | App\Http\Controllers\Auth\EmailVerificationNotificationController@store | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | throttle:6,1       |
+|        | POST      | forgot-password                  | password.email                   | App\Http\Controllers\Auth\PasswordResetLinkController@store             | web                |
+|        |           |                                  |                                  |                                                                         | guest              |
+|        | GET|HEAD  | forgot-password                  | password.request                 | App\Http\Controllers\Auth\PasswordResetLinkController@create            | web                |
+|        |           |                                  |                                  |                                                                         | guest              |
+|        | POST      | img-upload                       | uploads.photo.post               | App\Http\Controllers\Admin\ProductsController@store                     | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | GET|HEAD  | login                            | login                            | App\Http\Controllers\Auth\AuthenticatedSessionController@create         | web                |
+|        |           |                                  |                                  |                                                                         | guest              |
+|        | POST      | login                            | generated::7WPzSFjS27Oo7VxO      | App\Http\Controllers\Auth\AuthenticatedSessionController@store          | web                |
+|        |           |                                  |                                  |                                                                         | guest              |
+|        | POST      | logout                           | logout                           | App\Http\Controllers\Auth\AuthenticatedSessionController@destroy        | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | GET|HEAD  | orders                           | admin.orders.index               | App\Http\Controllers\Admin\OrdersController@index                       | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | POST      | orders                           | admin.orders.store               | App\Http\Controllers\Admin\OrdersController@store                       | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | GET|HEAD  | orders/create                    | admin.orders.create              | App\Http\Controllers\Admin\OrdersController@create                      | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | PUT|PATCH | orders/{}                        | admin.orders.update              | App\Http\Controllers\Admin\OrdersController@update                      | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | DELETE    | orders/{}                        | admin.orders.destroy             | App\Http\Controllers\Admin\OrdersController@destroy                     | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | GET|HEAD  | orders/{}                        | admin.orders.show                | App\Http\Controllers\Admin\OrdersController@show                        | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | GET|HEAD  | orders/{}/edit                   | admin.orders.edit                | App\Http\Controllers\Admin\OrdersController@edit                        | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | GET|HEAD  | product/{id?}                    | product                          | App\Http\Controllers\HomeController@product                             | web                |
+|        | GET|HEAD  | products                         | admin.products.index             | App\Http\Controllers\Admin\ProductsController@index                     | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | POST      | products                         | admin.products.store             | App\Http\Controllers\Admin\ProductsController@store                     | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | GET|HEAD  | products/create                  | admin.products.create            | App\Http\Controllers\Admin\ProductsController@create                    | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | PUT|PATCH | products/{}                      | admin.products.update            | App\Http\Controllers\Admin\ProductsController@update                    | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | DELETE    | products/{}                      | admin.products.destroy           | App\Http\Controllers\Admin\ProductsController@destroy                   | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | GET|HEAD  | products/{}                      | admin.products.show              | App\Http\Controllers\Admin\ProductsController@show                      | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | GET|HEAD  | products/{}/edit                 | admin.products.edit              | App\Http\Controllers\Admin\ProductsController@edit                      | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | POST      | register                         | generated::aVwOSAHi1MibvIIi      | App\Http\Controllers\Auth\RegisteredUserController@store                | web                |
+|        |           |                                  |                                  |                                                                         | guest              |
+|        | GET|HEAD  | register                         | register                         | App\Http\Controllers\Auth\RegisteredUserController@create               | web                |
+|        |           |                                  |                                  |                                                                         | guest              |
+|        | POST      | reset-password                   | password.update                  | App\Http\Controllers\Auth\NewPasswordController@store                   | web                |
+|        |           |                                  |                                  |                                                                         | guest              |
+|        | GET|HEAD  | reset-password/{token}           | password.reset                   | App\Http\Controllers\Auth\NewPasswordController@create                  | web                |
+|        |           |                                  |                                  |                                                                         | guest              |
+|        | GET|HEAD  | reviews                          | admin.reviews.index              | App\Http\Controllers\Admin\ReviewsController@index                      | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | POST      | reviews                          | admin.reviews.store              | App\Http\Controllers\Admin\ReviewsController@store                      | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | GET|HEAD  | reviews/accepted/{id}            | review.accepted                  | App\Http\Controllers\Admin\ReviewsController@reviewsAccepted            | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | GET|HEAD  | reviews/create                   | admin.reviews.create             | App\Http\Controllers\Admin\ReviewsController@create                     | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | PUT|PATCH | reviews/{}                       | admin.reviews.update             | App\Http\Controllers\Admin\ReviewsController@update                     | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | GET|HEAD  | reviews/{}                       | admin.reviews.show               | App\Http\Controllers\Admin\ReviewsController@show                       | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | DELETE    | reviews/{}                       | admin.reviews.destroy            | App\Http\Controllers\Admin\ReviewsController@destroy                    | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | GET|HEAD  | reviews/{}/edit                  | admin.reviews.edit               | App\Http\Controllers\Admin\ReviewsController@edit                       | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | POST      | send-form                        | send.form                        | App\Http\Controllers\HomeController@sendForm                            | web                |
+|        | POST      | send-review                      | send.review                      | App\Http\Controllers\HomeController@sendReview                          | web                |
+|        | GET|HEAD  | settings                         | admin.settings.index             | App\Http\Controllers\SettingsController@index                           | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | POST      | settings                         | admin.settings.store             | App\Http\Controllers\SettingsController@store                           | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | POST      | settings/colors                  | admin.settings.colors.store      | App\Http\Controllers\Admin\ColorsController@store                       | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | GET|HEAD  | settings/colors                  | admin.settings.colors.index      | App\Http\Controllers\Admin\ColorsController@index                       | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | GET|HEAD  | settings/colors/create           | admin.settings.colors.create     | App\Http\Controllers\Admin\ColorsController@create                      | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | DELETE    | settings/colors/{color}          | admin.settings.colors.destroy    | App\Http\Controllers\Admin\ColorsController@destroy                     | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | PUT|PATCH | settings/colors/{color}          | admin.settings.colors.update     | App\Http\Controllers\Admin\ColorsController@update                      | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | GET|HEAD  | settings/colors/{color}          | admin.settings.colors.show       | App\Http\Controllers\Admin\ColorsController@show                        | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | GET|HEAD  | settings/colors/{color}/edit     | admin.settings.colors.edit       | App\Http\Controllers\Admin\ColorsController@edit                        | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | GET|HEAD  | settings/create                  | admin.settings.create            | App\Http\Controllers\SettingsController@create                          | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | GET|HEAD  | settings/roles                   | admin.roles.index                | App\Http\Controllers\Admin\RolesColroller@index                         | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | POST      | settings/roles                   | admin.roles.store                | App\Http\Controllers\Admin\RolesColroller@store                         | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | GET|HEAD  | settings/roles/create            | admin.roles.create               | App\Http\Controllers\Admin\RolesColroller@create                        | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | DELETE    | settings/roles/{role}            | admin.roles.destroy              | App\Http\Controllers\Admin\RolesColroller@destroy                       | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | GET|HEAD  | settings/roles/{role}            | admin.roles.show                 | App\Http\Controllers\Admin\RolesColroller@show                          | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | PUT|PATCH | settings/roles/{role}            | admin.roles.update               | App\Http\Controllers\Admin\RolesColroller@update                        | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | GET|HEAD  | settings/roles/{role}/edit       | admin.roles.edit                 | App\Http\Controllers\Admin\RolesColroller@edit                          | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | POST      | settings/save                    | admin.settings.save              | App\Http\Controllers\SettingsController@save                            | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | GET|HEAD  | settings/scripts                 | admin.settings.scripts           | App\Http\Controllers\SettingsController@scripts                         | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | POST      | settings/users                   | admin.users.store                | App\Http\Controllers\Admin\UsersController@store                        | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | GET|HEAD  | settings/users                   | admin.users.index                | App\Http\Controllers\Admin\UsersController@index                        | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | GET|HEAD  | settings/users/create            | admin.users.create               | App\Http\Controllers\Admin\UsersController@create                       | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | DELETE    | settings/users/{user}            | admin.users.destroy              | App\Http\Controllers\Admin\UsersController@destroy                      | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | PUT|PATCH | settings/users/{user}            | admin.users.update               | App\Http\Controllers\Admin\UsersController@update                       | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | GET|HEAD  | settings/users/{user}            | admin.users.show                 | App\Http\Controllers\Admin\UsersController@show                         | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | GET|HEAD  | settings/users/{user}/edit       | admin.users.edit                 | App\Http\Controllers\Admin\UsersController@edit                         | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | GET|HEAD  | settings/{}                      | admin.settings.show              | App\Http\Controllers\SettingsController@show                            | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | PUT|PATCH | settings/{}                      | admin.settings.update            | App\Http\Controllers\SettingsController@update                          | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | DELETE    | settings/{}                      | admin.settings.destroy           | App\Http\Controllers\SettingsController@destroy                         | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | GET|HEAD  | settings/{}/edit                 | admin.settings.edit              | App\Http\Controllers\SettingsController@edit                            | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | role:administrator |
+|        | GET|HEAD  | token                            | generated::5JOh28KgzziRe7v1      | Closure                                                                 | web                |
+|        | GET|HEAD  | verify-email                     | verification.notice              | App\Http\Controllers\Auth\EmailVerificationPromptController@__invoke    | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        | GET|HEAD  | verify-email/{id}/{hash}         | verification.verify              | App\Http\Controllers\Auth\VerifyEmailController@__invoke                | web                |
+|        |           |                                  |                                  |                                                                         | auth               |
+|        |           |                                  |                                  |                                                                         | signed             |
+|        |           |                                  |                                  |                                                                         | throttle:6,1       |
++--------+-----------+----------------------------------+----------------------------------+-------------------------------------------------------------------------+--------------------+

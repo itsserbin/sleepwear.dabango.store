@@ -17,8 +17,9 @@ class Products extends Model
         'h1',
         'content',
         'characteristics',
-        'cost',
-        'sale_cost',
+        'price',
+        'sale_price',
+        'discount_price',
         'preview',
         'images',
     ];
@@ -30,16 +31,21 @@ class Products extends Model
 
     public function ProductsColor()
     {
-        return $this->hasMany('App\Models\ProductsColor', 'product_id', 'id');
+        return $this->hasMany(ProductsColor::class, 'product_id');
     }
 
-    public function Clients()
+    public function Client()
     {
-        return $this->hasMany(Clients::class, 'product', 'id');
+        return $this->hasMany(Clients::class,);
     }
 
     public function Reviews()
     {
         return $this->hasMany(Reviews::class, 'product_id');
+    }
+
+    public function Order()
+    {
+        return $this->hasOne(Orders::class,'product_id');
     }
 }

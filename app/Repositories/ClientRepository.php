@@ -50,9 +50,11 @@ class ClientRepository extends CoreRepository
             'name',
             'phone',
             'status',
-            'product',
-            'size',
+            'number_of_purchases',
+            'whole_check',
+            'average_check',
             'created_at',
+            'updated_at',
         ];
 
         return $this

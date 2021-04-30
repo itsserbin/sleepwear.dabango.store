@@ -20,6 +20,25 @@
             filter: blur(4px);
         }
     }
+    &-par{
+        display: flex;
+    }
+    .available-colors{
+        justify-content: center;
+        &:after{
+            background: none;
+        }
+        &__label{
+            text-align: center;
+        }
+    }
+    .shop__available-sizes{
+        justify-content: center;
+        margin: 0;
+        &__label{
+            text-align: center;
+        }
+    }
 }
 .modal-sizes {
     .modal-content {
@@ -136,55 +155,55 @@
         }
     }
 }
-// .color-selection {
-//     .row {
-//         display: flex;
-//         justify-content: flex-start;
-//         flex-wrap: wrap;
-//     }
-//     &__label {
-//         margin: 0 0 10px 0;
-//         font-weight: 600;
-//     }
-//     &__element {
-//         border-radius: 100%;
-//         width: 30px;
-//         height: 30px;
-//         &:not(:last-child) {
-//             margin: 0 5px 5px 0;
-//         }
-//         input[type=radio] {
-//             display: none;
-//         }
-//         label {
-//             display: flex;
-//             justify-content: center;
-//             align-items: center;
-//             border-radius: 100%;
-//             width: 100%;
-//             height: 100%;
-//         }
-//         &--blue {
-//             label {
-//                 background: blue;
-//             }
-//         }
-//         &--red {
-//             label {
-//                 background: red;
-//             }
-//         }
-//         &--green {
-//             label {
-//                 background: green;
-//             }
-//         }
-//     }
-//     &__element.checked {
-//         border: 1px solid #00a046;
-//         padding: 4px;
-//     }
-// }
+ .color-selection {
+     .row {
+         display: flex;
+         justify-content: flex-start;
+         flex-wrap: wrap;
+     }
+     &__label {
+         margin: 0 0 10px 0;
+         font-weight: 600;
+     }
+     &__element {
+         border-radius: 100%;
+         width: 30px;
+         height: 30px;
+         &:not(:last-child) {
+             margin: 0 5px 5px 0;
+         }
+         input[type=radio] {
+             display: none;
+         }
+         label {
+             display: flex;
+             justify-content: center;
+             align-items: center;
+             border-radius: 100%;
+             width: 100%;
+             height: 100%;
+         }
+         &--blue {
+             label {
+                 background: blue;
+             }
+         }
+         &--red {
+             label {
+                 background: red;
+             }
+         }
+         &--green {
+             label {
+                 background: green;
+             }
+         }
+     }
+     &__element.checked {
+         border: 1px solid #00a046;
+         padding: 4px;
+     }
+ }
 @media (min-width: 576px) {
     .form {
         width: 370px;

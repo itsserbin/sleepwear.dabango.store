@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Colors;
 use App\Models\Products;
 use App\Models\ProductsColor;
 use App\Models\ProductsPhoto;
@@ -10,6 +11,7 @@ use App\Repositories\ProductRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -46,9 +48,11 @@ class ProductsController extends Controller
     public function create()
     {
         $product = new Products();
+        $colors = Colors::all();
 
         return view('admin.product.create', [
             'product' => $product,
+            'colors' => $colors
         ]);
     }
 
@@ -61,28 +65,33 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         $product = new Products();
+        $product->published = $request->input('published');
         $product->status = $request->input('status');
+        $product->xs = $request->input('xs');
         $product->s = $request->input('s');
         $product->m = $request->input('m');
         $product->l = $request->input('l');
         $product->xl = $request->input('xl');
         $product->xxl = $request->input('xxl');
+        $product->xxxl = $request->input('xxxl');
         $product->h1 = $request->input('h1');
         $product->title = $request->input('title');
         $product->description = $request->input('description');
         $product->characteristics = $request->input('characteristics');
-        $product->cost = $request->input('cost');
-        $product->sale_cost = $request->input('sale_cost');
+        $product->price = $request->input('price');
+        $product->discount_price = $request->input('discount_price');
+        $product->trade_price = $request->input('trade_price');
         $product->content = $request->input('content');
+        $product->vendor_code = $request->input('vendor_code');
         $product->save();
 
-        $ProductsColor = $request->input('color');
-        foreach ($ProductsColor as $item){
-            $color = $item;
-            $item = new ProductsColor();
-            $item->color = $color;
-            $item->product_id = $product->id;
-            $item->save();
+        $colors = $request->input('colors');
+        if ($colors){
+            foreach ($colors as $item){
+                $color = new ProductsColor();
+                $color->color_id = $item;
+                $product->ProductsColor()->save($color);
+            }
         }
 
         $preview = $request->file('preview');
@@ -136,12 +145,16 @@ class ProductsController extends Controller
     {
         $product = $this->ProductRepository->getEdit($id);
         $productPhoto = ProductsPhoto::where('product_id', '=', $id)->get();
+
         $ProductsColor = ProductsColor::where('product_id', '=', $id)->get();
+        $colors = Colors::all();
 
         return view('admin.product.edit', [
             'product' => $product,
             'productPhoto' => $productPhoto,
-            'ProductsColor' => $ProductsColor
+            'ProductsColor' => $ProductsColor,
+
+            'colors' => $colors
         ]);
     }
 
@@ -156,39 +169,42 @@ class ProductsController extends Controller
     public function update(Request $request, Products $products, $id)
     {
         $product = $this->ProductRepository->getEdit($id);
+
+        $product->published = $request->input('published');
         $product->status = $request->input('status');
+
+        $product->xs = $request->input('xs');
         $product->s = $request->input('s');
         $product->m = $request->input('m');
         $product->l = $request->input('l');
         $product->xl = $request->input('xl');
         $product->xxl = $request->input('xxl');
+        $product->xxxl = $request->input('xxxl');
         $product->h1 = $request->input('h1');
         $product->title = $request->input('title');
         $product->description = $request->input('description');
         $product->characteristics = $request->input('characteristics');
-        $product->cost = $request->input('cost');
-        $product->sale_cost = $request->input('sale_cost');
+        $product->price = $request->input('price');
+        $product->discount_price = $request->input('discount_price');
+        $product->trade_price = $request->input('trade_price');
         $product->content = $request->input('content');
-        $product->update();
-
-
-
-//        $ProductsColor->destroy($product->id);
-//        dd($ProductsColor);
-
-        $Color = $request->input('color');
-        $ProductsColor = ProductsColor::where('product_id', $product->id)->get();
-        ProductsColor::destroy($ProductsColor);
-        if ($Color){
-            foreach ($Color as $item){
-                $color = $item;
-                $item = new ProductsColor();
-                $item->color = $color;
-                $item->product_id = $product->id;
-                $item->save();
+        $product->vendor_code = $request->input('vendor_code');
+        $colors = $request->input('colors');
+        $check = ProductsColor::where('product_id', $id)->get();
+        if ($check) {
+            foreach ($check as $item) {
+                ProductsColor::destroy($item->id);
             }
         }
 
+        if ($colors){
+            foreach ($colors as $item){
+                $color = new ProductsColor();
+                $color->color_id = $item;
+                $product->ProductsColor()->save($color);
+            }
+        }
+        $product->update();
 
         if ($request->file('preview')) {
             $preview = $request->file('preview');

@@ -2,7 +2,14 @@
 
 namespace App\Console;
 
+use App\Models\Bookkeeping\Costs;
+use App\Models\Bookkeeping\Profit;
+use App\Models\BookkeepingCosts;
+use App\Models\Clients;
+use App\Models\Orders;
+use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
@@ -25,6 +32,19 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->call(function () {
+            $date = Carbon::yesterday();
+
+            $profit = new Profit();
+            $profit->cost = $ProfitCost = Costs::where('updated_at', '>', $date)->select('total')->sum('total');
+            $profit->profit = $ProfitProfit = Orders::where([
+                ['updated_at', '>', $date],
+                ['status', '=', 'Выполнен']
+            ])->select('profit')->sum('profit');
+            $profit->marginality = $ProfitProfit - $ProfitCost;
+            $profit->turnover = $ProfitProfit + $ProfitCost;
+            $profit->save();
+        })->everyMinute();
     }
 
     /**

@@ -11,11 +11,11 @@
                 <div class="card__body">
                     <h5 class="card__label">{{$product->h1}}</h5>
                     <div class="card__price">
-                        @if(isset($product->sale_cost))
-                        <div class="card__old-price">{{$product->cost}}</div>
-                        <div class="card__actual-price">{{$product->sale_cost}}</div>
+                        @if(isset($product->discount_price))
+                        <div class="card__old-price">{{$product->price}}</div>
+                        <div class="card__actual-price">{{$product->discount_price}}</div>
                         @else
-                        <div class="card__price-without-discount">{{$product->cost}}</div>
+                        <div class="card__price-without-discount">{{$product->price}}</div>
                         @endif
                     </div>
                     <span class="card__button">Подробнее</span>

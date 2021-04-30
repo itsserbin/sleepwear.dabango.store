@@ -16,8 +16,8 @@ class Reviews extends Model
         'status',
     ];
 
-    public function Product()
+    public function Products()
     {
-        return $this->hasOne(Products::class, 'product_id', 'id');
+        return $this->belongsTo(Products::class,'product_id');
     }
 }

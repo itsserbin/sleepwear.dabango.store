@@ -1,42 +1,53 @@
-<div class="form-group">
-    <label for="status">Статус</label>
-    <select class="form-control" id="status" name="status">
-        @if (isset($product->id))
-            <option value="0" @if ($product->status == 0) selected="" @endif>Не опубликовано</option>
-            <option value="1" @if ($product->status == 1) selected="" @endif>Опубликовано</option>
-        @else
-            <option value="0">Не опубликовано</option>
-            <option value="1">Опубликовано</option>
-        @endif
-    </select>
-</div>
-
-<div class="form-group my-3">
-    <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-        <input type="checkbox" class="btn-check" name="s" id="s" autocomplete="off" value="1"
-               @if($product->s) checked @endif>
-        <label class="btn btn-outline-primary" for="s">S</label>
-
-        <input type="checkbox" class="btn-check" name="m" id="m" autocomplete="off" value="1"
-               @if($product->m) checked @endif>
-        <label class="btn btn-outline-primary" for="m">M</label>
-
-        <input type="checkbox" class="btn-check" name="l" id="l" autocomplete="off" value="1"
-               @if($product->l) checked @endif>
-        <label class="btn btn-outline-primary" for="l">L</label>
-
-        <input type="checkbox" class="btn-check" name="xl" id="xl" autocomplete="off" value="1"
-               @if($product->xl) checked @endif>
-        <label class="btn btn-outline-primary" for="xl">XL</label>
-
-        <input type="checkbox" class="btn-check" name="xxl" id="xxl" autocomplete="off" value="1"
-               @if($product->xxl) checked @endif>
-        <label class="btn btn-outline-primary" for="xxl">XXL</label>
+<div class="row">
+    <div class="col-12 col-md-4">
+        <div class="form-group my-3">
+            <label for="name">Название товара</label>
+            <input type="text" class="form-control" id="h1" name="h1" placeholder="H1"
+                   value="{{$product->h1 ?? ""}}">
+        </div>
     </div>
-</div>
+    <div class="col-12 col-md-4">
+        <div class="form-group  my-3">
+            <label for="status">Статус публикации</label>
+            <select class="form-control" id="published" name="published">
+                @if (isset($product->id))
+                    <option value="0" @if ($product->published == 0) selected="" @endif>Не опубликовано</option>
+                    <option value="1" @if ($product->published == 1) selected="" @endif>Опубликовано</option>
+                @else
+                    <option value="0">Не опубликовано</option>
+                    <option value="1">Опубликовано</option>
+                @endif
+            </select>
+        </div>
+    </div>
 
-<div class="form-group my-3">
-    <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+    <div class="col-12 col-md-4">
+        <div class="form-group  my-3">
+            <label for="status">Наличие товара</label>
+            <select class="form-control" id="status" name="status">
+                @if (isset($product->id))
+                    <option value="В наличии" @if ($product->status == 'В наличии') selected="" @endif>В наличии
+                    </option>
+                    <option value="Заканчивается" @if ($product->status == 'Заканчивается') selected="" @endif>
+                        Заканчивается
+                    </option>
+                    <option value="Нет в наличии" @if ($product->status == 'Нет в наличии') selected="" @endif>Нет в
+                        наличии
+                    </option>
+                @else
+                    <option value="В наличии">В наличии</option>
+                    <option value="Заканчивается">Заканчивается</option>
+                    <option value="Нет в наличии">Нет в наличии</option>
+                @endif
+            </select>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-6">
+        @include('admin.product.partials.product-sizes')
+    </div>
+
+    <div class="col-12 col-md-6">
         @include('admin.product.partials.product-colors')
     </div>
 </div>
@@ -54,11 +65,6 @@
               placeholder="Description">{{$product->description ?? ""}}</textarea>
 </div>
 
-<div class="form-group my-3">
-    <label for="name">H1</label>
-    <input type="text" class="form-control" id="h1" name="h1" placeholder="H1"
-           value="{{$product->h1 ?? ""}}">
-</div>
 
 <div class="form-group my-3">
     <label for="content">Описание товара</label>
@@ -79,18 +85,33 @@
 </script>
 
 <div class="row my-3">
-    <div class="col-12 col-md-6 ">
+    <div class="col-12 col-md-3 ">
         <div class="form-group">
-            <label for="cost">Цена</label>
-            <input type="text" class="form-control" id="cost" name="cost" placeholder="Цена услуги"
-                   value="{{$product->cost ?? ""}}" required>
+            <label for="price">Цена</label>
+            <input type="text" class="form-control" id="price" name="price" placeholder="Цена услуги"
+                   value="{{$product->price ?? ""}}" required>
         </div>
     </div>
-    <div class="col-12 col-md-6">
+    <div class="col-12 col-md-3">
         <div class="form-group">
-            <label for="sale_cost">Цена со скидкой</label>
-            <input type="text" class="form-control" id="sale_cost" name="sale_cost" placeholder="Цена услуги"
-                   value="{{$product->sale_cost ?? ""}}">
+            <label for="discount_price">Цена со скидкой</label>
+            <input type="text" class="form-control" id="discount_price" name="discount_price"
+                   placeholder="Цена услуги со скидкой"
+                   value="{{$product->discount_price ?? ""}}">
+        </div>
+    </div>
+    <div class="col-12 col-md-3">
+        <div class="form-group">
+            <label for="trade_price">Закупочная цена</label>
+            <input type="text" class="form-control" id="trade_price" name="trade_price" placeholder="Закупочная цена"
+                   value="{{$product->trade_price ?? ""}}">
+        </div>
+    </div>
+    <div class="col-12 col-md-3">
+        <div class="form-group">
+            <label for="vendor_code">Артикул</label>
+            <input type="text" class="form-control" id="vendor_code" name="vendor_code" placeholder="Артикул"
+                   value="{{$product->vendor_code ?? ""}}">
         </div>
     </div>
 </div>

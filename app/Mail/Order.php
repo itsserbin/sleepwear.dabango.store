@@ -13,24 +13,26 @@ class Order extends Mailable
 
     protected $name;
     protected $phone;
-    protected $size;
+    protected $sizes;
     protected $url;
     protected $product;
     protected $product_name;
+    protected $colors;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($name, $phone, $size, $url, $product_name, $product)
+    public function __construct($name, $phone, $sizes, $url, $product_name, $product, $colors)
     {
         $this->name = $name;
         $this->phone = $phone;
-        $this->size = $size;
+        $this->sizes = $sizes;
         $this->url = $url;
         $this->product = $product;
         $this->product_name = $product_name;
+        $this->colors = $colors;
     }
 
     /**
@@ -43,10 +45,11 @@ class Order extends Mailable
         return $this->markdown('emails.orders.shipped')->with([
             'name' => $this->name,
             'phone' => $this->phone,
-            'size' => $this->size,
+            'sizes' => $this->sizes,
             'url' => $this->url,
             'product' => $this->product,
             'product_name' => $this->product_name,
-        ])->subject('Новая заявка на купальник');;
+            'colors' => $this->colors,
+        ])->subject('Новая заявка на купальник');
     }
 }

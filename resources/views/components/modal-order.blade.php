@@ -4,64 +4,93 @@
             <span class="icon-cross"></span>
         </button>
         <form action="{{route('send.form')}}" method="POST" class="form order-form">
-            @csrf
-            <div class="order-form__size size">
-                {{--                <div class="row">--}}
-                    {{--                    <div class="size__label">Выберите цвет:</div>--}}
-                    {{--                    @foreach($ProductsColor as $item)--}}
-                    {{--                        <label class="label--checkbox" for="{{$item->color}}">--}}
-                        {{--                            <input type="checkbox" name="color[]" id="{{$item->color}}" class="checkbox checkbox-color" value="{{$item->color}}">--}}
-                        {{--                            {{$item->color}}--}}
-                    {{--                        </label>--}}
-                    {{--                    @endforeach--}}
-                {{--                </div>--}}
-                <div class="size__label">Выберите размер:</div>
-                <div class="row">
-
+            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+            <div class="modal-par">
+                <div class="shop__available-sizes available-sizes">
+                    <div class="shop__available-sizes__label">Выберите размер:</div>
                     @if(isset($product->s))
-                    <div class="size__element">
-                        <input id="size-1" type="radio" name="size" value="s" required>
-                        <label for="size-1">S</label>
-                    </div>
+                        <div class="size__element">
+                            <label class="mycheckbox">
+                                <input name="sizes[]" value="s" class="mycheckbox__default"
+                                       type="checkbox">
+                                <span class="mycheckbox__new">S</span>
+                                <span class="mycheckbox__descr"></span>
+                            </label>
+                        </div>
                     @endif
 
                     @if(isset($product->m))
-                    <div class="size__element">
-                        <input id="size-2" type="radio" name="size" value="m">
-                        <label for="size-2">M</label>
-                    </div>
+                        <div class="size__element">
+                            <label class="mycheckbox">
+                                <input name="sizes[]" value="m" class="mycheckbox__default"
+                                       type="checkbox">
+                                <span class="mycheckbox__new">M</span>
+                                <span class="mycheckbox__descr"></span>
+                            </label>
+                        </div>
                     @endif
 
                     @if(isset($product->l))
-                    <div class="size__element">
-                        <input id="size-3" type="radio" name="size" value="l">
-                        <label for="size-3">L</label>
-                    </div>
+                        <div class="size__element">
+                            <label class="mycheckbox">
+                                <input name="sizes[]" value="l" class="mycheckbox__default"
+                                       type="checkbox">
+                                <span class="mycheckbox__new">L</span>
+                                <span class="mycheckbox__descr"></span>
+                            </label>
+                        </div>
                     @endif
 
                     @if(isset($product->xl))
-                    <div class="size__element">
-                        <input id="size-4" type="radio" name="size" value="xl">
-                        <label for="size-4">XL</label>
-                    </div>
+                        <div class="size__element">
+                            <label class="mycheckbox">
+                                <input name="sizes[]" value="xl" class="mycheckbox__default"
+                                       type="checkbox">
+                                <span class="mycheckbox__new">XL</span>
+                                <span class="mycheckbox__descr"></span>
+                            </label>
+                        </div>
                     @endif
 
                     @if(isset($product->xxl))
-                    <div class="size__element">
-                        <input id="size-5" type="radio" name="size" value="xxl">
-                        <label for="size-5">XXL</label>
-                    </div>
+                        <div class="size__element">
+                            <label class="mycheckbox">
+                                <input name="sizes[]" value="xxl" class="mycheckbox__default"
+                                       type="checkbox">
+                                <span class="mycheckbox__new">XXL</span>
+                                <span class="mycheckbox__descr"></span>
+                            </label>
+                        </div>
                     @endif
                 </div>
+
+                <div class="available-colors">
+                    <div class="available-colors__label">Выберите цвет:</div>
+                    @foreach($ProductsColor as $item)
+                        <style>
+                            .mycheckbox.{{$item->Colors->name}}        {
+                                background-color: {{$item->Colors->hex}};
+                            }
+                        </style>
+
+                        <label class="mycheckbox {{$item->Colors->name}}">
+                            <input name="colors[]" value="{{$item->Colors->name}}" class="mycheckbox__default"
+                                   type="checkbox">
+                            <span class="mycheckbox__new"></span>
+                        </label>
+                    @endforeach
+                </div>
             </div>
+
             <label id="requestType-error" class="error" for="size"></label>
             <input name="name" placeholder="Ваше имя*" required>
             <input type="tel" name="phone" placeholder="Ваш номер телефона*" class="input-phone" required>
-            <input type="hidden" name="product" value="{{$product->id}}">
+            <input type="hidden" name="product_id" value="{{$product->id}}">
             <input type="hidden" name="product_name" value="{{$product->h1}}">
+            <input type="hidden" name="sale_price" value="@if(isset($product->discount_price)){{$product->discount_price}}@else{{$product->price}}@endif">
             <input type="hidden" name="url" value="{{url()->current()}}">
-            <input type="hidden" name="status" value="new">
-            <button class="order-form__button order-button-modal button button--color_red button--color-text_white" type="submit">
+            <button class="order-form__button order-button-modal button button--color_red button--color-text_white"
+                    type="submit" id="submit">
                 <span class="icon-arrow-right2"></span>
                 <span>Заказать</span>
             </button>
