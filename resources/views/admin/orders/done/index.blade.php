@@ -4,6 +4,12 @@
 
 @section('content')
     <div class="container">
+        @component('admin.components.breadcrumbs')
+            @slot('active')Заказы@endslot
+            @slot('active_link'){{route('admin.orders.index')}}@endslot
+            @slot('subsidiary')Выполненные@endslot
+        @endcomponent
+        <hr>
         <div class="row">
             <div class="col-12 col-md-3">
                 @include('admin.orders.partials.sidebar')

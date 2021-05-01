@@ -2,8 +2,15 @@
 @section('title', 'Заказы')
 @section('header', 'Заказы')
 
+
 @section('content')
     <div class="container">
+
+        @component('admin.components.breadcrumbs')
+            @slot('active')Заказы@endslot
+        @endcomponent
+        <hr>
+
         <div class="row">
             <div class="col-12 col-md-3">
                 @include('admin.orders.partials.sidebar')
@@ -39,7 +46,7 @@
                                 <td>{{$order->updated_at}}</td>
                                 <td>{{$order->created_at}}</td>
                                 <td class=""><a class="btn btn-default"
-                                                              href="{{route('admin.orders.edit', $order)}}">
+                                                href="{{route('admin.orders.edit', $order)}}">
                                         <svg width="1em" height="1em" viewBox="0 0 16 16"
                                              class="bi bi-pen"
                                              fill="currentColor"

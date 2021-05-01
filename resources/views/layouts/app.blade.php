@@ -18,9 +18,7 @@
 </head>
 <body class="font-sans antialiased">
 <div class="min-h-screen bg-light h-100">
-@include('layouts.navigation')
-
-<!-- Page Heading -->
+    @include('admin.components.navigation')
     <header class="bg-white shadow">
         <h1 class="max-w-7xl mx-auto p-4">
             @yield('header')
