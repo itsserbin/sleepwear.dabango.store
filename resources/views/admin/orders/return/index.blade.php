@@ -27,7 +27,7 @@
                             <th scope="col">Телефон</th>
                             <th scope="col">ID товара</th>
                             <th scope="col">Название</th>
-                            <th scope="col">Цена продажи</th>
+                            <th scope="col">Комментарий</th>
                             <th scope="col">Дата создания</th>
                             <th scope="col"></th>
                         </tr>
@@ -42,7 +42,7 @@
                                 <td>{{$order->product_id}}</td>
                                 <td><a href="{{route('product',$order->product_id)}}"
                                        target="_blank">{{$order->Product->h1}}</a></td>
-                                <td>{{$order->sale_price}}</td>
+                                <td>{{\Illuminate\Support\Str::limit($order->comment,'15')}}</td>
                                 <td>{{$order->created_at}}</td>
                                 <td class=""><a class="btn btn-default"
                                                                      href="{{route('admin.orders.edit', $order)}}">

@@ -42,7 +42,7 @@
                                 <td><a href="tel:{{$order->phone}}">{{$order->phone}}</a></td>
                                 <td><a href="{{route('product',$order->product_id)}}"
                                        target="_blank">{{$order->product_id}}</a></td>
-                                <td>{{$order->nova_poshta}}</td>
+                                <td>{{$order->waybill}}</td>
                                 <td>{{$order->city}}</td>
                                 <td>{{$order->sale_price}}</td>
                                 <td>{{$order->updated_at->toDateTimeString('minute')}}</td>

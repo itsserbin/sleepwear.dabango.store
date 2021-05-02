@@ -79,30 +79,35 @@
                    value="@if(isset($order->colors)) @foreach($order->colors as $color){{$color}} @endforeach @else Цвет не выбран @endif">
         </div>
     </div>
-
-    <div class="col-12 col-md-3">
-        <div class="form-group my-3">
-            <label for="nova_poshta">ТТН</label>
-            <input type="text" class="form-control" id="nova_poshta" name="nova_poshta"
-                   value="{{$order->nova_poshta ?? ""}}">
-        </div>
-    </div>
-
-    <div class="col-12 col-md-3">
+</div>
+<div class="row">
+    <div class="col-12 col-md-6">
         <div class="form-group my-3">
             <label for="city">Город</label>
             <input type="text" class="form-control" id="city" name="city"
                    value="{{$order->city ?? ""}}">
+        </div>
+
+
+        <div class="form-group my-3">
+            <label for="postal_office">Номер почтового отеделения</label>
+            <input type="text" class="form-control" id="postal_office" name="postal_office"
+                   value="{{$order->postal_office ?? ""}}">
+        </div>
+
+        <div class="form-group my-3">
+            <label for="waybill">Номер накладной</label>
+            <input type="text" class="form-control" id="waybill" name="waybill"
+                   value="{{$order->waybill ?? ""}}">
         </div>
     </div>
 
     <div class="col-12 col-md-6">
         <div class="form-group my-3">
             <label for="comment">Комментарий</label>
-            <textarea rows="6" class="form-control" id="comment" name="comment">{{$order->comment ?? ""}}</textarea>
+            <textarea rows="8" class="form-control" id="comment" name="comment">{{$order->comment ?? ""}}</textarea>
         </div>
     </div>
-
 </div>
 
 <div class="row">
