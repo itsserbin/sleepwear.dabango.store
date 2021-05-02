@@ -119,6 +119,7 @@ class HomeController extends Controller
         $sizes = $request->input('sizes');
 
         $phone = preg_replace('/[^0-9]/', '', $request->input('phone'));
+        $phone = '+'.$phone;
         $check = Clients::where('phone', $phone)->get();
 
         foreach ($product as $product) {
