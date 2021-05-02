@@ -56,6 +56,7 @@
                                 <th scope="col">Закупочная цена</th>
                                 <th scope="col">Цена продажи</th>
                                 <th scope="col">Маржа</th>
+                                <th scope="col">Дата</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -66,6 +67,8 @@
                                         <td>@convert($order->Product->trade_price) ₴</td>
                                         <td>@convert($order->sale_price) ₴</td>
                                     <td>@convert($order->sale_price - $order->Product->trade_price) ₴</td>
+{{--                                    @dd($order)--}}
+                                    <td>{{$order->created_at}}</td>
                                 </tr>
                             @endforeach
                             </tbody>

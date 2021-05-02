@@ -34,15 +34,31 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             $date = Carbon::now()->format('Y-m-d');
             $profit = Profit::whereDate('created_at',$date)->get();
+            $profit_old = Profit::whereDate('created_at','<', $date)->get();
+
+            foreach ($profit_old as $item){
+                $created_at = $item->created_at->format('Y-m-d');
+                $item->profit = $ProfitProfit = Orders::whereDate('created_at',$created_at)
+                    ->where('status','Выполнен')
+                    ->select('profit')
+                    ->sum('profit');
+
+                $item->cost = $ProfitCost = Costs::whereDate('created_at', $created_at)
+                    ->select('total')
+                    ->sum('total');
+                $item->marginality = $ProfitProfit - $ProfitCost;
+                $item->turnover = $ProfitProfit + $ProfitCost;
+                $item->update();
+            }
 
             if (count($profit)){
                 foreach ($profit as $item){
-                    $item->profit = $ProfitProfit = Orders::whereDate('updated_at', $date)
+                    $item->profit = $ProfitProfit = Orders::whereDate('created_at', $date)
                         ->where('status', 'Выполнен')
                         ->select('profit')
                         ->sum('profit');
 
-                    $item->cost = $ProfitCost = Costs::whereDate('updated_at', $date)
+                    $item->cost = $ProfitCost = Costs::whereDate('created_at', $date)
                         ->select('total')
                         ->sum('total');
                     $item->marginality = $ProfitProfit - $ProfitCost;
@@ -51,11 +67,11 @@ class Kernel extends ConsoleKernel
                 }
             }else{
                 $profit = new Profit();
-                $profit->cost = $ProfitCost = Costs::whereDate('updated_at', $date)
+                $profit->cost = $ProfitCost = Costs::whereDate('created_at', $date)
                     ->select('total')
                     ->sum('total');
 
-                $profit->profit = $ProfitProfit = Orders::whereDate('updated_at', $date)
+                $profit->profit = $ProfitProfit = Orders::whereDate('created_at', $date)
                     ->where('status', 'Выполнен')
                     ->select('profit')
                     ->sum('profit');

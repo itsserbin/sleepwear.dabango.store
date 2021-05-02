@@ -31,6 +31,9 @@
                                         {{$review->product_id}}
                                     </a>
                                 </td>
+                                @if(!$review->products->h1)
+                                    @dd($review->products)
+                                @endif
                                 <td>{{$review->products->h1}}</td>
                                 <td>{{$review->created_at->format('d.m.Y h:m')}}</td>
                                 <td>@if($review->status)

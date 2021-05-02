@@ -22,7 +22,7 @@ class BookkeepingController extends Controller
 
         $orders = Orders::where('status', 'Выполнен')
             ->orderBy('created_at', 'desc')
-            ->select('id', 'name', 'product_id', 'phone', 'trade_price', 'sale_price', 'updated_at')
+            ->select('id', 'name', 'product_id', 'phone', 'trade_price', 'sale_price', 'updated_at','created_at')
             ->paginate(15);
 
         $OrdersProfitInJustAWeek = Orders::where('status', 'Выполнен')
