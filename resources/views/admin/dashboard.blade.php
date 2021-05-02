@@ -17,10 +17,12 @@
                     <table class="table text-center align-center">
                         <thead>
                         <tr>
-                            <th scope="col">Статус</th>
+                            <th scope="col">Статус клиента</th>
+                            <th scope="col">Статус заказа</th>
                             <th scope="col">Имя</th>
                             <th scope="col">Телефон</th>
                             <th scope="col">Сумма продажи</th>
+                            <th scope="col">Дата обновления</th>
                             <th scope="col">Дата создания</th>
                         </tr>
                         </thead>
@@ -28,13 +30,13 @@
                         @isset($orders)
                             @foreach($orders as $order)
                                 <tr style="vertical-align:middle;">
-                                    <td scope="row">
-                                        {{$order->status}}
-                                    </td>
+                                    <td scope="row">{{$order->client->status}}</td>
+                                    <td scope="row">{{$order->status}}</td>
                                     <td>{{$order->name}}</td>
-                                    <td><a href="tel:+{{$order->phone}}">+{{$order->phone}}</a></td>
+                                    <td><a href="tel:+{{$order->phone}}">{{$order->phone}}</a></td>
                                     <td>{{$order->sale_price}}</td>
-                                    <td>{{$order->created_at->format('d.m.Y h:m')}}</td>
+                                    <td>{{$order->updated_at->toDateTimeString('minute')}}</td>
+                                    <td>{{$order->created_at->toDateTimeString('minute')}}</td>
                                 </tr>
                             @endforeach
                         @endisset
