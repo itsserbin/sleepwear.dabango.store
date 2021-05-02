@@ -32,18 +32,40 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->call(function () {
-            $date = Carbon::yesterday();
+            $date = Carbon::now()->format('Y-m-d');
+            $profit = Profit::whereDate('created_at',$date)->get();
 
-            $profit = new Profit();
-            $profit->cost = $ProfitCost = Costs::where('updated_at', '>', $date)->select('total')->sum('total');
-            $profit->profit = $ProfitProfit = Orders::where([
-                ['updated_at', '>', $date],
-                ['status', '=', 'Выполнен']
-            ])->select('profit')->sum('profit');
-            $profit->marginality = $ProfitProfit - $ProfitCost;
-            $profit->turnover = $ProfitProfit + $ProfitCost;
-            $profit->save();
-        })->daily();
+            if (count($profit)){
+                foreach ($profit as $item){
+                    $item->profit = $ProfitProfit = Orders::whereDate('updated_at', $date)
+                        ->where('status', 'Выполнен')
+                        ->select('profit')
+                        ->sum('profit');
+
+                    $item->cost = $ProfitCost = Costs::whereDate('updated_at', $date)
+                        ->select('total')
+                        ->sum('total');
+                    $item->marginality = $ProfitProfit - $ProfitCost;
+                    $item->turnover = $ProfitProfit + $ProfitCost;
+                    $item->update();
+                }
+            }else{
+                $profit = new Profit();
+                $profit->cost = $ProfitCost = Costs::whereDate('updated_at', $date)
+                    ->select('total')
+                    ->sum('total');
+
+                $profit->profit = $ProfitProfit = Orders::whereDate('updated_at', $date)
+                    ->where('status', 'Выполнен')
+                    ->select('profit')
+                    ->sum('profit');
+
+                $profit->marginality = $ProfitProfit - $ProfitCost;
+                $profit->turnover = $ProfitProfit + $ProfitCost;
+                $profit->save();;
+            }
+
+        })->everyMinute();
     }
 
     /**
