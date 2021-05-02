@@ -18,6 +18,8 @@
                 <form action="{{route('admin.orders.update', $order->id)}}" method="post">
                     @csrf
                     @method('PATCH')
+{{--                    @dd(\Illuminate\Support\Facades\Auth::user())--}}
+                    <input type="hidden" value="{{\Illuminate\Support\Facades\Auth::user()}}">
                     {{-- Form include --}}
                     @include('admin.orders.partials.form')
                     <button type="submit" class="btn btn-success">Сохранить</button>

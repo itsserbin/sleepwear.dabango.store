@@ -103,15 +103,21 @@
         </div>
     </div>
 
-    {{--    </div>--}}
     <div class="col-12 col-md-3">
-
         <div class="form-group my-3">
-
             <label for="created_at">Дата создания</label>
             <input type="text" class="form-control datepicker-here" id="created_at" data-timepicker="true"
                    data-time-format='hh:mm' name="created_at"
                    value="{{$order->created_at}}" disabled>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-3">
+        <div class="form-group my-3">
+            <label for="created_at">Дата обновления</label>
+            <input type="text" class="form-control datepicker-here" id="created_at" data-timepicker="true"
+                   data-time-format='hh:mm' name="created_at"
+                   value="{{$order->updated_at}}" disabled>
         </div>
     </div>
 </div>

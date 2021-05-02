@@ -4,6 +4,7 @@
         <option value="Новый" @if ($client->status == 'Новый') selected="" @endif>Новый</option>
         <option value="Раннее закупался" @if ($client->status == 'Раннее закупался') selected="" @endif>Раннее закупался</option>
         <option value="ТОПчик" @if ($client->status == 'ТОПчик') selected="" @endif>ТОПчик</option>
+        <option value="Возврат" @if ($client->status == 'Возврат') selected="" @endif>Возврат</option>
         <option value="ЧС" @if ($client->status == 'ЧС') selected="" @endif>ЧС</option>
     </select>
 </div>
