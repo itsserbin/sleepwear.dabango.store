@@ -26,7 +26,7 @@
     </header>
 
     <!-- Page Content -->
-    <main class="p-5 m-5 bg-white rounded-3">
+    <main class="p-3 p-md-5 m-2 m-md-5 bg-white rounded-3">
         @include('components.flash-message')
         @yield('content')
     </main>
