@@ -43,8 +43,8 @@
                                 <td><a href="{{route('product',$order->product_id)}}"
                                        target="_blank">{{$order->Product->h1}}</a></td>
                                 <td>{{$order->sale_price}}</td>
-                                <td>{{$order->updated_at}}</td>
-                                <td>{{$order->created_at}}</td>
+                                <td>{{$order->updated_at->toDateTimeString('minute')}}</td>
+                                <td>{{$order->created_at->toDateTimeString('minute')}}</td>
                                 <td class=""><a class="btn btn-default"
                                                 href="{{route('admin.orders.edit', $order)}}">
                                         <svg width="1em" height="1em" viewBox="0 0 16 16"

@@ -45,7 +45,7 @@
                                        target="_blank">{{$order->Product->h1}}</a></td>
                                 <td>{{$order->sale_price}}</td>
                                 <td>{{$order->created_at}}</td>
-                                <td class="d-flex justify-center"><a class="btn btn-default"
+                                <td class=""><a class="btn btn-default"
                                                                      href="{{route('admin.orders.edit', $order)}}">
                                         <svg width="1em" height="1em" viewBox="0 0 16 16"
                                              class="bi bi-pen"

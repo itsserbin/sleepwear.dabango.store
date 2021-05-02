@@ -46,7 +46,7 @@
                                 </td>
                                 <td>{{$product->vendor_code}}</td>
                                 <td>@if(isset($product->discount_price)){{$product->discount_price}}@else{{$product->price}}@endif</td>
-                                <td>{{$product->created_at->format('d.m.Y h:m')}}</td>
+                                <td>{{$product->created_at->toDateTimeString('minute')}}</td>
                                 <td>
                                     @if($product->status)
                                         Опубликован

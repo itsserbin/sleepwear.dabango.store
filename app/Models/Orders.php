@@ -25,15 +25,22 @@ class Orders extends Model
         'product_name',
         'trade_price',
         'sale_price',
+        'pay',
         'profit',
         'created_at',
         'updated_at',
+        'modified_by',
     ];
 
 
     protected $casts = [
         'colors' => 'array',
         'sizes' => 'array',
+    ];
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
     ];
 
 

@@ -103,6 +103,28 @@
         </div>
     </div>
 
+</div>
+
+<div class="row">
+    <div class="col-12 col-md-3">
+        <div class="form-group my-3">
+            <label for="pay">Выплата от поставщика</label>
+            <select class="form-control" id="pay" name="pay">
+                <option value="0" @if ($order->pay) selected="" @endif>Не получена</option>
+                <option value="1" @if ($order->pay) selected="" @endif>Получена</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-3">
+        <div class="form-group my-3">
+            <label for="created_at">Дата обновления</label>
+            <input type="text" class="form-control datepicker-here" id="created_at" data-timepicker="true"
+                   data-time-format='hh:mm' name="created_at"
+                   value="{{$order->updated_at}}" disabled>
+        </div>
+    </div>
+
     <div class="col-12 col-md-3">
         <div class="form-group my-3">
             <label for="created_at">Дата создания</label>
@@ -114,10 +136,10 @@
 
     <div class="col-12 col-md-3">
         <div class="form-group my-3">
-            <label for="created_at">Дата обновления</label>
-            <input type="text" class="form-control datepicker-here" id="created_at" data-timepicker="true"
-                   data-time-format='hh:mm' name="created_at"
-                   value="{{$order->updated_at}}" disabled>
+            <label for="modified_by">Обновлено пользователем</label>
+            <input type="hidden" name="modified_by" value="{{auth()->user()->name}}">
+            <input type="text" class="form-control"
+                   placeholder="{{$order->modified_by ?? '-'}}" disabled>
         </div>
     </div>
 </div>

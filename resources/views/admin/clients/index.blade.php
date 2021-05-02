@@ -35,8 +35,8 @@
                                     <td>{{$client->number_of_purchases ?? "-"}}</td>
                                     <td>{{$client->whole_check ?? "-"}}</td>
                                     <td>{{$client->average_check ?? "-" }}</td>
-                                    <td>{{$client->updated_at->format('d.m.Y h:m')}}</td>
-                                    <td>{{$client->created_at->format('d.m.Y h:m')}}</td>
+                                    <td>{{$client->updated_at->toDateTimeString('minute')}}</td>
+                                    <td>{{$client->created_at->toDateTimeString('minute')}}</td>
                                     <td><a class="btn btn-default"
                                                           href="{{route('admin.clients.edit', $client)}}">
                                             <svg width="1em" height="1em" viewBox="0 0 16 16"
