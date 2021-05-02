@@ -35,8 +35,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('products', ProductsController::class)->names('admin.products');
 
-        Route::resource('reviews', ReviewsController::class)->names('admin.reviews');
-        Route::get('reviews-accepted/{id}', [ReviewsController::class, 'reviewsAccepted'])->where('id', '\d+')->name('review.accepted');
+    Route::resource('reviews', ReviewsController::class)->names('admin.reviews');
+    Route::get('reviews-accepted/{id}', [ReviewsController::class, 'reviewsAccepted'])->where('id', '\d+')->name('review.accepted');
 
     Route::group(['prefix' => '/clients'], function () {
         Route::resource('all', ClientsController::class)->names('admin.clients');
