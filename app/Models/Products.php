@@ -41,7 +41,7 @@ class Products extends Model
 
     public function Reviews()
     {
-        return $this->hasOne(Reviews::class, 'product_id');
+        return $this->hasOne(Reviews::class);
     }
 
     public function Order()
