@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row mb-5">
             <div class="col-12">
-                <h3>Текущее время: {{\Carbon\Carbon::now()->format('m:h')}}</h3>
+                <h3>Текущее время: {{\Carbon\Carbon::now()->format('H:m')}}</h3>
                 <h3>Заказов сегодня: {{$orders_today}}</h3>
             </div>
         </div>
