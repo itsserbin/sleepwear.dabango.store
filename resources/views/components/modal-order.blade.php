@@ -4,7 +4,7 @@
             <span class="icon-cross"></span>
         </button>
         <form action="{{route('send.form')}}" method="POST" class="form order-form">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+            <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
             <div class="modal-par">
                 <div class="shop__available-sizes available-sizes">
                     <div class="shop__available-sizes__label">Выберите размер:</div>
