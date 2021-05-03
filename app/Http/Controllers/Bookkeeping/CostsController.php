@@ -40,6 +40,8 @@ class CostsController extends Controller
         $cost->comment = $request->input('comment');
         $cost->quantity = $quantity = $request->input('quantity');
         $cost->sum = $sum = $request->input('sum');
+        $created_at = $request->input('created_at');
+        $cost->sucm = $sum = $request->input('sum');
         $cost->user_id = Auth::id();
         $cost->total = $quantity * $sum;
         $cost->save();
@@ -70,6 +72,7 @@ class CostsController extends Controller
         $cost->quantity = $quantity = $request->input('quantity');
         $cost->sum = $sum = $request->input('sum');
         $cost->total = $quantity * $sum;
+        $cost->created_at = $request->input('created_at');
         $cost->update();
 
         if ($cost) {

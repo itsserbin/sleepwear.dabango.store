@@ -10,10 +10,10 @@
                 @include('admin.bookkeeping.partials.sidebar')
             </div>
             <div class="col-12 col-md-9">
-                <div class="row mb-4">
+                <div class="row mb-5">
                     <h3>Последние траты</h3>
                     <div class="table-responsive rounded-3">
-                        <table class="table text-center align-center table-light">
+                        <table class="table text-center align-center">
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
@@ -21,6 +21,8 @@
                                 <th scope="col">Кол-во</th>
                                 <th scope="col">Сумма</th>
                                 <th scope="col">Итого</th>
+                                <th scope="col">Ответственный</th>
+                                <th scope="col">Дата</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -31,12 +33,21 @@
                                     <td scope="row">{{$cost->quantity}}</td>
                                     <td scope="row">{{$cost->sum}}</td>
                                     <td scope="row">{{$cost->total}}</td>
+                                    <td scope="row">{{$cost->user->name}}</td>
+                                    <td scope="row">{{$cost->created_at->format('d.m.y')}}</td>
                                 </tr>
                             @endforeach
                             </tbody>
                             <tfoot>
                             <tr>
-                                <th scope="row" colspan="3" class="text-end">За 7 дней:</th>
+                                <th scope="row" colspan="2" class="text-end">
+                                    <a href="{{route('admin.bookkeeping.costs.index')}}">
+                                    <button class="btn btn-light">
+                                        Перейти ко всем тратам
+                                    </button>
+                                    </a>
+                                </th>
+                                <th scope="row" colspan="4" class="text-end">За 7 дней:</th>
                                 <th colspan="2" class="text-center">@convert($CostsInJustAWeek) ₴</th>
                             </tr>
                             </tfoot>
@@ -44,11 +55,11 @@
                     </div>
                 </div>
 
-                <div class="row mb-4">
+                <div class="row mb-5">
 
                 <h3>Последние проданные товары</h3>
                     <div class="table-responsive rounded-3">
-                        <table class="table text-center align-center table-light">
+                        <table class="table text-center align-center">
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
@@ -67,15 +78,22 @@
                                         <td>@convert($order->Product->trade_price) ₴</td>
                                         <td>@convert($order->sale_price) ₴</td>
                                     <td>@convert($order->sale_price - $order->Product->trade_price) ₴</td>
-{{--                                    @dd($order)--}}
-                                    <td>{{$order->created_at}}</td>
+                                    <td>{{$order->updated_at->format('d.m.y')}}</td>
                                 </tr>
                             @endforeach
                             </tbody>
                             <tfoot>
                             <tr>
-                                <th scope="row" colspan="3" class="text-end">За 7 дней:</th>
-                                <th colspan="2" class="text-center">@convert($OrdersProfitInJustAWeek) ₴</th>
+                                <th scope="row" colspan="5" class="text-end">За 3 дня:</th>
+                                <th colspan="2" class="text-center">@convert($ProfitOrdersInJustAThreeDays) ₴</th>
+                            </tr>
+                            <tr>
+                                <th scope="row" colspan="5" class="text-end">За 7 дней:</th>
+                                <th colspan="2" class="text-center">@convert($ProfitOrdersInJustAWeek) ₴</th>
+                            </tr>
+                            <tr>
+                                <th scope="row" colspan="5" class="text-end">За этот месяц:</th>
+                                <th colspan="2" class="text-center">@convert($ProfitOrdersInJustAMonth) ₴</th>
                             </tr>
                             </tfoot>
                         </table>
@@ -85,7 +103,7 @@
                 <div class="row">
                 <h3>Прибыль с вычетом расходов</h3>
                     <div class="table-responsive rounded-3">
-                        <table class="table text-center align-center table-light">
+                        <table class="table text-center align-center">
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
@@ -111,7 +129,7 @@
                             @endforeach
                             </tbody>
                             <tr>
-                                <th scope="row" colspan="5" class="text-end">За 7 дней:</th>
+                                <th scope="row" colspan="6" class="text-end">За 7 дней:</th>
                                 <td colspan="2" class="text-center">@convert($ProfitInJustAWeek) ₴</td>
                             </tr>
                         </table>

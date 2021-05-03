@@ -10,52 +10,8 @@
                 @include('admin.bookkeeping.partials.sidebar')
             </div>
             <div class="col-12 col-md-9">
-                <div class="row">
-                    <h2>Прибыль с товара</h2>
-                    <div class="table-responsive">
-                        <table class="table text-center align-center">
-                            <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Имя</th>
-                                <th scope="col">ID Товара</th>
-                                <th scope="col">Товар</th>
-                                <th scope="col">Закупочная цена</th>
-                                <th scope="col">Цена продажи</th>
-                                <th scope="col">Маржа</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($profitOrders as $profit)
-                                <tr style="vertical-align:middle;">
-                                    <th scope="row">{{$profit->id}}</th>
-                                    <td>{{$profit->name}}</td>
-                                    <td>{{$profit->product_id}}</td>
-                                    {{--                                @foreach($profit->product as $item)--}}
-                                    <td>
-                                        <a href="{{route('product', $profit->product->id)}}"
-                                           target="_blank">
-                                            {{$profit->product->h1}}
-                                        </a>
-                                    </td>
-                                    <td>@convert($profit->trade_price) ₴</td>
-                                    <td>@convert($profit->sale_price) ₴</td>
-                                    {{--                                @endforeach--}}
-                                    <td>@convert($profit->profit) ₴</td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                            <tfoot>
-                            <tr>
-                                <th scope="row" colspan="5" class="text-end">За 7 дней:</th>
-                                {{--                            <td colspan="2" class="text-center">@convert($ProfitClientsInJustAWeek) ₴</td>--}}
-                            </tr>
-                        </table>
-                    </div>
-                    {{ $profitOrders->links() }}
-                </div>
 
-                <div class="row">
+                <div class="row mb-5">
                     <h2>Прибыль с вычетом расходов</h2>
                     <div class="table-responsive">
                         <table class="table text-center align-center">
@@ -84,13 +40,73 @@
                             @endforeach
                             </tbody>
                             <tr>
-                                <th scope="row" colspan="5" class="text-end">За 7 дней:</th>
-                                {{--                            <td colspan="2" class="text-center">@convert($ProfitInJustAWeek) ₴</td>--}}
+                                <th scope="row" colspan="6" class="text-end">Чистая маржа а 3 дня:</th>
+                                <td colspan="2" class="text-center">@convert($ProfitInJustAThreeDays) ₴</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" colspan="6" class="text-end">Чистая маржа за 7 дней:</th>
+                                <td colspan="2" class="text-center">@convert($ProfitInJustAWeek) ₴</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" colspan="6" class="text-end">Чистая маржа за этот месяц:</th>
+                                <td colspan="2" class="text-center">@convert($ProfitInJustAMonth) ₴</td>
                             </tr>
                         </table>
                     </div>
                     {{ $profits->links() }}
                 </div>
+
+                <div class="row">
+                    <h2>Прибыль с товара</h2>
+                    <div class="table-responsive">
+                        <table class="table text-center align-center">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Имя</th>
+                                <th scope="col">ID Товара</th>
+                                <th scope="col">Товар</th>
+                                <th scope="col">Закупочная цена</th>
+                                <th scope="col">Цена продажи</th>
+                                <th scope="col">Маржа</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($profitOrders as $profit)
+                                <tr style="vertical-align:middle;">
+                                    <th scope="row">{{$profit->id}}</th>
+                                    <td>{{$profit->name}}</td>
+                                    <td>{{$profit->product_id}}</td>
+                                    <td>
+                                        <a href="{{route('product', $profit->product->id)}}"
+                                           target="_blank">
+                                            {{$profit->product->h1}}
+                                        </a>
+                                    </td>
+                                    <td>@convert($profit->trade_price) ₴</td>
+                                    <td>@convert($profit->sale_price) ₴</td>
+                                    <td>@convert($profit->profit) ₴</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th scope="row" colspan="6" class="text-end">Чистая прибыль за 3 дня:</th>
+                                <td colspan="2" class="text-center">@convert($ProfitOrdersInJustAThreeDays) ₴</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" colspan="6" class="text-end">Чистая прибыль за 7 дней:</th>
+                                <td colspan="2" class="text-center">@convert($ProfitOrdersInJustAWeek) ₴</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" colspan="6" class="text-end">Чистая прибыль за этот месяц:</th>
+                                <td colspan="2" class="text-center">@convert($ProfitOrdersInJustAWeek) ₴</td>
+                            </tr>
+                        </table>
+                    </div>
+                    {{ $profitOrders->links() }}
+                </div>
+
             </div>
 
         </div>

@@ -50,7 +50,7 @@ class HomeController extends Controller
             $footer_scripts = $setting->footer_scripts;
         }
 
-        $products = $this->ProductRepository->getItemsWithPaginateOnProduction(30);
+        $products = $this->ProductRepository->getItemsWithPaginateOnProduction(50);
         $reviews = Reviews::orderBy('created_at')->get();
         return view('pages.home.index', [
             'phone' => $phone,

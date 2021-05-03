@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\ReviewsController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Bookkeeping\BookkeepingController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SettingsController;
 use Illuminate\Http\Request;
@@ -57,6 +58,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('all', App\Http\Controllers\Bookkeeping\BookkeepingController::class)->names('admin.bookkeeping');
         Route::resource('costs', App\Http\Controllers\Bookkeeping\CostsController::class)->names('admin.bookkeeping.costs');
         Route::resource('profit', App\Http\Controllers\Bookkeeping\ProfitController::class)->names('admin.bookkeeping.profit');
+        Route::get('product-sales',[BookkeepingController::class, 'productSales'])->name('admin.bookkeeping.productSales');
     });
 
     Route::group(['middleware' => 'role:administrator', 'prefix' => '/settings'], function () {

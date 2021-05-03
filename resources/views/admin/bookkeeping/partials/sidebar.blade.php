@@ -15,4 +15,10 @@
            aria-current="page"
            href="{{route('admin.bookkeeping.profit.index')}}">Прибыль</a>
     </li>
+
+    <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('admin.bookkeeping.productSales') ? 'active' : null }}"
+           aria-current="page"
+           href="{{route('admin.bookkeeping.productSales')}}">Выполненные заказы</a>
+    </li>
 </ul>
