@@ -37,7 +37,7 @@
 <meta property="og:site_name" content="YouBrand">
 
 @if(Route::is('product') )
-    <meta property="product:price:amount" content="@if($product->sale_cost){{$product->sale_cost}}@else{{$product->cost}}@endif"/>
+    <meta property="product:price:amount" content="@if($product->sale_price){{$product->sale_price}}@else{{$product->price}}@endif"/>
     <meta property="product:price:currency" content="UAH"/>
     <meta property="og:image" content="{{asset($product->preview)}}">
 @else
