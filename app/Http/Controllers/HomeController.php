@@ -109,7 +109,7 @@ class HomeController extends Controller
         ]);
     }
 
-    public function sendForm(Request $request)
+    public function send_form_post(Request $request)
     {
         $product = Products::where('id', $request->input('product_id'))->get();
 
@@ -150,7 +150,6 @@ class HomeController extends Controller
                 $client->number_of_purchases = 1;
                 $client->whole_check = $sale_price;
                 $client->average_check = $sale_price;
-
                 $client->save();
                 $client->Orders()->create([
                     'name' => $name,
@@ -169,7 +168,6 @@ class HomeController extends Controller
             $product->update();
         }
 
-
         $name = $request->name;
         $phone = $request->phone;
         $sizes = $request->sizes;
@@ -179,8 +177,8 @@ class HomeController extends Controller
         $colors = $request->colors;
 
         Mail::to(['serbin.ssd@gmail.com',
-             'youbrand_top@ukr.net',
-             'karina.youbrand@gmail.com'
+//             'youbrand_top@ukr.net',
+//             'karina.youbrand@gmail.com'
         ])->send(new Order($name, $phone, $sizes, $url, $product_name, $product, $colors));
 
         $settings = Settings::find(1)->get();
@@ -209,13 +207,48 @@ class HomeController extends Controller
             'after_body_scripts' => $after_body_scripts,
             'footer_scripts' => $footer_scripts,
         ]);
+
     }
 
-    public function sendReview(Request $request)
+//    public function send_form_get()
+//    {
+//
+//    }
+
+    public function send_review_post(Request $request)
     {
         $reviews = new Reviews();
         $data = $request->all();
         $reviews->create($data);
-        return back()->with('success', 'Отзыв отправлен на модерацию');
+    }
+
+    public function send_review_get()
+    {
+        $settings = Settings::find(1)->get();
+        foreach ($settings as $setting) {
+            $phone = $setting->phone;
+            $email = $setting->email;
+            $facebook = $setting->facebook;
+            $instagram = $setting->instagram;
+            $schedule = $setting->schedule;
+            $telegram = $setting->telegram;
+            $viber = $setting->viber;
+            $head_scripts = $setting->head_scripts;
+            $after_body_scripts = $setting->after_body_scripts;
+            $footer_scripts = $setting->footer_scripts;
+        }
+
+        return view('components.done-reviews',[
+            'phone' => $phone,
+            'email' => $email,
+            'facebook' => $facebook,
+            'instagram' => $instagram,
+            'schedule' => $schedule,
+            'telegram' => $telegram,
+            'viber' => $viber,
+            'head_scripts' => $head_scripts,
+            'after_body_scripts' => $after_body_scripts,
+            'footer_scripts' => $footer_scripts,
+        ]);
     }
 }

@@ -39,7 +39,8 @@
                         <div class="shop__price-without-discount">{{$product->price}}</div>
                     @endif
                     <button type="button" id="order"
-                            class="shop__button order-button button button--color_red button--color-text_white">
+                            class="shop__button order-button button button--color_red button--color-text_white"
+                            data-toggle="modal" data-target="#modal-order">
                         <span class="icon-cart"></span>
                         <span>Купить</span>
                     </button>
@@ -107,7 +108,7 @@
                     <div class="available-colors__label">Доступные цвета:</div>
                     @foreach($ProductsColor as $item)
                         <style>
-                            .mycheckbox.{{$item->Colors->name}}        {
+                            .mycheckbox.{{$item->Colors->name}}          {
                                 background-color: {{$item->Colors->hex}};
                             }
                         </style>

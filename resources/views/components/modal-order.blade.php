@@ -1,10 +1,10 @@
 <div id="modal-order" class="modal">
-    <div class="modal-content">
+    <div class="modal-content" id="order-modal">
         <button class="modal-close">
             <span class="icon-cross"></span>
         </button>
-        <form action="{{route('send.form')}}" method="POST" class="form order-form">
-            <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+        <form action="{{route('send.form.post')}}" method="POST" class="form order-form">
+            @csrf
             <div class="modal-par">
                 <div class="shop__available-sizes available-sizes">
                     <div class="shop__available-sizes__label">Выберите размер:</div>
