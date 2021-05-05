@@ -68,6 +68,7 @@ class Kernel extends ConsoleKernel
                 }
             }else{
                 $profit = new Profit();
+                $profit->date = $date_now;
                 $profit->cost = $ProfitCost = Costs::whereDate('date', $date_now)
                     ->select('total')
                     ->sum('total');
