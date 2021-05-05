@@ -4,7 +4,7 @@
             <span class="icon-cross"></span>
         </button>
         <form action="{{route('send.form.post')}}" method="POST" class="form order-form">
-            @csrf
+{{--            @csrf--}}
             <div class="modal-par">
                 <div class="shop__available-sizes available-sizes">
                     <div class="shop__available-sizes__label">Выберите размер:</div>

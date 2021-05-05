@@ -1,27 +1,33 @@
-// jQuery(document).ready(function ($) {
-//     // все формы в .modal-content будут отслылаться по $(this).attr('action')
-//     $('#review-modal').on('submit', '.form', function (event) {
-//         event.preventDefault();
-//
-//         let form = $(this).serializeArray();
-//         let action = $(this).attr('action');
-//         let formData = new FormData();
-//
-//         if (form.length) {
-//             form.map(function (item) {
-//                 formData.append(item.name, item.value)
-//             })
-//
-//             axios.post(action, formData)
-//             alert('Спасибо, Ваш отзыв отправлен на модерацию!')
-//             $('input').val('');
-//             $('textarea').val('');
-//             $('body').removeClass('lock');
-//             $('#modal-review').removeClass('show');
-//         }
-//
-//     });
-// });
+jQuery(document).ready(function ($) {
+    // все формы в .modal-content будут отслылаться по $(this).attr('action')
+    $('.modal-content').on('submit', '.form', function (event) {
+        event.preventDefault();
+
+        let form = $(this).serializeArray();
+        let action = $(this).attr('action');
+        let formData = new FormData();
+
+        if (form.length) {
+            form.map(function (item) {
+                formData.append(item.name, item.value)
+            })
+
+            axios.post(action, formData).then(function (response) {
+                if (action === window.location.origin + '/send-form') {
+                    location.href = window.location.origin + '/send-form';
+                }
+                if (action === window.location.origin + '/send-review') {
+                    alert('Ваш отзыв успешно отправлен на модерацию!')
+                }
+            })
+                .catch(function (response) {
+                    alert('Произошла ошибка, пожалуйста, обратитесь по контактным данным.')
+                });
+            ;
+        }
+
+    });
+});
 
 
 $(function () {
@@ -32,12 +38,12 @@ $(function () {
 
         }
     });
-    // $('#review').click(function () {
-    //     $('body').addClass('lock');
-    //     $('#modal-review').addClass('show');
-    //     if ($('#modal-review').hasClass('show')) {
-    //     }
-    // });
+    $('#review').click(function () {
+        $('body').addClass('lock');
+        $('#modal-review').addClass('show');
+        if ($('#modal-review').hasClass('show')) {
+        }
+    });
     $('#sizes').click(function () {
         $('body').addClass('lock');
         $('#modal-sizes').addClass('show');
@@ -46,34 +52,25 @@ $(function () {
     });
     $('.modal-close').click(function () {
         $('#modal-order').removeClass('show');
-        // $('#modal-review').removeClass('show');
+        $('#modal-review').removeClass('show');
         $('#modal-sizes').removeClass('show');
         $('body').removeClass('lock');
-        $('input').val('');
-        $('textarea').val('');
-        $('input[name="size"]').prop('checked', false);
     });
     $(document).keydown(function (e) {
         if (e.keyCode === 27) {
             e.stopPropagation();
             $('#modal-order').removeClass('show');
-            // $('#modal-review').removeClass('show');
+            $('#modal-review').removeClass('show');
             $('#modal-sizes').removeClass('show');
             $('body').removeClass('lock');
-            $('input').val('');
-            $('textarea').val('');
-            $('input[name="size"]').prop('checked', false);
         }
     });
     $('.modal').click(function (e) {
         if ($(e.target).closest('.modal-content').length == 0) {
             $('#modal-order').removeClass('show');
-            // $('#modal-review').removeClass('show');
+            $('#modal-review').removeClass('show');
             $('#modal-sizes').removeClass('show');
             $('body').removeClass('lock');
-            $('input').val('');
-            $('textarea').val('');
-            $('input[name="size"]').prop('checked', false);
         }
     });
 });

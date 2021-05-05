@@ -177,10 +177,14 @@ class HomeController extends Controller
         $colors = $request->colors;
 
         Mail::to(['serbin.ssd@gmail.com',
-//             'youbrand_top@ukr.net',
-//             'karina.youbrand@gmail.com'
+             'youbrand_top@ukr.net',
+             'karina.youbrand@gmail.com'
         ])->send(new Order($name, $phone, $sizes, $url, $product_name, $product, $colors));
 
+    }
+
+    public function send_form_get()
+    {
         $settings = Settings::find(1)->get();
         foreach ($settings as $setting) {
             $phone = $setting->phone;
@@ -207,13 +211,7 @@ class HomeController extends Controller
             'after_body_scripts' => $after_body_scripts,
             'footer_scripts' => $footer_scripts,
         ]);
-
     }
-
-//    public function send_form_get()
-//    {
-//
-//    }
 
     public function send_review_post(Request $request)
     {

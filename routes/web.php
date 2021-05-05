@@ -31,9 +31,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/product/{id?}', [HomeController::class, 'product'])->name('product');
 
 Route::post('send-form', [HomeController::class, 'send_form_post'])->name('send.form.post');
-//Route::get('send-form', [HomeController::class, 'send_form_get'])->name('send.form.get');
-
-//Route::post('send-review', [HomeController::class, 'send_review_post'])->name('send.review.post');
+Route::get('send-form', [HomeController::class, 'send_form_get'])->name('send.form.get');
+Route::post('send-review', [HomeController::class, 'send_review_post'])->name('send.review.post');
 //Route::get('send-review', [HomeController::class, 'send_review_get'])->name('send.review.get');
 
 
