@@ -3,16 +3,19 @@
 namespace App\Http\Controllers\Bookkeeping;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bookkeeping\Costs;
 use App\Models\Bookkeeping\Profit;
 use App\Models\Clients;
 use App\Models\Orders;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class ProfitController extends Controller
 {
     public function index()
     {
+
         $profitOrders = Orders::where('status', 'Выполнен')->paginate(15);
 
         $SaleSumInJustAThreeDays = Orders::where('status', 'Выполнен')

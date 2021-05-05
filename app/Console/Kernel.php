@@ -34,7 +34,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->call(function () {
             $date_now = Carbon::now()->format('Y-m-d');
-            $profit_now = Profit::whereDate('created_at',$date_now)->get();
+            $profit_now = Profit::whereDate('date',$date_now)->get();
             $profit_old = Profit::all();
 
             foreach ($profit_old as $item){
