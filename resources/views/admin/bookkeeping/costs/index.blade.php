@@ -27,28 +27,26 @@
                     <table class="table text-center align-center">
                         <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">Дата</th>
                             <th scope="col">Название</th>
                             <th scope="col">Кол-во</th>
                             <th scope="col">Сумма</th>
                             <th scope="col">Итого</th>
                             <th scope="col">Ответственный</th>
                             <th scope="col">Комментарий</th>
-                            <th scope="col">Создано</th>
                             <th scope="col">Действие</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($costs as $cost)
                             <tr style="vertical-align:middle;">
-                                <th scope="row">{{$cost->id}}</th>
+                                <td scope="row">{{$cost->date->format('d.m.y')}}</td>
                                 <td>{{$cost->name}}</td>
                                 <td scope="row">{{$cost->quantity}}</td>
                                 <td scope="row">{{$cost->sum}}</td>
                                 <td scope="row">{{$cost->total}}</td>
                                 <td scope="row">{{$cost->user->name}}</td>
                                 <td scope="row">{{$cost->comment ?? "-"}}</td>
-                                <td scope="row">{{$cost->date->format('d.m.y h:m')}}</td>
                                 <td>
                                     <form
                                         onsubmit="if(confirm('Удалить?')){ return true }else{ return false }"

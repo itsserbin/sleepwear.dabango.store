@@ -9,7 +9,12 @@ class Profit extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'date'
+    ];
+
     protected $dates = [
+        'date',
         'created_at',
         'updated_at',
     ];

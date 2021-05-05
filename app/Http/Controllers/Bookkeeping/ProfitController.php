@@ -86,6 +86,19 @@ class ProfitController extends Controller
 
     public function create()
     {
+        $profit = new Profit();
 
+        return view('admin.bookkeeping.profit.create',[
+            'profit' => $profit,
+        ]);
+    }
+
+    public function store(Request $request)
+    {
+        $profit = new Profit();
+        $data = $request->all();
+        $profit->save($data);
+
+        return redirect(route('admin.bookkeeping.profit.index'));
     }
 }

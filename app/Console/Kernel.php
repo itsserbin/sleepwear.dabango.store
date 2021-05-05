@@ -33,18 +33,18 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->call(function () {
-            $date = Carbon::now()->format('Y-m-d');
-            $profit = Profit::whereDate('created_at',$date)->get();
-            $profit_old = Profit::whereDate('created_at','<', $date)->get();
+            $date_now = Carbon::now()->format('Y-m-d');
+            $profit_now = Profit::whereDate('created_at',$date_now)->get();
+            $profit_old = Profit::all();
 
             foreach ($profit_old as $item){
-                $created_at = $item->created_at->format('Y-m-d');
+                $created_at = $item->date->format('Y-m-d');
                 $item->profit = $ProfitProfit = Orders::whereDate('created_at',$created_at)
                     ->where('status','Выполнен')
                     ->select('profit')
                     ->sum('profit');
 
-                $item->cost = $ProfitCost = Costs::whereDate('created_at', $created_at)
+                $item->cost = $ProfitCost = Costs::whereDate('date', $created_at)
                     ->select('total')
                     ->sum('total');
                 $item->marginality = $ProfitProfit - $ProfitCost;
@@ -52,14 +52,14 @@ class Kernel extends ConsoleKernel
                 $item->update();
             }
 
-            if (count($profit)){
-                foreach ($profit as $item){
-                    $item->profit = $ProfitProfit = Orders::whereDate('created_at', $date)
+            if (count($profit_now)){
+                foreach ($profit_now as $item){
+                    $item->profit = $ProfitProfit = Orders::whereDate('created_at', $date_now)
                         ->where('status', 'Выполнен')
                         ->select('profit')
                         ->sum('profit');
 
-                    $item->cost = $ProfitCost = Costs::whereDate('created_at', $date)
+                    $item->cost = $ProfitCost = Costs::whereDate('date', $date_now)
                         ->select('total')
                         ->sum('total');
                     $item->marginality = $ProfitProfit - $ProfitCost;
@@ -68,11 +68,11 @@ class Kernel extends ConsoleKernel
                 }
             }else{
                 $profit = new Profit();
-                $profit->cost = $ProfitCost = Costs::whereDate('created_at', $date)
+                $profit->cost = $ProfitCost = Costs::whereDate('date', $date_now)
                     ->select('total')
                     ->sum('total');
 
-                $profit->profit = $ProfitProfit = Orders::whereDate('created_at', $date)
+                $profit->profit = $ProfitProfit = Orders::whereDate('created_at', $date_now)
                     ->where('status', 'Выполнен')
                     ->select('profit')
                     ->sum('profit');

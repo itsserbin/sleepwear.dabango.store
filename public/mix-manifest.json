@@ -3,7 +3,6 @@
     "/admin/admin.js": "/admin/admin.js",
     "/css/app.css": "/css/app.css",
     "/admin/admin.css": "/admin/admin.css",
-    "/css/admin/app.css": "/css/admin/app.css",
     "/css/pages/order.css": "/css/pages/order.css",
     "/css/product/app.css": "/css/product/app.css"
 }

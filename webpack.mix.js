@@ -18,9 +18,9 @@ mix.js('resources/js/app.js', 'public/js')
 
     .sass('resources/scss/app.scss', 'public/css')
     .sass('resources/scss/product/app.scss', 'public/css/product')
-    .sass('resources/scss/pages/order.scss', 'public/css/pages')
-    .postCss('resources/css/app.css', 'public/css/admin', [
-        require('postcss-import'),
-        require('tailwindcss'),
-        require('autoprefixer'),
-    ]);
+    .sass('resources/scss/pages/order.scss', 'public/css/pages');
+    // .postCss('resources/css/app.css', 'public/css/admin', [
+    //     require('postcss-import'),
+    //     require('tailwindcss'),
+    //     require('autoprefixer'),
+    // ]);
