@@ -12,60 +12,58 @@
         </div>
 
         @role('administrator')
-        @if(isset($days_orders))
-            <div class="row mb-5">
-                <h2>Статистика по дням</h2>
-                <a href="{{route('admin.bookkeeping.product_sales.create')}}">
-                    <button class="btn btn-light">
-                        Посчитать день
-                    </button>
-                </a>
-                <div class="table-responsive">
-                    <table class="table text-center align-center">
-                        <thead>
-                        <tr style="vertical-align: middle;">
-                            <th scope="col">Дата</th>
-                            <th scope="col">Цена заявки</th>
-                            <th scope="col">Затраты на рекламу</th>
-                            <th scope="col">Кол-во заявок</th>
-                            <th scope="col">В процессе</th>
-                            <th scope="col">На почте</th>
-                            <th scope="col">Выполненные</th>
-                            <th scope="col">Возвраты</th>
-                            <th scope="col">Отмененные</th>
-                            <th scope="col">Не обработаны</th>
-                        </tr>
-                        </thead>
-                        <tbody>
+        <div class="row mb-5">
+            <h2>Статистика по дням</h2>
+            <a href="{{route('admin.bookkeeping.product_sales.create')}}">
+                <button class="btn btn-light">
+                    Посчитать день
+                </button>
+            </a>
+            <div class="table-responsive">
+                <table class="table text-center align-center">
+                    <thead>
+                    <tr style="vertical-align: middle;">
+                        <th scope="col">Дата</th>
+                        <th scope="col">Цена заявки</th>
+                        <th scope="col">Затраты на рекламу</th>
+                        <th scope="col">Кол-во заявок</th>
+                        <th scope="col">В процессе</th>
+                        <th scope="col">На почте</th>
+                        <th scope="col">Выполненные</th>
+                        <th scope="col">Возвраты</th>
+                        <th scope="col">Отмененные</th>
+                        <th scope="col">Не обработаны</th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-                        @foreach($days_orders as $item)
-                            <tr style="vertical-align:middle;">
-                                <td scope="row">{{$item->date->format('d.m.y') ?? '-'}}</td>
-                                <td scope="row">{{number_format((float)$item->application_price, 2, ',', '')}}</td>
-                                <td scope="row">{{$item->advertising}}</td>
-                                <td scope="row">{{$item->applications}}</td>
-                                <td scope="row">{{$item->in_process}}</td>
-                                <td scope="row">{{$item->at_the_post_office}}</td>
-                                <td scope="row">{{$item->completed_applications}}</td>
-                                <td scope="row">{{$item->refunds}}</td>
-                                <td scope="row">{{$item->cancel}}</td>
-                                <td scope="row">{{$item->unprocessed}}</td>
-                            </tr>
-                        @endforeach
-
-                        </tbody>
-                        <tfoot>
-                        <tr>
-                            <td colspan="10" class="p-3">
-                                <a href="{{route('admin.bookkeeping.product_sales.index')}}">
-                                    <button type="button" class="btn btn-light ">Перейти к статистике</button>
-                                </a></td>
+                    @foreach($days_orders as $item)
+                        <tr style="vertical-align:middle;">
+                            <td scope="row">{{$item->date->format('d.m.y') ?? '-'}}</td>
+                            <td scope="row">{{number_format((float)$item->application_price, 2, ',', '')}}</td>
+                            <td scope="row">{{$item->advertising}}</td>
+                            <td scope="row">{{$item->applications}}</td>
+                            <td scope="row">{{$item->in_process}}</td>
+                            <td scope="row">{{$item->at_the_post_office}}</td>
+                            <td scope="row">{{$item->completed_applications}}</td>
+                            <td scope="row">{{$item->refunds}}</td>
+                            <td scope="row">{{$item->cancel}}</td>
+                            <td scope="row">{{$item->unprocessed}}</td>
                         </tr>
-                        </tfoot>
-                    </table>
-                </div>
+                    @endforeach
+
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="10" class="p-3">
+                            <a href="{{route('admin.bookkeeping.product_sales.index')}}">
+                                <button type="button" class="btn btn-light ">Перейти к статистике</button>
+                            </a></td>
+                    </tr>
+                    </tfoot>
+                </table>
             </div>
-        @endif
+        </div>
         @endrole
 
         <div class="row mb-5">
