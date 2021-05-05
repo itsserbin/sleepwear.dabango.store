@@ -41,7 +41,7 @@
                                 <td>{{$order->status}}</td>
                                 <td>{{$order->name}}</td>
                                 <td><a href="tel:{{$order->phone}}">{{$order->phone}}</a></td>
-                                <td>{{$order->nova_poshta}}</td>
+                                <td>{{$order->waybill}}</td>
                                 <td>{{$order->product_id}}</td>
                                 <td><a href="{{route('product',$order->product_id)}}"
                                        target="_blank">{{$order->Product->h1}}</a></td>
