@@ -17,8 +17,8 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('admin.bookkeeping.productSales') ? 'active' : null }}"
+        <a class="nav-link {{ request()->routeIs('admin.bookkeeping.product_sales.index') ? 'active' : null }}"
            aria-current="page"
-           href="{{route('admin.bookkeeping.productSales')}}">Выполненные заказы</a>
+           href="{{route('admin.bookkeeping.product_sales.index')}}">Статистика продаж</a>
     </li>
 </ul>

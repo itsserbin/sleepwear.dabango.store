@@ -18,6 +18,12 @@ class Costs extends Model
         'created_at',
     ];
 
+    protected $dates = [
+        'date',
+        'created_at',
+        'updated_at',
+    ];
+
     public function User()
     {
         return $this->hasOne(User::class, 'id', 'user_id');

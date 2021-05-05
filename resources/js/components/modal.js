@@ -32,12 +32,12 @@ $(function () {
 
         }
     });
-    $('#review').click(function () {
-        $('body').addClass('lock');
-        $('#modal-review').addClass('show');
-        if ($('#modal-review').hasClass('show')) {
-        }
-    });
+    // $('#review').click(function () {
+    //     $('body').addClass('lock');
+    //     $('#modal-review').addClass('show');
+    //     if ($('#modal-review').hasClass('show')) {
+    //     }
+    // });
     $('#sizes').click(function () {
         $('body').addClass('lock');
         $('#modal-sizes').addClass('show');
@@ -46,7 +46,7 @@ $(function () {
     });
     $('.modal-close').click(function () {
         $('#modal-order').removeClass('show');
-        $('#modal-review').removeClass('show');
+        // $('#modal-review').removeClass('show');
         $('#modal-sizes').removeClass('show');
         $('body').removeClass('lock');
         $('input').val('');
@@ -57,7 +57,7 @@ $(function () {
         if (e.keyCode === 27) {
             e.stopPropagation();
             $('#modal-order').removeClass('show');
-            $('#modal-review').removeClass('show');
+            // $('#modal-review').removeClass('show');
             $('#modal-sizes').removeClass('show');
             $('body').removeClass('lock');
             $('input').val('');
@@ -68,7 +68,7 @@ $(function () {
     $('.modal').click(function (e) {
         if ($(e.target).closest('.modal-content').length == 0) {
             $('#modal-order').removeClass('show');
-            $('#modal-review').removeClass('show');
+            // $('#modal-review').removeClass('show');
             $('#modal-sizes').removeClass('show');
             $('body').removeClass('lock');
             $('input').val('');

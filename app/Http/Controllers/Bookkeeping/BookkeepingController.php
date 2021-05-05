@@ -88,28 +88,4 @@ class BookkeepingController extends Controller
             'ProfitInJustAWeek' => $ProfitInJustAWeek
         ]);
     }
-
-    public function productSales()
-    {
-        $done_orders = Orders::where('status','Выполнен')
-            ->select([
-                'id',
-                'name',
-                'trade_price',
-                'sale_price',
-                'product_id',
-                'pay',
-                'profit',
-                'created_at',
-                'updated_at'
-            ])
-            ->orderBy('created_at','desc')
-            ->paginate(15);
-
-//        dd($done_orders);
-
-        return view('admin.bookkeeping.product-sales.index',[
-            'done_orders' => $done_orders
-        ]);
-    }
 }

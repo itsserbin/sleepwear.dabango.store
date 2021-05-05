@@ -1,15 +1,66 @@
 @extends('layouts.app')
 
-@section('title','Проданные товары')
-@section('header','Проданные товары')
+@section('title','Статистика продаж')
+@section('header','Статистика продаж')
 
 @section('content')
     <div class="container">
+
+        @component('admin.components.breadcrumbs')
+            @slot('active')Бухгалтерия@endslot
+            @slot('active_link'){{route('admin.bookkeeping.index')}}@endslot
+            @slot('subsidiary')Статистика продаж@endslot
+        @endcomponent
+        <hr>
+
         <div class="row ">
-            <div class="col-12 col-md-3">
+            <div class="col-12 col-md-2">
                 @include('admin.bookkeeping.partials.sidebar')
             </div>
-            <div class="col-12 col-md-9">
+            <div class="col-12 col-md-10">
+                <div class="row mb-5">
+                    <h2>Статистика по дням</h2>
+                    <a href="{{route('admin.bookkeeping.product_sales.create')}}">
+                        <button class="btn btn-light">
+                            Посчитать день
+                        </button>
+                    </a>
+                    <div class="table-responsive">
+                        <table class="table text-center align-center">
+                            <thead>
+                            <tr style="vertical-align: middle;">
+                                <th scope="col">Дата</th>
+                                <th scope="col">Цена заявки</th>
+                                <th scope="col">Затраты на рекламу</th>
+                                <th scope="col">Кол-во заявок</th>
+                                <th scope="col">В процессе</th>
+                                <th scope="col">На почте</th>
+                                <th scope="col">Выполненные</th>
+                                <th scope="col">Возвраты</th>
+                                <th scope="col">Отмененные</th>
+                                <th scope="col">Не обработаны</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($days_orders as $item)
+                                <tr style="vertical-align:middle;">
+                                    <td scope="row">{{$item->date->format('d.m.y')}}</td>
+                                    <td scope="row">{{number_format((float)$item->application_price, 2, ',', '')}}</td>
+                                    <td scope="row">{{$item->advertising}}</td>
+                                    <td scope="row">{{$item->applications}}</td>
+                                    <td scope="row">{{$item->in_process}}</td>
+                                    <td scope="row">{{$item->at_the_post_office}}</td>
+                                    <td scope="row">{{$item->completed_applications}}</td>
+                                    <td scope="row">{{$item->refunds}}</td>
+                                    <td scope="row">{{$item->cancel}}</td>
+                                    <td scope="row">{{$item->unprocessed}}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    {{ $done_orders->links() }}
+                </div>
 
                 <div class="row">
                     <h2>Статистика по товарам</h2>

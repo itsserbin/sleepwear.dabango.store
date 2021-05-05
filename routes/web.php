@@ -6,8 +6,10 @@ use App\Http\Controllers\Admin\ColorsController;
 use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\ReviewsController;
+use App\Http\Controllers\Admin\RolesColroller;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Bookkeeping\BookkeepingController;
+use App\Http\Controllers\Bookkeeping\OrdersDayController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SettingsController;
 use Illuminate\Http\Request;
@@ -63,7 +65,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('all', App\Http\Controllers\Bookkeeping\BookkeepingController::class)->names('admin.bookkeeping');
         Route::resource('costs', App\Http\Controllers\Bookkeeping\CostsController::class)->names('admin.bookkeeping.costs');
         Route::resource('profit', App\Http\Controllers\Bookkeeping\ProfitController::class)->names('admin.bookkeeping.profit');
-        Route::get('product-sales', [BookkeepingController::class, 'productSales'])->name('admin.bookkeeping.productSales');
+        Route::resource('product-sales', OrdersDayController::class)->names('admin.bookkeeping.product_sales');
     });
 
     Route::group(['middleware' => 'role:administrator', 'prefix' => '/settings'], function () {
@@ -72,7 +74,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('colors', ColorsController::class)->names('admin.settings.colors');
         Route::post('save', [SettingsController::class, 'save'])->name('admin.settings.save');
         Route::resource('users', UsersController::class)->names('admin.users');
-        Route::resource('roles', \App\Http\Controllers\Admin\RolesColroller::class)->names('admin.roles');
+        Route::resource('roles', RolesColroller::class)->names('admin.roles');
     });
 
     Route::post('img-upload', [ProductsController::class, 'store'])->name('uploads.photo.post');

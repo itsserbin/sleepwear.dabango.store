@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Models\Bookkeeping\Costs;
+use App\Models\Bookkeeping\OrdersDay;
 use App\Models\Bookkeeping\Profit;
 use App\Models\BookkeepingCosts;
 use App\Models\Clients;
@@ -79,6 +80,103 @@ class Kernel extends ConsoleKernel
                 $profit->marginality = $ProfitProfit - $ProfitCost;
                 $profit->turnover = $ProfitProfit + $ProfitCost;
                 $profit->save();;
+            }
+
+        })->everyMinute();
+
+        $schedule->call(function () {
+            $date_now = Carbon::now()->format('Y-m-d');
+
+            $orders_old = OrdersDay::all();
+            $orders_days = OrdersDay::whereDate('date', $date_now)->first();
+
+            if ($orders_days == null) {
+                $orders_days = new OrdersDay();
+                $orders_days->date = $date_now;
+
+                $orders_days->advertising = Costs::whereDate('date', $date_now)
+                    ->where('name', 'Таргет')
+                    ->select('total')
+                    ->sum('total');
+
+                $orders_days->applications = Orders::whereDate('created_at', $date_now)
+                    ->count();
+
+                if ($orders_days->applications > 0) {
+                    $orders_days->application_price = $orders_days->advertising / $orders_days->applications;
+                }else{
+                    $orders_days->application_price = '-';
+                }
+
+                $orders_days->in_process = Orders::whereDate('created_at', $date_now)
+                    ->where('status', 'В процессе')
+                    ->count();
+
+                $orders_days->unprocessed = Orders::whereDate('created_at', $date_now)
+                    ->where('status', 'Новый')
+                    ->count();
+
+                $orders_days->at_the_post_office = Orders::whereDate('created_at', $date_now)
+                    ->where('status', 'На почте')
+                    ->count();
+
+                $orders_days->completed_applications = Orders::whereDate('created_at', $date_now)
+                    ->where('status', 'Выполнен')
+                    ->count();
+
+                $orders_days->refunds = Orders::whereDate('created_at', $date_now)
+                    ->where('status', 'Возврат')
+                    ->count();
+
+                $orders_days->cancel = Orders::whereDate('created_at', $date_now)
+                    ->where('status', 'Отменен')
+                    ->count();
+
+                $orders_days->save();
+            } else {
+                foreach ($orders_old as $item) {
+                    $date = $item->date->format('Y-m-d');
+
+                    $item->advertising = Costs::whereDate('date', $date)
+                        ->where('name', 'Таргет')
+                        ->select('total')
+                        ->sum('total');
+
+                    $item->applications = Orders::whereDate('created_at', $date)
+                        ->count();
+
+                    if ($item->applications > 0) {
+                        $item->application_price = $item->advertising / $item->applications;
+                    }else{
+                        $item->application_price = '-';
+                    }
+
+                    $item->in_process = Orders::whereDate('created_at', $date)
+                        ->where('status', 'В процессе')
+                        ->count();
+
+                    $item->at_the_post_office = Orders::whereDate('created_at', $date)
+                        ->where('status', 'На почте')
+                        ->count();
+
+                    $item->completed_applications = Orders::whereDate('created_at', $date)
+                        ->where('status', 'Выполнен')
+                        ->count();
+
+                    $item->unprocessed = Orders::whereDate('created_at', $date)
+                        ->where('status', 'Новый')
+                        ->count();
+
+                    $item->refunds = Orders::whereDate('created_at', $date)
+                        ->where('status', 'Возврат')
+                        ->count();
+
+                    $item->cancel = Orders::whereDate('created_at', $date)
+                        ->where('status', 'Отменен')
+                        ->count();
+
+                    $item->update();
+                }
             }
 
         })->everyMinute();

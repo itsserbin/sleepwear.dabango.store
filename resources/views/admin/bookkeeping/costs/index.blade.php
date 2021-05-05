@@ -5,11 +5,19 @@
 
 @section('content')
     <div class="container">
+
+        @component('admin.components.breadcrumbs')
+            @slot('active')Бухгалтерия@endslot
+            @slot('active_link'){{route('admin.bookkeeping.index')}}@endslot
+            @slot('subsidiary')Расходы@endslot
+        @endcomponent
+        <hr>
+
         <div class="row ">
-            <div class="col-12 col-md-3">
+            <div class="col-12 col-md-2">
                 @include('admin.bookkeeping.partials.sidebar')
             </div>
-            <div class="col-12 col-md-9">
+            <div class="col-12 col-md-10">
                 <a href="{{route('admin.bookkeeping.costs.create')}}">
                     <button class="btn btn-light mb-3">
                         Добавить расход
@@ -40,7 +48,7 @@
                                 <td scope="row">{{$cost->total}}</td>
                                 <td scope="row">{{$cost->user->name}}</td>
                                 <td scope="row">{{$cost->comment ?? "-"}}</td>
-                                <td scope="row">{{$cost->created_at->format('d.m.y h:m')}}</td>
+                                <td scope="row">{{$cost->date->format('d.m.y h:m')}}</td>
                                 <td>
                                     <form
                                         onsubmit="if(confirm('Удалить?')){ return true }else{ return false }"

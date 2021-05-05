@@ -32,7 +32,8 @@
 @endif
 
 <div class="form-group my-3">
-    <label for="created_at">Дата</label>
-    <input type="date" class="form-control datepicker-here" id="created_at" name="created_at"
-           value="{{$cost->created_at}}">
+    <label for="date">Дата</label>
+    <input type="date" class="form-control datepicker-here" data-timepicker="true"
+           data-time-format='hh:mm' id="date" name="date"
+           value="{{$cost->date}}" placeholder="Введите дату расхода">
 </div>
