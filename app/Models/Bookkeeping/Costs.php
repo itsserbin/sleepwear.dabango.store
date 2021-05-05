@@ -15,6 +15,7 @@ class Costs extends Model
         'total',
         'user_id',
         'comment',
+        'date',
         'created_at',
     ];
 

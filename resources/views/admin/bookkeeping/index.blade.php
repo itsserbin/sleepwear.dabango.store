@@ -82,7 +82,7 @@
                                         <td>@convert($order->Product->trade_price) ₴</td>
                                         <td>@convert($order->sale_price) ₴</td>
                                     <td>@convert($order->sale_price - $order->Product->trade_price) ₴</td>
-                                    <td>{{$order->updated_at->format('d.m.y')}}</td>
+                                    <td>{{$order->created_at->format('d.m.y')}}</td>
                                 </tr>
                             @endforeach
                             </tbody>
