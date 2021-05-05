@@ -22,25 +22,23 @@
                         <table class="table text-center align-center">
                             <thead>
                             <tr>
-                                <th scope="col">#</th>
+                                <th scope="col">Дата</th>
                                 <th scope="col">Название</th>
                                 <th scope="col">Кол-во</th>
                                 <th scope="col">Сумма</th>
                                 <th scope="col">Итого</th>
                                 <th scope="col">Ответственный</th>
-                                <th scope="col">Дата</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($costs as $cost)
                                 <tr style="vertical-align:middle;">
-                                    <th scope="row">{{$cost->id}}</th>
+                                    <td scope="row">{{$cost->date->format('d.m.y')}}</td>
                                     <td>{{$cost->name}}</td>
                                     <td scope="row">{{$cost->quantity}}</td>
                                     <td scope="row">{{$cost->sum}}</td>
                                     <td scope="row">{{$cost->total}}</td>
                                     <td scope="row">{{$cost->user->name}}</td>
-                                    <td scope="row">{{$cost->created_at->format('d.m.y')}}</td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -53,7 +51,7 @@
                                     </button>
                                     </a>
                                 </th>
-                                <th scope="row" colspan="4" class="text-end">За 7 дней:</th>
+                                <th scope="row" colspan="3" class="text-end">За 7 дней:</th>
                                 <th colspan="2" class="text-center">@convert($CostsInJustAWeek) ₴</th>
                             </tr>
                             </tfoot>
