@@ -96,8 +96,8 @@ class ProfitController extends Controller
     public function store(Request $request)
     {
         $profit = new Profit();
-        $data = $request->all();
-        $profit->save($data);
+        $profit->date = $request->input('date');
+        $profit->save();
 
         return redirect(route('admin.bookkeeping.profit.index'));
     }

@@ -38,7 +38,7 @@
                             <tbody>
                             @foreach($profits as $profit)
                                 <tr style="vertical-align:middle;">
-                                    <td scope="row">{{$profit->date->format('d.m.y')}}</td>
+                                    <td scope="row">{{$profit->date->format('d.m.Y')}}</td>
                                     <td>@convert($profit->cost) ₴</td>
                                     <td>@convert($profit->profit) ₴</td>
                                     <td>@convert($profit->marginality) ₴</td>
