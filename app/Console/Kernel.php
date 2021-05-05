@@ -112,6 +112,10 @@ class Kernel extends ConsoleKernel
                     ->where('status', 'В процессе')
                     ->count();
 
+                $orders_days->transferred_to_supplier = Orders::whereDate('created_at', $date_now)
+                    ->where('status', 'Передан поставщику')
+                    ->count();
+
                 $orders_days->unprocessed = Orders::whereDate('created_at', $date_now)
                     ->where('status', 'Новый')
                     ->count();
@@ -153,6 +157,10 @@ class Kernel extends ConsoleKernel
 
                     $item->in_process = Orders::whereDate('created_at', $date)
                         ->where('status', 'В процессе')
+                        ->count();
+
+                    $item->transferred_to_supplier = Orders::whereDate('created_at', $date)
+                        ->where('status', 'Передан поставщику')
                         ->count();
 
                     $item->at_the_post_office = Orders::whereDate('created_at', $date)

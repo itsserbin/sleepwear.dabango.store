@@ -30,9 +30,10 @@
                             <thead>
                             <tr style="vertical-align: middle;">
                                 <th scope="col">Дата</th>
-                                <th scope="col">Цена заявки</th>
+                                <th scope="col" >Цена заявки</th>
                                 <th scope="col">Затраты на рекламу</th>
                                 <th scope="col">Кол-во заявок</th>
+                                <th scope="col">Переданы поставщику</th>
                                 <th scope="col">В процессе</th>
                                 <th scope="col">На почте</th>
                                 <th scope="col">Выполненные</th>
@@ -48,6 +49,7 @@
                                     <td scope="row">{{number_format((float)$item->application_price, 2, ',', '')}}</td>
                                     <td scope="row">{{$item->advertising}}</td>
                                     <td scope="row">{{$item->applications}}</td>
+                                    <td scope="row">{{$item->transferred_to_supplier}}</td>
                                     <td scope="row">{{$item->in_process}}</td>
                                     <td scope="row">{{$item->at_the_post_office}}</td>
                                     <td scope="row">{{$item->completed_applications}}</td>

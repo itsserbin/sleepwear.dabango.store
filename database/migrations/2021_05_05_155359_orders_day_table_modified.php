@@ -4,17 +4,17 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CostsTableModified extends Migration
+class OrdersDayTableModified extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
+        public function up()
     {
-        Schema::table('costs', function (Blueprint $table) {
-//            $table->date('date')->nullable();
+        Schema::table('orders_days', function (Blueprint $table) {
+            $table->string('transferred_to_supplier')->nullable();
         });
     }
 
@@ -23,4 +23,8 @@ class CostsTableModified extends Migration
      *
      * @return void
      */
+    public function down()
+    {
+        //
+    }
 }
