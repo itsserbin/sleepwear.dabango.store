@@ -57,7 +57,7 @@
                                     <td>
                                         <form
                                             onsubmit="if(confirm('Удалить?')){ return true }else{ return false }"
-                                            action="{{route('admin.admin.bookkeeping.product_sales.destroy', $item)}}"
+                                            action="{{route('admin.bookkeeping.product_sales.destroy', $item)}}"
                                             method="POST">
                                             <input type="hidden" name="_method" value="DELETE">
                                             @csrf
