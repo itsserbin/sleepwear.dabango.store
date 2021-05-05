@@ -39,7 +39,7 @@
                     @foreach($days_orders as $item)
                         <tr style="vertical-align:middle;">
                             <td scope="row">{{$item->date->format('d.m.y')}}</td>
-                            <td scope="row">{{number_format((float)$item->application_price, 2, ',', '')}}</td>
+                            <td scope="row">{{number_format((float)$item->application_price, 2, ',', '') ?? '-'}}</td>
                             <td scope="row">{{$item->advertising}}</td>
                             <td scope="row">{{$item->applications}}</td>
                             <td scope="row">{{$item->in_process}}</td>
