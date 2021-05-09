@@ -14,7 +14,7 @@ class CostsTableModified extends Migration
     public function up()
     {
         Schema::table('costs', function (Blueprint $table) {
-//            $table->date('date')->nullable();
+            $table->date('date')->nullable();
         });
     }
 
