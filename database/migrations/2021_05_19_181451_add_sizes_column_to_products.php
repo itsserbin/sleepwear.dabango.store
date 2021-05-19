@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CostTableModified extends Migration
+class AddSizesColumnToProducts extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CostTableModified extends Migration
      */
     public function up()
     {
-        Schema::table('costs', function (Blueprint $table) {
-//            $table->date('date')->nullable();
+        Schema::table('products', function (Blueprint $table) {
+            $table->text('size_table')->nullable();
         });
     }
 
@@ -25,6 +25,8 @@ class CostTableModified extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('products', function (Blueprint $table) {
+            //
+        });
     }
 }

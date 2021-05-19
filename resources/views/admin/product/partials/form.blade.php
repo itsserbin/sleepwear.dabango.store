@@ -84,6 +84,15 @@
     CKEDITOR.replace('characteristics');
 </script>
 
+<div class="form-group my-3">
+    <label for="size_table">Размерная сетка</label>
+    <textarea type="text" class="form-control" id="size_table" name="size_table"
+              placeholder="Введите данные о размерах товара">{{$product->size_table ?? ""}}</textarea>
+</div>
+<script>
+    CKEDITOR.replace('size_table');
+</script>
+
 <div class="row my-3">
     <div class="col-12 col-md-3 ">
         <div class="form-group">

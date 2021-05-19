@@ -17,6 +17,7 @@ class Products extends Model
         'h1',
         'content',
         'characteristics',
+        'size_table',
         'price',
         'sale_price',
         'discount_price',

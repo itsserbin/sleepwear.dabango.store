@@ -78,6 +78,7 @@ class ProductsController extends Controller
         $product->title = $request->input('title');
         $product->description = $request->input('description');
         $product->characteristics = $request->input('characteristics');
+        $product->size_table = $request->input('size_table');
         $product->price = $request->input('price');
         $product->discount_price = $request->input('discount_price');
         $product->trade_price = $request->input('trade_price');
@@ -184,6 +185,7 @@ class ProductsController extends Controller
         $product->title = $request->input('title');
         $product->description = $request->input('description');
         $product->characteristics = $request->input('characteristics');
+        $product->size_table = $request->input('size_table');
         $product->price = $request->input('price');
         $product->discount_price = $request->input('discount_price');
         $product->trade_price = $request->input('trade_price');
