@@ -12,7 +12,7 @@ class CostsController extends Controller
 {
     public function index()
     {
-        $costs = Costs::paginate(15);
+        $costs = Costs::orderBy('created_at', 'desc')->paginate(15);
         $InJustAWeek = Costs::orderBy('created_at', 'desc')
             ->select('total')
             ->get(7)
