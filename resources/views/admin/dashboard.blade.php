@@ -27,6 +27,7 @@
                         <th scope="col">Цена заявки</th>
                         <th scope="col">Затраты на рекламу</th>
                         <th scope="col">Кол-во заявок</th>
+                        <th scope="col">Переданы поставщику</th>
                         <th scope="col">В процессе</th>
                         <th scope="col">На почте</th>
                         <th scope="col">Выполненные</th>
