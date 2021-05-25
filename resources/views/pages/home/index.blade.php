@@ -6,7 +6,7 @@
     @include('components.modal-burger-menu')
     <section class="product-list card">
         <div class="content">
-            <div class="product-list__title">Модные и стильные женские купальники 2021</div>
+            <div class="product-list__title">Трендовые женские купальники 2021</div>
             <div class="row">
                 @foreach($products as $product)
                     @if($product->status)

@@ -43,6 +43,7 @@
                             <td scope="row">{{number_format((float)$item->application_price, 2, ',', '')}}</td>
                             <td scope="row">{{$item->advertising}}</td>
                             <td scope="row">{{$item->applications}}</td>
+                            <td scope="row">{{$item->transferred_to_supplier}}</td>
                             <td scope="row">{{$item->in_process}}</td>
                             <td scope="row">{{$item->at_the_post_office}}</td>
                             <td scope="row">{{$item->completed_applications}}</td>
