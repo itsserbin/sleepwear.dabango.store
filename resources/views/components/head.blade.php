@@ -34,7 +34,7 @@
 <meta property="og:title" content="@yield('title')">
 <meta property="og:description" content="@yield('description')">
 <meta property="og:url" content="{{url()->current()}}">
-<meta property="og:site_name" content="YouBrand">
+<meta property="og:site_name" content="Dabango">
 
 @if(Route::is('product') )
     <meta property="product:price:amount" content="@if($product->sale_price){{$product->sale_price}}@else{{$product->price}}@endif"/>
