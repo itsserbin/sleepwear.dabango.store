@@ -40,7 +40,7 @@
                                 <td>{{$order->name}}</td>
                                 <td><a href="tel:{{$order->phone}}">{{$order->phone}}</a></td>
                                 <td>{{$order->product_id}}</td>
-                                <td>{{$order->postal_office}}</td>
+                                <td>{{$order->waybill}}</td>
                                 <td><a href="{{route('product',$order->product_id)}}"
                                        target="_blank">{{$order->Product->h1}}</a></td>
                                 <td>{{$order->sale_price}}</td>
