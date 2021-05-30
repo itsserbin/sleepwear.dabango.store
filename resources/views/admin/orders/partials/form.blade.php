@@ -36,6 +36,16 @@
         </div>
     </div>
 
+</div>
+<div class="row">
+    <div class="col-12 col-md-3">
+        <div class="form-group my-3">
+            <label for="sale_price">Цена закупки</label>
+            <input type="text" class="form-control" id="sale_price" name="sale_price"
+                   value="{{$order->trade_price}}" disabled>
+        </div>
+    </div>
+
     <div class="col-12 col-md-3">
         <div class="form-group my-3">
             <label for="sale_price">Цена продажи</label>
@@ -44,6 +54,15 @@
         </div>
     </div>
 
+    <div class="col-12 col-md-3">
+        <div class="form-group my-3">
+            <label for="sale_price">Маржинальность</label>
+            <input type="text" class="form-control" id="sale_price" name="sale_price"
+                   value="{{$order->sale_price - $order->trade_price}}" disabled>
+        </div>
+    </div>
+</div>
+<div class="row">
     <div class="col-12 col-md-3">
         <div class="form-group my-3">
             <label for="product_name">Название товара</label>
@@ -113,7 +132,7 @@
 <div class="row">
     <div class="col-12 col-md-3">
         <div class="form-group my-3">
-            <label for="pay">Выплата от поставщика</label>
+            <label for="pay">Выплата от поставщика: {{$order->sale_price - $order->trade_price}} грн.</label>
             <select class="form-control" id="pay" name="pay">
                 <option value="0" @if ($order->pay) selected="" @endif>Не получена</option>
                 <option value="1" @if ($order->pay) selected="" @endif>Получена</option>
