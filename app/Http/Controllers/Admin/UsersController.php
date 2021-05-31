@@ -25,7 +25,7 @@ class UsersController extends Controller
 //        dd($user->roles);
         $users = User::paginate(15);
 
-        return view('admin.settings.users.index', [
+        return view('admin.options.users.index', [
             'users' => $users,
         ]);
     }
@@ -39,7 +39,7 @@ class UsersController extends Controller
         $roles = Role::all();
         $permissions = Permission::all();
 
-        return view('admin.settings.users.edit', [
+        return view('admin.options.users.edit', [
             'user' => $user,
             'roles' => $roles,
             'permissions' => $permissions

@@ -11,7 +11,7 @@ class ColorsController extends Controller
    public function index()
    {
        $colors = Colors::all();
-       return view('admin.settings.colors.index', [
+       return view('admin.options.colors.index', [
            'colors' => $colors
        ]);
    }

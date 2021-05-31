@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 col-md-3">
-                @include('admin.settings.partials.sidebar')
+                @include('admin.options.partials.sidebar')
             </div>
             <div class="col-12 col-md-9">
                 <div class="table-responsive">
@@ -16,7 +16,7 @@
                     </button>
                     <!-- Modal -->
                     <div class="modal fade" id="addColorModal" tabindex="-1" aria-labelledby="addColorModalLabel" aria-hidden="true">
-                        <form action="{{route('admin.settings.colors.store')}}" method="POST">
+                        <form action="{{route('admin.options.colors.store')}}" method="POST">
                             @csrf
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -64,7 +64,7 @@
                                 <td>
                                     <form
                                         onsubmit="if(confirm('Удалить?')){ return true }else{ return false }"
-                                        action="{{route('admin.settings.colors.destroy', $color)}}"
+                                        action="{{route('admin.options.colors.destroy', $color)}}"
                                         method="POST">
                                         <input type="hidden" name="_method" value="DELETE">
                                         @csrf

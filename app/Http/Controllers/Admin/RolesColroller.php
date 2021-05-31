@@ -19,7 +19,7 @@ class RolesColroller extends Controller
 
 
         $roles = Role::all();
-        return view('admin.settings.roles.index', [
+        return view('admin.options.roles.index', [
             'roles' => $roles
         ]);
     }
@@ -29,7 +29,7 @@ class RolesColroller extends Controller
         $role = Role::find($id);
         $permissions = Permission::all();
 
-        return view('admin.settings.roles.edit', [
+        return view('admin.options.roles.edit', [
             'role' => $role,
             'permissions' => $permissions
         ]);

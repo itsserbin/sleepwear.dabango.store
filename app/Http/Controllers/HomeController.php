@@ -10,7 +10,7 @@ use App\Models\Products;
 use App\Models\ProductsColor;
 use App\Models\ProductsPhoto;
 use App\Models\Reviews;
-use App\Models\Settings;
+use App\Models\Options;
 use App\Repositories\ProductRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -36,7 +36,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        $settings = Settings::find(1)->get();
+        $settings = Options::find(1)->get();
         foreach ($settings as $setting) {
             $phone = $setting->phone;
             $email = $setting->email;
@@ -64,7 +64,7 @@ class HomeController extends Controller
             'after_body_scripts' => $after_body_scripts,
             'footer_scripts' => $footer_scripts,
 
-            'settings' => $settings,
+            'options' => $settings,
             'products' => $products,
             'reviews' => $reviews,
         ]);
@@ -72,7 +72,7 @@ class HomeController extends Controller
 
     public function product($id)
     {
-        $settings = Settings::find(1)->get();
+        $settings = Options::find(1)->get();
         foreach ($settings as $setting) {
             $phone = $setting->phone;
             $email = $setting->email;
@@ -185,7 +185,7 @@ class HomeController extends Controller
 
     public function send_form_get()
     {
-        $settings = Settings::find(1)->get();
+        $settings = Options::find(1)->get();
         foreach ($settings as $setting) {
             $phone = $setting->phone;
             $email = $setting->email;
@@ -222,7 +222,7 @@ class HomeController extends Controller
 
     public function send_review_get()
     {
-        $settings = Settings::find(1)->get();
+        $settings = Options::find(1)->get();
         foreach ($settings as $setting) {
             $phone = $setting->phone;
             $email = $setting->email;

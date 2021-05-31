@@ -21,7 +21,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | Here you may configure all of the mailers used by your application plus
-    | their respective settings. Several examples have been configured for
+    | their respective options. Several examples have been configured for
     | you and you are free to add your own as your application requires.
     |
     | Laravel supports a variety of email "transport" drivers to be used while
@@ -97,7 +97,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Markdown Mail Settings
+    | Markdown Mail Options
     |--------------------------------------------------------------------------
     |
     | If you are using Markdown based email rendering, you may configure your

@@ -27,8 +27,8 @@ class PermissionSeeder extends Seeder
         $editProducts->save();
 
         $editSettings = new Permission();
-        $editSettings->name = 'Edit settings';
-        $editSettings->slug = 'edit-settings';
+        $editSettings->name = 'Edit options';
+        $editSettings->slug = 'edit-options';
         $editSettings->save();
 
         $showOrders = new Permission();

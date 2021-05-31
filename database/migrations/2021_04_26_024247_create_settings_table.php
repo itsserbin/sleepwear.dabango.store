@@ -13,7 +13,7 @@ class CreateSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('settings', function (Blueprint $table) {
+        Schema::create('options', function (Blueprint $table) {
             $table->id();
             $table->string('schedule')->nullable();
             $table->string('phone')->nullable();
@@ -38,6 +38,6 @@ class CreateSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('settings');
+        Schema::dropIfExists('options');
     }
 }

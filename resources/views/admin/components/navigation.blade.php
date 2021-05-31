@@ -36,12 +36,12 @@
                 @endrole
 
                 @role('administrator')
-                @if(Gate::allows('edit-settings'))
-                    <a class="nav-link {{ request()->routeIs('admin.settings.index') ? 'active' : null }}"
-                       href="{{route('admin.settings.index')}}">Настройки</a>
+                @if(Gate::allows('edit-options'))
+                    <a class="nav-link {{ request()->routeIs('admin.options.index') ? 'active' : null }}"
+                       href="{{route('admin.options.index')}}">Настройки</a>
                 @elseif(Gate::allows('admin'))
-                    <a class="nav-link {{ request()->routeIs('admin.settings.index') ? 'active' : null }}"
-                       href="{{route('admin.settings.index')}}">Настройки</a>
+                    <a class="nav-link {{ request()->routeIs('admin.options.index') ? 'active' : null }}"
+                       href="{{route('admin.options.index')}}">Настройки</a>
                 @endif
 
                 @if(Gate::allows('show-bookkeeping'))

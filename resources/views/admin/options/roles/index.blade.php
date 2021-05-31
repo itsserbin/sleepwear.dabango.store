@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title','Пользователи')
-@section('header','Пользователи')
+@section('title','Роли')
+@section('header','Роли')
 
 @section('content')
     <div class="container">
         <div class="row">
             <div class="col-12 col-md-3">
-                @include('admin.settings.partials.sidebar')
+                @include('admin.options.partials.sidebar')
             </div>
             <div class="col-12 col-md-9">
                 <div class="table-responsive">
@@ -15,30 +15,33 @@
                         <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Имя</th>
-                            <th scope="col">Почта</th>
-                            <th scope="col">Роль</th>
-                            <th scope="col">Дата регистрации</th>
+                            <th scope="col">Название</th>
+                            <th scope="col">Права</th>
+                            <th scope="col">Slug</th>
+                            <th scope="col">Дата Создания</th>
                             <th scope="col">Действие</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($users as $user)
+                        @foreach($roles as $role)
                             <tr style="vertical-align:middle;">
-                                <td>{{$user->id}}</td>
-                                <td>{{$user->name}}</td>
-                                <td>{{$user->email}}</td>
-                                <td>@foreach($user->roles as $item){{$item->name}}@endforeach</td>
-                                <td>{{$user->created_at}}</td>
+                                <td>{{$role->id}}</td>
+                                <td>{{$role->name}}</td>
+                                <td>@foreach($role->permissions as $item)
+                                        <ul class="p-0 m-0 list-unstyled">
+                                            <li>{{$item->name ?? "-"}}</li>
+                                        </ul> @endforeach</td>
+                                <td>{{$role->slug}}</td>
+                                <td>{{$role->created_at}}</td>
                                 <td>
                                     <form
                                         onsubmit="if(confirm('Удалить?')){ return true }else{ return false }"
-                                        action="{{route('admin.users.destroy', $user)}}"
+                                        action="{{route('admin.roles.destroy', $role)}}"
                                         method="POST">
                                         <input type="hidden" name="_method" value="DELETE">
                                         @csrf
                                         <a class="btn btn-default"
-                                           href="{{route('admin.users.edit', $user)}}">
+                                           href="{{route('admin.roles.edit', $role)}}">
                                             <svg width="1em" height="1em" viewBox="0 0 16 16"
                                                  class="bi bi-pen"
                                                  fill="currentColor"

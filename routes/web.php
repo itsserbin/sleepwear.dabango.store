@@ -11,7 +11,7 @@ use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Bookkeeping\BookkeepingController;
 use App\Http\Controllers\Bookkeeping\OrdersDayController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\OptionsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -67,11 +67,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('product-sales', OrdersDayController::class)->names('admin.bookkeeping.product_sales');
     });
 
-    Route::group(['middleware' => 'role:administrator', 'prefix' => '/settings'], function () {
-        Route::resource('all', SettingsController::class)->names('admin.settings');
-        Route::get('scripts', [SettingsController::class, 'scripts'])->name('admin.settings.scripts');
-        Route::resource('colors', ColorsController::class)->names('admin.settings.colors');
-        Route::post('save', [SettingsController::class, 'save'])->name('admin.settings.save');
+    Route::group(['middleware' => 'role:administrator', 'prefix' => '/options'], function () {
+        Route::get('/', [OptionsController::class, 'index'])->name('admin.options.index');
+        Route::get('scripts', [OptionsController::class, 'scripts'])->name('admin.options.scripts');
+        Route::resource('colors', ColorsController::class)->names('admin.options.colors');
+        Route::post('update', [OptionsController::class, 'update'])->name('admin.options.update');
         Route::resource('users', UsersController::class)->names('admin.users');
         Route::resource('roles', RolesColroller::class)->names('admin.roles');
     });
