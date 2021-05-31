@@ -31,7 +31,7 @@ class ClientRepository extends CoreRepository
      *
      * @return Model
      */
-    public function getEdit($id)
+    public function getById($id)
     {
         return $this->startConditions()->find($id);
     }
@@ -63,8 +63,33 @@ class ClientRepository extends CoreRepository
             ->orderBy('created_at', 'desc')
             ->paginate($perPage);
     }
-    public function getClient($id)
+
+    /**
+     * Обновить данные клиента.
+     *
+     * @param $id
+     * @param $request
+     * @return mixed
+     */
+    public function update(int $id, array $request)
     {
-        return $this->model::find($id);
+        return $this->model::where('id', $id)->update([
+            'name' => $request['name'],
+            'status' => $request['status'],
+            'comment' => $request['comment'],
+            'city' => $request['city'],
+            'phone' => $request['phone'],
+        ]);
+    }
+
+    /**
+     * Удалить клиента из базы.
+     *
+     * @param int $id
+     * @return int
+     */
+    public function destroy(int $id)
+    {
+        return $this->model::destroy($id);
     }
 }

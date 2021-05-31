@@ -34,13 +34,13 @@ class Kernel extends ConsoleKernel
     {
         $schedule->call(function () {
             $date_now = Carbon::now()->format('Y-m-d');
-            $profit_now = Profit::whereDate('date',$date_now)->get();
+            $profit_now = Profit::whereDate('date', $date_now)->get();
             $profit_old = Profit::all();
 
-            foreach ($profit_old as $item){
+            foreach ($profit_old as $item) {
                 $created_at = $item->date->format('Y-m-d');
-                $item->profit = $ProfitProfit = Orders::whereDate('created_at',$created_at)
-                    ->where('status','Выполнен')
+                $item->profit = $ProfitProfit = Orders::whereDate('created_at', $created_at)
+                    ->where('status', 'Выполнен')
                     ->select('profit')
                     ->sum('profit');
 
@@ -52,8 +52,8 @@ class Kernel extends ConsoleKernel
                 $item->update();
             }
 
-            if (count($profit_now)){
-                foreach ($profit_now as $item){
+            if (count($profit_now)) {
+                foreach ($profit_now as $item) {
                     $item->profit = $ProfitProfit = Orders::whereDate('created_at', $date_now)
                         ->where('status', 'Выполнен')
                         ->select('profit')
@@ -66,7 +66,7 @@ class Kernel extends ConsoleKernel
                     $item->turnover = $ProfitProfit + $ProfitCost;
                     $item->update();
                 }
-            }else{
+            } else {
                 $profit = new Profit();
                 $profit->date = $date_now;
                 $profit->cost = $ProfitCost = Costs::whereDate('date', $date_now)
@@ -91,6 +91,30 @@ class Kernel extends ConsoleKernel
             $orders_old = OrdersDay::all();
             $orders_days = OrdersDay::whereDate('date', $date_now)->first();
 
+            $OrdersCountNow = Orders::whereDate('created_at', $date_now)
+                ->count();
+
+            $DoneOrdersCountNow = Orders::whereDate('created_at', $date_now)
+                ->where('status', 'Выполнен')
+                ->count();
+
+            $CancelOrdersCountNow = Orders::whereDate('created_at', $date_now)
+                ->where('status', 'Отменен')
+                ->count();
+
+            $SumCostsNow = Costs::whereDate('date', $date_now)
+                ->where('name', 'Таргет')
+                ->select('total')
+                ->sum('total');
+
+            $SumDayMarginalityNow = Profit::whereDate('created_at', $date_now)
+                ->select('marginality')
+                ->sum('marginality');
+
+            $SumDayCostsNow = Profit::whereDate('created_at', $date_now)
+                ->select('cost')
+                ->sum('cost');
+
             if ($orders_days == null) {
                 $orders_days = new OrdersDay();
                 $orders_days->date = $date_now;
@@ -105,7 +129,7 @@ class Kernel extends ConsoleKernel
 
                 if ($orders_days->applications > 0) {
                     $orders_days->application_price = $orders_days->advertising / $orders_days->applications;
-                }else{
+                } else {
                     $orders_days->application_price = '-';
                 }
 
@@ -137,10 +161,53 @@ class Kernel extends ConsoleKernel
                     ->where('status', 'Отменен')
                     ->count();
 
+                if ($CancelOrdersCountNow !== 0) {
+                    $orders_days->canceled_orders_rate = $DoneOrdersCountNow / $CancelOrdersCountNow;
+                }
+
+                if ($DoneOrdersCountNow !== 0) {
+                    $orders_days->received_parcel_ratio = $OrdersCountNow / $DoneOrdersCountNow;
+                    $orders_days->сlient_cost = $SumCostsNow / $DoneOrdersCountNow;
+                }
+
+                $orders_days->profit = Profit::whereDate('created_at', $date_now)
+                        ->select('profit')
+                        ->sum('profit') - $orders_days->сlient_cost;
+
+                if ($SumDayCostsNow !== 0) {
+                    $orders_days->marginality = $SumDayMarginalityNow / $SumDayCostsNow;
+                }
+
+                $orders_days->investor_profit = $orders_days->profit * 0.35;
+
                 $orders_days->save();
             } else {
                 foreach ($orders_old as $item) {
                     $date = $item->date->format('Y-m-d');
+
+                    $OrdersCount = Orders::whereDate('created_at', $date)
+                        ->count();
+
+                    $DoneOrdersCount = Orders::whereDate('created_at', $date)
+                        ->where('status', 'Выполнен')
+                        ->count();
+
+                    $CancelOrdersCount = Orders::whereDate('created_at', $date)
+                        ->where('status', 'Отменен')
+                        ->count();
+
+                    $SumCosts = Costs::whereDate('date', $date)
+                        ->where('name', 'Таргет')
+                        ->select('total')
+                        ->sum('total');
+
+                    $SumDayMarginality = Profit::whereDate('created_at', $date)
+                        ->select('marginality')
+                        ->sum('marginality');
+
+                    $SumDayCosts = Profit::whereDate('created_at', $date)
+                        ->select('cost')
+                        ->sum('cost');
 
                     $item->advertising = Costs::whereDate('date', $date)
                         ->where('name', 'Таргет')
@@ -152,7 +219,7 @@ class Kernel extends ConsoleKernel
 
                     if ($item->applications > 0) {
                         $item->application_price = $item->advertising / $item->applications;
-                    }else{
+                    } else {
                         $item->application_price = '-';
                     }
 
@@ -183,6 +250,25 @@ class Kernel extends ConsoleKernel
                     $item->cancel = Orders::whereDate('created_at', $date)
                         ->where('status', 'Отменен')
                         ->count();
+
+                    if ($CancelOrdersCount !== 0) {
+                        $item->canceled_orders_rate = $DoneOrdersCount / $CancelOrdersCount;
+                    }
+
+                    if ($DoneOrdersCount !== 0) {
+                        $item->received_parcel_ratio = $OrdersCount / $DoneOrdersCount;
+                        $item->сlient_cost = $SumCosts / $DoneOrdersCount;
+                    }
+
+                    $item->profit = Profit::whereDate('created_at', $date)
+                            ->select('profit')
+                            ->sum('profit') - $item->сlient_cost;
+
+                    if ($SumDayCosts !== 0) {
+                        $item->marginality = $SumDayMarginality / $SumDayCosts;
+                    }
+
+                    $item->investor_profit = $item->profit * 0.35;
 
                     $item->update();
                 }

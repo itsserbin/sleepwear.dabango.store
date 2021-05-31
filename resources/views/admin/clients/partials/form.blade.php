@@ -14,19 +14,19 @@
         <div class="form-group my-3">
             <label for="name">Имя</label>
             <input type="text" class="form-control" id="name" name="name"
-                   value="{{$client->name}}" disabled>
+                   value="{{$client->name}}">
         </div>
 
         <div class="form-group my-3">
             <label for="phone">Телефон</label>
             <input type="text" class="form-control" id="phone" name="phone"
-                   value="{{$client->phone}}" disabled>
+                   value="{{$client->phone}}">
             <a href="tel:{{$client->phone}}">Позвонить</a>
         </div>
 
         <div class="form-group my-3">
             <label for="size">Город</label>
-            <input type="text" class="form-control" id="size" name="size"
+            <input type="text" class="form-control" id="city" name="city"
                    value="{{$client->city ?? "-"}}">
         </div>
     </div>

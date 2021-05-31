@@ -30,7 +30,7 @@
                             <thead>
                             <tr style="vertical-align: middle;">
                                 <th scope="col">Дата</th>
-                                <th scope="col" >Цена заявки</th>
+                                <th scope="col">Цена заявки</th>
                                 <th scope="col">Затраты на рекламу</th>
                                 <th scope="col">Кол-во заявок</th>
                                 <th scope="col">Переданы поставщику</th>
@@ -40,6 +40,12 @@
                                 <th scope="col">Возвраты</th>
                                 <th scope="col">Отмененные</th>
                                 <th scope="col">Не обработаны</th>
+                                <th scope="col">COR (Canceled Orders Rate)</th>
+                                <th scope="col">RPR (Received Parcel Ratio)</th>
+                                <th scope="col">Стоимость клиента</th>
+                                <th scope="col">Прибыль</th>
+                                <th scope="col">Маржинальность</th>
+                                <th scope="col">Прибыль инвестора</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -56,6 +62,12 @@
                                     <td scope="row">{{$item->refunds}}</td>
                                     <td scope="row">{{$item->cancel}}</td>
                                     <td scope="row">{{$item->unprocessed}}</td>
+                                    <td scope="row">{{round($item->canceled_orders_rate, 2)}}</td>
+                                    <td scope="row">{{round($item->received_parcel_ratio, 2)}}</td>
+                                    <td scope="row">{{round($item->сlient_cost, 2)}}</td>
+                                    <td scope="row">{{round($item->profit, 2)}}</td>
+                                    <td scope="row">{{round($item->marginality, 2)}}</td>
+                                    <td scope="row">{{round($item->investor_profit,2)}}</td>
                                     <td>
                                         <form
                                             onsubmit="if(confirm('Удалить?')){ return true }else{ return false }"
