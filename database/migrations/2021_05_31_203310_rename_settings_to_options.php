@@ -13,7 +13,7 @@ class RenameSettingsToOptions extends Migration
      */
     public function up()
     {
-        Schema::rename('options', 'options');
+        Schema::rename('settings', 'options');
     }
 
     /**
