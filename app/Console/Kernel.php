@@ -162,11 +162,11 @@ class Kernel extends ConsoleKernel
                     ->count();
 
                 if ($CancelOrdersCountNow !== 0) {
-                    $orders_days->canceled_orders_rate = $DoneOrdersCountNow / $CancelOrdersCountNow;
+                    $orders_days->canceled_orders_rate = ($CancelOrdersCountNow / $OrdersCountNow) * 100;
                 }
 
                 if ($DoneOrdersCountNow !== 0) {
-                    $orders_days->received_parcel_ratio = $OrdersCountNow / $DoneOrdersCountNow;
+                    $orders_days->received_parcel_ratio = ($DoneOrdersCountNow / $OrdersCountNow) * 100;
                     $orders_days->сlient_cost = $SumCostsNow / $DoneOrdersCountNow;
                 }
 
@@ -175,7 +175,7 @@ class Kernel extends ConsoleKernel
                         ->sum('profit') - $orders_days->сlient_cost;
 
                 if ($SumDayCostsNow !== 0) {
-                    $orders_days->marginality = $SumDayMarginalityNow / $SumDayCostsNow;
+                    $orders_days->marginality = ($SumDayMarginalityNow / $SumDayCostsNow) * 100;
                 }
 
                 $orders_days->investor_profit = $orders_days->profit * 0.35;
@@ -252,11 +252,11 @@ class Kernel extends ConsoleKernel
                         ->count();
 
                     if ($CancelOrdersCount !== 0) {
-                        $item->canceled_orders_rate = $DoneOrdersCount / $CancelOrdersCount;
+                        $item->canceled_orders_rate = ($CancelOrdersCount / $OrdersCount) * 100;
                     }
 
                     if ($DoneOrdersCount !== 0) {
-                        $item->received_parcel_ratio = $OrdersCount / $DoneOrdersCount;
+                        $item->received_parcel_ratio = ($DoneOrdersCount / $OrdersCount) * 100;
                         $item->сlient_cost = $SumCosts / $DoneOrdersCount;
                     }
 
@@ -265,7 +265,7 @@ class Kernel extends ConsoleKernel
                             ->sum('profit') - $item->сlient_cost;
 
                     if ($SumDayCosts !== 0) {
-                        $item->marginality = $SumDayMarginality / $SumDayCosts;
+                        $item->marginality = ($SumDayMarginality / $SumDayCosts) * 100;
                     }
 
                     $item->investor_profit = $item->profit * 0.35;
