@@ -7,96 +7,167 @@ use App\Models\Bookkeeping\Costs;
 use App\Models\Bookkeeping\Profit;
 use App\Models\Clients;
 use App\Models\Orders;
+use App\Repositories\OrdersRepository;
 use Carbon\Carbon;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
+/**
+ * Class OrdersController
+ * @package App\Http\Controllers\Admin
+ */
 class OrdersController extends Controller
 {
+    private $OrdersRepository;
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->OrdersRepository = app(OrdersRepository::class);
+    }
+
+    /**
+     * Получить все заказы и вывести в пагинацию по 15 шт.
+     *
+     * @return Application|Factory|View
+     */
     public function index()
     {
+        $orders = $this->OrdersRepository->getAllWithPaginate(15);
 
-        $orders = Orders::orderBy('created_at','desc')->paginate(15);
-
-        return view('admin.orders.index',[
+        return view('admin.orders.index', [
             'orders' => $orders
         ]);
     }
 
+    /**
+     * Получить заказ для редактирования.
+     *
+     * @param $id
+     * @return Application|Factory|View
+     */
     public function edit($id)
     {
-        $order = Orders::find($id);
+        $order = $this->OrdersRepository->getById($id);
 
-        return view('admin.orders.edit',[
+        return view('admin.orders.edit', [
             'order' => $order
         ]);
     }
 
+    /**
+     * Обновить данные заказа.
+     *
+     * @param $id
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update($id, Request $request)
     {
-        $order = Orders::find($id);
-        $data = $request->all();
-        $order->update($data);
+        $this->OrdersRepository->update($id, $request->all());
 
-        return view('admin.orders.edit',[
-            'order' => $order
-        ])->with('success','Заказ успешно обновлен');
+        return back()->with('success', 'Заказ успешно обновлен!');
     }
 
+    /**
+     * Удалить заказ.
+     *
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy($id)
     {
-        $order = Orders::destroy($id);
-        return back();
+        $this->OrdersRepository->destroy($id);
+
+        return back()->with('success', 'Заказ успешно удален!');
     }
 
+    /**
+     * Вывести новые заказы в пагинацию по 15 шт.
+     *
+     * @return Application|Factory|View
+     */
     public function showNewOrders()
     {
-        $orders = Orders::where('status', 'Новый')->paginate(15);
+        $orders = $this->OrdersRepository->getNewOrdersWithPaginate(15);
 
         return view('admin.orders.new.index', [
             'orders' => $orders,
         ]);
     }
 
+    /**
+     * Вывести заказы в процессе в пагинацию по 15 шт.
+     *
+     * @return Application|Factory|View
+     */
     public function showProcessOrders()
     {
-        $orders = Orders::where('status', 'В процессе')->paginate(15);
+        $orders = $this->OrdersRepository->getProcessOrdersWithPaginate(15);
 
         return view('admin.orders.process.index', [
             'orders' => $orders,
         ]);
     }
 
+    /**
+     * Вывести заказы переданные поставщику в пагинацию по 15 шт.
+     *
+     * @return Application|Factory|View
+     */
     public function showTransferredToSupplierOrders()
     {
-        $orders = Orders::where('status', 'Передан поставщику')->paginate(15);
+        $orders = $this->OrdersRepository->getTransferredToSupplierOrdersWithPaginate(15);
 
         return view('admin.orders.transferred-to-supplier.index', [
             'orders' => $orders,
         ]);
     }
 
+    /**
+     * Вывести заказы на почте в пагинацию по 15 шт.
+     *
+     * @return Application|Factory|View
+     */
     public function showPostOfficeOrders()
     {
-        $orders = Orders::where('status', 'На почте')->paginate(15);
+        $orders = $this->OrdersRepository->getPostOfficeOrdersWithPaginate(15);
 
         return view('admin.orders.post-office-clients.index', [
             'orders' => $orders,
         ]);
     }
 
+    /**
+     * Вывести выполненные заказы в пагинацию по 15 шт.
+     *
+     * @return Application|Factory|View
+     */
     public function showDoneOrders()
     {
-        $orders = Orders::where('status', 'Выполнен')->paginate(15);
+        $orders = $this->OrdersRepository->getDoneOrdersWithPaginate(15);
 
         return view('admin.orders.done.index', [
             'orders' => $orders,
         ]);
     }
 
+    /**
+     * Вывести возвращеные заказы в пагинацию по 15 шт.
+     *
+     * @return Application|Factory|View
+     */
     public function showReturnOrders()
     {
-        $orders = Orders::where('status', 'Возврат')->paginate(15);
+        $orders = $this->OrdersRepository->getReturnOrdersWithPaginate(15);
 
         return view('admin.orders.return.index', [
             'orders' => $orders,
@@ -104,9 +175,14 @@ class OrdersController extends Controller
     }
 
 
+    /**
+     * Вывести отмененные заказы в пагинацию по 15 шт.
+     *
+     * @return Application|Factory|View
+     */
     public function showCancelOrders()
     {
-        $orders = Orders::where('status', 'Отменен')->paginate(15);
+        $orders = $this->OrdersRepository->getCancelOrdersWithPaginate(15);
 
         return view('admin.orders.cancel.index', [
             'orders' => $orders,

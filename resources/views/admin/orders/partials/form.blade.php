@@ -85,16 +85,16 @@
 
     <div class="col-12 col-md-3">
         <div class="form-group my-3">
-            <label for="product_sizes">Размер(ы)</label>
-            <input type="text" class="form-control" id="product_sizes" name="product_sizes"
+            <label for="sizes">Размер(ы)</label>
+            <input type="text" class="form-control" id="sizes" name="sizes"
                    value="@if(isset($order->sizes)) @foreach($order->sizes as $size){{$size}} @endforeach @else Размер не выбран @endif">
         </div>
     </div>
 
     <div class="col-12 col-md-3">
         <div class="form-group my-3">
-            <label for="product_colors">Цвет(а)</label>
-            <input type="text" class="form-control" id="product_colors" name="product_colors"
+            <label for="colors">Цвет(а)</label>
+            <input type="text" class="form-control" id="colors" name="colors"
                    value="@if(isset($order->colors)) @foreach($order->colors as $color){{$color}} @endforeach @else Цвет не выбран @endif">
         </div>
     </div>

@@ -5,11 +5,14 @@ namespace App\Models;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * Class Orders
+ * @package App\Models
+ */
 class Orders extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
         'id',
         'status',
@@ -44,14 +47,23 @@ class Orders extends Model
         'updated_at',
     ];
 
-
+    /**
+     * Relation with Products.
+     *
+     * @return BelongsTo
+     */
     public function Product()
     {
         return $this->belongsTo(Products::class);
     }
 
-    public function Client()
+    /**
+     * Relation with Clients.
+     *
+     * @return BelongsTo
+     */
+    public function Clients()
     {
-        return $this->belongsTo(Clients::class);
+        return $this->belongsTo(Clients::class,'client_id');
     }
 }

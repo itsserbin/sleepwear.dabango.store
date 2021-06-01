@@ -19,12 +19,23 @@
             </div>
             <div class="col-12 col-md-10">
                 <div class="row mb-5">
-                    <h2>Статистика по дням</h2>
-                    <a href="{{route('admin.bookkeeping.product_sales.create')}}">
-                        <button class="btn btn-light">
-                            Посчитать день
-                        </button>
-                    </a>
+                    <div class="row">
+                        <h2>Статистика по дням</h2>
+                        <a href="{{route('admin.bookkeeping.product_sales.create')}}">
+                            <button class="btn btn-light">
+                                Посчитать день
+                            </button>
+                        </a>
+                    </div>
+
+                    <div class="row">
+                        <a href="{{route('admin.bookkeeping.product_sales.ShowStatisticsForTheWeek')}}">
+                            <button class="btn">
+                                Итог за 7 дней
+                            </button>
+                        </a>
+                    </div>
+
                     <div class="table-responsive">
                         <table class="table text-center align-center">
                             <thead>

@@ -50,7 +50,11 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::group(['prefix' => '/orders'], function () {
-        Route::resource('all', OrdersController::class)->names('admin.orders');
+        Route::get('/', [OrdersController::class, 'index'])->name('admin.orders.index');
+        Route::get('/edit/{id}', [OrdersController::class, 'edit'])->name('admin.orders.edit');
+        Route::patch('/update/{id}', [OrdersController::class, 'update'])->name('admin.orders.update');
+        Route::delete('/destroy/{id}', [OrdersController::class, 'destroy'])->name('admin.orders.destroy');
+
         Route::get('new', [OrdersController::class, 'showNewOrders'])->name('admin.orders.showNewOrders');
         Route::get('done', [OrdersController::class, 'showDoneOrders'])->name('admin.orders.showDoneOrders');
         Route::get('cancel', [OrdersController::class, 'showCancelOrders'])->name('admin.orders.showCancelOrders');
@@ -65,6 +69,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('costs', App\Http\Controllers\Bookkeeping\CostsController::class)->names('admin.bookkeeping.costs');
         Route::resource('profit', App\Http\Controllers\Bookkeeping\ProfitController::class)->names('admin.bookkeeping.profit');
         Route::resource('product-sales', OrdersDayController::class)->names('admin.bookkeeping.product_sales');
+        Route::get('product-sales/?period=week', [OrdersDayController::class, 'ShowStatisticsForTheWeek'])
+            ->name('admin.bookkeeping.product_sales.ShowStatisticsForTheWeek');
     });
 
     Route::group(['middleware' => 'role:administrator', 'prefix' => '/options'], function () {
