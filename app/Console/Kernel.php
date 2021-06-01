@@ -213,7 +213,7 @@ class Kernel extends ConsoleKernel
                         ->select('cost')
                         ->sum('cost');
 
-                    $ReturnOrdersCount = Orders::whereDate('created_at', $date_now)
+                    $ReturnOrdersCount = Orders::whereDate('created_at', $date)
                         ->where('status', 'Возврат')
                         ->count();
 
