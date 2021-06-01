@@ -15,11 +15,7 @@ class ProductsTableModified2 extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             $table->string('viewed');
-
-            $table->foreignId('provider_id')
-                ->references('id')
-                ->on('providers')
-                ->onDelete('set null');
+            $table->foreignId('provider_id')->constrained('providers')->onDelete('set null');
         });
 
     }
