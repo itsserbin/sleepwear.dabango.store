@@ -115,6 +115,10 @@ class Kernel extends ConsoleKernel
                 ->select('cost')
                 ->sum('cost');
 
+            $ReturnOrdersCountNow = Orders::whereDate('created_at', $date_now)
+                ->where('status', 'Возврат')
+                ->count();
+
             if ($orders_days == null) {
                 $orders_days = new OrdersDay();
                 $orders_days->date = $date_now;
@@ -162,7 +166,7 @@ class Kernel extends ConsoleKernel
                     ->count();
 
                 if ($CancelOrdersCountNow !== 0) {
-                    $orders_days->canceled_orders_rate = ($CancelOrdersCountNow / $OrdersCountNow) * 100;
+                    $orders_days->canceled_orders_rate = (($CancelOrdersCountNow + $ReturnOrdersCountNow) / $OrdersCountNow) * 100;
                 }
 
                 if ($DoneOrdersCountNow !== 0) {
@@ -209,6 +213,11 @@ class Kernel extends ConsoleKernel
                         ->select('cost')
                         ->sum('cost');
 
+                    $ReturnOrdersCount = Orders::whereDate('created_at', $date_now)
+                        ->where('status', 'Возврат')
+                        ->count();
+
+
                     $item->advertising = Costs::whereDate('date', $date)
                         ->where('name', 'Таргет')
                         ->select('total')
@@ -252,7 +261,7 @@ class Kernel extends ConsoleKernel
                         ->count();
 
                     if ($CancelOrdersCount !== 0) {
-                        $item->canceled_orders_rate = ($CancelOrdersCount / $OrdersCount) * 100;
+                        $item->canceled_orders_rate = (($CancelOrdersCount + $ReturnOrdersCount) / $OrdersCount) * 100;
                     }
 
                     if ($DoneOrdersCount !== 0) {
