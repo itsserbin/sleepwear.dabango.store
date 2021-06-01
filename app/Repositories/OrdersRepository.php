@@ -34,7 +34,7 @@ class OrdersRepository extends CoreRepository
     }
 
     /**
-     * Получить все продукты вывести в пагинации по 15 шт.
+     * Вывести все продукты в пагинации по 15 шт.
      *
      * @param int|null $perPage
      *
