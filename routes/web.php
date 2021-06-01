@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\RolesColroller;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Bookkeeping\BookkeepingController;
 use App\Http\Controllers\Bookkeeping\OrdersDayController;
+use App\Http\Controllers\Bookkeeping\ProvidersController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OptionsController;
 use Illuminate\Http\Request;
@@ -71,6 +72,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('product-sales', OrdersDayController::class)->names('admin.bookkeeping.product_sales');
         Route::get('product-sales/?period=week', [OrdersDayController::class, 'ShowStatisticsForTheWeek'])
             ->name('admin.bookkeeping.product_sales.ShowStatisticsForTheWeek');
+
+        Route::get('providers', [ProvidersController::class, 'index'])
+            ->name('admin.bookkeeping.providers.index');
     });
 
     Route::group(['middleware' => 'role:administrator', 'prefix' => '/options'], function () {
