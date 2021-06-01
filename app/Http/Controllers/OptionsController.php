@@ -63,9 +63,9 @@ class OptionsController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function update(Request $request)
+    public function update($id, Request $request)
     {
-        $this->OptionsRepository->update($request);
+        $this->OptionsRepository->update($id,$request);
 
         return back()->with('success', 'Настройки успешно обновлены!');
     }

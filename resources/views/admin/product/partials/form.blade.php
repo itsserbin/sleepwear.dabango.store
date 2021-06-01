@@ -45,6 +45,16 @@
 
     <div class="col-12 col-md-6">
         @include('admin.product.partials.product-sizes')
+        <div class="form-group  my-5">
+            <label for="provider">Поставщик</label>
+            <select class="form-control" id="provider" name="provider">
+                @foreach($providers as $provider)
+                    <option value="{{$provider->id}}" @if ($product->provider_id == $provider->id) selected="" @endif>
+                        {{$provider->name}}
+                    </option>
+                @endforeach
+            </select>
+        </div>
     </div>
 
     <div class="col-12 col-md-6">

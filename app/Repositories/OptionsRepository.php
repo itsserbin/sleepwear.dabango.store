@@ -88,8 +88,8 @@ class OptionsRepository extends CoreRepository
      * @param $request
      * @return mixed
      */
-    public function update($request)
+    public function update($id,$request)
     {
-        return $this->model->find(1)->update($request->all());
+        return $this->model->find($id)->update($request->all());
     }
 }

@@ -22,6 +22,7 @@ class CreateProvidersTable extends Migration
             $table->string('prepayment');
             $table->string('time_of_dispatch')->nullable();
             $table->string('comment')->nullable();
+            $table->string('contacts')->nullable();
             $table->timestamps();
         });
     }

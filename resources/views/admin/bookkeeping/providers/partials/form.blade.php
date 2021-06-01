@@ -1,71 +1,76 @@
-@extends('layouts.app')
-
-@section('title','Поставщики')
-@section('header','Поставщики')
-
-@section('content')
-    <div class="container">
-
-        @component('admin.components.breadcrumbs')
-            @slot('active')Бухгалтерия@endslot
-            @slot('active_link'){{route('admin.bookkeeping.index')}}@endslot
-            @slot('subsidiary')Поставщики@endslot
-        @endcomponent
-
-        <div class="row">
-            <div class="col-12 col-md-2">
-                @include('admin.bookkeeping.partials.sidebar')
-            </div>
-            <div class="col-12 col-md-10">
-                <a href="{{route('admin.bookkeeping.providers.create')}}">
-                    <button class="btn btn-light">
-                        Добавить поставщика
-                    </button>
-                </a>
-                <div class="row mb-5">
-                    <div class="table-responsive">
-                        <table class="table text-center align-center">
-                            <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Название</th>
-                                <th scope="col">Каталог</th>
-                                <th scope="col">Наличие</th>
-                                <th scope="col">Возвраты</th>
-                                <th scope="col">Предоплата</th>
-                                <th scope="col">До какого времени отправка</th>
-                                <th scope="col">Комментарии</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($profits as $profit)
-                                <tr style="vertical-align:middle;">
-                                    <td scope="row">{{$profit->date->format('d.m.Y')}}</td>
-                                    <td>@convert($profit->cost) ₴</td>
-                                    <td>@convert($profit->profit) ₴</td>
-                                    <td>@convert($profit->marginality) ₴</td>
-                                    <td>@convert($profit->turnover) ₴</td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                            <tr>
-                                <th scope="row" colspan="4" class="text-end">Чистая маржа а 3 дня:</th>
-                                <td colspan="2" class="text-center">@convert($ProfitInJustAThreeDays) ₴</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" colspan="4" class="text-end">Чистая маржа за 7 дней:</th>
-                                <td colspan="2" class="text-center">@convert($ProfitInJustAWeek) ₴</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" colspan="4" class="text-end">Чистая маржа за этот месяц:</th>
-                                <td colspan="2" class="text-center">@convert($ProfitInJustAMonth) ₴</td>
-                            </tr>
-                        </table>
-                    </div>
-                    {{ $profits->links() }}
-                </div>
-
-            </div>
-
+<div class="row">
+    <div class="col-12 col-md-4">
+        <div class="form-group my-3">
+            <label for="name">Название</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Введите название поставщика"
+                   value="{{$provider->name ?? ""}}" required>
         </div>
-@endsection
+    </div>
+    <div class="col-12 col-md-4">
+        <div class="form-group my-3">
+            <label for="refunds">Возвраты</label>
+            <input type="text" class="form-control" id="refunds" name="refunds"
+                   placeholder="Введите сумму оплаты за возврат"
+                   value="{{$provider->refunds ?? ""}}" required>
+        </div>
+    </div>
+    <div class="col-12 col-md-4">
+        <div class="form-group my-3">
+            <label for="prepayment">Предоплата</label>
+            <select class="form-control" id="prepayment" name="prepayment">
+                @if (isset($provider->id))
+                    <option value="0" @if ($provider->prepayment == 0) selected="" @endif>Нет</option>
+                    <option value="1" @if ($provider->prepayment == 1) selected="" @endif>Есть</option>
+                @else
+                    <option value="0">Нет</option>
+                    <option value="1">Есть</option>
+                @endif
+            </select>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-12 col-md-4">
+        <div class="form-group my-3">
+            <label for="catalog">Каталог</label>
+            <input type="text" class="form-control" id="catalog" name="catalog" placeholder="Введите ссылку на каталог"
+                   value="{{$provider->catalog ?? ""}}" required>
+        </div>
+    </div>
+    <div class="col-12 col-md-4">
+        <div class="form-group my-3">
+            <label for="availability">Наличие</label>
+            <input type="text" class="form-control" id="availability" name="availability"
+                   placeholder="Введите ссылку на наличие"
+                   value="{{$provider->name ?? ""}}" required>
+        </div>
+    </div>
+    <div class="col-12 col-md-4">
+        <div class="form-group my-3">
+            <label for="time_of_dispatch">Время отправки</label>
+            <input type="text" class="form-control" id="time_of_dispatch" name="time_of_dispatch"
+                   placeholder="Укажите до какого времени отправка"
+                   value="{{$provider->time_of_dispatch ?? ""}}" required>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12 col-md-6">
+        <div class="form-group my-3">
+            <label for="comment">Комментарии</label>
+            <textarea type="text" class="form-control" id="comment" name="comment" rows="6"
+                      placeholder="Комментарии..." required>{{$provider->comment ?? ""}}</textarea>
+        </div>
+    </div>
+    <div class="col-12 col-md-6">
+        <div class="form-group my-3">
+            <label for="contacts">Контакты</label>
+            <textarea type="text" class="form-control" id="contacts" name="contacts" rows="6"
+                      placeholder="Укажите контактные данные поставщика"
+                      required>{{$provider->contacts ?? ""}}</textarea>
+        </div>
+    </div>
+</div>

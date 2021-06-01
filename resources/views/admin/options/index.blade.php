@@ -10,7 +10,7 @@
             </div>
             <div class="col-12 col-md-9">
                 @foreach($options as $option)
-                    <form action="{{route('admin.options.update')}}" method="post">
+                    <form action="{{route('admin.options.update',1)}}" method="post">
                         @csrf
 
                         <div class="mb-3">

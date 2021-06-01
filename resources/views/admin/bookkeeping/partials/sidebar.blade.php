@@ -21,4 +21,10 @@
            aria-current="page"
            href="{{route('admin.bookkeeping.product_sales.index')}}">Статистика продаж</a>
     </li>
+
+    <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('admin.bookkeeping.providers.index') ? 'active' : null }}"
+           aria-current="page"
+           href="{{route('admin.bookkeeping.providers.index')}}">Поставщики</a>
+    </li>
 </ul>

@@ -66,15 +66,23 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::group(['middleware' => 'role:administrator', 'prefix' => '/bookkeeping'], function () {
-        Route::resource('all', App\Http\Controllers\Bookkeeping\BookkeepingController::class)->names('admin.bookkeeping');
-        Route::resource('costs', App\Http\Controllers\Bookkeeping\CostsController::class)->names('admin.bookkeeping.costs');
-        Route::resource('profit', App\Http\Controllers\Bookkeeping\ProfitController::class)->names('admin.bookkeeping.profit');
-        Route::resource('product-sales', OrdersDayController::class)->names('admin.bookkeeping.product_sales');
+        Route::resource('all', App\Http\Controllers\Bookkeeping\BookkeepingController::class)
+            ->names('admin.bookkeeping');
+
+        Route::resource('costs', App\Http\Controllers\Bookkeeping\CostsController::class)
+            ->names('admin.bookkeeping.costs');
+
+        Route::resource('profit', App\Http\Controllers\Bookkeeping\ProfitController::class)
+            ->names('admin.bookkeeping.profit');
+
+        Route::resource('product-sales', OrdersDayController::class)
+            ->names('admin.bookkeeping.product_sales');
+
         Route::get('product-sales/?period=week', [OrdersDayController::class, 'ShowStatisticsForTheWeek'])
             ->name('admin.bookkeeping.product_sales.ShowStatisticsForTheWeek');
 
-        Route::get('providers', [ProvidersController::class, 'index'])
-            ->name('admin.bookkeeping.providers.index');
+        Route::resource('providers', ProvidersController::class)
+            ->names('admin.bookkeeping.providers');
     });
 
     Route::group(['middleware' => 'role:administrator', 'prefix' => '/options'], function () {

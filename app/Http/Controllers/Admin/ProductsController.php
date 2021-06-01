@@ -7,6 +7,7 @@ use App\Models\Colors;
 use App\Models\Products;
 use App\Models\ProductsColor;
 use App\Models\ProductsPhoto;
+use App\Repositories\Bookkeeping\ProvidersRepository;
 use App\Repositories\ProductRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -19,6 +20,7 @@ use Illuminate\Http\Response;
 class ProductsController extends Controller
 {
     private $ProductRepository;
+    private $ProvidersRepository;
 
     /**
      * Display a listing of the resource.
@@ -29,14 +31,20 @@ class ProductsController extends Controller
     {
         parent::__construct();
         $this->ProductRepository = app(ProductRepository::class);
+        $this->ProvidersRepository = app(ProvidersRepository::class);
     }
 
+    /**
+     * Вывести все товары в пагинации п 15 шт.
+     *
+     * @return Application|Factory|View
+     */
     public function index()
     {
         $products = $this->ProductRepository->getAllWithPaginate(15);
 
         return view('admin.product.index', [
-            'products' => $products
+            'products' => $products,
         ]);
     }
 
@@ -49,10 +57,12 @@ class ProductsController extends Controller
     {
         $product = new Products();
         $colors = Colors::all();
+        $providers = $this->ProvidersRepository->getProvidersToProduct();
 
         return view('admin.product.create', [
             'product' => $product,
-            'colors' => $colors
+            'colors' => $colors,
+            'provider' => $providers
         ]);
     }
 
@@ -79,6 +89,7 @@ class ProductsController extends Controller
         $product->description = $request->input('description');
         $product->characteristics = $request->input('characteristics');
         $product->size_table = $request->input('size_table');
+        $product->provider_id = $request->input('provider');
         $product->price = $request->input('price');
         $product->discount_price = $request->input('discount_price');
         $product->trade_price = $request->input('trade_price');
@@ -87,8 +98,8 @@ class ProductsController extends Controller
         $product->save();
 
         $colors = $request->input('colors');
-        if ($colors){
-            foreach ($colors as $item){
+        if ($colors) {
+            foreach ($colors as $item) {
                 $color = new ProductsColor();
                 $color->color_id = $item;
                 $product->ProductsColor()->save($color);
@@ -146,15 +157,15 @@ class ProductsController extends Controller
     {
         $product = $this->ProductRepository->getEdit($id);
         $productPhoto = ProductsPhoto::where('product_id', '=', $id)->get();
-
         $ProductsColor = ProductsColor::where('product_id', '=', $id)->get();
         $colors = Colors::all();
+        $providers = $this->ProvidersRepository->getProvidersToProduct();
 
         return view('admin.product.edit', [
             'product' => $product,
             'productPhoto' => $productPhoto,
             'ProductsColor' => $ProductsColor,
-
+            'providers' => $providers,
             'colors' => $colors
         ]);
     }
@@ -188,6 +199,7 @@ class ProductsController extends Controller
         $product->size_table = $request->input('size_table');
         $product->price = $request->input('price');
         $product->discount_price = $request->input('discount_price');
+        $product->provider_id = $request->input('provider');
         $product->trade_price = $request->input('trade_price');
         $product->content = $request->input('content');
         $product->vendor_code = $request->input('vendor_code');
@@ -199,8 +211,8 @@ class ProductsController extends Controller
             }
         }
 
-        if ($colors){
-            foreach ($colors as $item){
+        if ($colors) {
+            foreach ($colors as $item) {
                 $color = new ProductsColor();
                 $color->color_id = $item;
                 $product->ProductsColor()->save($color);

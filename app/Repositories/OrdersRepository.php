@@ -131,6 +131,7 @@ class OrdersRepository extends CoreRepository
             'status',
             'name',
             'phone',
+            'waybill',
             'product_id',
             'sale_price',
             'created_at',

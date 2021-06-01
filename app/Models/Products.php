@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Bookkeeping\Providers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Products extends Model
 {
@@ -28,6 +30,16 @@ class Products extends Model
     public function ProductsPhoto()
     {
         return $this->hasMany('App\Models\ProductsPhoto', 'product_id', 'id');
+    }
+
+    /**
+     * Relation with providers.
+     *
+     * @return HasOne
+     */
+    public function Providers()
+    {
+        return $this->hasOne(Providers::class,'provider_id');
     }
 
     public function ProductsColor()
