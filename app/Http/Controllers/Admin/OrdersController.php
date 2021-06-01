@@ -72,7 +72,8 @@ class OrdersController extends Controller
      */
     public function update($id, Request $request)
     {
-        $this->OrdersRepository->update($id, $request->all());
+//        $this->OrdersRepository->update($id, $request->all());
+        $this->OrdersRepository->update($id, $request->except('_method','_token'));
 
         return back()->with('success', 'Заказ успешно обновлен!');
     }

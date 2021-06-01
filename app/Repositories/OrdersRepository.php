@@ -268,18 +268,20 @@ class OrdersRepository extends CoreRepository
      */
     public function update(int $id, array $request)
     {
-        return $this->model::where('id', $id)->update([
-            'status' => $request['status'],
-            'name' => $request['name'],
-            'phone' => $request['phone'],
-            'comment' => $request['comment'],
-            'city' => $request['city'],
-            'sizes' => $request['sizes'],
-            'colors' => $request['colors'],
-            'waybill' => $request['waybill'],
-            'postal_office' => $request['postal_office'],
-            'pay' => $request['pay'],
-        ]);
+//        return $this->model::where('id', $id)->update([
+//            'status' => $request['status'],
+//            'name' => $request['name'],
+//            'phone' => $request['phone'],
+//            'comment' => $request['comment'],
+//            'city' => $request['city'],
+//            'sizes' => $request['sizes'],
+//            'colors' => $request['colors'],
+//            'waybill' => $request['waybill'],
+//            'postal_office' => $request['postal_office'],
+//            'pay' => $request['pay'],
+//        ]);
+
+        return $this->model::where('id', $id)->update($request);
 
     }
 
