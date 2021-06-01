@@ -3,16 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Bookkeeping\Costs;
-use App\Models\Bookkeeping\Profit;
-use App\Models\Clients;
-use App\Models\Orders;
 use App\Repositories\OrdersRepository;
-use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 /**
@@ -68,12 +63,11 @@ class OrdersController extends Controller
      *
      * @param $id
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function update($id, Request $request)
     {
-//        $this->OrdersRepository->update($id, $request->all());
-        $this->OrdersRepository->update($id, $request->except('_method','_token'));
+        $this->OrdersRepository->update($id, $request->except('_method', '_token'));
 
         return back()->with('success', 'Заказ успешно обновлен!');
     }
@@ -82,7 +76,7 @@ class OrdersController extends Controller
      * Удалить заказ.
      *
      * @param $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function destroy($id)
     {
