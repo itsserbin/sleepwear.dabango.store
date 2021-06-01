@@ -78,7 +78,7 @@
                                     <td scope="row">{{round($item->сlient_cost, 2) . ' грн.'}}</td>
                                     <td scope="row">{{round($item->profit, 2) . ' грн.'}}</td>
                                     <td scope="row">{{round($item->marginality, 2). '%'}}</td>
-                                    <td scope="row">{{round($item->investor_profit,2). '%'}}</td>
+                                    <td scope="row">{{round($item->investor_profit,2). ' грн.'}}</td>
                                     <td>
                                         <form
                                             onsubmit="if(confirm('Удалить?')){ return true }else{ return false }"
