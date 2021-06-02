@@ -62,7 +62,7 @@ class ProductsController extends Controller
         return view('admin.product.create', [
             'product' => $product,
             'colors' => $colors,
-            'provider' => $providers
+            'providers' => $providers
         ]);
     }
 
