@@ -174,13 +174,13 @@ class Kernel extends ConsoleKernel
                     $orders_days->сlient_cost = $SumCostsNow / $DoneOrdersCountNow;
                 }
 
-                $orders_days->profit =  $SumDayMarginalityNow - (100 * $CancelOrdersCountNow) - $SumCostsNow;
+                $orders_days->profit =  $SumDayMarginalityNow - (100 * $ReturnOrdersCountNow) - $SumCostsNow;
 
                 if ($SumDayCostsNow !== 0) {
                     $orders_days->marginality = ($SumDayMarginalityNow / $SumDayCostsNow) * 100;
                 }
 
-                $orders_days->investor_profit = ($SumDayMarginalityNow - (100 * $CancelOrdersCountNow) * 0.35) - $SumCostsNow;
+                $orders_days->investor_profit = ($SumDayMarginalityNow - (100 * $ReturnOrdersCountNow) * 0.35) - $SumCostsNow;
 
                 $orders_days->save();
             } else {
@@ -270,13 +270,13 @@ class Kernel extends ConsoleKernel
                         $item->сlient_cost = $SumCosts / $DoneOrdersCount;
                     }
 
-                    $item->profit = $SumDayMarginality - (100 * $CancelOrdersCount) - $SumCosts;
+                    $item->profit = $SumDayMarginality - (100 * $ReturnOrdersCount) - $SumCosts;
 
                     if ($SumDayCosts !== 0) {
                         $item->marginality = ($SumDayMarginality / $SumDayCosts) * 100;
                     }
 
-                    $item->investor_profit = ($SumDayMarginality - (100 * $CancelOrdersCount) * 0.35) - $SumCosts;
+                    $item->investor_profit = ($SumDayMarginality - (100 * $ReturnOrdersCount) * 0.35) - $SumCosts;
 
                     $item->update();
                 }
