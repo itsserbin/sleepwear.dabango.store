@@ -197,7 +197,7 @@ class OrdersRepository extends CoreRepository
 
         return $this
             ->startConditions()
-            ->where('status', 'На почте')
+            ->where('status', 'Выполнен')
             ->with('Clients', 'Product')
             ->select($columns)
             ->orderBy('created_at', 'desc')

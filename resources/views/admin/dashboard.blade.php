@@ -13,33 +13,125 @@
 
         @role('administrator')
         <div class="row mb-5">
-            <h2>Статистика по дням</h2>
-            <a href="{{route('admin.bookkeeping.product_sales.create')}}">
-                <button class="btn btn-light">
-                    Посчитать день
-                </button>
-            </a>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <h2>Статистика по дням</h2>
+                </div>
+                <div class="col-12 col-md-6 text-end">
+                    <a href="{{route('admin.bookkeeping.daily-statistics.create')}}">
+                        <button class="btn btn-danger">
+                            Посчитать день
+                        </button>
+                    </a>
+                </div>
+                <hr>
+            </div>
             <div class="table-responsive">
-                <table class="table text-center align-center">
+                <table class="table text-center align-center w-100">
                     <thead>
                     <tr style="vertical-align: middle;">
-                        <th scope="col">Дата</th>
-                        <th scope="col">Цена заявки</th>
-                        <th scope="col">Затраты на рекламу</th>
-                        <th scope="col">Кол-во заявок</th>
-                        <th scope="col">Переданы поставщику</th>
-                        <th scope="col">В процессе</th>
-                        <th scope="col">На почте</th>
-                        <th scope="col">Выполненные</th>
-                        <th scope="col">Возвраты</th>
-                        <th scope="col">Отмененные</th>
-                        <th scope="col">Не обработаны</th>
-                        <th scope="col">COR (Canceled Orders Rate)</th>
-                        <th scope="col">RPR (Received Parcel Ratio)</th>
-                        <th scope="col">Стоимость клиента</th>
-                        <th scope="col">Прибыль</th>
-                        <th scope="col">Маржинальность</th>
-                        <th scope="col">Прибыль инвестора</th>
+                        <th>
+                            <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Дата по которой посчитана статистика">
+                                <b>Дата</b>
+                            </button>
+                        </th>
+                        <th>
+                            <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Сумма затрат по таргету/Кол-во заявок">
+                                <b>Цена заявки</b>
+                            </button>
+                        </th>
+                        <th>
+                            <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Сумма всех затрат по таргету за день">
+                                <b>Затраты на рекламу</b>
+                            </button>
+                        </th>
+                        <th>
+                            <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Количество всех заявок за день">
+                                <b>Количество заявок</b>
+                            </button>
+                        </th>
+                        <th>
+                            <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Количество заявок переданных поставщику за день">
+                                <b>Переданы поставщику</b>
+                            </button>
+                        </th>
+                        <th>
+                            <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Количество заявок в процессе за день">
+                                <b>В процессе</b>
+                            </button>
+                        </th>
+                        <th>
+                            <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Количество заявок на почте за день">
+                                <b>На почте</b>
+                            </button>
+                        </th>
+                        <th>
+                            <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Количество выполненных заявок за день">
+                                <b>Выполненные</b>
+                            </button>
+                        </th>
+                        <th>
+                            <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Количество возвращенных заказов за день">
+                                <b>Возвраты</b>
+                            </button>
+                        </th>
+                        <th>
+                            <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Количество отмененных заказов за день">
+                                <b>Отмененные</b>
+                            </button>
+                        </th>
+                        <th scope="col">
+                            <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Количество не обработаных заявок за день">
+                                <b>Не обработаны</b>
+                            </button>
+                        </th>
+                        <th scope="col">
+                            <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Canceled Orders Rate = Коэфициент отмененных заказов. Форумула: (Отмененные заказы/Все заказы) * 100">
+                                <b>COR</b>
+                            </button>
+                        </th>
+                        <th scope="col">
+                            <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Received Parcel Ratio = Коэффициент полученных посылок. Форумула: (Выполненные заказы/Все заказы) * 100">
+                                <b>RPR</b>
+                            </button>
+                        </th>
+                        <th scope="col">
+                            <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Средняя реальная стоимость клиента. Форумула: Расходы на таргет/Выполненные заказы">
+                                <b>Стоимость клиента</b>
+                            </button>
+                        </th>
+                        <th scope="col">
+                            <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Фактическая прибыль. Форумула: ((Маржа за день * Количество выполненных заказов)-(100 * Кол-во отмененных заказов)) - Расходы на таргет">
+                                <b>Прибыль</b>
+                            </button>
+                        </th>
+                        <th scope="col">
+                            <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Маржинальность. Форумула: (Чистая прибыль за день) / Расходы на таргет">
+                                <b>Маржинальность</b>
+                            </button>
+                        </th>
+                        <th scope="col">
+                            <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Прибыль инвестора. Форумула: ((Маржинальность за день * Количество выполненных заказов) - (100 * Количество отмененных заказов) * 0,35) - Расходы на таргет">
+                                <b>Прибыль инвестора</b>
+                            </button>
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -67,16 +159,11 @@
                     @endforeach
 
                     </tbody>
-                    <tfoot>
-                    <tr>
-                        <td colspan="10" class="p-3">
-                            <a href="{{route('admin.bookkeeping.product_sales.index')}}">
-                                <button type="button" class="btn btn-light ">Перейти к статистике</button>
-                            </a></td>
-                    </tr>
-                    </tfoot>
                 </table>
             </div>
+            <a href="{{route('admin.bookkeeping.daily-statistics.index')}}">
+                <button type="button" class="btn btn-danger ">Перейти к статистике</button>
+            </a>
         </div>
         @endrole
 
@@ -170,4 +257,10 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function () {
+            $("body").tooltip({selector: '[data-bs-toggle=tooltip]'});
+        });
+    </script>
 @endsection

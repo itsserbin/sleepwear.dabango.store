@@ -6,15 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Models\Bookkeeping\Costs;
 use App\Models\Bookkeeping\OrdersDay;
 use App\Models\Orders;
-use App\Repositories\Bookkeeping\OrdersDaysRepository;
+use App\Repositories\Bookkeeping\BookkeepingRepository;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class OrdersDayController extends Controller
+class DailyStatisticsController extends Controller
 {
-    private $OrdersDaysRepository;
+    private $BookkeepingRepository;
 
     /**
      * Display a listing of the resource.
@@ -24,30 +24,14 @@ class OrdersDayController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->OrdersDaysRepository = app(OrdersDaysRepository::class);
+        $this->BookkeepingRepository = app(BookkeepingRepository::class);
     }
 
     public function index()
     {
         $days_orders = OrdersDay::orderBy('date', 'desc')->paginate(15);
 
-        $done_orders = Orders::where('status', 'Выполнен')
-            ->select([
-                'id',
-                'name',
-                'trade_price',
-                'sale_price',
-                'product_id',
-                'pay',
-                'profit',
-                'created_at',
-                'updated_at'
-            ])
-            ->orderBy('created_at', 'desc')
-            ->paginate(15);
-
-        return view('admin.bookkeeping.product-sales.index', [
-            'done_orders' => $done_orders,
+        return view('admin.bookkeeping.daily-statistics.index', [
             'days_orders' => $days_orders
         ]);
     }
@@ -56,7 +40,7 @@ class OrdersDayController extends Controller
     {
         $orders_day = new OrdersDay();
 
-        return view('admin.bookkeeping.product-sales.create', [
+        return view('admin.bookkeeping.daily-statistics.create', [
             'orders_day' => $orders_day
         ]);
     }
@@ -67,7 +51,7 @@ class OrdersDayController extends Controller
         $orders_day->date = $request->input('date');
         $orders_day->save();
 
-        return redirect(route('admin.bookkeeping.product_sales.index'));
+        return redirect(route('admin.bookkeeping.daily-statistics.index'));
     }
 
     public function destroy($id)
@@ -82,7 +66,7 @@ class OrdersDayController extends Controller
        $days_orders = $this->OrdersDaysRepository->ShowStatisticsForTheWeek();
         dd($days_orders);
 //        dd(Carbon::today()->subDays(7)->format('Y-m-d'));
-//        return view('admin.bookkeeping.product-sales.index', [
+//        return view('admin.bookkeeping.daily-statistics.index', [
 //            'days_orders' => $days_orders
 //        ]);
     }

@@ -6,9 +6,9 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <form action="{{route('admin.bookkeeping.product_sales.store')}}" method="POST">
+                <form action="{{route('admin.bookkeeping.daily-statistics.store')}}" method="POST">
                     @csrf
-                    @include('admin.bookkeeping.product-sales.partials.form')
+                    @include('admin.bookkeeping.daily-statistics.partials.form')
                     <button class="btn btn-success my-3" type="submit">Сохранить</button>
                     <p>* Данные подсчитываються каждую минуту.</p>
                 </form>

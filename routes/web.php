@@ -9,7 +9,8 @@ use App\Http\Controllers\Admin\ReviewsController;
 use App\Http\Controllers\Admin\RolesColroller;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Bookkeeping\BookkeepingController;
-use App\Http\Controllers\Bookkeeping\OrdersDayController;
+use App\Http\Controllers\Bookkeeping\DailyStatisticsController;
+use App\Http\Controllers\Bookkeeping\ProductStatisticsController;
 use App\Http\Controllers\Bookkeeping\ProvidersController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OptionsController;
@@ -75,11 +76,14 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('profit', App\Http\Controllers\Bookkeeping\ProfitController::class)
             ->names('admin.bookkeeping.profit');
 
-        Route::resource('product-sales', OrdersDayController::class)
-            ->names('admin.bookkeeping.product_sales');
+        Route::resource('daily-statistics', DailyStatisticsController::class)
+            ->names('admin.bookkeeping.daily-statistics');
 
-        Route::get('product-sales/?period=week', [OrdersDayController::class, 'ShowStatisticsForTheWeek'])
-            ->name('admin.bookkeeping.product_sales.ShowStatisticsForTheWeek');
+        Route::get('daily-statistics/?period=week', [DailyStatisticsController::class, 'ShowStatisticsForTheWeek'])
+            ->name('admin.bookkeeping.daily-statistics.ShowStatisticsForTheWeek');
+
+        Route::resource('product-statistics', ProductStatisticsController::class)
+            ->names('admin.bookkeeping.product-statistics');
 
         Route::resource('providers', ProvidersController::class)
             ->names('admin.bookkeeping.providers');

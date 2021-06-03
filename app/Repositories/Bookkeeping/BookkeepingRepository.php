@@ -3,6 +3,7 @@
 namespace App\Repositories\Bookkeeping;
 
 use App\Models\Bookkeeping\OrdersDay as Model;
+use App\Models\Orders;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -13,7 +14,7 @@ use PhpParser\Node\Expr\AssignOp\Concat;
  *
  * @package App\Repositories
  */
-class OrdersDaysRepository extends CoreRepository
+class BookkeepingRepository extends CoreRepository
 {
     /**
      * @return string
@@ -40,6 +41,26 @@ class OrdersDaysRepository extends CoreRepository
         return $this->startConditions()
             ->whereDate('date','>',Carbon::today()->subDays(7)->format('Y-m-d'))
             ->get();
+    }
+
+    public function getDoneOrdersWithPaginate($perPage = null)
+    {
+        $doneOrders = Orders::where('status', 'Выполнен')
+            ->select([
+                'id',
+                'name',
+                'trade_price',
+                'sale_price',
+                'product_id',
+                'pay',
+                'profit',
+                'created_at',
+                'updated_at'
+            ])
+            ->orderBy('created_at', 'desc')
+            ->paginate($perPage);
+
+        return $doneOrders;
     }
 
 }

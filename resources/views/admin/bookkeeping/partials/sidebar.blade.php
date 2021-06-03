@@ -17,9 +17,15 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('admin.bookkeeping.product_sales.index') ? 'active' : null }}"
+        <a class="nav-link {{ request()->routeIs('admin.bookkeeping.daily-statistics.index') ? 'active' : null }}"
            aria-current="page"
-           href="{{route('admin.bookkeeping.product_sales.index')}}">Статистика продаж</a>
+           href="{{route('admin.bookkeeping.daily-statistics.index')}}">Статистика продаж по дням</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('admin.bookkeeping.product-statistics.index') ? 'active' : null }}"
+           aria-current="page"
+           href="{{route('admin.bookkeeping.product-statistics.index')}}">Статистика продаж товаров</a>
     </li>
 
     <li class="nav-item">
