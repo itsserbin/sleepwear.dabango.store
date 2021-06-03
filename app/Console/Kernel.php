@@ -174,15 +174,13 @@ class Kernel extends ConsoleKernel
                     $orders_days->сlient_cost = $SumCostsNow / $DoneOrdersCountNow;
                 }
 
-                $orders_days->profit = Profit::whereDate('created_at', $date_now)
-                        ->select('profit')
-                        ->sum('profit') - $orders_days->сlient_cost;
+                $orders_days->profit =  $SumDayMarginalityNow - (100 * $CancelOrdersCountNow) - $SumCostsNow;
 
                 if ($SumDayCostsNow !== 0) {
                     $orders_days->marginality = ($SumDayMarginalityNow / $SumDayCostsNow) * 100;
                 }
 
-                $orders_days->investor_profit = ($orders_days->profit * 0.35) - $SumCostsNow;
+                $orders_days->investor_profit = ($SumDayMarginalityNow - (100 * $CancelOrdersCountNow) * 0.35) - $SumCostsNow;
 
                 $orders_days->save();
             } else {
@@ -217,6 +215,9 @@ class Kernel extends ConsoleKernel
                         ->where('status', 'Возврат')
                         ->count();
 
+                    $SumDayMarginality = Profit::whereDate('created_at', $date)
+                        ->select('marginality')
+                        ->sum('marginality');
 
                     $item->advertising = Costs::whereDate('date', $date)
                         ->where('name', 'Таргет')
@@ -260,24 +261,22 @@ class Kernel extends ConsoleKernel
                         ->where('status', 'Отменен')
                         ->count();
 
-                    if ($CancelOrdersCount !== 0) {
+                    if ($OrdersCount !== 0) {
                         $item->canceled_orders_rate = (($CancelOrdersCount + $ReturnOrdersCount) / $OrdersCount) * 100;
+                        $item->received_parcel_ratio = ($DoneOrdersCount / $OrdersCount) * 100;
                     }
 
                     if ($DoneOrdersCount !== 0) {
-                        $item->received_parcel_ratio = ($DoneOrdersCount / $OrdersCount) * 100;
                         $item->сlient_cost = $SumCosts / $DoneOrdersCount;
                     }
 
-                    $item->profit = Profit::whereDate('created_at', $date)
-                            ->select('profit')
-                            ->sum('profit') - $item->сlient_cost;
+                    $item->profit = $SumDayMarginality - (100 * $CancelOrdersCount) - $SumCosts;
 
                     if ($SumDayCosts !== 0) {
                         $item->marginality = ($SumDayMarginality / $SumDayCosts) * 100;
                     }
 
-                    $item->investor_profit = ($item->profit * 0.35) - $SumCosts;
+                    $item->investor_profit = ($SumDayMarginality - (100 * $CancelOrdersCount) * 0.35) - $SumCosts;
 
                     $item->update();
                 }
