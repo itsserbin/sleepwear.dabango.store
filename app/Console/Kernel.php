@@ -174,7 +174,7 @@ class Kernel extends ConsoleKernel
                     $orders_days->сlient_cost = $SumCostsNow / $DoneOrdersCountNow;
                 }
 
-                $orders_days->profit =  $SumDayMarginalityNow - (100 * $ReturnOrdersCountNow) - $SumCostsNow;
+                $orders_days->profit =  $SumDayMarginalityNow - ((100 * $ReturnOrdersCountNow) - $SumCostsNow);
 
                 if ($SumDayCostsNow !== 0) {
                     $orders_days->marginality = ($SumDayMarginalityNow / $SumDayCostsNow) * 100;
@@ -270,7 +270,7 @@ class Kernel extends ConsoleKernel
                         $item->сlient_cost = $SumCosts / $DoneOrdersCount;
                     }
 
-                    $item->profit = $SumDayMarginality - (100 * $ReturnOrdersCount) - $SumCosts;
+                    $item->profit = $SumDayMarginality - ((100 * $ReturnOrdersCount) - $SumCosts);
 
                     if ($SumDayCosts !== 0) {
                         $item->marginality = ($SumDayMarginality / $SumDayCosts) * 100;
