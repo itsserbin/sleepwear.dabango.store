@@ -20,12 +20,16 @@
             <div class="col-12 col-md-10">
                 <div class="row mb-5">
                     <div class="row">
-                        <h2>Статистика по дням</h2>
-                        <a href="{{route('admin.bookkeeping.daily-statistics.create')}}">
-                            <button class="btn btn-light">
-                                Посчитать день
-                            </button>
-                        </a>
+                        <div class="col-12 col-md-6">
+                            <h2>Статистика по дням</h2>
+                        </div>
+                        <div class="col-12 col-md-6 text-end">
+                            <a href="{{route('admin.bookkeeping.daily-statistics.create')}}">
+                                <button class="btn btn-danger">
+                                    Посчитать день
+                                </button>
+                            </a>
+                        </div>
                     </div>
 
                     <div class="row">
