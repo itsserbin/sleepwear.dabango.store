@@ -33,13 +33,149 @@
                     </div>
 
                     <div class="row">
-                        <a href="{{route('admin.bookkeeping.daily-statistics.ShowStatisticsForTheWeek')}}">
-                            <button class="btn">
-                                Итог за 7 дней
-                            </button>
-                        </a>
-                    </div>
+                        <div class="col-12">
+                            <a href="{{route('admin.bookkeeping.daily-statistics.index')}}"
+                               class="text-decoration-none">
+                                <button class="btn btn-outline-warning my-3">
+                                    За все время
+                                </button>
+                            </a>
 
+                            <a href="{{route('admin.bookkeeping.daily-statistics.7Days')}}"
+                               class="text-decoration-none">
+                                <button class="btn btn-outline-warning my-3">
+                                    За 7 дней
+                                </button>
+                            </a>
+
+                            <a href="{{route('admin.bookkeeping.daily-statistics.week')}}" class="text-decoration-none">
+                                <button class="btn btn-outline-warning my-3">
+                                    За 14 дней
+                                </button>
+                            </a>
+
+                            <a href="{{route('admin.bookkeeping.daily-statistics.30Days')}}"
+                               class="text-decoration-none">
+                                <button class="btn btn-outline-warning my-3">
+                                    За 30 дней
+                                </button>
+                            </a>
+                        </div>
+
+                    </div>
+                    <hr>
+                    @if(!Route::is('admin.bookkeeping.daily-statistics.index'))
+                        <div class="row align-items-center">
+                            <div class="col-6 col-md-3 text-center my-3">
+                                <div class="h5">
+                                    В среднем заявок:
+                                </div>
+                                <div class="h6">
+                                    {{round($AverageApplications)}}
+                                </div>
+                            </div>
+
+                            <div class="col-6 col-md-3 text-center my-3">
+                                <div class="h5">
+                                    На почте:
+                                </div>
+                                <div class="h6">
+                                    {{round($SumAtThePostOffice)}}
+                                </div>
+                            </div>
+
+                            <div class="col-6 col-md-3 text-center my-3">
+                                <div class="h5">
+                                    Средний COR:
+                                </div>
+                                <div class="h6">
+                                    {{round($AverageCorRate, 2). '%'}}
+                                </div>
+                            </div>
+
+                            <div class="col-6 col-md-3 text-center my-3">
+                                <div class="h5">
+                                    Средний ROR:
+                                </div>
+                                <div class="h6">
+                                    {{round($AverageRorRate, 2). '%'}}
+                                </div>
+                            </div>
+
+                            <div class="col-6 col-md-3 text-center my-3">
+                                <div class="h5">
+                                    Средний RPR:
+                                </div>
+                                <div class="h6">
+                                    {{round($AverageRprRate, 2). '%'}}
+                                </div>
+                            </div>
+
+                            <div class="col-6 col-md-3 text-center my-3">
+                                <div class="h5">
+                                    Средняя цена заявки:
+                                </div>
+                                <div class="h6">
+                                    {{round($AverageApplicationPrice, 2). ' грн.'}}
+                                </div>
+                            </div>
+
+                            <div class="col-6 col-md-3 text-center my-3">
+                                <div class="h5">
+                                    Средняя стоимость клиента:
+                                </div>
+                                <div class="h6">
+                                    {{round($AverageClientCostRate, 2). ' грн.'}}
+                                </div>
+                            </div>
+
+                            <div class="col-6 col-md-3 text-center my-3">
+                                <div class="h5">
+                                    Общая прибыль:
+                                </div>
+                                <div class="h6">
+                                    {{round($SumProfit, 2). ' грн.'}}
+                                </div>
+                            </div>
+
+                            <div class="col-6 col-md-3 text-center my-3">
+                                <div class="h5">
+                                    Затраты на рекламу:
+                                </div>
+                                <div class="h6">
+                                    {{round($SumTargetCosts, 2). ' грн.'}}
+                                </div>
+                            </div>
+
+                            <div class="col-6 col-md-3 text-center my-3">
+                                <div class="h5">
+                                    Средняя маржа:
+                                </div>
+                                <div class="h6">
+                                    {{round($AverageMarginality, 2). '%'}}
+                                </div>
+                            </div>
+
+                            <div class="col-6 col-md-3 text-center my-3">
+                                <div class="h5">
+                                    Прибыль инвестора:
+                                </div>
+                                <div class="h6">
+                                    {{round($SumInvestorProfit, 2). ' грн.'}}
+                                </div>
+                            </div>
+
+                            <div class="col-6 col-md-3 text-center my-3">
+                                <div class="h5">
+                                    Зарплата менеджера:
+                                </div>
+                                <div class="h6">
+                                    {{round($SumManagerSalary, 2). ' грн.'}}
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    @endif
                     <div class="table-responsive">
                         <table class="table text-center align-center">
                             <thead>
@@ -161,7 +297,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($days_orders as $item)
+                            @foreach($data as $item)
                                 <tr style="vertical-align:middle;">
                                     <td scope="row">{{$item->date->format('d.m.y')}}</td>
                                     <td scope="row">{{number_format((float)$item->application_price, 2, ',', '')}}</td>
@@ -177,7 +313,7 @@
                                     <td scope="row">{{round($item->canceled_orders_rate, 2). '%'}}</td>
                                     <td scope="row">{{round($item->returned_orders_ratio, 2). '%'}}</td>
                                     <td scope="row">{{round($item->received_parcel_ratio, 2). '%'}}</td>
-                                    <td scope="row">{{round($item->сlient_cost, 2) . ' грн.'}}</td>
+                                    <td scope="row">{{round($item->client_cost, 2) . ' грн.'}}</td>
                                     <td scope="row">{{round($item->profit, 2) . ' грн.'}}</td>
                                     <td scope="row">{{round($item->marginality, 2). '%'}}</td>
                                     <td scope="row">{{round($item->investor_profit,2). ' грн.'}}</td>
@@ -205,7 +341,7 @@
                             </tbody>
                         </table>
                     </div>
-                    {{ $days_orders->links() }}
+                    {{ $data->links() }}
                 </div>
             </div>
         </div>

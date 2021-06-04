@@ -36,13 +36,129 @@ class BookkeepingRepository extends CoreRepository
         return $this->startConditions()->find($id);
     }
 
-    public function ShowStatisticsForTheWeek()
+    /**
+     * Показать статистику за все время.
+     *
+     * @param null $perPage
+     * @return mixed
+     */
+    public function ShowAllStatistics($perPage = null)
     {
-        return $this->startConditions()
-            ->whereDate('date','>',Carbon::today()->subDays(7)->format('Y-m-d'))
-            ->get();
+        return $this
+            ->startConditions()
+            ->orderBy('date', 'desc')
+            ->paginate($perPage);
     }
 
+    /**
+     * Показать статистику за неделю.
+     *
+     * @param null $perPage
+     * @return mixed
+     */
+    public function StatisticsByTheNumberOfDays($subDays = null)
+    {
+        $getAll = $this
+            ->startConditions()
+            ->whereDate('date', '>=', Carbon::today()->subDays($subDays)->format('Y-m-d'))
+            ->orderBy('date','desc')
+            ->paginate();
+
+        $AverageCorRate = $this
+            ->startConditions()
+            ->whereDate('date', '>=', Carbon::today()->subDays($subDays)->format('Y-m-d'))
+            ->select('canceled_orders_rate')
+            ->avg('canceled_orders_rate');
+
+        $AverageRorRate = $this
+            ->startConditions()
+            ->whereDate('date', '>=', Carbon::today()->subDays($subDays)->format('Y-m-d'))
+            ->select('returned_orders_ratio')
+            ->avg('returned_orders_ratio');
+
+        $AverageRprRate = $this
+            ->startConditions()
+            ->whereDate('date', '>=', Carbon::today()->subDays($subDays)->format('Y-m-d'))
+            ->select('received_parcel_ratio')
+            ->avg('received_parcel_ratio');
+
+        $AverageClientCostRate = $this
+            ->startConditions()
+            ->whereDate('date', '>=', Carbon::today()->subDays($subDays)->format('Y-m-d'))
+            ->select('client_cost')
+            ->avg('client_cost');
+
+        $SumProfit = $this
+            ->startConditions()
+            ->whereDate('date', '>=', Carbon::today()->subDays($subDays)->format('Y-m-d'))
+            ->select('profit')
+            ->sum('profit');
+
+        $AverageApplicationPrice = $this
+            ->startConditions()
+            ->whereDate('date', '>=', Carbon::today()->subDays($subDays)->format('Y-m-d'))
+            ->select('application_price')
+            ->avg('application_price');
+
+        $SumTargetCosts = $this
+            ->startConditions()
+            ->whereDate('date', '>=', Carbon::today()->subDays($subDays)->format('Y-m-d'))
+            ->select('advertising')
+            ->sum('advertising');
+
+        $AverageMarginality = $this
+            ->startConditions()
+            ->whereDate('date', '>=', Carbon::today()->subDays($subDays)->format('Y-m-d'))
+            ->select('marginality')
+            ->avg('marginality');
+
+        $SumInvestorProfit = $this
+            ->startConditions()
+            ->whereDate('date', '>=', Carbon::today()->subDays($subDays)->format('Y-m-d'))
+            ->select('investor_profit')
+            ->sum('investor_profit');
+
+        $SumManagerSalary = $this
+            ->startConditions()
+            ->whereDate('date', '>=', Carbon::today()->subDays($subDays)->format('Y-m-d'))
+            ->select('manager_salary')
+            ->sum('manager_salary');
+
+        $AverageApplications = $this
+            ->startConditions()
+            ->whereDate('date', '>=', Carbon::today()->subDays($subDays)->format('Y-m-d'))
+            ->select('applications')
+            ->avg('applications');
+
+        $SumAtThePostOffice = $this
+            ->startConditions()
+            ->whereDate('date', '>=', Carbon::today()->subDays($subDays)->format('Y-m-d'))
+            ->select('at_the_post_office')
+            ->sum('at_the_post_office');
+
+        return [
+            $getAll,
+            $AverageCorRate,
+            $AverageRorRate,
+            $AverageRprRate,
+            $AverageClientCostRate,
+            $SumProfit,
+            $AverageApplicationPrice,
+            $SumTargetCosts,
+            $AverageMarginality,
+            $SumInvestorProfit,
+            $SumManagerSalary,
+            $AverageApplications,
+            $SumAtThePostOffice
+        ];
+    }
+
+    /**
+     * Вывести выполненные заказы в пагинацию по 15 шт.
+     *
+     * @param null $perPage
+     * @return mixed
+     */
     public function getDoneOrdersWithPaginate($perPage = null)
     {
         $doneOrders = Orders::where('status', 'Выполнен')

@@ -76,11 +76,32 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('profit', App\Http\Controllers\Bookkeeping\ProfitController::class)
             ->names('admin.bookkeeping.profit');
 
-        Route::resource('daily-statistics', DailyStatisticsController::class)
-            ->names('admin.bookkeeping.daily-statistics');
+//        Route::resource('daily-statistics', DailyStatisticsController::class)
+//            ->names('admin.bookkeeping.daily-statistics');
 
-        Route::get('daily-statistics/?period=week', [DailyStatisticsController::class, 'ShowStatisticsForTheWeek'])
-            ->name('admin.bookkeeping.daily-statistics.ShowStatisticsForTheWeek');
+        Route::prefix('daily-statistics')->group(function (){
+            Route::get('/', [DailyStatisticsController::class, 'index'])
+                ->name('admin.bookkeeping.daily-statistics.index');
+
+            Route::get('create', [DailyStatisticsController::class, 'create'])
+                ->name('admin.bookkeeping.daily-statistics.create');
+
+            Route::post('store',[DailyStatisticsController::class,'store'])
+                ->name('admin.bookkeeping.daily-statistics.store');
+
+            Route::delete('destroy/{id}',[DailyStatisticsController::class,'destroy'])
+                ->name('admin.bookkeeping.daily-statistics.destroy');
+
+            Route::get('days=7', [DailyStatisticsController::class, 'showStatisticsFor7Days'])
+                ->name('admin.bookkeeping.daily-statistics.7Days');
+
+            Route::get('days=14', [DailyStatisticsController::class, 'showStatisticsFor14Days'])
+                ->name('admin.bookkeeping.daily-statistics.week');
+
+            Route::get('days=30', [DailyStatisticsController::class, 'showStatisticsFor30Days'])
+                ->name('admin.bookkeeping.daily-statistics.30Days');
+        });
+
 
         Route::resource('product-statistics', ProductStatisticsController::class)
             ->names('admin.bookkeeping.product-statistics');

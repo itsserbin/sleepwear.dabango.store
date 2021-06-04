@@ -164,7 +164,7 @@
                             <td scope="row">{{round($item->canceled_orders_rate, 2). '%'}}</td>
                             <td scope="row">{{round($item->returned_orders_ratio, 2). '%'}}</td>
                             <td scope="row">{{round($item->received_parcel_ratio, 2). '%'}}</td>
-                            <td scope="row">{{round($item->сlient_cost, 2) . ' грн.'}}</td>
+                            <td scope="row">{{round($item->client_cost, 2) . ' грн.'}}</td>
                             <td scope="row">{{round($item->profit, 2) . ' грн.'}}</td>
                             <td scope="row">{{round($item->marginality, 2). '%'}}</td>
                             <td scope="row">{{round($item->investor_profit,2). ' грн.'}}</td>
