@@ -104,6 +104,12 @@
                         </th>
                         <th scope="col">
                             <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Returned Orders Ratio = Коэфициент возвращенных заказов. Форумула: (Возвращенные заказы/Все заказы) * 100">
+                                <b>ROR</b>
+                            </button>
+                        </th>
+                        <th scope="col">
+                            <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Received Parcel Ratio = Коэффициент полученных посылок. Форумула: (Выполненные заказы/Все заказы) * 100">
                                 <b>RPR</b>
                             </button>
@@ -132,6 +138,12 @@
                                 <b>Прибыль инвестора</b>
                             </button>
                         </th>
+                        <th scope="col">
+                            <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Зарплата менеджера. Форумула: Кол-во выполненных заказов * 15">
+                                <b>Зарплата менеджера</b>
+                            </button>
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -150,11 +162,14 @@
                             <td scope="row">{{$item->cancel}}</td>
                             <td scope="row">{{$item->unprocessed}}</td>
                             <td scope="row">{{round($item->canceled_orders_rate, 2). '%'}}</td>
+                            <td scope="row">{{round($item->returned_orders_ratio, 2). '%'}}</td>
                             <td scope="row">{{round($item->received_parcel_ratio, 2). '%'}}</td>
                             <td scope="row">{{round($item->сlient_cost, 2) . ' грн.'}}</td>
                             <td scope="row">{{round($item->profit, 2) . ' грн.'}}</td>
                             <td scope="row">{{round($item->marginality, 2). '%'}}</td>
                             <td scope="row">{{round($item->investor_profit,2). ' грн.'}}</td>
+                            <td scope="row">{{round($item->manager_salary,2). ' грн.'}}</td>
+
                         </tr>
                     @endforeach
 
