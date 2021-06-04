@@ -11,28 +11,62 @@
             @slot('active_link'){{route('admin.bookkeeping.index')}}@endslot
             @slot('subsidiary')Прибыль@endslot
         @endcomponent
+        <hr>
 
         <div class="row">
             <div class="col-12 col-md-2">
                 @include('admin.bookkeeping.partials.sidebar')
             </div>
             <div class="col-12 col-md-10">
-                <a href="{{route('admin.bookkeeping.profit.create')}}">
-                    <button class="btn btn-light">
-                        Добавить дату
-                    </button>
-                </a>
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <h2>Прибыль с вычетом расходов</h2>
+                    </div>
+
+                    <div class="col-12 col-md-6 text-end">
+                        <a href="{{route('admin.bookkeeping.profit.create')}}">
+                            <button class="btn btn-danger">
+                                Добавить дату
+                            </button>
+                        </a>
+                    </div>
+                </div>
+
                 <div class="row mb-5">
-                    <h2>Прибыль с вычетом расходов</h2>
                     <div class="table-responsive">
                         <table class="table text-center align-center">
                             <thead>
                             <tr>
-                                <th scope="col">Дата</th>
-                                <th scope="col">Расходы</th>
-                                <th scope="col">Прибыль</th>
-                                <th scope="col">Маржа</th>
-                                <th scope="col">Оборот</th>
+                                <th scope="col">
+                                    <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                                            title="Дата по которой посчитана статистика">
+                                        <b>Дата</b>
+                                    </button>
+                                </th>
+                                <th scope="col">
+                                    <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                                            title="Сумма всех расходов">
+                                        <b>Расходы</b>
+                                    </button>
+                                </th>
+                                <th scope="col">
+                                    <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                                            title="Общая маржинальность проданных товаров, без вычета расходов">
+                                        <b>Прибыль</b>
+                                    </button>
+                                </th>
+                                <th scope="col">
+                                    <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                                            title="Формула: Маржа проданных товаров - Сумма всех затрат">
+                                        <b>Маржа</b>
+                                    </button>
+                                </th>
+                                <th scope="col">
+                                    <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                                            title="Формула: Маржа проданных товаров + Сумма всех затрат">
+                                        <b>Оборот</b>
+                                    </button>
+                                </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -64,6 +98,10 @@
                 </div>
 
             </div>
-
         </div>
+        <script>
+            $(document).ready(function () {
+                $("body").tooltip({selector: '[data-bs-toggle=tooltip]'});
+            });
+        </script>
 @endsection
