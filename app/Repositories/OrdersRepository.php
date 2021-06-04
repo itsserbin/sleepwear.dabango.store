@@ -189,6 +189,7 @@ class OrdersRepository extends CoreRepository
             'name',
             'phone',
             'waybill',
+            'pay',
             'city',
             'product_id',
             'sale_price',
