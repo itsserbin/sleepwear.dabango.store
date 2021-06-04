@@ -1,19 +1,21 @@
-<div class="form-group">
-    <label for="status">Статус</label>
-    <select class="form-control" id="status" name="status">
-        <option value="Новый" @if ($order->status == 'Новый') selected="" @endif>Новый</option>
-        <option value="В процессе" @if ($order->status == 'В процессе') selected="" @endif>В процессе</option>
-        <option value="Передан поставщику" @if ($order->status == 'Передан поставщику') selected="" @endif>Передан
-            поставщику
-        </option>
-        <option value="На почте" @if ($order->status == 'На почте') selected="" @endif>На почте</option>
-        <option value="Отменен" @if ($order->status == 'Отменен') selected="" @endif>Отменен</option>
-        <option value="Возврат" @if ($order->status == 'Возврат') selected="" @endif>Возврат</option>
-        <option value="Выполнен" @if ($order->status == 'Выполнен') selected="" @endif>Выполнен</option>
-    </select>
-</div>
-
 <div class="row">
+    <div class="col-12 col-md-3">
+        <div class="form-group my-3">
+            <label for="status">Статус</label>
+            <select class="form-control" id="status" name="status">
+                <option value="Новый" @if ($order->status == 'Новый') selected="" @endif>Новый</option>
+                <option value="В процессе" @if ($order->status == 'В процессе') selected="" @endif>В процессе</option>
+                <option value="Передан поставщику" @if ($order->status == 'Передан поставщику') selected="" @endif>
+                    Передан
+                    поставщику
+                </option>
+                <option value="На почте" @if ($order->status == 'На почте') selected="" @endif>На почте</option>
+                <option value="Отменен" @if ($order->status == 'Отменен') selected="" @endif>Отменен</option>
+                <option value="Возврат" @if ($order->status == 'Возврат') selected="" @endif>Возврат</option>
+                <option value="Выполнен" @if ($order->status == 'Выполнен') selected="" @endif>Выполнен</option>
+            </select>
+        </div>
+    </div>
     <div class="col-12 col-md-3">
         <div class="form-group my-3">
             <label for="name">Имя</label>
@@ -37,6 +39,7 @@
     </div>
 
 </div>
+<hr>
 <div class="row">
     <div class="col-12 col-md-3">
         <div class="form-group my-3">
@@ -62,6 +65,7 @@
         </div>
     </div>
 </div>
+<hr>
 <div class="row">
     <div class="col-12 col-md-3">
         <div class="form-group my-3">
@@ -99,6 +103,7 @@
         </div>
     </div>
 </div>
+<hr>
 <div class="row">
     <div class="col-12 col-md-6">
         <div class="form-group my-3">
@@ -128,8 +133,18 @@
         </div>
     </div>
 </div>
-
+<hr>
 <div class="row">
+    <div class="col-12 col-md-3">
+        <div class="form-group my-3">
+            <label for="provider_id">Поставщик</label>
+            <a href="{{route('admin.bookkeeping.providers.edit',$order->Product->Providers->id)}}" target="_blank">
+                <input type="text" class="form-control" id="provider_id" name="provider_id"
+                       value="{{$order->Product->Providers->name}}" disabled>
+            </a>
+        </div>
+    </div>
+
     <div class="col-12 col-md-3">
         <div class="form-group my-3">
             <label for="pay">Выплата от поставщика: {{$order->sale_price - $order->trade_price}} грн.</label>
@@ -139,7 +154,9 @@
             </select>
         </div>
     </div>
-
+</div>
+<hr>
+<div class="row">
     <div class="col-12 col-md-3">
         <div class="form-group my-3">
             <label for="created_at">Дата обновления</label>

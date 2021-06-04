@@ -5,8 +5,13 @@ namespace App\Models;
 use App\Models\Bookkeeping\Providers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+
+/**
+ * Class Products
+ * @package App\Models
+ */
 class Products extends Model
 {
     use HasFactory;
@@ -35,11 +40,11 @@ class Products extends Model
     /**
      * Relation with providers.
      *
-     * @return HasOne
+     * @return BelongsTo
      */
     public function Providers()
     {
-        return $this->hasOne(Providers::class,'provider_id');
+        return $this->belongsTo(Providers::class,'provider_id');
     }
 
     public function ProductsColor()

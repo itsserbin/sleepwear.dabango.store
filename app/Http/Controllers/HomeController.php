@@ -144,6 +144,7 @@ class HomeController extends Controller
                 }
             } else {
                 $client = new Clients();
+
                 $client->name = $name;
                 $client->status = 'Новый';
                 $client->phone = $phone;
@@ -176,10 +177,10 @@ class HomeController extends Controller
         $product_name = $request->product_name;
         $colors = $request->colors;
 
-        Mail::to(['serbin.ssd@gmail.com',
-             'youbrand_top@ukr.net',
-             'karina.youbrand@gmail.com'
-        ])->send(new Order($name, $phone, $sizes, $url, $product_name, $product, $colors));
+//        Mail::to(['serbin.ssd@gmail.com',
+//             'youbrand_top@ukr.net',
+//             'karina.youbrand@gmail.com'
+//        ])->send(new Order($name, $phone, $sizes, $url, $product_name, $product, $colors));
 
     }
 
