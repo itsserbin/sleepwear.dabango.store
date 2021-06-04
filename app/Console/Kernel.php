@@ -165,16 +165,17 @@ class Kernel extends ConsoleKernel
                     ->where('status', 'Отменен')
                     ->count();
 
-                if ($CancelOrdersCountNow !== 0) {
-                    $orders_days->canceled_orders_rate = (($CancelOrdersCountNow + $ReturnOrdersCountNow) / $OrdersCountNow) * 100;
+                if ($OrdersCountNow !== 0) {
+                    $orders_days->canceled_orders_rate = ($CancelOrdersCountNow / $OrdersCountNow) * 100;
+                    $orders_days->returned_orders_ratio = ($ReturnOrdersCountNow / $OrdersCountNow) * 100;
+                    $orders_days->received_parcel_ratio = ($DoneOrdersCountNow / $OrdersCountNow) * 100;
                 }
 
                 if ($DoneOrdersCountNow !== 0) {
-                    $orders_days->received_parcel_ratio = ($DoneOrdersCountNow / $OrdersCountNow) * 100;
                     $orders_days->сlient_cost = $SumCostsNow / $DoneOrdersCountNow;
                 }
 
-                $orders_days->profit =  $SumDayMarginalityNow - ((100 * $ReturnOrdersCountNow) - $SumCostsNow);
+                $orders_days->profit = $SumDayMarginalityNow - ((100 * $ReturnOrdersCountNow) - $SumCostsNow);
 
                 if ($SumDayCostsNow !== 0) {
                     $orders_days->marginality = ($SumDayMarginalityNow / $SumDayCostsNow) * 100;
@@ -262,7 +263,8 @@ class Kernel extends ConsoleKernel
                         ->count();
 
                     if ($OrdersCount !== 0) {
-                        $item->canceled_orders_rate = (($CancelOrdersCount + $ReturnOrdersCount) / $OrdersCount) * 100;
+                        $item->canceled_orders_rate = ($CancelOrdersCount / $OrdersCount) * 100;
+                        $item->returned_orders_ratio = ($ReturnOrdersCount / $OrdersCount) * 100;
                         $item->received_parcel_ratio = ($DoneOrdersCount / $OrdersCount) * 100;
                     }
 
