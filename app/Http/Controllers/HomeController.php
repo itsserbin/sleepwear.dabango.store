@@ -173,14 +173,14 @@ class HomeController extends Controller
         $phone = $request->phone;
         $sizes = $request->sizes;
         $url = $request->url;
-        $product = $request->product;
+        $product = $request->product_id;
         $product_name = $request->product_name;
         $colors = $request->colors;
 
-//        Mail::to(['serbin.ssd@gmail.com',
-//             'youbrand_top@ukr.net',
-//             'karina.youbrand@gmail.com'
-//        ])->send(new Order($name, $phone, $sizes, $url, $product_name, $product, $colors));
+        Mail::to(['serbin.ssd@gmail.com',
+             'youbrand_top@ukr.net',
+             'karina.youbrand@gmail.com'
+        ])->send(new Order($name, $phone, $sizes, $url, $product_name, $product, $colors));
 
     }
 
