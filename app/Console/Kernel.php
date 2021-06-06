@@ -182,7 +182,7 @@ class Kernel extends ConsoleKernel
                 }
 
                 $orders_days->investor_profit = ($SumDayMarginalityNow - (100 * $ReturnOrdersCountNow) * 0.35) - $SumCostsNow;
-                $orders_days->manager_salary = ($DoneOrdersCountNow + $CancelOrdersCountNow) * 15;
+                $orders_days->manager_salary = ($DoneOrdersCountNow + $ReturnOrdersCountNow) * 15;
                 $orders_days->save();
             } else {
                 foreach ($orders_old as $item) {
@@ -279,7 +279,7 @@ class Kernel extends ConsoleKernel
                     }
 
                     $item->investor_profit = ($SumDayMarginality - (100 * $ReturnOrdersCount) * 0.35) - $SumCosts;
-                    $item->manager_salary = ($DoneOrdersCount + $CancelOrdersCount) * 15;
+                    $item->manager_salary = ($DoneOrdersCount + $ReturnOrdersCount) * 15;
 
                     $item->update();
                 }
