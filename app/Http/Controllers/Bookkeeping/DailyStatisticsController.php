@@ -93,7 +93,7 @@ class DailyStatisticsController extends Controller
         $AverageMarginality = $days_orders[8];
         $SumInvestorProfit = $days_orders[9];
         $SumManagerSalary = $days_orders[10];
-        $AverageApplications = $days_orders[11];
+        $SumApplications = $days_orders[11];
         $SumAtThePostOffice = $days_orders[12];
 
         return view('admin.bookkeeping.daily-statistics.index', [
@@ -108,7 +108,7 @@ class DailyStatisticsController extends Controller
             'AverageMarginality' => $AverageMarginality,
             'SumInvestorProfit' => $SumInvestorProfit,
             'SumManagerSalary' => $SumManagerSalary,
-            'AverageApplications' => $AverageApplications,
+            'SumApplications' => $SumApplications,
             'SumAtThePostOffice' => $SumAtThePostOffice,
         ]);
     }
@@ -133,7 +133,7 @@ class DailyStatisticsController extends Controller
         $AverageMarginality = $days_orders[8];
         $SumInvestorProfit = $days_orders[9];
         $SumManagerSalary = $days_orders[10];
-        $AverageApplications = $days_orders[11];
+        $SumApplications = $days_orders[11];
         $SumAtThePostOffice = $days_orders[12];
 
         return view('admin.bookkeeping.daily-statistics.index', [
@@ -148,7 +148,7 @@ class DailyStatisticsController extends Controller
             'AverageMarginality' => $AverageMarginality,
             'SumInvestorProfit' => $SumInvestorProfit,
             'SumManagerSalary' => $SumManagerSalary,
-            'AverageApplications' => $AverageApplications,
+            'SumApplications' => $SumApplications,
             'SumAtThePostOffice' => $SumAtThePostOffice,
         ]);
     }
@@ -173,7 +173,7 @@ class DailyStatisticsController extends Controller
         $AverageMarginality = $days_orders[8];
         $SumInvestorProfit = $days_orders[9];
         $SumManagerSalary = $days_orders[10];
-        $AverageApplications = $days_orders[11];
+        $SumApplications = $days_orders[11];
         $SumAtThePostOffice = $days_orders[12];
 
         return view('admin.bookkeeping.daily-statistics.index', [
@@ -188,7 +188,7 @@ class DailyStatisticsController extends Controller
             'AverageMarginality' => $AverageMarginality,
             'SumInvestorProfit' => $SumInvestorProfit,
             'SumManagerSalary' => $SumManagerSalary,
-            'AverageApplications' => $AverageApplications,
+            'SumApplications' => $SumApplications,
             'SumAtThePostOffice' => $SumAtThePostOffice,
         ]);
     }

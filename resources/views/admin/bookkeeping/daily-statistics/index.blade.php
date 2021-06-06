@@ -68,10 +68,10 @@
                         <div class="row align-items-center">
                             <div class="col-6 col-md-3 text-center my-3">
                                 <div class="h5">
-                                    В среднем заявок:
+                                    Получено заявок:
                                 </div>
                                 <div class="h6">
-                                    {{round($AverageApplications)}}
+                                    {{round($SumApplications)}}
                                 </div>
                             </div>
 

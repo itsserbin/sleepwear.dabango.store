@@ -124,11 +124,11 @@ class BookkeepingRepository extends CoreRepository
             ->select('manager_salary')
             ->sum('manager_salary');
 
-        $AverageApplications = $this
+        $SumApplications = $this
             ->startConditions()
             ->whereDate('date', '>=', Carbon::today()->subDays($subDays)->format('Y-m-d'))
             ->select('applications')
-            ->avg('applications');
+            ->sum('applications');
 
         $SumAtThePostOffice = $this
             ->startConditions()
@@ -148,7 +148,7 @@ class BookkeepingRepository extends CoreRepository
             $AverageMarginality,
             $SumInvestorProfit,
             $SumManagerSalary,
-            $AverageApplications,
+            $SumApplications,
             $SumAtThePostOffice
         ];
     }
