@@ -6,3 +6,4 @@ require('bootstrap/dist/css/bootstrap.css')
 require('popper.js')
 
 require('air-datepicker/dist/js/datepicker.min')
+require('air-datepicker/dist/css/datepicker.min.css')

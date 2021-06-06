@@ -33,7 +33,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-12 col-md-7">
                             <a href="{{route('admin.bookkeeping.daily-statistics.index')}}"
                                class="text-decoration-none">
                                 <button class="btn btn-outline-warning my-3">
@@ -60,8 +60,25 @@
                                     За 30 дней
                                 </button>
                             </a>
-                        </div>
 
+                        </div>
+                        <div class="col-12 col-md-5">
+                            <form action="{{route('admin.bookkeeping.daily-statistics.dateRange')}}" method="POST"
+                                  class="d-flex my-3">
+                                @csrf
+                                <input type="text"
+                                       class="form-control datepicker-here"
+                                       data-multiple-dates-separator=" - "
+                                       id="date_range"
+                                       name="date_range"
+                                       placeholder="Выберите дату"
+                                       data-range="true"
+                                       data-date-format="yyyy-mm-dd">
+                                <button type="submit" class="btn btn-outline-warning">
+                                    Поиск
+                                </button>
+                            </form>
+                        </div>
                     </div>
                     <hr>
                     @if(!Route::is('admin.bookkeeping.daily-statistics.index'))

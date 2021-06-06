@@ -100,6 +100,9 @@ Route::group(['middleware' => 'auth'], function () {
 
             Route::get('days=30', [DailyStatisticsController::class, 'showStatisticsFor30Days'])
                 ->name('admin.bookkeeping.daily-statistics.30Days');
+
+            Route::post('date-range',[DailyStatisticsController::class,'showFromRange'])
+            ->name('admin.bookkeeping.daily-statistics.dateRange');
         });
 
 

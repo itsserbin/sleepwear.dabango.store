@@ -80,36 +80,22 @@ class DailyStatisticsController extends Controller
      */
     public function showStatisticsFor7Days()
     {
-       $days_orders = $this->BookkeepingRepository->StatisticsByTheNumberOfDays(7);
-
-        $data = $days_orders[0];
-        $AverageCorRate = $days_orders[1];
-        $AverageRorRate = $days_orders[2];
-        $AverageRprRate = $days_orders[3];
-        $AverageClientCostRate = $days_orders[4];
-        $SumProfit = $days_orders[5];
-        $AverageApplicationPrice = $days_orders[6];
-        $SumTargetCosts = $days_orders[7];
-        $AverageMarginality = $days_orders[8];
-        $SumInvestorProfit = $days_orders[9];
-        $SumManagerSalary = $days_orders[10];
-        $SumApplications = $days_orders[11];
-        $SumAtThePostOffice = $days_orders[12];
+        $days_orders = $this->BookkeepingRepository->StatisticsByTheNumberOfDays(7);
 
         return view('admin.bookkeeping.daily-statistics.index', [
-            'data' => $data,
-            'AverageCorRate' => $AverageCorRate,
-            'AverageRorRate' => $AverageRorRate,
-            'AverageRprRate' => $AverageRprRate,
-            'AverageClientCostRate' => $AverageClientCostRate,
-            'SumProfit' => $SumProfit,
-            'AverageApplicationPrice' => $AverageApplicationPrice,
-            'SumTargetCosts' => $SumTargetCosts,
-            'AverageMarginality' => $AverageMarginality,
-            'SumInvestorProfit' => $SumInvestorProfit,
-            'SumManagerSalary' => $SumManagerSalary,
-            'SumApplications' => $SumApplications,
-            'SumAtThePostOffice' => $SumAtThePostOffice,
+            'data' => $days_orders[0],
+            'AverageCorRate' => $days_orders[1],
+            'AverageRorRate' => $days_orders[2],
+            'AverageRprRate' => $days_orders[3],
+            'AverageClientCostRate' => $days_orders[4],
+            'SumProfit' => $days_orders[5],
+            'AverageApplicationPrice' => $days_orders[6],
+            'SumTargetCosts' => $days_orders[7],
+            'AverageMarginality' => $days_orders[8],
+            'SumInvestorProfit' => $days_orders[9],
+            'SumManagerSalary' => $days_orders[10],
+            'SumApplications' => $days_orders[11],
+            'SumAtThePostOffice' => $days_orders[12],
         ]);
     }
 
@@ -122,34 +108,20 @@ class DailyStatisticsController extends Controller
     {
         $days_orders = $this->BookkeepingRepository->StatisticsByTheNumberOfDays(14);
 
-        $data = $days_orders[0];
-        $AverageCorRate = $days_orders[1];
-        $AverageRorRate = $days_orders[2];
-        $AverageRprRate = $days_orders[3];
-        $AverageClientCostRate = $days_orders[4];
-        $SumProfit = $days_orders[5];
-        $AverageApplicationPrice = $days_orders[6];
-        $SumTargetCosts = $days_orders[7];
-        $AverageMarginality = $days_orders[8];
-        $SumInvestorProfit = $days_orders[9];
-        $SumManagerSalary = $days_orders[10];
-        $SumApplications = $days_orders[11];
-        $SumAtThePostOffice = $days_orders[12];
-
         return view('admin.bookkeeping.daily-statistics.index', [
-            'data' => $data,
-            'AverageCorRate' => $AverageCorRate,
-            'AverageRorRate' => $AverageRorRate,
-            'AverageRprRate' => $AverageRprRate,
-            'AverageClientCostRate' => $AverageClientCostRate,
-            'SumProfit' => $SumProfit,
-            'AverageApplicationPrice' => $AverageApplicationPrice,
-            'SumTargetCosts' => $SumTargetCosts,
-            'AverageMarginality' => $AverageMarginality,
-            'SumInvestorProfit' => $SumInvestorProfit,
-            'SumManagerSalary' => $SumManagerSalary,
-            'SumApplications' => $SumApplications,
-            'SumAtThePostOffice' => $SumAtThePostOffice,
+            'data' => $days_orders[0],
+            'AverageCorRate' => $days_orders[1],
+            'AverageRorRate' => $days_orders[2],
+            'AverageRprRate' => $days_orders[3],
+            'AverageClientCostRate' => $days_orders[4],
+            'SumProfit' => $days_orders[5],
+            'AverageApplicationPrice' => $days_orders[6],
+            'SumTargetCosts' => $days_orders[7],
+            'AverageMarginality' => $days_orders[8],
+            'SumInvestorProfit' => $days_orders[9],
+            'SumManagerSalary' => $days_orders[10],
+            'SumApplications' => $days_orders[11],
+            'SumAtThePostOffice' => $days_orders[12],
         ]);
     }
 
@@ -162,34 +134,41 @@ class DailyStatisticsController extends Controller
     {
         $days_orders = $this->BookkeepingRepository->StatisticsByTheNumberOfDays(30);
 
-        $data = $days_orders[0];
-        $AverageCorRate = $days_orders[1];
-        $AverageRorRate = $days_orders[2];
-        $AverageRprRate = $days_orders[3];
-        $AverageClientCostRate = $days_orders[4];
-        $SumProfit = $days_orders[5];
-        $AverageApplicationPrice = $days_orders[6];
-        $SumTargetCosts = $days_orders[7];
-        $AverageMarginality = $days_orders[8];
-        $SumInvestorProfit = $days_orders[9];
-        $SumManagerSalary = $days_orders[10];
-        $SumApplications = $days_orders[11];
-        $SumAtThePostOffice = $days_orders[12];
+        return view('admin.bookkeeping.daily-statistics.index', [
+            'data' => $days_orders[0],
+            'AverageCorRate' => $days_orders[1],
+            'AverageRorRate' => $days_orders[2],
+            'AverageRprRate' => $days_orders[3],
+            'AverageClientCostRate' => $days_orders[4],
+            'SumProfit' => $days_orders[5],
+            'AverageApplicationPrice' => $days_orders[6],
+            'SumTargetCosts' => $days_orders[7],
+            'AverageMarginality' => $days_orders[8],
+            'SumInvestorProfit' => $days_orders[9],
+            'SumManagerSalary' => $days_orders[10],
+            'SumApplications' => $days_orders[11],
+            'SumAtThePostOffice' => $days_orders[12],
+        ]);
+    }
+
+    public function showFromRange(Request $request)
+    {
+        $days_orders = $this->BookkeepingRepository->StatisticsByDateRange($request);
 
         return view('admin.bookkeeping.daily-statistics.index', [
-            'data' => $data,
-            'AverageCorRate' => $AverageCorRate,
-            'AverageRorRate' => $AverageRorRate,
-            'AverageRprRate' => $AverageRprRate,
-            'AverageClientCostRate' => $AverageClientCostRate,
-            'SumProfit' => $SumProfit,
-            'AverageApplicationPrice' => $AverageApplicationPrice,
-            'SumTargetCosts' => $SumTargetCosts,
-            'AverageMarginality' => $AverageMarginality,
-            'SumInvestorProfit' => $SumInvestorProfit,
-            'SumManagerSalary' => $SumManagerSalary,
-            'SumApplications' => $SumApplications,
-            'SumAtThePostOffice' => $SumAtThePostOffice,
+            'data' => $days_orders[0],
+            'AverageCorRate' => $days_orders[1],
+            'AverageRorRate' => $days_orders[2],
+            'AverageRprRate' => $days_orders[3],
+            'AverageClientCostRate' => $days_orders[4],
+            'SumProfit' => $days_orders[5],
+            'AverageApplicationPrice' => $days_orders[6],
+            'SumTargetCosts' => $days_orders[7],
+            'AverageMarginality' => $days_orders[8],
+            'SumInvestorProfit' => $days_orders[9],
+            'SumManagerSalary' => $days_orders[10],
+            'SumApplications' => $days_orders[11],
+            'SumAtThePostOffice' => $days_orders[12],
         ]);
     }
 }
