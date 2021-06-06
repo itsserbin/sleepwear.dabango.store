@@ -31,6 +31,7 @@ class AdminController extends Controller
 
     public function index()
     {
+
         $days_orders = OrdersDay::orderBy('date', 'desc')->paginate(15);
 
         $orders = $this->OrdersRepository->getAllWithPaginate(10);

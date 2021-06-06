@@ -51,7 +51,7 @@ class BookkeepingRepository extends CoreRepository
     }
 
     /**
-     * Показать статистику за неделю.
+     * Показать статистику за определенные дни.
      *
      * @param null $perPage
      * @return mixed

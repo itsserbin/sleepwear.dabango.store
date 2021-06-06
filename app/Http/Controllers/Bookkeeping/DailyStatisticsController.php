@@ -15,6 +15,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
+/**
+ * Class DailyStatisticsController
+ * @package App\Http\Controllers\Bookkeeping
+ */
 class DailyStatisticsController extends Controller
 {
     private $BookkeepingRepository;
