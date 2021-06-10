@@ -41,27 +41,27 @@ class DailyStatisticsController extends Controller
      */
     public function index()
     {
-        $data = $this->BookkeepingRepository->ShowAllStatistics(15);
+        $days_orders = $this->BookkeepingRepository->ShowAllStatistics(15);
 
         return view('admin.bookkeeping.daily-statistics.index', [
-            'data' => $data
+            'days_orders' => $days_orders
         ]);
     }
 
     public function create()
     {
-        $orders_day = new OrdersDay();
+        $days_orders = new OrdersDay();
 
         return view('admin.bookkeeping.daily-statistics.create', [
-            'orders_day' => $orders_day
+            'days_orders' => $days_orders
         ]);
     }
 
     public function store(Request $request)
     {
-        $orders_day = new OrdersDay();
-        $orders_day->date = $request->input('date');
-        $orders_day->save();
+        $days_orders = new OrdersDay();
+        $days_orders->date = $request->input('date');
+        $days_orders->save();
 
         return redirect(route('admin.bookkeeping.daily-statistics.index'));
     }
@@ -83,7 +83,7 @@ class DailyStatisticsController extends Controller
         $days_orders = $this->BookkeepingRepository->StatisticsByTheNumberOfDays(7);
 
         return view('admin.bookkeeping.daily-statistics.index', [
-            'data' => $days_orders[0],
+            'days_orders' => $days_orders[0],
             'AverageCorRate' => $days_orders[1],
             'AverageRorRate' => $days_orders[2],
             'AverageRprRate' => $days_orders[3],
@@ -109,7 +109,7 @@ class DailyStatisticsController extends Controller
         $days_orders = $this->BookkeepingRepository->StatisticsByTheNumberOfDays(14);
 
         return view('admin.bookkeeping.daily-statistics.index', [
-            'data' => $days_orders[0],
+            'days_orders' => $days_orders[0],
             'AverageCorRate' => $days_orders[1],
             'AverageRorRate' => $days_orders[2],
             'AverageRprRate' => $days_orders[3],
@@ -135,7 +135,7 @@ class DailyStatisticsController extends Controller
         $days_orders = $this->BookkeepingRepository->StatisticsByTheNumberOfDays(30);
 
         return view('admin.bookkeeping.daily-statistics.index', [
-            'data' => $days_orders[0],
+            'days_orders' => $days_orders[0],
             'AverageCorRate' => $days_orders[1],
             'AverageRorRate' => $days_orders[2],
             'AverageRprRate' => $days_orders[3],
@@ -156,7 +156,7 @@ class DailyStatisticsController extends Controller
         $days_orders = $this->BookkeepingRepository->StatisticsByDateRange($request);
 
         return view('admin.bookkeeping.daily-statistics.index', [
-            'data' => $days_orders[0],
+            'days_orders' => $days_orders[0],
             'AverageCorRate' => $days_orders[1],
             'AverageRorRate' => $days_orders[2],
             'AverageRprRate' => $days_orders[3],

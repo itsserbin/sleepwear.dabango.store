@@ -113,6 +113,10 @@ class Kernel extends ConsoleKernel
                 ->select('total')
                 ->sum('total');
 
+            $SumDayProfitNow = Profit::whereDate('created_at', $date_now)
+                ->select('profit')
+                ->sum('profit');
+
             $SumDayMarginalityNow = Profit::whereDate('date', $date_now)
                 ->select('marginality')
                 ->sum('marginality');
@@ -181,16 +185,16 @@ class Kernel extends ConsoleKernel
 
                 $orders_days->costs = $SumCostsNow + $orders_days->manager_salary + (100 * $ReturnOrdersCountNow);
 
-                $orders_days->profit = $SumDayMarginalityNow;
+                $orders_days->profit = $SumDayProfitNow;
 
-                $orders_days->net_profit = $orders_days->profit - $SumCostsNow;
+                $orders_days->net_profit = $orders_days->profit - $orders_days->costs;
 
                 if ($DoneOrdersCountNow !== 0) {
                     $orders_days->client_cost = $orders_days->net_profit / $DoneOrdersCountNow;
                 }
 
                 if ($SumDayCostsNow !== 0) {
-                    $orders_days->marginality = $orders_days->profit / $orders_days->costs;
+                    $orders_days->marginality = ($orders_days->profit / $orders_days->costs) * 100;
                 }
 
                 $orders_days->investor_profit = $orders_days->net_profit * 0.35;
@@ -216,9 +220,9 @@ class Kernel extends ConsoleKernel
                         ->select('total')
                         ->sum('total');
 
-                    $SumDayMarginality = Profit::whereDate('created_at', $date)
-                        ->select('marginality')
-                        ->sum('marginality');
+                    $SumDayProfit = Profit::whereDate('created_at', $date)
+                        ->select('profit')
+                        ->sum('profit');
 
                     $SumDayCosts = Profit::whereDate('created_at', $date)
                         ->select('cost')
@@ -227,10 +231,6 @@ class Kernel extends ConsoleKernel
                     $ReturnOrdersCount = Orders::whereDate('created_at', $date)
                         ->where('status', 'Возврат')
                         ->count();
-
-                    $SumDayMarginality = Profit::whereDate('created_at', $date)
-                        ->select('marginality')
-                        ->sum('marginality');
 
                     $item->advertising = Costs::whereDate('date', $date)
                         ->where('name', 'Таргет')
@@ -282,18 +282,18 @@ class Kernel extends ConsoleKernel
 
                     $item->manager_salary = $ManagerSalary = ($DoneOrdersCount + $ReturnOrdersCount) * 15;
 
-                    $item->profit = $SumDayMarginality;
+                    $item->profit = $SumDayProfit;
 
                     $item->costs = $SumCosts + $ManagerSalary + (100 * $ReturnOrdersCount);
 
-                    $item->net_profit = $item->profit - $item->costs;
+                    $item->net_profit = ($item->profit) - ($item->costs);
 
                     if ($DoneOrdersCount !== 0) {
                         $item->client_cost = $item->net_profit / $DoneOrdersCount;
                     }
 
                     if ($SumDayCosts !== 0) {
-                        $item->marginality = $item->profit / $item->costs;
+                        $item->marginality = ($item->profit / $item->costs) * 100;
                     }
 
                     $item->investor_profit = $item->net_profit * 0.35;
