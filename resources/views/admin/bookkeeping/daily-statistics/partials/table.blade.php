@@ -86,15 +86,17 @@
                     <b>RPR</b>
                 </button>
             </th>
+
             <th scope="col">
                 <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
-                        title="Средняя реальная стоимость клиента. Форумула: Расходы на таргет/Выполненные заказы">
+                        title="Средняя реальная стоимость клиента. Форумула: Чистая прибыль / Выполненные">
                     <b>Стоимость клиента</b>
                 </button>
             </th>
+
             <th scope="col">
                 <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
-                        title="Фактическая прибыль. Форумула: ((Маржа за день * Количество выполненных заказов)-(100 * Кол-во отмененных заказов)) - Расходы на таргет">
+                        title="Фактическая прибыль. Форумула: Сумма маржинальности всех проданных товаров">
                     <b>Прибыль</b>
                 </button>
             </th>
@@ -115,22 +117,25 @@
 
             <th scope="col">
                 <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
-                        title="Маржинальность. Форумула: (Чистая прибыль за день) / Расходы на таргет">
+                        title="Маржинальность. Форумула: (Прибыль / Расходы) * 100">
                     <b>Маржинальность</b>
                 </button>
             </th>
+
             <th scope="col">
                 <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
-                        title="Прибыль инвестора. Форумула: ((Маржинальность за день * Количество выполненных заказов) - (100 * Количество отмененных заказов) * 0,35) - Расходы на таргет">
+                        title="Прибыль инвестора. Форумула: Чистая  прибыль * 0.35">
                     <b>Прибыль инвестора</b>
                 </button>
             </th>
+
             <th scope="col">
                 <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
-                        title="Зарплата менеджера. Форумула: Кол-во выполненных заказов * 15">
+                        title="Зарплата менеджера. Форумула: (Кол-во выполненных заказов + Кол-во отмененных заказов) * 15">
                     <b>Зарплата менеджера</b>
                 </button>
             </th>
+
         </tr>
         </thead>
         <tbody>

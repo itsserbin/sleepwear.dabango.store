@@ -280,11 +280,11 @@ class Kernel extends ConsoleKernel
                         $item->received_parcel_ratio = ($DoneOrdersCount / $OrdersCount) * 100;
                     }
 
-                    $item->manager_salary = $ManagerSalary = ($DoneOrdersCount + $ReturnOrdersCount) * 15;
+                    $item->manager_salary = ($DoneOrdersCount + $ReturnOrdersCount) * 15;
 
                     $item->profit = $SumDayProfit;
 
-                    $item->costs = $SumCosts + $ManagerSalary + (100 * $ReturnOrdersCount);
+                    $item->costs = $SumCosts + $item->manager_salary + (100 * $ReturnOrdersCount);
 
                     $item->net_profit = ($item->profit) - ($item->costs);
 
