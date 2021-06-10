@@ -34,11 +34,14 @@ class Kernel extends ConsoleKernel
     {
         $schedule->call(function () {
             $date_now = Carbon::now()->format('Y-m-d');
+
             $profit_now = Profit::whereDate('date', $date_now)->get();
+
             $profit_old = Profit::all();
 
             foreach ($profit_old as $item) {
                 $created_at = $item->date->format('Y-m-d');
+
                 $item->profit = $ProfitProfit = Orders::whereDate('created_at', $created_at)
                     ->where('status', 'Выполнен')
                     ->select('profit')
@@ -47,8 +50,11 @@ class Kernel extends ConsoleKernel
                 $item->cost = $ProfitCost = Costs::whereDate('date', $created_at)
                     ->select('total')
                     ->sum('total');
+
                 $item->marginality = $ProfitProfit - $ProfitCost;
+
                 $item->turnover = $ProfitProfit + $ProfitCost;
+
                 $item->update();
             }
 
@@ -107,7 +113,7 @@ class Kernel extends ConsoleKernel
                 ->select('total')
                 ->sum('total');
 
-            $SumDayMarginalityNow = Profit::whereDate('created_at', $date_now)
+            $SumDayMarginalityNow = Profit::whereDate('date', $date_now)
                 ->select('marginality')
                 ->sum('marginality');
 
@@ -171,18 +177,24 @@ class Kernel extends ConsoleKernel
                     $orders_days->received_parcel_ratio = ($DoneOrdersCountNow / $OrdersCountNow) * 100;
                 }
 
-                if ($DoneOrdersCountNow !== 0) {
-                    $orders_days->client_cost = $SumCostsNow / $DoneOrdersCountNow;
-                }
+                $orders_days->manager_salary = ($DoneOrdersCountNow + $ReturnOrdersCountNow) * 15;
 
-                $orders_days->profit = $SumDayMarginalityNow - ((100 * $ReturnOrdersCountNow) - $SumCostsNow);
+                $orders_days->costs = $SumCostsNow + $orders_days->manager_salary + (100 * $ReturnOrdersCountNow);
+
+                $orders_days->profit = $SumDayMarginalityNow;
+
+                $orders_days->net_profit = $orders_days->profit - $SumCostsNow;
+
+                if ($DoneOrdersCountNow !== 0) {
+                    $orders_days->client_cost = $orders_days->net_profit / $DoneOrdersCountNow;
+                }
 
                 if ($SumDayCostsNow !== 0) {
-                    $orders_days->marginality = ($SumDayMarginalityNow / $SumDayCostsNow) * 100;
+                    $orders_days->marginality = $orders_days->profit / $orders_days->costs;
                 }
 
-                $orders_days->investor_profit = ($SumDayMarginalityNow - (100 * $ReturnOrdersCountNow) * 0.35) - $SumCostsNow;
-                $orders_days->manager_salary = ($DoneOrdersCountNow + $ReturnOrdersCountNow) * 15;
+                $orders_days->investor_profit = $orders_days->net_profit * 0.35;
+
                 $orders_days->save();
             } else {
                 foreach ($orders_old as $item) {
@@ -268,18 +280,23 @@ class Kernel extends ConsoleKernel
                         $item->received_parcel_ratio = ($DoneOrdersCount / $OrdersCount) * 100;
                     }
 
-                    if ($DoneOrdersCount !== 0) {
-                        $item->client_cost = $SumCosts / $DoneOrdersCount;
-                    }
+                    $item->manager_salary = $ManagerSalary = ($DoneOrdersCount + $ReturnOrdersCount) * 15;
 
-                    $item->profit = $SumDayMarginality - ((100 * $ReturnOrdersCount) - $SumCosts);
+                    $item->profit = $SumDayMarginality;
+
+                    $item->costs = $SumCosts + $ManagerSalary + (100 * $ReturnOrdersCount);
+
+                    $item->net_profit = $item->profit - $item->costs;
+
+                    if ($DoneOrdersCount !== 0) {
+                        $item->client_cost = $item->net_profit / $DoneOrdersCount;
+                    }
 
                     if ($SumDayCosts !== 0) {
-                        $item->marginality = ($SumDayMarginality / $SumDayCosts) * 100;
+                        $item->marginality = $item->profit / $item->costs;
                     }
 
-                    $item->investor_profit = ($SumDayMarginality - (100 * $ReturnOrdersCount) * 0.35) - $SumCosts;
-                    $item->manager_salary = ($DoneOrdersCount + $ReturnOrdersCount) * 15;
+                    $item->investor_profit = $item->net_profit * 0.35;
 
                     $item->update();
                 }
