@@ -71,7 +71,7 @@ class ClientsRepository extends CoreRepository
      * @param null $perPage
      * @return mixed
      */
-    public function search($search,$perPage = null)
+    public function search($search, $perPage = null)
     {
         $columns = [
             'id',
@@ -85,22 +85,14 @@ class ClientsRepository extends CoreRepository
             'updated_at',
         ];
 
-        if ($search != null){
-            return $this
-                ->startConditions()
-                ->select($columns)
-                ->where('name', 'LIKE', "%$search%")
-                ->orWhere('phone', 'LIKE', "%$search%")
-                ->orWhere('id', 'LIKE', "%$search%")
-                ->orderBy('created_at','desc')
-                ->paginate($perPage);
-        }else{
-            return $this
-                ->startConditions()
-                ->select($columns)
-                ->orderBy('created_at', 'desc')
-                ->paginate($perPage);
-        }
+        return $this
+            ->startConditions()
+            ->select($columns)
+            ->where('name', 'LIKE', "%$search%")
+            ->orWhere('phone', 'LIKE', "%$search%")
+            ->orWhere('id', 'LIKE', "%$search%")
+            ->orderBy('created_at', 'desc')
+            ->paginate($perPage);
     }
 
     /**

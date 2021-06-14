@@ -1,5 +1,3 @@
-// import Vue from "vue";
-
 require('../bootstrap')
 
 import Vue from "vue";
@@ -27,7 +25,9 @@ require('bootstrap/dist/js/bootstrap.min')
 require('bootstrap/dist/css/bootstrap.css')
 require('popper.js')
 
+Vue.component('admin-dashboard', require('./pages/AdminDashboard').default);
 Vue.component('clients-list', require('./pages/clients/ClientsList.vue').default);
+Vue.component('orders-list', require('./pages/orders/OrdersList.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Orders as Model;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Carbon;
 use PhpParser\Node\Expr\AssignOp\Concat;
 
 /**
@@ -296,5 +297,50 @@ class OrdersRepository extends CoreRepository
     public function destroy(int $id)
     {
         return $this->model::destroy($id);
+    }
+
+    /**
+     * Посчитать кол-во клиентов за сегодня.
+     *
+     * @return mixed
+     */
+    public function countOrdersToday()
+    {
+        return $this
+            ->startConditions()
+            ->whereDate('created_at', Carbon::now()->format('Y-m-d'))
+            ->count();
+    }
+
+    /**
+     * Искать совпадения по базе по: ID, Имя и телефон.
+     *
+     * @param $search
+     * @param null $perPage
+     * @return mixed
+     */
+    public function search($search, $perPage = null)
+    {
+        $columns = [
+            'id',
+            'name',
+            'phone',
+            'status',
+            'product_id',
+            'client_id',
+            'sale_price',
+            'created_at',
+            'updated_at',
+        ];
+
+        return $this
+            ->startConditions()
+            ->select($columns)
+            ->where('name', 'LIKE', "%$search%")
+            ->orWhere('phone', 'LIKE', "%$search%")
+            ->orWhere('id', 'LIKE', "%$search%")
+            ->orderBy('created_at', 'desc')
+            ->with('product')
+            ->paginate($perPage);
     }
 }

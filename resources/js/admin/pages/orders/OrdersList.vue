@@ -1,7 +1,7 @@
 <template>
     <b-container>
         <b-row>
-            <b-form v-on:submit.prevent="searchClients">
+            <b-form v-on:submit.prevent="searchOrders">
                 <b-form-group label="Поиск" label-for="search-input" class="my-3">
                     <b-input-group>
                         <b-input-group-append>
@@ -22,6 +22,7 @@
                 </b-form-group>
             </b-form>
         </b-row>
+
         <b-row>
             <b-col>
                 <b-table-simple
@@ -32,30 +33,30 @@
                     <b-thead>
                         <b-tr>
                             <b-th>ID</b-th>
-                            <b-th>Статус</b-th>
+                            <b-th>Статус заказа</b-th>
                             <b-th>Имя</b-th>
                             <b-th>Номер телефона</b-th>
-                            <b-th>Кол-во покупок</b-th>
-                            <b-th>Средний чек</b-th>
-                            <b-th>Общий чек</b-th>
+                            <b-th>ID товара</b-th>
+                            <b-th>Название товара</b-th>
+                            <b-th>Цена продажи</b-th>
                             <b-th>Создан</b-th>
                             <b-th>Дата обновления</b-th>
                             <b-th>Действия</b-th>
                         </b-tr>
                     </b-thead>
                     <b-tbody>
-                        <b-tr v-for="item in clients" :key="item.id">
+                        <b-tr v-for="item in orders" :key="item.id">
                             <b-th>{{ item.id }}</b-th>
                             <b-th>{{ item.status }}</b-th>
                             <b-td>{{ item.name }}</b-td>
                             <b-td><a v-bind:href="'tel:' + item.phone">{{ item.phone }}</a></b-td>
-                            <b-td>{{ item.number_of_purchases }}</b-td>
-                            <b-td>{{ item.average_check | formatMoney }}</b-td>
-                            <b-td>{{ item.whole_check | formatMoney }}</b-td>
+                            <b-td>{{ item.product_id }}</b-td>
+                            <b-td>{{ item.product.h1 }}</b-td>
+                            <b-td>{{ item.sale_price | formatMoney }}</b-td>
                             <b-td>{{ item.created_at | moment("DD.MM.YYYY") }}</b-td>
                             <b-td>{{ item.updated_at | moment("DD.MM.YYYY") }}</b-td>
                             <b-td>
-                                <a v-bind:href="'/admin/clients/edit/' + item.id">
+                                <a v-bind:href="'/admin/orders/edit/' + item.id">
                                     <svg width="1em" height="1em" viewBox="0 0 16 16"
                                          class="bi bi-pen"
                                          fill="currentColor"
@@ -109,53 +110,53 @@ export default {
     data() {
         return {
             searchForm: '',
-            clients: [],
+            orders: [],
             pageCount: 1,
             showingFrom: 1,
             showingTo: 1,
             total: 1,
-            endpoint: '/api/clients?page='
+            endpoint: '/api/orders?page='
         }
     },
     mounted() {
-        axios.get("/api/clients/")
-            .then(({data}) => this.getClientsListSuccessResponse(data))
-            .catch((response) => this.getClientsListErrorResponse(response));
+        axios.get("/api/orders/")
+            .then(({data}) => this.getOrdersListSuccessResponse(data))
+            .catch((response) => this.getOrdersListErrorResponse(response));
     },
     methods: {
         clearSearch() {
             document.getElementById("search-input").value = "";
-            axios.get("/api/clients/")
-                .then(({data}) => this.getClientsListSuccessResponse(data))
-                .catch((response) => this.getClientsListErrorResponse(response));
+            axios.get("/api/orders/")
+                .then(({data}) => this.getOrdersListSuccessResponse(data))
+                .catch((response) => this.getOrdersListErrorResponse(response));
         },
-        getClientsListSuccessResponse(data) {
-            this.clients = data.result.data;
+        getOrdersListSuccessResponse(data) {
+            this.orders = data.result.data;
             this.total = data.result.total;
             this.showingFrom = data.result.from;
             this.showingTo = data.result.to;
             this.pageCount = data.result.last_page;
         },
-        getClientsListErrorResponse(response) {
+        getOrdersListErrorResponse(response) {
             console.log(response);
         },
         fetch(page = 1) {
             axios.get(this.endpoint + page)
                 .then(({data}) => {
-                    this.clients = data.result.data;
+                    this.orders = data.result.data;
                     this.total = data.result.total;
                     this.showingFrom = data.result.from;
                     this.showingTo = data.result.to;
                     this.pageCount = data.result.last_page;
                 });
         },
-        searchClients() {
-            axios.post("/api/clients/search/" + this.searchForm)
+        searchOrders() {
+            axios.post("/api/orders/search/" + this.searchForm)
                 .then(({data}) => this.getSearchResultListSuccessResponse(data))
                 .catch((response) => this.getSearchResultListErrorResponse(response));
         },
         getSearchResultListSuccessResponse(data) {
-            this.clients = data.result.data;
+            this.orders = data.result.data;
             this.total = data.result.total;
             this.showingFrom = data.result.from;
             this.showingTo = data.result.to;
@@ -165,8 +166,8 @@ export default {
             console.log(response);
         },
         onDelete(id) {
-            if (confirm('Вы точно хотите удалить клиента?')) {
-                axios.delete('/api/clients/destroy/' + id)
+            if (confirm('Вы точно хотите удалить заказ?')) {
+                axios.delete('/api/orders/destroy/' + id)
                     .then(() => this.fetch(1))
             }
         },
