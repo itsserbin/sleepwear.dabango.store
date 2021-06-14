@@ -14,21 +14,32 @@
         "alpinejs": "^2.7.3",
         "autoprefixer": "^10.1.0",
         "axios": "^0.21",
+        "bootstrap": "^5.0.1",
+        "jquery": "^3.6",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
+        "numeral": "^2.0.6",
+        "popper.js": "^1.16.1",
         "postcss": "^8.3.0",
         "postcss-import": "^14.0.2",
         "resolve-url-loader": "^3.1.2",
-        "sass": "^1.32.8",
-        "sass-loader": "^10.1.1",
-        "tailwindcss": "^2.0.2"
+        "sass": "^1.32.11",
+        "sass-loader": "^11.0.1",
+        "tailwindcss": "^2.0.2",
+        "vue": "^2.6.14",
+        "vue-loader": "^15.9.7",
+        "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
         "@popperjs/core": "^2.9.2",
         "air-datepicker": "^2.2.3",
-        "bootstrap": "^5.0.1",
+        "bootstrap-vue": "^2.21.2",
         "jquery": "^3.6.0",
         "popper.js": "^1.16.1",
-        "slick-carousel": "^1.8.1"
+        "portal-vue": "^2.1.7",
+        "slick-carousel": "^1.8.1",
+        "vue-moment": "^4.1.0",
+        "vue-swal": "^1.0.0",
+        "vuejs-paginate": "^2.1.0"
     }
 }

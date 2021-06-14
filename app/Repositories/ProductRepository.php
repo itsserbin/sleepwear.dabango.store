@@ -46,6 +46,7 @@ class ProductRepository extends CoreRepository
         $columns = [
             'id',
             'status',
+            'published',
             'description',
             'price',
             'discount_price',

@@ -20,5 +20,3 @@ require('./components/modal')
 require('./components/alert')
 require('./components/radio-checked')
 require('./components/scroll-box-shadow')
-
-

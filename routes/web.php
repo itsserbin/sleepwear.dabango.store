@@ -38,7 +38,7 @@ Route::post('send-review', [HomeController::class, 'send_review_post'])->name('s
 //Route::get('send-review', [HomeController::class, 'send_review_get'])->name('send.review.get');
 
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
 
     Route::get('dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
@@ -48,7 +48,20 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('reviews-accepted/{id}', [ReviewsController::class, 'reviewsAccepted'])->where('id', '\d+')->name('review.accepted');
 
     Route::group(['prefix' => '/clients'], function () {
-        Route::resource('all', ClientsController::class)->names('admin.clients');
+        Route::get('/', [ClientsController::class, 'index'])
+            ->name('admin.clients.index');
+
+        Route::get('/edit/{id}', [ClientsController::class, 'edit'])
+            ->name('admin.clients.edit');
+
+        Route::patch('/update/{id}', [ClientsController::class, 'update'])
+            ->name('admin.clients.update');
+
+        Route::delete('/destroy/{id}', [OrdersController::class, 'destroy'])
+            ->name('admin.clients.destroy');
+
+
+//        Route::resource('all', ClientsController::class)->names('admin.clients');
     });
 
     Route::group(['prefix' => '/orders'], function () {
@@ -79,17 +92,17 @@ Route::group(['middleware' => 'auth'], function () {
 //        Route::resource('daily-statistics', DailyStatisticsController::class)
 //            ->names('admin.bookkeeping.daily-statistics');
 
-        Route::prefix('daily-statistics')->group(function (){
+        Route::prefix('daily-statistics')->group(function () {
             Route::get('/', [DailyStatisticsController::class, 'index'])
                 ->name('admin.bookkeeping.daily-statistics.index');
 
             Route::get('create', [DailyStatisticsController::class, 'create'])
                 ->name('admin.bookkeeping.daily-statistics.create');
 
-            Route::post('store',[DailyStatisticsController::class,'store'])
+            Route::post('store', [DailyStatisticsController::class, 'store'])
                 ->name('admin.bookkeeping.daily-statistics.store');
 
-            Route::delete('destroy/{id}',[DailyStatisticsController::class,'destroy'])
+            Route::delete('destroy/{id}', [DailyStatisticsController::class, 'destroy'])
                 ->name('admin.bookkeeping.daily-statistics.destroy');
 
             Route::get('days=7', [DailyStatisticsController::class, 'showStatisticsFor7Days'])
@@ -101,8 +114,8 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('days=30', [DailyStatisticsController::class, 'showStatisticsFor30Days'])
                 ->name('admin.bookkeeping.daily-statistics.30Days');
 
-            Route::post('date-range',[DailyStatisticsController::class,'showFromRange'])
-            ->name('admin.bookkeeping.daily-statistics.dateRange');
+            Route::post('date-range', [DailyStatisticsController::class, 'showFromRange'])
+                ->name('admin.bookkeeping.daily-statistics.dateRange');
         });
 
 
@@ -126,4 +139,4 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('del-img', [ProductsController::class, 'destroyImage'])->name('destroy.image');
 });
 
-require __DIR__ . '/auth.php';
+Auth::routes();

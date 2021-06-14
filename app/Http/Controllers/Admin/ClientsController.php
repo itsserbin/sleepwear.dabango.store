@@ -9,7 +9,7 @@ use App\Models\Bookkeeping\Profit;
 use App\Models\Clients;
 use App\Models\Orders;
 use App\Models\Products;
-use App\Repositories\ClientRepository;
+use App\Repositories\ClientsRepository;
 use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -35,7 +35,7 @@ class ClientsController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->ClientRepository = app(ClientRepository::class);
+        $this->ClientRepository = app(ClientsRepository::class);
     }
 
     /**

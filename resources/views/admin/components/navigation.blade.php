@@ -18,36 +18,24 @@
                 <a class="nav-link {{ request()->routeIs('admin.reviews.index') ? 'active' : null }}"
                    href="{{route('admin.reviews.index')}}">Отзывы</a>
 
-                @if(Gate::allows('show-clients'))
-                    <a class="nav-link {{ request()->routeIs('admin.clients.index') ? 'active' : null }}"
-                       href="{{route('admin.clients.index')}}">Клиенты</a>
-                @elseif(Gate::allows('admin'))
+                @if(Gate::allows('show-clients') OR Gate::allows('admin'))
                     <a class="nav-link {{ request()->routeIs('admin.clients.index') ? 'active' : null }}"
                        href="{{route('admin.clients.index')}}">Клиенты</a>
                 @endif
 
-                @if(Gate::allows('show-orders'))
-                    <a class="nav-link {{ request()->routeIs('admin.orders.index') ? 'active' : null }}"
-                       href="{{route('admin.orders.index')}}">Заказы</a>
-                @elseif(Gate::allows('admin'))
+                @if(Gate::allows('show-orders') OR Gate::allows('admin'))
                     <a class="nav-link {{ request()->routeIs('admin.orders.index') ? 'active' : null }}"
                        href="{{route('admin.orders.index')}}">Заказы</a>
                 @endif
                 @endrole
 
                 @role('administrator')
-                @if(Gate::allows('edit-options'))
-                    <a class="nav-link {{ request()->routeIs('admin.options.index') ? 'active' : null }}"
-                       href="{{route('admin.options.index')}}">Настройки</a>
-                @elseif(Gate::allows('admin'))
+                @if(Gate::allows('edit-options') OR Gate::allows('admin'))
                     <a class="nav-link {{ request()->routeIs('admin.options.index') ? 'active' : null }}"
                        href="{{route('admin.options.index')}}">Настройки</a>
                 @endif
 
-                @if(Gate::allows('show-bookkeeping'))
-                    <a class="nav-link {{ request()->routeIs('admin.bookkeeping.index') ? 'active' : null }}"
-                       href="{{route('admin.bookkeeping.index')}}">Бухгалтерия</a>
-                @elseif(Gate::allows('admin'))
+                @if(Gate::allows('show-bookkeeping') OR Gate::allows('admin'))
                     <a class="nav-link {{ request()->routeIs('admin.bookkeeping.index') ? 'active' : null }}"
                        href="{{route('admin.bookkeeping.index')}}">Бухгалтерия</a>
                 @endif

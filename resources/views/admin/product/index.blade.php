@@ -48,7 +48,7 @@
                                 <td>@if(isset($product->discount_price)){{$product->discount_price}}@else{{$product->price}}@endif</td>
                                 <td>{{$product->created_at->toDateTimeString('minute')}}</td>
                                 <td>
-                                    @if($product->status)
+                                    @if($product->published)
                                         Опубликован
                                     @else
                                         Черновик

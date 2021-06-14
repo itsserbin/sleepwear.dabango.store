@@ -14,7 +14,7 @@ use PhpParser\Node\Expr\AssignOp\Concat;
  *
  * @package App\Repositories
  */
-class ClientRepository extends CoreRepository
+class ClientsRepository extends CoreRepository
 {
     /**
      * @return string
@@ -62,6 +62,45 @@ class ClientRepository extends CoreRepository
             ->select($columns)
             ->orderBy('created_at', 'desc')
             ->paginate($perPage);
+    }
+
+    /**
+     * Искать в базе по критериям: ID, Имя и телефон.
+     *
+     * @param $request
+     * @param null $perPage
+     * @return mixed
+     */
+    public function search($search,$perPage = null)
+    {
+        $columns = [
+            'id',
+            'name',
+            'phone',
+            'status',
+            'number_of_purchases',
+            'whole_check',
+            'average_check',
+            'created_at',
+            'updated_at',
+        ];
+
+        if ($search != null){
+            return $this
+                ->startConditions()
+                ->select($columns)
+                ->where('name', 'LIKE', "%$search%")
+                ->orWhere('phone', 'LIKE', "%$search%")
+                ->orWhere('id', 'LIKE', "%$search%")
+                ->orderBy('created_at','desc')
+                ->paginate($perPage);
+        }else{
+            return $this
+                ->startConditions()
+                ->select($columns)
+                ->orderBy('created_at', 'desc')
+                ->paginate($perPage);
+        }
     }
 
     /**

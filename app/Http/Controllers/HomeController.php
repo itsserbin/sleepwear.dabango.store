@@ -178,8 +178,8 @@ class HomeController extends Controller
         $colors = $request->colors;
 
         Mail::to(['serbin.ssd@gmail.com',
-             'youbrand_top@ukr.net',
-             'karina.youbrand@gmail.com'
+            'youbrand_top@ukr.net',
+            'karina.youbrand@gmail.com'
         ])->send(new Order($name, $phone, $sizes, $url, $product_name, $product, $colors));
 
     }

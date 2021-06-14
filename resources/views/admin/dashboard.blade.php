@@ -53,7 +53,13 @@
                         @isset($orders)
                             @foreach($orders as $order)
                                 <tr style="vertical-align:middle;">
-                                    <td scope="row">{{$order->Clients->status}}</td>
+                                    <td scope="row">
+                                        @if(isset($order->Clients->status))
+                                            {{$order->Clients->status}}
+                                        @else
+                                            Deleted.
+                                        @endif
+                                    </td>
                                     <td scope="row">{{$order->status}}</td>
                                     <td>{{$order->name}}</td>
                                     <td><a href="tel:+{{$order->phone}}">{{$order->phone}}</a></td>
