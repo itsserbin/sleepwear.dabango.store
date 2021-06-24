@@ -62,6 +62,17 @@
                             </label>
                         </div>
                     @endif
+
+                    @if(isset($product->xxxl))
+                        <div class="size__element">
+                            <label class="mycheckbox">
+                                <input name="sizes[]" value="xxxl" class="mycheckbox__default"
+                                       type="checkbox">
+                                <span class="mycheckbox__new">XXXL</span>
+                                <span class="mycheckbox__descr"></span>
+                            </label>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="available-colors">
