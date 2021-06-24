@@ -2,15 +2,169 @@
     <b-container>
         <b-row>
             <b-col>
-                <div class="h3">Текущее время: {{ timeNow }}</div>
-                <div class="h3">Заказов сегодня: {{ ordersToday }}</div>
+                <a v-bind:href="'/admin/bookkeeping/daily-statistics/create/'">
+                    <b-button variant="danger">
+                        <b>Добавить день</b>
+                    </b-button>
+                </a>
+
+            </b-col>
+            <b-col>
+                <b-form v-on:submit.prevent="searchByRange" class="d-flex">
+
+                    <VueDatePicker
+                        v-model="date"
+                        format="YYYY-MM-DD"
+                        placeholder="Введите дату"
+                        range/>
+
+                    <b-input-group-append>
+                        <b-button type="submit" variant="danger">Поиск</b-button>
+                    </b-input-group-append>
+                </b-form>
             </b-col>
         </b-row>
 
         <b-row class="my-3">
             <b-col>
-                <h2>Статистика по дням</h2>
+                <b-button v-on:click.prevent="showAllStatistics" variant="outline-warning">
+                    За все время
+                </b-button>
+            </b-col>
 
+            <b-col>
+                <b-button v-on:click.prevent="showStatisticsFor7Days" variant="outline-warning">
+                    За 7 дней
+                </b-button>
+            </b-col>
+
+            <b-col>
+                <b-button v-on:click.prevent="showStatisticsFor14Days" variant="outline-warning">
+                    За 14 дней
+                </b-button>
+            </b-col>
+
+            <b-col>
+                <b-button v-on:click.prevent="showStatisticsFor30Days" variant="outline-warning">
+                    За 30 дней
+                </b-button>
+            </b-col>
+        </b-row>
+
+        <b-row class="align-items-center">
+            <hr>
+            <b-col class="col-6 col-md-3 text-center my-3">
+                <div class="h5">
+                    Получено заявок:
+                </div>
+                <div class="h6">
+                    {{ SumApplications }}
+                </div>
+            </b-col>
+
+            <b-col class="col-6 col-md-3 text-center my-3">
+                <div class="h5">
+                    На почте:
+                </div>
+                <div class="h6">
+                    {{ SumAtThePostOffice }}
+                </div>
+            </b-col>
+
+            <b-col class="col-6 col-md-3 text-center my-3">
+                <div class="h5">
+                    Средний COR:
+                </div>
+                <div class="h6">
+                    {{ AverageCorRate | formatPercent }}
+                </div>
+            </b-col>
+
+            <b-col class="col-6 col-md-3 text-center my-3">
+                <div class="h5">
+                    Средний ROR:
+                </div>
+                <div class="h6">
+                    {{ AverageRorRate | formatPercent }}
+                </div>
+            </b-col>
+
+            <b-col class="col-6 col-md-3 text-center my-3">
+                <div class="h5">
+                    Средний RPR:
+                </div>
+                <div class="h6">
+                    {{ AverageRprRate | formatPercent }}
+                </div>
+            </b-col>
+
+            <b-col class="col-6 col-md-3 text-center my-3">
+                <div class="h5">
+                    Средняя цена заявки:
+                </div>
+                <div class="h6">
+                    {{ AverageApplicationPrice | formatMoney }}
+                </div>
+            </b-col>
+
+            <b-col class="col-6 col-md-3 text-center my-3">
+                <div class="h5">
+                    Средняя стоимость клиента:
+                </div>
+                <div class="h6">
+                    {{ AverageClientCostRate | formatMoney }}
+                </div>
+            </b-col>
+
+            <b-col class="col-6 col-md-3 text-center my-3">
+                <div class="h5">
+                    Общая прибыль:
+                </div>
+                <div class="h6">
+                    {{ SumProfit | formatMoney }}
+                </div>
+            </b-col>
+
+            <b-col class="col-6 col-md-3 text-center my-3">
+                <div class="h5">
+                    Затраты на рекламу:
+                </div>
+                <div class="h6">
+                    {{ SumTargetCosts | formatMoney }}
+                </div>
+            </b-col>
+
+            <b-col class="col-6 col-md-3 text-center my-3">
+                <div class="h5">
+                    Средняя маржа:
+                </div>
+                <div class="h6">
+                    {{ AverageMarginality | formatPercent }}
+                </div>
+            </b-col>
+
+            <b-col class="col-6 col-md-3 text-center my-3">
+                <div class="h5">
+                    Прибыль инвестора:
+                </div>
+                <div class="h6">
+                    {{ SumInvestorProfit | formatMoney }}
+                </div>
+            </b-col>
+
+            <b-col class="col-6 col-md-3 text-center my-3">
+                <div class="h5">
+                    Зарплата менеджера:
+                </div>
+                <div class="h6">
+                    {{ SumManagerSalary | formatMoney }}
+                </div>
+            </b-col>
+            <hr>
+        </b-row>
+
+        <b-row>
+            <b-col>
                 <b-table-simple
                     responsive
                     striped
@@ -203,137 +357,26 @@
                         </b-tr>
                     </b-tbody>
                 </b-table-simple>
-                <b-row class="text-center">
-                    <a v-bind:href="'/admin/bookkeeping/daily-statistics'">
-                        <b-button variant="danger">Перейти ко всем клиентам</b-button>
-                    </a>
+                <b-row>
+                    <b-col>
+                        Показано {{ showingFrom }}-{{ showingTo }} / {{ total }} Записей
+                    </b-col>
+                    <b-col>
+                        <paginate
+                            :page-count="pageCount"
+                            :page-range="3"
+                            :margin-pages="2"
+                            :click-handler="fetch"
+                            :prev-text="'<'"
+                            :next-text="'>'"
+                            :container-class="'pagination justify-content-end'"
+                            :page-link-class="'page-link'"
+                            :prev-link-class="'page-link'"
+                            :next-link-class="'page-link'"
+                            :page-class="'page-item'">
+                        </paginate>
+                    </b-col>
                 </b-row>
-            </b-col>
-        </b-row>
-
-        <b-row class="my-3">
-            <b-col>
-                <h2>Последние заказы</h2>
-                <b-table-simple
-                    responsive
-                    striped
-                    class="text-center"
-                    hover>
-                    <b-thead>
-                        <b-tr>
-                            <b-th>ID</b-th>
-                            <b-th>Статус заказа</b-th>
-                            <b-th>Имя</b-th>
-                            <b-th>Номер телефона</b-th>
-                            <b-th>ID товара</b-th>
-                            <b-th>Название товара</b-th>
-                            <b-th>Цена продажи</b-th>
-                            <b-th>Создан</b-th>
-                            <b-th>Дата обновления</b-th>
-                            <b-th>Действия</b-th>
-                        </b-tr>
-                    </b-thead>
-                    <b-tbody>
-                        <b-tr v-for="item in orders" :key="item.id">
-                            <b-th>{{ item.id }}</b-th>
-                            <b-th>{{ item.status }}</b-th>
-                            <b-td>{{ item.name }}</b-td>
-                            <b-td><a v-bind:href="'tel:' + item.phone">{{ item.phone }}</a></b-td>
-                            <b-td>{{ item.product_id }}</b-td>
-                            <b-td>{{ item.product.h1 }}</b-td>
-                            <b-td>{{ item.sale_price | formatMoney }}</b-td>
-                            <b-td>{{ item.created_at | moment("DD.MM.YYYY") }}</b-td>
-                            <b-td>{{ item.updated_at | moment("DD.MM.YYYY") }}</b-td>
-                            <b-td>
-                                <a v-bind:href="'/admin/orders/edit/' + item.id">
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16"
-                                         class="bi bi-pen"
-                                         fill="currentColor"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                              d="M5.707 13.707a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391L10.086 2.5a2 2 0 0 1 2.828 0l.586.586a2 2 0 0 1 0 2.828l-7.793 7.793zM3 11l7.793-7.793a1 1 0 0 1 1.414 0l.586.586a1 1 0 0 1 0 1.414L5 13l-3 1 1-3z"/>
-                                        <path fill-rule="evenodd"
-                                              d="M9.854 2.56a.5.5 0 0 0-.708 0L5.854 5.855a.5.5 0 0 1-.708-.708L8.44 1.854a1.5 1.5 0 0 1 2.122 0l.293.292a.5.5 0 0 1-.707.708l-.293-.293z"/>
-                                        <path
-                                            d="M13.293 1.207a1 1 0 0 1 1.414 0l.03.03a1 1 0 0 1 .03 1.383L13.5 4 12 2.5l1.293-1.293z"/>
-                                    </svg>
-                                </a>
-                            </b-td>
-                        </b-tr>
-                    </b-tbody>
-                    <b-tfoot>
-                        <b-tr>
-                            <b-th colspan="10">
-                                <a v-bind:href="'/admin/orders/'">
-                                    <b-button variant="danger">Перейти ко всем заказам</b-button>
-                                </a>
-                            </b-th>
-                        </b-tr>
-                    </b-tfoot>
-                </b-table-simple>
-            </b-col>
-        </b-row>
-
-        <b-row class="my-3">
-            <b-col>
-                <h2>Последние клиенты</h2>
-                <b-table-simple
-                    responsive
-                    striped
-                    class="text-center"
-                    hover>
-                    <b-thead>
-                        <b-tr>
-                            <b-th>ID</b-th>
-                            <b-th>Статус</b-th>
-                            <b-th>Имя</b-th>
-                            <b-th>Номер телефона</b-th>
-                            <b-th>Кол-во покупок</b-th>
-                            <b-th>Средний чек</b-th>
-                            <b-th>Общий чек</b-th>
-                            <b-th>Создан</b-th>
-                            <b-th>Дата обновления</b-th>
-                            <b-th>Действия</b-th>
-                        </b-tr>
-                    </b-thead>
-                    <b-tbody>
-                        <b-tr v-for="item in clients" :key="item.id">
-                            <b-th>{{ item.id }}</b-th>
-                            <b-th>{{ item.status }}</b-th>
-                            <b-td>{{ item.name }}</b-td>
-                            <b-td><a v-bind:href="'tel:' + item.phone">{{ item.phone }}</a></b-td>
-                            <b-td>{{ item.number_of_purchases }}</b-td>
-                            <b-td>{{ item.average_check | formatMoney }}</b-td>
-                            <b-td>{{ item.whole_check | formatMoney }}</b-td>
-                            <b-td>{{ item.created_at | moment("DD.MM.YYYY") }}</b-td>
-                            <b-td>{{ item.updated_at | moment("DD.MM.YYYY") }}</b-td>
-                            <b-td>
-                                <a v-bind:href="'/admin/clients/edit/' + item.id">
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16"
-                                         class="bi bi-pen"
-                                         fill="currentColor"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                              d="M5.707 13.707a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391L10.086 2.5a2 2 0 0 1 2.828 0l.586.586a2 2 0 0 1 0 2.828l-7.793 7.793zM3 11l7.793-7.793a1 1 0 0 1 1.414 0l.586.586a1 1 0 0 1 0 1.414L5 13l-3 1 1-3z"/>
-                                        <path fill-rule="evenodd"
-                                              d="M9.854 2.56a.5.5 0 0 0-.708 0L5.854 5.855a.5.5 0 0 1-.708-.708L8.44 1.854a1.5 1.5 0 0 1 2.122 0l.293.292a.5.5 0 0 1-.707.708l-.293-.293z"/>
-                                        <path
-                                            d="M13.293 1.207a1 1 0 0 1 1.414 0l.03.03a1 1 0 0 1 .03 1.383L13.5 4 12 2.5l1.293-1.293z"/>
-                                    </svg>
-                                </a>
-                            </b-td>
-                        </b-tr>
-                    </b-tbody>
-                    <b-tfoot>
-                        <b-tr>
-                            <b-th colspan="10">
-                                <a v-bind:href="'/admin/clients/'">
-                                    <b-button variant="danger">Перейти ко всем клиентам</b-button>
-                                </a>
-                            </b-th>
-                        </b-tr>
-                    </b-tfoot>
-                </b-table-simple>
             </b-col>
         </b-row>
     </b-container>
@@ -343,67 +386,113 @@
 export default {
     data() {
         return {
-            clients: [],
-            orders: [],
             dailyStatistics: [],
-            timeNow: '',
-            ordersToday: '',
+            pageCount: 1,
+            showingFrom: 1,
+            showingTo: 1,
+            total: 1,
+            endpoint: '/api/bookkeeping/daily-statistics?page=',
+            SumApplications: 1,
+            SumAtThePostOffice: 1,
+            AverageCorRate: 1,
+            AverageRorRate: 1,
+            AverageRprRate: 1,
+            AverageApplicationPrice: 1,
+            AverageClientCostRate: 1,
+            SumProfit: 1,
+            SumTargetCosts: 1,
+            AverageMarginality: 1,
+            SumInvestorProfit: 1,
+            SumManagerSalary: 1,
+            date: new Date(),
+            currentDate: new Date(),
         }
     },
-    created() {
-        setInterval(this.getTimeNow, 1000);
-    },
     mounted() {
-        axios.get("/api/dashboard/")
-            .then(({data}) => this.getDashboardSuccessResponse(data))
-            .catch((response) => this.getDashboardErrorResponse(response));
-
-        axios.get("/api/clients/")
-            .then(({data}) => this.getClientsListSuccessResponse(data))
-            .catch((response) => this.getClientsListErrorResponse(response));
-
-        axios.get("/api/orders/")
-            .then(({data}) => this.getOrdersListSuccessResponse(data))
-            .catch((response) => this.getOrdersListErrorResponse(response));
-
         axios.get("/api/bookkeeping/daily-statistics")
             .then(({data}) => this.getDailyStatisticsSuccessResponse(data))
             .catch((response) => this.getDailyStatisticsErrorResponse(response));
     },
+    computed: {
+        minDate() {
+            return new Date(
+                this.currentDate.getFullYear() - 1,
+                this.currentDate.getMonth(),
+                this.currentDate.getDate()
+            );
+        },
+        maxDate() {
+            return new Date(
+                this.currentDate.getFullYear() + 1,
+                this.currentDate.getMonth(),
+                this.currentDate.getDate(),
+            );
+        },
+    },
     methods: {
-        getDashboardSuccessResponse(data) {
-            this.ordersToday = data.ordersToday;
+        showAllStatistics() {
+            axios.get("/api/bookkeeping/daily-statistics")
+                .then(({data}) => this.getDailyStatisticsSuccessResponse(data))
+                .catch((response) => this.getDailyStatisticsErrorResponse(response));
         },
-        getDashboardErrorResponse(response) {
-            console.log(response);
+        showStatisticsFor7Days() {
+            axios.get("/api/bookkeeping/daily-statistics/?days=7")
+                .then(({data}) => this.getDailyStatisticsSuccessResponse(data))
+                .catch((response) => this.getDailyStatisticsErrorResponse(response));
         },
-
-        getClientsListSuccessResponse(data) {
-            this.clients = data.result.data;
+        showStatisticsFor14Days() {
+            axios.get("/api/bookkeeping/daily-statistics/?days=14")
+                .then(({data}) => this.getDailyStatisticsSuccessResponse(data))
+                .catch((response) => this.getDailyStatisticsErrorResponse(response));
         },
-        getClientsListErrorResponse(response) {
-            console.log(response);
+        showStatisticsFor30Days() {
+            axios.get("/api/bookkeeping/daily-statistics/?days=30")
+                .then(({data}) => this.getDailyStatisticsSuccessResponse(data))
+                .catch((response) => this.getDailyStatisticsErrorResponse(response));
         },
-
-        getOrdersListSuccessResponse(data) {
-            this.orders = data.result.data;
-        },
-        getOrdersListErrorResponse(response) {
-            console.log(response);
-        },
-
         getDailyStatisticsSuccessResponse(data) {
             this.dailyStatistics = data.result.data;
+            this.SumApplications = data.SumApplications;
+            this.SumAtThePostOffice = data.SumAtThePostOffice;
+            this.AverageCorRate = data.AverageCorRate;
+            this.AverageRorRate = data.AverageRorRate;
+            this.AverageRprRate = data.AverageRprRate;
+            this.AverageApplicationPrice = data.AverageApplicationPrice;
+            this.AverageClientCostRate = data.AverageClientCostRate;
+            this.SumProfit = data.SumProfit;
+            this.SumTargetCosts = data.SumTargetCosts;
+            this.AverageMarginality = data.AverageMarginality;
+            this.SumInvestorProfit = data.SumInvestorProfit;
+            this.SumManagerSalary = data.SumManagerSalary;
+
+            this.total = data.result.total;
+            this.showingFrom = data.result.from;
+            this.showingTo = data.result.to;
+            this.pageCount = data.result.last_page;
         },
         getDailyStatisticsErrorResponse(response) {
             console.log(response);
         },
-
-        getTimeNow: function () {
-            const today = new Date();
-            const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-            this.timeNow = time;
-        }
+        fetch(page = 1) {
+            axios.get(this.endpoint + page)
+                .then(({data}) => {
+                    this.dailyStatistics = data.result.data;
+                    this.total = data.result.total;
+                    this.showingFrom = data.result.from;
+                    this.showingTo = data.result.to;
+                    this.pageCount = data.result.last_page;
+                });
+        },
+        searchByRange() {
+            axios.get("/api/bookkeeping/daily-statistics/date-range/", {
+                params: {
+                    date_start: this.date.start,
+                    date_end: this.date.end
+                }
+            })
+                .then(({data}) => this.getDailyStatisticsSuccessResponse(data))
+                .catch((response) => this.getDailyStatisticsErrorResponse(response));
+        },
     }
 }
 </script>

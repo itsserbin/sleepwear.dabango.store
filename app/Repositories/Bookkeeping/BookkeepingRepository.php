@@ -42,27 +42,103 @@ class BookkeepingRepository extends CoreRepository
      * @param null $perPage
      * @return mixed
      */
-    public function ShowAllStatistics($perPage = null)
+    public function getAllWithPaginate($perPage = null)
     {
-        return $this
+        $getAll = $this
             ->startConditions()
             ->orderBy('date', 'desc')
             ->paginate($perPage);
+
+        $AverageCorRate = $this
+            ->startConditions()
+            ->select('canceled_orders_rate')
+            ->avg('canceled_orders_rate');
+
+        $AverageRorRate = $this
+            ->startConditions()
+            ->select('returned_orders_ratio')
+            ->avg('returned_orders_ratio');
+
+        $AverageRprRate = $this
+            ->startConditions()
+            ->select('received_parcel_ratio')
+            ->avg('received_parcel_ratio');
+
+        $AverageClientCostRate = $this
+            ->startConditions()
+            ->select('client_cost')
+            ->avg('client_cost');
+
+        $SumProfit = $this
+            ->startConditions()
+            ->select('profit')
+            ->sum('profit');
+
+        $AverageApplicationPrice = $this
+            ->startConditions()
+            ->select('application_price')
+            ->avg('application_price');
+
+        $SumTargetCosts = $this
+            ->startConditions()
+            ->select('advertising')
+            ->sum('advertising');
+
+        $AverageMarginality = $this
+            ->startConditions()
+            ->select('marginality')
+            ->avg('marginality');
+
+        $SumInvestorProfit = $this
+            ->startConditions()
+            ->select('investor_profit')
+            ->sum('investor_profit');
+
+        $SumManagerSalary = $this
+            ->startConditions()
+            ->select('manager_salary')
+            ->sum('manager_salary');
+
+        $SumApplications = $this
+            ->startConditions()
+            ->select('applications')
+            ->sum('applications');
+
+        $SumAtThePostOffice = $this
+            ->startConditions()
+            ->select('at_the_post_office')
+            ->sum('at_the_post_office');
+
+        return [
+            $getAll,
+            $AverageCorRate,
+            $AverageRorRate,
+            $AverageRprRate,
+            $AverageClientCostRate,
+            $SumProfit,
+            $AverageApplicationPrice,
+            $SumTargetCosts,
+            $AverageMarginality,
+            $SumInvestorProfit,
+            $SumManagerSalary,
+            $SumApplications,
+            $SumAtThePostOffice
+        ];
     }
 
     /**
      * Показать статистику за определенные дни.
      *
-     * @param null $perPage
-     * @return mixed
+     * @param int $subDays
+     * @return array
      */
-    public function StatisticsByTheNumberOfDays($subDays = null)
+    public function StatisticsByTheNumberOfDays($subDays, $perPage)
     {
         $getAll = $this
             ->startConditions()
             ->whereDate('date', '>=', Carbon::today()->subDays($subDays)->format('Y-m-d'))
             ->orderBy('date', 'desc')
-            ->paginate();
+            ->paginate($perPage);
 
         $AverageCorRate = $this
             ->startConditions()
@@ -155,159 +231,83 @@ class BookkeepingRepository extends CoreRepository
 
     public function StatisticsByDateRange($request)
     {
-        $range = explode(' - ', $request->date_range);
+        $result = $this
+            ->startConditions()
+            ->whereBetween('date', [$request['date_start'], $request['date_end']])
+            ->orderBy('date', 'desc')
+            ->paginate(15);
 
-        if (isset($range[1])) {
-            $result = $this->startConditions()->whereBetween('date', [$range[0], $range[1]])->paginate(15);
+        $AverageCorRate = $this
+            ->startConditions()
+            ->whereBetween('date', [$request['date_start'], $request['date_end']])
+            ->select('canceled_orders_rate')
+            ->avg('canceled_orders_rate');
 
-            $AverageCorRate = $this
-                ->startConditions()
-                ->whereBetween('date', [$range[0], $range[1]])
-                ->select('canceled_orders_rate')
-                ->avg('canceled_orders_rate');
+        $AverageRorRate = $this
+            ->startConditions()
+            ->whereBetween('date', [$request['date_start'], $request['date_end']])
+            ->select('returned_orders_ratio')
+            ->avg('returned_orders_ratio');
 
-            $AverageRorRate = $this
-                ->startConditions()
-                ->whereBetween('date', [$range[0], $range[1]])
-                ->select('returned_orders_ratio')
-                ->avg('returned_orders_ratio');
+        $AverageRprRate = $this
+            ->startConditions()
+            ->whereBetween('date', [$request['date_start'], $request['date_end']])
+            ->select('received_parcel_ratio')
+            ->avg('received_parcel_ratio');
 
-            $AverageRprRate = $this
-                ->startConditions()
-                ->whereBetween('date', [$range[0], $range[1]])
-                ->select('received_parcel_ratio')
-                ->avg('received_parcel_ratio');
+        $AverageClientCostRate = $this
+            ->startConditions()
+            ->whereBetween('date', [$request['date_start'], $request['date_end']])
+            ->select('client_cost')
+            ->avg('client_cost');
 
-            $AverageClientCostRate = $this
-                ->startConditions()
-                ->whereBetween('date', [$range[0], $range[1]])
-                ->select('client_cost')
-                ->avg('client_cost');
+        $SumProfit = $this
+            ->startConditions()
+            ->whereBetween('date', [$request['date_start'], $request['date_end']])
+            ->select('profit')
+            ->sum('profit');
 
-            $SumProfit = $this
-                ->startConditions()
-                ->whereBetween('date', [$range[0], $range[1]])
-                ->select('profit')
-                ->sum('profit');
+        $AverageApplicationPrice = $this
+            ->startConditions()
+            ->whereBetween('date', [$request['date_start'], $request['date_end']])
+            ->select('application_price')
+            ->avg('application_price');
 
-            $AverageApplicationPrice = $this
-                ->startConditions()
-                ->whereBetween('date', [$range[0], $range[1]])
-                ->select('application_price')
-                ->avg('application_price');
+        $SumTargetCosts = $this
+            ->startConditions()
+            ->whereBetween('date', [$request['date_start'], $request['date_end']])
+            ->select('advertising')
+            ->sum('advertising');
 
-            $SumTargetCosts = $this
-                ->startConditions()
-                ->whereBetween('date', [$range[0], $range[1]])
-                ->select('advertising')
-                ->sum('advertising');
+        $AverageMarginality = $this
+            ->startConditions()
+            ->whereBetween('date', [$request['date_start'], $request['date_end']])
+            ->select('marginality')
+            ->avg('marginality');
 
-            $AverageMarginality = $this
-                ->startConditions()
-                ->whereBetween('date', [$range[0], $range[1]])
-                ->select('marginality')
-                ->avg('marginality');
+        $SumInvestorProfit = $this
+            ->startConditions()
+            ->whereBetween('date', [$request['date_start'], $request['date_end']])
+            ->select('investor_profit')
+            ->sum('investor_profit');
 
-            $SumInvestorProfit = $this
-                ->startConditions()
-                ->whereBetween('date', [$range[0], $range[1]])
-                ->select('investor_profit')
-                ->sum('investor_profit');
+        $SumManagerSalary = $this
+            ->startConditions()
+            ->whereBetween('date', [$request['date_start'], $request['date_end']])
+            ->select('manager_salary')
+            ->sum('manager_salary');
 
-            $SumManagerSalary = $this
-                ->startConditions()
-                ->whereBetween('date', [$range[0], $range[1]])
-                ->select('manager_salary')
-                ->sum('manager_salary');
+        $SumApplications = $this
+            ->startConditions()
+            ->whereBetween('date', [$request['date_start'], $request['date_end']])
+            ->select('applications')
+            ->sum('applications');
 
-            $SumApplications = $this
-                ->startConditions()
-                ->whereBetween('date', [$range[0], $range[1]])
-                ->select('applications')
-                ->sum('applications');
-
-            $SumAtThePostOffice = $this
-                ->startConditions()
-                ->whereBetween('date', [$range[0], $range[1]])
-                ->select('at_the_post_office')
-                ->sum('at_the_post_office');
-
-        } else {
-            $result = $this->startConditions()->whereDate('date', $range[0])->paginate();
-
-            $AverageCorRate = $this
-                ->startConditions()
-                ->whereDate('date', $range[0])
-                ->select('canceled_orders_rate')
-                ->avg('canceled_orders_rate');
-
-            $AverageRorRate = $this
-                ->startConditions()
-                ->whereDate('date', $range[0])
-                ->select('returned_orders_ratio')
-                ->avg('returned_orders_ratio');
-
-            $AverageRprRate = $this
-                ->startConditions()
-                ->whereDate('date', $range[0])
-                ->select('received_parcel_ratio')
-                ->avg('received_parcel_ratio');
-
-            $AverageClientCostRate = $this
-                ->startConditions()
-                ->whereDate('date', $range[0])
-                ->select('client_cost')
-                ->avg('client_cost');
-
-            $SumProfit = $this
-                ->startConditions()
-                ->whereDate('date', $range[0])
-                ->select('profit')
-                ->sum('profit');
-
-            $AverageApplicationPrice = $this
-                ->startConditions()
-                ->whereDate('date', $range[0])
-                ->select('application_price')
-                ->avg('application_price');
-
-            $SumTargetCosts = $this
-                ->startConditions()
-                ->whereDate('date', $range[0])
-                ->select('advertising')
-                ->sum('advertising');
-
-            $AverageMarginality = $this
-                ->startConditions()
-                ->whereDate('date', $range[0])
-                ->select('marginality')
-                ->avg('marginality');
-
-            $SumInvestorProfit = $this
-                ->startConditions()
-                ->whereDate('date', $range[0])
-                ->select('investor_profit')
-                ->sum('investor_profit');
-
-            $SumManagerSalary = $this
-                ->startConditions()
-                ->whereDate('date', $range[0])
-                ->select('manager_salary')
-                ->sum('manager_salary');
-
-            $SumApplications = $this
-                ->startConditions()
-                ->whereDate('date', $range[0])
-                ->select('applications')
-                ->sum('applications');
-
-            $SumAtThePostOffice = $this
-                ->startConditions()
-                ->whereDate('date', $range[0])
-                ->select('at_the_post_office')
-                ->sum('at_the_post_office');
-        }
-
+        $SumAtThePostOffice = $this
+            ->startConditions()
+            ->whereBetween('date', [$request['date_start'], $request['date_end']])
+            ->select('at_the_post_office')
+            ->sum('at_the_post_office');
 
         return [
             $result,

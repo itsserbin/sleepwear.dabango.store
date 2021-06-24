@@ -176,9 +176,9 @@ class Kernel extends ConsoleKernel
                     ->count();
 
                 if ($OrdersCountNow !== 0) {
-                    $orders_days->canceled_orders_rate = ($CancelOrdersCountNow / $OrdersCountNow) * 100;
-                    $orders_days->returned_orders_ratio = ($ReturnOrdersCountNow / $OrdersCountNow) * 100;
-                    $orders_days->received_parcel_ratio = ($DoneOrdersCountNow / $OrdersCountNow) * 100;
+                    $orders_days->canceled_orders_rate = $CancelOrdersCountNow / $OrdersCountNow;
+                    $orders_days->returned_orders_ratio = $ReturnOrdersCountNow / $OrdersCountNow;
+                    $orders_days->received_parcel_ratio = $DoneOrdersCountNow / $OrdersCountNow;
                 }
 
                 $orders_days->manager_salary = ($DoneOrdersCountNow + $ReturnOrdersCountNow) * 15;
@@ -194,7 +194,7 @@ class Kernel extends ConsoleKernel
                 }
 
                 if ($SumDayCostsNow !== 0) {
-                    $orders_days->marginality = ($orders_days->profit / $orders_days->costs) * 100;
+                    $orders_days->marginality = $orders_days->profit / $orders_days->costs;
                 }
 
                 $orders_days->investor_profit = $orders_days->net_profit * 0.35;
@@ -275,9 +275,9 @@ class Kernel extends ConsoleKernel
                         ->count();
 
                     if ($OrdersCount !== 0) {
-                        $item->canceled_orders_rate = ($CancelOrdersCount / $OrdersCount) * 100;
-                        $item->returned_orders_ratio = ($ReturnOrdersCount / $OrdersCount) * 100;
-                        $item->received_parcel_ratio = ($DoneOrdersCount / $OrdersCount) * 100;
+                        $item->canceled_orders_rate = $CancelOrdersCount / $OrdersCount;
+                        $item->returned_orders_ratio = $ReturnOrdersCount / $OrdersCount;
+                        $item->received_parcel_ratio = $DoneOrdersCount / $OrdersCount;
                     }
 
                     $item->manager_salary = ($DoneOrdersCount + $ReturnOrdersCount) * 15;
@@ -293,7 +293,7 @@ class Kernel extends ConsoleKernel
                     }
 
                     if ($SumDayCosts !== 0) {
-                        $item->marginality = ($item->profit / $item->costs) * 100;
+                        $item->marginality = $item->profit / $item->costs;
                     }
 
                     $item->investor_profit = $item->net_profit * 0.35;

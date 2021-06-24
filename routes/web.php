@@ -105,17 +105,17 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
             Route::delete('destroy/{id}', [DailyStatisticsController::class, 'destroy'])
                 ->name('admin.bookkeeping.daily-statistics.destroy');
 
-            Route::get('days=7', [DailyStatisticsController::class, 'showStatisticsFor7Days'])
-                ->name('admin.bookkeeping.daily-statistics.7Days');
+//            Route::get('days=7', [DailyStatisticsController::class, 'showStatisticsFor7Days'])
+//                ->name('admin.bookkeeping.daily-statistics.7Days');
+//
+//            Route::get('days=14', [DailyStatisticsController::class, 'showStatisticsFor14Days'])
+//                ->name('admin.bookkeeping.daily-statistics.week');
+//
+//            Route::get('days=30', [DailyStatisticsController::class, 'showStatisticsFor30Days'])
+//                ->name('admin.bookkeeping.daily-statistics.30Days');
 
-            Route::get('days=14', [DailyStatisticsController::class, 'showStatisticsFor14Days'])
-                ->name('admin.bookkeeping.daily-statistics.week');
-
-            Route::get('days=30', [DailyStatisticsController::class, 'showStatisticsFor30Days'])
-                ->name('admin.bookkeeping.daily-statistics.30Days');
-
-            Route::post('date-range', [DailyStatisticsController::class, 'showFromRange'])
-                ->name('admin.bookkeeping.daily-statistics.dateRange');
+//            Route::post('date-range', [DailyStatisticsController::class, 'showFromRange'])
+//                ->name('admin.bookkeeping.daily-statistics.dateRange');
         });
 
 

@@ -41,13 +41,14 @@ class DailyStatisticsController extends Controller
      */
     public function index()
     {
-        $days_orders = $this->BookkeepingRepository->ShowAllStatistics(15);
-
-        return view('admin.bookkeeping.daily-statistics.index', [
-            'days_orders' => $days_orders
-        ]);
+        return view('admin.bookkeeping.daily-statistics.index');
     }
 
+    /**
+     * Открыть страницу добавления дня в статистику.
+     *
+     * @return Application|Factory|View
+     */
     public function create()
     {
         $days_orders = new OrdersDay();

@@ -54,6 +54,12 @@ class OrdersController extends BaseController
         ]);
     }
 
+    /**
+     * Удаление заказа.
+     *
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function destroy($id)
     {
         $result = $this->OrdersRepository->destroy($id);

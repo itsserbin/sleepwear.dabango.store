@@ -8,16 +8,25 @@ import Paginate from 'vuejs-paginate'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+import VueDatePicker from '@mathieustan/vue-datepicker';
+import '@mathieustan/vue-datepicker/dist/vue-datepicker.min.css';
+
+Vue.use(VueDatePicker);
+
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.use(VueSwal)
 Vue.use(require('vue-moment'));
 Vue.component('paginate', Paginate)
 
-var numeral = require("numeral");
+
+let numeral = require("numeral");
 
 Vue.filter("formatMoney", function (value) {
     return numeral(value).format('0,0[.]00');
+});
+Vue.filter("formatPercent", function (value) {
+    return numeral(value).format('0.000%');
 });
 
 
@@ -28,6 +37,7 @@ require('popper.js')
 Vue.component('admin-dashboard', require('./pages/AdminDashboard').default);
 Vue.component('clients-list', require('./pages/clients/ClientsList.vue').default);
 Vue.component('orders-list', require('./pages/orders/OrdersList.vue').default);
+Vue.component('bookkeeping-daily-statistics', require('./pages/bookkeeping/DailyStatistics.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

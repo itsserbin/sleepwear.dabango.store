@@ -90,7 +90,7 @@
                                     :click-handler="fetch"
                                     :prev-text="'<'"
                                     :next-text="'>'"
-                                    :container-class="'pagination justify-content-end'"
+                                    :container-class="'pagination justify-content-start'"
                                     :page-link-class="'page-link'"
                                     :prev-link-class="'page-link'"
                                     :next-link-class="'page-link'"
