@@ -10,6 +10,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="stylesheet" href="{{asset('admin/admin.css') }}">
+    <script type="text/javascript"
+            src="https://cdn.tiny.cloud/1/ufqphs7puyg4ij1mc3c61o7isu5mxekk5x9yygffpdo89ava/tinymce/5/tinymce.min.js"
+            referrerpolicy="origin"></script>
 </head>
 <body>
 <div id="app">
@@ -23,8 +26,16 @@
     <main class="py-4">
         @yield('content')
     </main>
+
 </div>
 
 <script src="{{asset('admin/admin.js') }}"></script>
+<script>
+    tinymce.init({
+        selector: '.editor',
+        height: 350,
+        plugins: 'code | table',
+    });
+</script>
 </body>
 </html>

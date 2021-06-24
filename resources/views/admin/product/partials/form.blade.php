@@ -78,30 +78,21 @@
 
 <div class="form-group my-3">
     <label for="content">Описание товара</label>
-    <textarea type="text" class="form-control" id="content" name="content"
+    <textarea type="text" class="form-control editor" id="content" name="content"
               placeholder="Описание">{{$product->content ?? ""}}</textarea>
 </div>
-<script>
-    CKEDITOR.replace('content');
-</script>
 
 <div class="form-group my-3">
     <label for="description">Характеристики товара</label>
-    <textarea type="text" class="form-control" id="characteristics" name="characteristics"
+    <textarea type="text" class="form-control editor" id="characteristics" name="characteristics"
               placeholder="Характеристики">{{$product->characteristics ?? ""}}</textarea>
 </div>
-<script>
-    CKEDITOR.replace('characteristics');
-</script>
 
 <div class="form-group my-3">
     <label for="size_table">Размерная сетка</label>
-    <textarea type="text" class="form-control" id="size_table" name="size_table"
+    <textarea type="text" class="form-control editor" id="size_table" name="size_table"
               placeholder="Введите данные о размерах товара">{{$product->size_table ?? ""}}</textarea>
 </div>
-<script>
-    CKEDITOR.replace('size_table');
-</script>
 
 <div class="row my-3">
     <div class="col-12 col-md-3 ">
