@@ -44,7 +44,7 @@ class Kernel extends HttpKernel
         ValidatePostSize::class,
         TrimStrings::class,
         ConvertEmptyStringsToNull::class,
-//        SecuredHttp::class,
+        SecuredHttp::class,
     ];
 
     /**
