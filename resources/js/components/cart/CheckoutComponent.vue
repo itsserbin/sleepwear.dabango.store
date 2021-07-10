@@ -160,7 +160,7 @@ export default {
             console.log(response);
         },
         sendOrder() {
-            axios.post('/api/order/create/', this.order)
+            axios.post('/api/order/create', this.order)
                 .then(() => this.sendFormSuccessResponse())
                 .catch(({response}) => this.sendFormErrorResponse(response));
         },
