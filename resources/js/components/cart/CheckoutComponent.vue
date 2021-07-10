@@ -170,12 +170,16 @@ export default {
                 text: 'Ваша заявка отправлена :)',
                 icon: 'success',
             });
-            // window.location.href = '/send-form';
+            window.location.href = '/send-form';
         },
         sendFormErrorResponse(response) {
             this.errors = response.data;
             console.log(response)
-
+            swal({
+                title: 'Ошибка!',
+                text: 'Призошла ошибка. Если видите это уведомление - пожалуйста, сообщите нам об этом. ',
+                icon: 'danger',
+            });
         },
         goHomePage() {
             window.location.href = window.location.origin;

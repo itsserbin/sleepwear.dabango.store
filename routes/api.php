@@ -303,7 +303,7 @@ Route::middleware('api')->group(function () {
         /**
          * Создание нового заказа.
          *
-         * GET /api/order/create/
+         * POST /api/order/create/
          */
         Route::post('create', [OrdersController::class, 'create'])
             ->name('api.orders.create');
