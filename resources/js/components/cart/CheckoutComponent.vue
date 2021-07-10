@@ -161,10 +161,10 @@ export default {
         },
         sendOrder() {
             axios.post('/api/order/create/', this.order)
-                .then(({data}) => this.sendFormSuccessResponse(data))
+                .then(() => this.sendFormSuccessResponse())
                 .catch(({response}) => this.sendFormErrorResponse(response));
         },
-        sendFormSuccessResponse(data) {
+        sendFormSuccessResponse() {
             swal({
                 title: 'Отправлено!',
                 text: 'Ваша заявка отправлена :)',
@@ -175,11 +175,6 @@ export default {
         sendFormErrorResponse(response) {
             this.errors = response.data;
             console.log(response)
-            swal({
-                title: 'Ошибка!',
-                text: 'Призошла ошибка. Если видите это уведомление - пожалуйста, сообщите нам об этом. ',
-                icon: 'danger',
-            });
         },
         goHomePage() {
             window.location.href = window.location.origin;
