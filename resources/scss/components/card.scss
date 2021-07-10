@@ -1,5 +1,6 @@
 .card {
 	padding: 0 0 20px 0;
+    border: none !important;
 	&__product {
 		display: grid;
 		grid-template-rows: 1.5fr 0.5fr;
@@ -30,7 +31,7 @@
 		height: 44px;
 		overflow: hidden;
 		font-weight: bold;
-		font-size: 22px;
+		font-size: 14px;
 		color: #000;
 		text-align: center;
 	}
@@ -46,7 +47,6 @@
 		margin: 0 0 5px 0;
 		font-weight: 500;
 		font-size: 18px;
-		-webkit-text-decoration-line: line-through;
 		text-decoration-line: line-through;
 		color: #A5A5A5;
 		&:after {
@@ -87,7 +87,6 @@
 		&__label {
 			margin: 0 0 10px 0;
 			height: 48px;
-			font-size: 16px;
 		}
 		&__price {
 			margin: 0 0 10px 0;

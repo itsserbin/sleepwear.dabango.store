@@ -4,7 +4,7 @@
 @import "components/nullstyle.scss";
 @import "components/fonts.scss";
 @import "components/alert.scss";
-@import "components/modal.scss";
+//@import "components/modal.scss";
 @import "components/burger-menu.scss";
 @import "components/header.scss";
 @import "components/checkbox.scss";
@@ -78,7 +78,7 @@ ul {
 
 .main {
     flex: 1 0 auto;
-    margin: 100px 0 0 0;
+    margin: 75px 0 0 0;
 }
 
 .footer {

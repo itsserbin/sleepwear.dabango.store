@@ -91,6 +91,66 @@ class Kernel extends ConsoleKernel
 
         })->everyMinute();
 
+        /**
+         * Интергация API с НоваПошта
+         *
+         * Обновление раз в 5 минут.
+         */
+        $schedule->call(function () {
+            $orders = Orders::where([
+                ['waybill', '!=', null],
+                ['status', '!=', 'Выполнен'],
+            ])->select('id','status', 'waybill')->get();
+
+            foreach ($orders as $item) {
+                $curl = curl_init();
+                curl_setopt_array($curl, array(
+                    CURLOPT_URL => "https://api.novaposhta.ua/v2.0/json/",
+                    CURLOPT_RETURNTRANSFER => True,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => "POST",
+                    CURLOPT_POSTFIELDS => json_encode([
+                        'apiKey' => 'ef9ad9f085a4555623f1513fd91a5892',
+                        'modelName' => 'TrackingDocument',
+                        'calledMethod' => 'getStatusDocuments',
+                        'methodProperties' => [
+                            'Documents' => [
+                                ['DocumentNumber' => $item->waybill],
+                            ]
+                        ]
+                    ]),
+                    CURLOPT_HTTPHEADER => array("content-type: application/json",),
+                ));
+                $response = curl_exec($curl);
+                $err = curl_error($curl);
+                curl_close($curl);
+
+                if ($err) {
+                    echo "cURL Error #:" . $err;
+                } else {
+                    $result = json_decode($response, true);
+
+                    if ($result['data'][0]['StatusCode'] == 1) {
+                        $item->status = 'Ожидает отправки';
+                    } elseif (in_array((int)$result['data'][0]['StatusCode'], [102, 103, 108], true)) {
+                        $item->status = 'Возврат';
+                    } elseif (in_array((int)$result['data'][0]['StatusCode'], [7, 8], true)) {
+                        $item->status = 'Ожидает получения';
+                    } elseif (in_array((int)$result['data'][0]['StatusCode'], [9, 11], true)) {
+                        $item->status = 'Выполнен';
+                    }
+                    $item->update();
+                    echo 'done';
+                }
+            }
+
+        })->everyMinute();
+
+        /**
+         * Подсчет дневной статистики.
+         *
+         * Обновление каждую минуту.
+         */
         $schedule->call(function () {
             $date_now = Carbon::now()->format('Y-m-d');
 
@@ -310,7 +370,8 @@ class Kernel extends ConsoleKernel
      *
      * @return void
      */
-    protected function commands()
+    protected
+    function commands()
     {
         $this->load(__DIR__ . '/Commands');
 

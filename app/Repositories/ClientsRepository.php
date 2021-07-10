@@ -16,6 +16,18 @@ use PhpParser\Node\Expr\AssignOp\Concat;
  */
 class ClientsRepository extends CoreRepository
 {
+    /** @var OrdersRepository */
+    private $OrdersRepository;
+
+    /**
+     * ClientsController constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->OrdersRepository = app(OrdersRepository::class);
+    }
+
     /**
      * @return string
      */
@@ -122,5 +134,52 @@ class ClientsRepository extends CoreRepository
     public function destroy(int $id)
     {
         return $this->model::destroy($id);
+    }
+
+    /**
+     * Проверить наличие клиента в БД.
+     */
+    public function checkByPhone($phone)
+    {
+        return $this->startConditions()->where('phone', $phone)->first();
+    }
+
+    /**
+     * Записываем нового клиента в базу и создаем заказ.
+     *
+     * @param $name
+     * @param $phone
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function createClient($name, $phone)
+    {
+        $client = new Clients();
+        $client->name = $name;
+        $client->status = 'Новый';
+        $client->phone = $phone;
+        $client->number_of_purchases = 1;
+        $client->whole_check = '-';
+        $client->average_check = '-';
+        $client->save();
+
+        return $client;
+    }
+
+    /**
+     * Обновляем информацию о клиенте и создаем заказ.
+     *
+     * @param $client
+     * @return mixed
+     */
+    public function updateClient($client)
+    {
+        $result = $this->startConditions()->where('id', $client)->first();
+
+        ++$result->number_of_purchases;
+        $result->whole_check = '-';
+        $result->average_check = '-';
+        $result->update();
+
+        return $result;
     }
 }

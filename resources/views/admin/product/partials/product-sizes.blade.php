@@ -2,7 +2,7 @@
 <div class="form-group my-3">
     <label for="sizes" class="w-100">Выберите размеры</label>
     <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-        <input type="checkbox" class="btn-check" name="s" id="xs" autocomplete="off" value="1"
+        <input type="checkbox" class="btn-check" name="xs" id="xs" autocomplete="off" value="1"
                @if($product->xs) checked @endif>
         <label class="btn btn-outline-primary" for="xs">XS</label>
 

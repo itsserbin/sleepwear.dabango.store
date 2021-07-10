@@ -33,4 +33,10 @@
            aria-current="page"
            href="{{route('admin.bookkeeping.providers.index')}}">Поставщики</a>
     </li>
+
+    <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('admin.bookkeeping.supplier-payments.index') ? 'active' : null }}"
+           aria-current="page"
+           href="{{route('admin.bookkeeping.supplier-payments.index')}}">Выплаты поставщика</a>
+    </li>
 </ul>

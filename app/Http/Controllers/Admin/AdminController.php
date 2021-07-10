@@ -31,11 +31,9 @@ class AdminController extends Controller
 
     public function index()
     {
-
         $days_orders = OrdersDay::orderBy('date', 'desc')->paginate(15);
 
         $orders = $this->OrdersRepository->getAllWithPaginate(10);
-//        $orders = Orders::orderBy('created_at','desc')->with('Clients')->paginate(10);
         $orders_today = Orders::whereDate('created_at', Carbon::now()->format('Y-m-d'))->count();
         $clients = Clients::orderBy('updated_at', 'desc')->paginate(10);
 

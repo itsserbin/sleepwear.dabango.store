@@ -2,7 +2,7 @@
     <div class="content">
         <h2 class="shipping-and-payment__block-title block-title">Доставка и оплата</h2>
         <div class="row">
-            <div class="shipping-and-payment__first-side">
+            <div class="col-12 col-md-6 shipping-and-payment__first-side">
                 <div class="shipping-and-payment__element">
                     <div class="shipping-and-payment__image">
                         <img src="{{asset('storage/img/content/shipping-and-payment-img1.png')}}" alt="">
@@ -13,7 +13,7 @@
                     </div>
                 </div>
             </div>
-            <div class="shipping-and-payment__second-side">
+            <div class="col-12 col-md-6 shipping-and-payment__second-side">
                 <div class="shipping-and-payment__element">
                     <div class="shipping-and-payment__image">
                         <img src="{{asset('storage/img/content/shipping-and-payment-img2.png')}}" alt="">

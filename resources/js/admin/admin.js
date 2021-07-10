@@ -1,20 +1,20 @@
 require('../bootstrap')
 
 import Vue from "vue";
-import {BootstrapVue, IconsPlugin} from 'bootstrap-vue'
 import VueSwal from 'vue-swal'
 import Paginate from 'vuejs-paginate'
 
+import {BootstrapVue, IconsPlugin} from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+Vue.use(BootstrapVue)
+Vue.use(IconsPlugin)
 
 import VueDatePicker from '@mathieustan/vue-datepicker';
 import '@mathieustan/vue-datepicker/dist/vue-datepicker.min.css';
 
 Vue.use(VueDatePicker);
 
-Vue.use(BootstrapVue)
-Vue.use(IconsPlugin)
 Vue.use(VueSwal)
 Vue.use(require('vue-moment'));
 Vue.component('paginate', Paginate)
@@ -30,14 +30,16 @@ Vue.filter("formatPercent", function (value) {
 });
 
 
-require('bootstrap/dist/js/bootstrap.min')
-require('bootstrap/dist/css/bootstrap.css')
+// require('bootstrap/dist/js/bootstrap.min')
+// require('bootstrap/dist/css/bootstrap.css')
 require('popper.js')
 
 Vue.component('admin-dashboard', require('./pages/AdminDashboard').default);
 Vue.component('clients-list', require('./pages/clients/ClientsList.vue').default);
 Vue.component('orders-list', require('./pages/orders/OrdersList.vue').default);
+Vue.component('order-edit', require('./pages/orders/EditOrder').default);
 Vue.component('bookkeeping-daily-statistics', require('./pages/bookkeeping/DailyStatistics.vue').default);
+Vue.component('supplier-payments', require('./pages/bookkeeping/SupplierPaymentsList').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

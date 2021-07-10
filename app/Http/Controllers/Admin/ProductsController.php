@@ -8,7 +8,7 @@ use App\Models\Products;
 use App\Models\ProductsColor;
 use App\Models\ProductsPhoto;
 use App\Repositories\Bookkeeping\ProvidersRepository;
-use App\Repositories\ProductRepository;
+use App\Repositories\Products\ProductRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -155,7 +155,7 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        $product = $this->ProductRepository->getEdit($id);
+        $product = $this->ProductRepository->getById($id);
         $productPhoto = ProductsPhoto::where('product_id', '=', $id)->get();
         $ProductsColor = ProductsColor::where('product_id', '=', $id)->get();
         $colors = Colors::all();
@@ -180,7 +180,7 @@ class ProductsController extends Controller
      */
     public function update(Request $request, Products $products, $id)
     {
-        $product = $this->ProductRepository->getEdit($id);
+        $product = $this->ProductRepository->getById($id);
 
         $product->published = $request->input('published');
         $product->status = $request->input('status');

@@ -69,3 +69,104 @@
         }
     }
 }
+
+
+.available-sizes {
+    display: flex;
+    flex-wrap: wrap;
+
+    .mycheckbox {
+        display: flex;
+        align-items: center;
+        user-select: none;
+        margin-bottom: 0;
+
+        &__default {
+            display: none;
+        }
+
+        &__new {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(59, 50, 95, 0.1);
+            border-radius: 7px;
+            position: relative;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+        }
+
+        &__new::after {
+            content: "";
+            display: block;
+            width: 0;
+            height: 0;
+            left: 50%;
+            top: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            transition: 0.11s ease-in;
+
+        }
+
+        &__default:checked + .mycheckbox__new::after {
+            height: 40px;
+            width: 40px;
+            border: 1px solid black;
+            border-radius: 7px;
+            background: rgba(56, 175, 68, 0.3);
+        }
+    }
+}
+
+.available-colors {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+
+    .mycheckbox {
+        display: flex;
+        align-items: center;
+        user-select: none;
+        border-radius: 7px;
+        margin: 0 3px;
+
+        &__default {
+            display: none;
+        }
+
+        &__new {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(59, 50, 95, 0.1);
+            border-radius: 7px;
+            position: relative;
+            display: block;
+            flex-shrink: 0;
+        }
+
+        &__new::after {
+            content: "";
+            background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 9.5L5 13L14.5 1.5' stroke='%233AB7F6' stroke-width='3'/%3E%3C/svg%3E%0A");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            display: block;
+            width: 0;
+            height: 0;
+            left: 50%;
+            top: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            transition: 0.11s ease-in;
+        }
+
+        &__default:checked + .mycheckbox__new::after {
+            height: 15px;
+            width: 13px;
+            border-radius: 50%;
+        }
+    }
+}

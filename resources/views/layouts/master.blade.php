@@ -5,7 +5,7 @@
 {!! $head_scripts !!}
 <body>
 {!! $after_body_scripts !!}
-<div class="wrapper">
+<div id="app" class="wrapper">
     <button onclick="topFunction()" id="myBtn" class="arrow-to-top">
         <span class="icon-arrow-up2"></span>
     </button>

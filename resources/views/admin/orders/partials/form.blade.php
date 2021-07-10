@@ -30,76 +30,106 @@
                    value="{{$order->phone}}">
         </div>
     </div>
-    <div class="col-12 col-md-3">
-        <div class="form-group my-3">
-            <label for="vendor_code">Арткул</label>
-            <input type="text" class="form-control" id="vendor_code" name="vendor_code"
-                   value="{{$order->Product->vendor_code}}" disabled>
-        </div>
-    </div>
+{{--    <div class="col-12 col-md-3">--}}
+{{--        <div class="form-group my-3">--}}
+{{--            <label for="vendor_code">Арткул</label>--}}
+{{--            <input type="text" class="form-control" id="vendor_code" name="vendor_code"--}}
+{{--                   value="{{$order->Product->vendor_code}}" disabled>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
 </div>
 <hr>
+{{--<div class="row">--}}
+{{--    <div class="col-12 col-md-3">--}}
+{{--        <div class="form-group my-3">--}}
+{{--            <label for="sale_price">Цена закупки</label>--}}
+{{--            <input type="text" class="form-control" id="sale_price" name="sale_price"--}}
+{{--                   value="{{$order->trade_price}}" disabled>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+
+{{--    <div class="col-12 col-md-3">--}}
+{{--        <div class="form-group my-3">--}}
+{{--            <label for="sale_price">Цена продажи</label>--}}
+{{--            <input type="text" class="form-control" id="sale_price" name="sale_price"--}}
+{{--                   value="{{$order->sale_price}}" disabled>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+
+{{--    <div class="col-12 col-md-3">--}}
+{{--        <div class="form-group my-3">--}}
+{{--            <label for="sale_price">Маржинальность</label>--}}
+{{--            <input type="text" class="form-control" id="sale_price" name="sale_price"--}}
+{{--                   value="{{$order->sale_price - $order->trade_price}}" disabled>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</div>--}}
+<hr>
 <div class="row">
-    <div class="col-12 col-md-3">
-        <div class="form-group my-3">
-            <label for="sale_price">Цена закупки</label>
-            <input type="text" class="form-control" id="sale_price" name="sale_price"
-                   value="{{$order->trade_price}}" disabled>
-        </div>
-    </div>
+{{--    <div class="col-12 col-md-3">--}}
+{{--        <div class="form-group my-3">--}}
+{{--            <label for="product_name">Название товара</label>--}}
+{{--            <a href="{{route('product', $order->product_id)}}" target="_blank">--}}
+{{--                <input type="text" class="form-control" id="product_name" name="product_name"--}}
+{{--                       value="{{$order->Product->h1}}" disabled>--}}
+{{--            </a>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
-    <div class="col-12 col-md-3">
-        <div class="form-group my-3">
-            <label for="sale_price">Цена продажи</label>
-            <input type="text" class="form-control" id="sale_price" name="sale_price"
-                   value="{{$order->sale_price}}" disabled>
-        </div>
-    </div>
+{{--    <div class="col-12 col-md-3">--}}
+{{--        <div class="form-group my-3">--}}
+{{--            <label for="product_id">ID товара</label>--}}
+{{--            <a href="{{route('product', $order->product_id)}}" target="_blank">--}}
+{{--                <input type="text" class="form-control" id="product_id" name="product_id"--}}
+{{--                       value="{{$order->product_id}}" disabled>--}}
+{{--            </a>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
-    <div class="col-12 col-md-3">
-        <div class="form-group my-3">
-            <label for="sale_price">Маржинальность</label>
-            <input type="text" class="form-control" id="sale_price" name="sale_price"
-                   value="{{$order->sale_price - $order->trade_price}}" disabled>
-        </div>
-    </div>
+{{--    <div class="col-12 col-md-3">--}}
+{{--        <div class="form-group my-3">--}}
+{{--            <label for="sizes">Размер(ы)</label>--}}
+{{--            <input type="text" class="form-control" id="sizes" name="sizes[]"--}}
+{{--                   value="@if(isset($order->sizes)) @foreach($order->sizes as $size){{$size}} @endforeach @else Размер не выбран @endif">--}}
+{{--        </div>--}}
+{{--    </div>--}}
+
+{{--    <div class="col-12 col-md-3">--}}
+{{--        <div class="form-group my-3">--}}
+{{--            <label for="colors">Цвет(а)</label>--}}
+{{--            <input type="text" class="form-control" id="colors" name="colors[]"--}}
+{{--                   value="@if(isset($order->colors)) @foreach($order->colors as $color){{$color}} @endforeach @else Цвет не выбран @endif">--}}
+{{--        </div>--}}
+{{--    </div>--}}
 </div>
 <hr>
 <div class="row">
-    <div class="col-12 col-md-3">
-        <div class="form-group my-3">
-            <label for="product_name">Название товара</label>
-            <a href="{{route('product', $order->product_id)}}" target="_blank">
-                <input type="text" class="form-control" id="product_name" name="product_name"
-                       value="{{$order->Product->h1}}" disabled>
-            </a>
-        </div>
-    </div>
-
-    <div class="col-12 col-md-3">
-        <div class="form-group my-3">
-            <label for="product_id">ID товара</label>
-            <a href="{{route('product', $order->product_id)}}" target="_blank">
-                <input type="text" class="form-control" id="product_id" name="product_id"
-                       value="{{$order->product_id}}" disabled>
-            </a>
-        </div>
-    </div>
-
-    <div class="col-12 col-md-3">
-        <div class="form-group my-3">
-            <label for="sizes">Размер(ы)</label>
-            <input type="text" class="form-control" id="sizes" name="sizes[]"
-                   value="@if(isset($order->sizes)) @foreach($order->sizes as $size){{$size}} @endforeach @else Размер не выбран @endif">
-        </div>
-    </div>
-
-    <div class="col-12 col-md-3">
-        <div class="form-group my-3">
-            <label for="colors">Цвет(а)</label>
-            <input type="text" class="form-control" id="colors" name="colors[]"
-                   value="@if(isset($order->colors)) @foreach($order->colors as $color){{$color}} @endforeach @else Цвет не выбран @endif">
+    <div class="col-12">
+        <div class="table-responsive">
+            <table class="text-center">
+                <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Фото</th>
+                    <th>Количество</th>
+                    <th>Цена</th>
+                    <th>Цвет</th>
+                    <th>Размер</th>
+                    <th>Действия</th>
+                </tr>
+                @foreach($order->items as $item)
+                <tr>
+                    <td><a href="{{route('product',$item->product->id)}}" target="_blank">{{$item->product->h1}}</a></td>
+                    <td><img src="{{asset($item->product->preview)}}" alt="{{$item->product->h1}}"></td>
+                    <td>{{$item->count}}</td>
+                    <td>{{$item->sale_price}}</td>
+                    <td>@foreach($item->color as $color){{$color}} @endforeach</td>
+                    <td>@foreach($item->size as $size){{$size}} @endforeach</td>
+                </tr>
+                @endforeach
+                </thead>
+            </table>
         </div>
     </div>
 </div>
@@ -135,25 +165,25 @@
 </div>
 <hr>
 <div class="row">
-    <div class="col-12 col-md-3">
-        <div class="form-group my-3">
-            <label for="provider_id">Поставщик</label>
-            <a href="{{route('admin.bookkeeping.providers.edit',$order->Product->Providers->id)}}" target="_blank">
-                <input type="text" class="form-control" id="provider_id" name="provider_id"
-                       value="{{$order->Product->Providers->name}}" disabled>
-            </a>
-        </div>
-    </div>
+{{--    <div class="col-12 col-md-3">--}}
+{{--        <div class="form-group my-3">--}}
+{{--            <label for="provider_id">Поставщик</label>--}}
+{{--            <a href="{{route('admin.bookkeeping.providers.edit',$order->Product->Providers->id)}}" target="_blank">--}}
+{{--                <input type="text" class="form-control" id="provider_id" name="provider_id"--}}
+{{--                       value="{{$order->Product->Providers->name}}" disabled>--}}
+{{--            </a>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
-    <div class="col-12 col-md-3">
-        <div class="form-group my-3">
-            <label for="pay">Выплата от поставщика: {{$order->sale_price - $order->trade_price}} грн.</label>
-            <select class="form-control" id="pay" name="pay">
-                <option value="0" @if ($order->pay) selected="" @endif>Не получена</option>
-                <option value="1" @if ($order->pay) selected="" @endif>Получена</option>
-            </select>
-        </div>
-    </div>
+{{--    <div class="col-12 col-md-3">--}}
+{{--        <div class="form-group my-3">--}}
+{{--            <label for="pay">Выплата от поставщика: {{$order->sale_price - $order->trade_price}} грн.</label>--}}
+{{--            <select class="form-control" id="pay" name="pay">--}}
+{{--                <option value="0" @if ($order->pay) selected="" @endif>Не получена</option>--}}
+{{--                <option value="1" @if ($order->pay) selected="" @endif>Получена</option>--}}
+{{--            </select>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 </div>
 <hr>
 <div class="row">

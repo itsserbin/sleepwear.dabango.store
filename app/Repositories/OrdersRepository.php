@@ -14,6 +14,7 @@ use PhpParser\Node\Expr\AssignOp\Concat;
  */
 class OrdersRepository extends CoreRepository
 {
+
     /**
      * @return string
      */
@@ -31,7 +32,10 @@ class OrdersRepository extends CoreRepository
      */
     public function getById($id)
     {
-        return $this->startConditions()->find($id);
+        return $this
+            ->startConditions()
+            ->with('items.product')
+            ->find($id);
     }
 
     /**
@@ -263,6 +267,37 @@ class OrdersRepository extends CoreRepository
     }
 
     /**
+     * Создание нового заказа.
+     *
+     * @param $data
+     * @return mixed
+     */
+    public function create($data, $client_id)
+    {
+        $order = new $this->model;
+
+        $order->name = $data['name'];
+        $order->phone = $data['phone'];
+        $order->city = $data['city'];
+        $order->postal_office = $data['postal_office'];
+        $order->client_id = $client_id;
+        $order->product_name = '-';
+        $order->trade_price = '-';
+        $order->sale_price = '-';
+        $order->profit = '-';
+        $order->status = 'Новый';
+
+        $order->save();
+
+        return $order;
+    }
+
+    public function find(int $id)
+    {
+        return $this->model::where('id', $id)->with('items', 'items.product')->first();
+    }
+
+    /**
      * Обновить данные клиента.
      *
      * @param $id
@@ -271,20 +306,17 @@ class OrdersRepository extends CoreRepository
      */
     public function update(int $id, array $request)
     {
-//        return $this->model::where('id', $id)->update([
-//            'status' => $request['status'],
-//            'name' => $request['name'],
-//            'phone' => $request['phone'],
-//            'comment' => $request['comment'],
-//            'city' => $request['city'],
-//            'sizes' => $request['sizes'],
-//            'colors' => $request['colors'],
-//            'waybill' => $request['waybill'],
-//            'postal_office' => $request['postal_office'],
-//            'pay' => $request['pay'],
-//        ]);
+        return $this->model::where('id', $id)->update([
+            'status' => $request[0]['status'],
+            'name' => $request[0]['name'],
+            'phone' => $request[0]['phone'],
+            'comment' => $request[0]['comment'],
+            'city' => $request[0]['city'],
+            'waybill' => $request[0]['waybill'],
+            'postal_office' => $request[0]['postal_office'],
+            'modified_by' => $request[1]['userName'],
+        ]);
 
-        return $this->model::where('id', $id)->update($request);
 
     }
 
@@ -342,5 +374,20 @@ class OrdersRepository extends CoreRepository
             ->orderBy('created_at', 'desc')
             ->with('product')
             ->paginate($perPage);
+    }
+
+    /**
+     * Подсчитать сумму всех заказов пользователя, с учетом нового заказа.
+     *
+     * @param $phone
+     * @param $sale_price
+     * @return mixed
+     */
+    public function sumAllClientOrders($phone, $sale_price)
+    {
+        return $this
+                ->startConditions()
+                ->where('phone', $phone)
+                ->sum('sale_price') + $sale_price;
     }
 }

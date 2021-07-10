@@ -4,7 +4,7 @@
         <div class="relative-slider">
             @foreach($products as $product)
             @if($product->status)
-            <a href="{{route('product', $product->id)}}" class="card__product">
+            <a href="{{route('product', $product->id)}}" class="card__product text-decoration-none">
                 <div class="card__image">
                     <img src="{{asset($product->preview)}}" alt="">
                 </div>

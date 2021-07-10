@@ -3,25 +3,25 @@
         <ul class="menu__list">
 
             @if(\Illuminate\Support\Facades\Route::is('product'))
-                <li><a href="{{route('home')}}" class="menu__link">Главная</a></li>
-                <li><a href="#specifications" class="menu__link">Характеристики</a></li>
-                <li><a href="#advantages" class="menu__link">Наши преимущества</a></li>
-                <li><a href="#shipping-and-payment" class="menu__link">Доставка и оплата</a></li>
-                <li><a href="#reviews" class="menu__link">Отзывы</a></li>
+                <li><a href="{{route('home')}}" class="menu__link text-decoration-none">Главная</a></li>
+                <li><a href="#specifications" class="menu__link text-decoration-none">Характеристики</a></li>
+                <li><a href="#advantages" class="menu__link text-decoration-none">Наши преимущества</a></li>
+                <li><a href="#shipping-and-payment" class="menu__link text-decoration-none">Доставка и оплата</a></li>
+                <li><a href="#reviews" class="menu__link text-decoration-none">Отзывы</a></li>
             @endif
 
         </ul>
     </nav>
     <div class="burger-menu__contacts">
         <div class="row">
-            <address class="address">
+            <address class="address text-center">
 
                 @if(isset($phone))
-                    <a href="tel:{{$phone}}" class="phonecall">{{$phone}}</a>
+                    <a href="tel:{{$phone}}" class="phonecall text-decoration-none">{{$phone}}</a>
                 @endif
 
                 @if(isset($email))
-                    <a href="mailto:{{$email}}" class="email">{{$email}}</a>
+                    <a href="mailto:{{$email}}" class="email text-decoration-none">{{$email}}</a>
                 @endif
 
             </address>
@@ -54,7 +54,7 @@
         <div class="row">
 
             @if(isset($schedule))
-                <div class="burger-menu__schedule schedule">
+                <div class="burger-menu__schedule schedule text-center">
                     <span>{!! $schedule !!}</span>
                 </div>
             @endif

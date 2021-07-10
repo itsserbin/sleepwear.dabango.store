@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Products;
 
 use App\Models\Products as Model;
 use Illuminate\Database\Eloquent\Collection;
@@ -29,7 +29,7 @@ class ProductRepository extends CoreRepository
      *
      * @return Model
      */
-    public function getEdit($id)
+    public function getById($id)
     {
         return $this->startConditions()->find($id);
     }
@@ -63,6 +63,7 @@ class ProductRepository extends CoreRepository
             ->orderBy('created_at', 'desc')
             ->paginate($perPage);
     }
+
     public function getProduct($id)
     {
         return $this->model::find($id);
@@ -89,5 +90,19 @@ class ProductRepository extends CoreRepository
             ->select($columns)
             ->orderBy('total_sales', 'DESC')
             ->paginate($perPage);
+    }
+
+    /**
+     * Увеличить кол-во покупок товара на 1.
+     *
+     * @param $id
+     * @param $data
+     * @return mixed
+     */
+    public function updateProductTotalSales($id, $data)
+    {
+        return $this
+            ->model::where('id', $id)
+            ->update(['total_sales' => ++$data]);
     }
 }

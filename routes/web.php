@@ -12,9 +12,12 @@ use App\Http\Controllers\Bookkeeping\BookkeepingController;
 use App\Http\Controllers\Bookkeeping\DailyStatisticsController;
 use App\Http\Controllers\Bookkeeping\ProductStatisticsController;
 use App\Http\Controllers\Bookkeeping\ProvidersController;
+use App\Http\Controllers\Bookkeeping\SupplierPaymentsController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OptionsController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
@@ -29,13 +32,60 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 |
 */
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/product/{id?}', [HomeController::class, 'product'])->name('product');
+/**
+ * Открыть главную страницу.
+ *
+ * GET /
+ */
+Route::get('/', [HomeController::class, 'index'])
+    ->name('home');
 
-Route::post('send-form', [HomeController::class, 'send_form_post'])->name('send.form.post');
-Route::get('send-form', [HomeController::class, 'send_form_get'])->name('send.form.get');
-Route::post('send-review', [HomeController::class, 'send_review_post'])->name('send.review.post');
-//Route::get('send-review', [HomeController::class, 'send_review_get'])->name('send.review.get');
+/**
+ * Открыть корзину.
+ *
+ * GET /cart/
+ */
+Route::get('cart',[CartController::class,'index'])
+    ->name('cart');
+
+/**
+ * Открыть страницу подтверждения заказа.
+ */
+Route::get('checkout',[HomeController::class,'checkout'])
+    ->name('checkout');
+
+/**
+ * Открыть страницу товара.
+ *
+ * GET /product/{id}
+ */
+Route::get('/product/{id?}', [HomeController::class, 'product'])
+    ->name('product');
+
+/**
+ * Отправить форму заявки.
+ *
+ * POST /send-form/
+ */
+Route::post('send-form', [HomeController::class, 'send_form_post'])
+    ->name('send.form.post');
+
+/**
+ * Показать страницу благодарности после отправки заявки.
+ *
+ * GET /send-form/
+ */
+Route::get('send-form', [HomeController::class, 'send_form_get'])
+    ->name('send.form.get');
+
+/**
+ * Отправить форму отзыва.
+ *
+ * POST /send-review/
+ */
+Route::post('send-review', [HomeController::class, 'send_review_post'])
+    ->name('send.review.post');
+
 
 
 Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
@@ -89,8 +139,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
         Route::resource('profit', App\Http\Controllers\Bookkeeping\ProfitController::class)
             ->names('admin.bookkeeping.profit');
 
-//        Route::resource('daily-statistics', DailyStatisticsController::class)
-//            ->names('admin.bookkeeping.daily-statistics');
 
         Route::prefix('daily-statistics')->group(function () {
             Route::get('/', [DailyStatisticsController::class, 'index'])
@@ -104,18 +152,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
 
             Route::delete('destroy/{id}', [DailyStatisticsController::class, 'destroy'])
                 ->name('admin.bookkeeping.daily-statistics.destroy');
-
-//            Route::get('days=7', [DailyStatisticsController::class, 'showStatisticsFor7Days'])
-//                ->name('admin.bookkeeping.daily-statistics.7Days');
-//
-//            Route::get('days=14', [DailyStatisticsController::class, 'showStatisticsFor14Days'])
-//                ->name('admin.bookkeeping.daily-statistics.week');
-//
-//            Route::get('days=30', [DailyStatisticsController::class, 'showStatisticsFor30Days'])
-//                ->name('admin.bookkeeping.daily-statistics.30Days');
-
-//            Route::post('date-range', [DailyStatisticsController::class, 'showFromRange'])
-//                ->name('admin.bookkeeping.daily-statistics.dateRange');
         });
 
 
@@ -124,6 +160,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
 
         Route::resource('providers', ProvidersController::class)
             ->names('admin.bookkeeping.providers');
+
+        Route::get('supplier-payments',[SupplierPaymentsController::class,'index'])
+            ->name('admin.bookkeeping.supplier-payments.index');
     });
 
     Route::group(['middleware' => 'role:administrator', 'prefix' => '/options'], function () {

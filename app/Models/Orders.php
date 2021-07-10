@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class Orders
@@ -34,12 +35,6 @@ class Orders extends Model
         'modified_by',
     ];
 
-
-    protected $casts = [
-        'colors' => 'array',
-        'sizes' => 'array',
-    ];
-
     protected $dates = [
         'created_at',
         'updated_at',
@@ -63,5 +58,15 @@ class Orders extends Model
     public function Clients()
     {
         return $this->belongsTo(Clients::class,'client_id');
+    }
+
+    /**
+     * Relation with OrderItems.
+     *
+     * @return HasMany
+     */
+    public function items()
+    {
+        return $this->hasMany('App\Models\OrderItems', 'order_id');
     }
 }

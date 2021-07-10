@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Repositories\ClientsRepository;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 /**
@@ -11,6 +12,7 @@ use Illuminate\Http\Request;
  */
 class ClientsController extends BaseController
 {
+    /** @var ClientsRepository  */
     private $ClientsRepository;
 
     /**
@@ -23,7 +25,7 @@ class ClientsController extends BaseController
     }
 
     /**
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function index()
     {
@@ -39,7 +41,7 @@ class ClientsController extends BaseController
      * Поиск по клиентской базе.
      *
      * @param $search
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function search($search)
     {
@@ -55,11 +57,27 @@ class ClientsController extends BaseController
      * Удаление клиента.
      *
      * @param $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function destroy($id)
     {
         $result = $this->ClientsRepository->destroy($id);
+
+        return $this->returnResponse([
+            'success' => true,
+            'result' => $result,
+        ]);
+    }
+
+    /**
+     * Получить клиента по ID для редактирования.
+     *
+     * @param $id
+     * @return JsonResponse
+     */
+    public function edit($id)
+    {
+        $result = $this->ClientsRepository->getById($id);
 
         return $this->returnResponse([
             'success' => true,

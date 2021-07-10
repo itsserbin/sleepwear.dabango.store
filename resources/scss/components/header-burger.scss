@@ -1,6 +1,6 @@
 .header-burger {
     position: relative;
-    width: 25px;
+    width: 25px !important;
     height: 18px;
     transition: all 0.3s ease 0s;
     &::before,
