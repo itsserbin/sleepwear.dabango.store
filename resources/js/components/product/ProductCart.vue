@@ -29,6 +29,23 @@
                 </div>
             </a>
         </div>
+        <div class="row">
+            <div class="col">
+                <paginate
+                    :page-count="pageCount"
+                    :page-range="3"
+                    :margin-pages="2"
+                    :click-handler="fetch"
+                    :prev-text="'<'"
+                    :next-text="'>'"
+                    :container-class="'pagination justify-content-center'"
+                    :page-link-class="'page-link'"
+                    :prev-link-class="'page-link'"
+                    :next-link-class="'page-link'"
+                    :page-class="'page-item'">
+                </paginate>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -38,6 +55,11 @@ export default {
         return {
             host: window.location.origin,
             products: [],
+            pageCount: 1,
+            showingFrom: 1,
+            showingTo: 1,
+            total: 1,
+            endpoint: '/api/product?page='
         }
     },
     mounted() {
@@ -48,9 +70,23 @@ export default {
     methods: {
         deleteCartListSuccessResponse(data) {
             this.products = data.result.data;
+            this.total = data.result.total;
+            this.showingFrom = data.result.from;
+            this.showingTo = data.result.to;
+            this.pageCount = data.result.last_page;
         },
         deleteCartListErrorResponse(response) {
             console.log(response);
+        },
+        fetch(page = 1) {
+            axios.get(this.endpoint + page)
+                .then(({data}) => {
+                    this.products = data.result.data;
+                    this.total = data.result.total;
+                    this.showingFrom = data.result.from;
+                    this.showingTo = data.result.to;
+                    this.pageCount = data.result.last_page;
+                });
         },
     }
 }

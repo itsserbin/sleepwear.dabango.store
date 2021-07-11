@@ -5,12 +5,14 @@ import 'slick-carousel'
 import Vue from "vue";
 import Vuex from 'vuex';
 import store from "./store";
-
+import Paginate from 'vuejs-paginate'
 import {BootstrapVue, IconsPlugin} from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
+Vue.component('paginate', Paginate)
+
 
 window.axios = require('axios');
 
