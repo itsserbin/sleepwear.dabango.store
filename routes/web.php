@@ -169,7 +169,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
         Route::get('/', [OptionsController::class, 'index'])->name('admin.options.index');
         Route::get('scripts', [OptionsController::class, 'scripts'])->name('admin.options.scripts');
         Route::resource('colors', ColorsController::class)->names('admin.options.colors');
-        Route::post('update', [OptionsController::class, 'update'])->name('admin.options.update');
+        Route::post('update/{id}', [OptionsController::class, 'update'])->name('admin.options.update');
         Route::resource('users', UsersController::class)->names('admin.users');
         Route::resource('roles', RolesColroller::class)->names('admin.roles');
     });
