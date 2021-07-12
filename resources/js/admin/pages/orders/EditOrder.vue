@@ -119,8 +119,7 @@
                                         </a>
 
                                         <button type="button" class="btn" data-bs-toggle="modal"
-                                                :data-bs-target="'#staticBackdrop' + item.id"
-                                                v-on:click.prevent="editOrderItems(item.id)">
+                                                :data-bs-target="'#staticBackdrop' + item.id">
                                             <svg width="1em" height="1em" viewBox="0 0 16 16"
                                                  class="bi bi-pen"
                                                  fill="currentColor"
@@ -214,6 +213,23 @@
                 </div>
             </b-row>
 
+            <b-row v-if="order.product_id !== null">
+                <b-col>
+                    <div class="h5">Данные до обновления:</div>
+                    <ul>
+                        <li>ID товара:
+                            <a v-bind:href="host + 'product/' + order.product_id" target="_blank">{{ order.product_id }}</a>
+                        </li>
+                        <li v-if="order.colors !== null">Цвет товара:
+                            <span v-for="colors_old in order.colors">{{colors_old}}</span>
+                        </li>
+                        <li v-if="order.sizes !== null">Размер товара:
+                            <span v-for="sizes_old in order.sizes">{{sizes_old}}</span>
+                        </li>
+                    </ul>
+                </b-col>
+            </b-row>
+
             <b-row>
                 <div class="col-12 col-md-3">
                     <div class="form-group my-3">
@@ -269,9 +285,7 @@ export default {
                 updated_at: null,
                 modified_by: null,
             },
-            items: {
-                id: null,
-            },
+            items: [],
         }
     },
     props: {
@@ -285,7 +299,7 @@ export default {
         axios.get('/api/orders/edit/' + id)
             .then(({data}) => this.getOrderSuccessResponse(data))
             .catch((response) => this.getOrderErrorResponse(response));
-        console.log(this.showModal);
+
         this.getItems(id);
     },
     methods: {

@@ -28,13 +28,13 @@ class OrdersRepository extends CoreRepository
      *
      * @param int @id
      *
-     * @return Model
+     * @return Model|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|Collection|\Illuminate\Database\Eloquent\Model
      */
     public function getById($id)
     {
         return $this
             ->startConditions()
-            ->with('items.product')
+            ->with('Product', 'items.product')
             ->find($id);
     }
 
