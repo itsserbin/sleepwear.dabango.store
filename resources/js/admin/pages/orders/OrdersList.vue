@@ -36,9 +36,6 @@
                             <b-th>Статус заказа</b-th>
                             <b-th>Имя</b-th>
                             <b-th>Номер телефона</b-th>
-<!--                            <b-th>ID товара</b-th>-->
-<!--                            <b-th>Название товара</b-th>-->
-<!--                            <b-th>Цена продажи</b-th>-->
                             <b-th>Создан</b-th>
                             <b-th>Дата обновления</b-th>
                             <b-th>Действия</b-th>
@@ -50,9 +47,6 @@
                             <b-th>{{ item.status }}</b-th>
                             <b-td>{{ item.name }}</b-td>
                             <b-td><a v-bind:href="'tel:' + item.phone">{{ item.phone }}</a></b-td>
-<!--                            <b-td>{{ item.product_id }}</b-td>-->
-<!--                            <b-td>{{ item.product.h1 }}</b-td>-->
-<!--                            <b-td>{{ item.sale_price | formatMoney }}</b-td>-->
                             <b-td>{{ item.created_at | moment("DD.MM.YYYY") }}</b-td>
                             <b-td>{{ item.updated_at | moment("DD.MM.YYYY") }}</b-td>
                             <b-td>

@@ -94,7 +94,7 @@ class OrdersController extends Controller
     {
         $orders = $this->OrdersRepository->getNewOrdersWithPaginate(15);
 
-        return view('admin.orders.new.index', [
+        return view('admin.orders.index', [
             'orders' => $orders,
         ]);
     }

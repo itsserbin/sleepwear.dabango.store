@@ -25,8 +25,8 @@
                             <th scope="col">Статус</th>
                             <th scope="col">Имя</th>
                             <th scope="col">Телефон</th>
-                            <th scope="col">ID товара</th>
-                            <th scope="col">Название</th>
+{{--                            <th scope="col">ID товара</th>--}}
+{{--                            <th scope="col">Название</th>--}}
                             <th scope="col">Комментарий</th>
                             <th scope="col">Дата обновления</th>
                             <th scope="col"></th>
@@ -39,9 +39,9 @@
                                 <td>{{$order->status}}</td>
                                 <td>{{$order->name}}</td>
                                 <td><a href="tel:{{$order->phone}}">{{$order->phone}}</a></td>
-                                <td>{{$order->product_id}}</td>
-                                <td><a href="{{route('product',$order->product_id)}}"
-                                       target="_blank">{{$order->Product->h1}}</a></td>
+{{--                                <td>{{$order->product_id}}</td>--}}
+{{--                                <td><a href="{{route('product',$order->product_id)}}"--}}
+{{--                                       target="_blank">{{$order->Product->h1}}</a></td>--}}
                                 <td>{{\Illuminate\Support\Str::limit($order->comment,'20')}}</td>
                                 <td>{{$order->updated_at->toDateTimeString('minute')}}</td>
                                 <td class=""><a class="btn btn-default"

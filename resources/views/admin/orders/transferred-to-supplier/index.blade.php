@@ -27,9 +27,9 @@
                             <th scope="col">Имя</th>
                             <th scope="col">Телефон</th>
                             <th scope="col">ТТН</th>
-                            <th scope="col">ID товара</th>
-                            <th scope="col">Название</th>
-                            <th scope="col">Цена продажи</th>
+{{--                            <th scope="col">ID товара</th>--}}
+{{--                            <th scope="col">Название</th>--}}
+{{--                            <th scope="col">Цена продажи</th>--}}
                             <th scope="col">Дата создания</th>
                             <th scope="col"></th>
                         </tr>
@@ -42,10 +42,10 @@
                                 <td>{{$order->name}}</td>
                                 <td><a href="tel:{{$order->phone}}">{{$order->phone}}</a></td>
                                 <td>{{$order->waybill}}</td>
-                                <td>{{$order->product_id}}</td>
-                                <td><a href="{{route('product',$order->product_id)}}"
-                                       target="_blank">{{$order->Product->h1}}</a></td>
-                                <td>{{$order->sale_price}}</td>
+{{--                                <td>{{$order->product_id}}</td>--}}
+{{--                                <td><a href="{{route('product',$order->product_id)}}"--}}
+{{--                                       target="_blank">{{$order->Product->h1}}</a></td>--}}
+{{--                                <td>{{$order->sale_price}}</td>--}}
                                 <td>{{$order->created_at}}</td>
                                 <td class=""><a class="btn btn-default"
                                                                      href="{{route('admin.orders.edit', $order)}}">

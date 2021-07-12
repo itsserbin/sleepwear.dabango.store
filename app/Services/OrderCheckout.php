@@ -87,8 +87,8 @@ class OrderCheckout
 
 
             Mail::to(['serbin.ssd@gmail.com',
-//            'youbrand_top@ukr.net',
-//            'karina.youbrand@gmail.com'
+            'youbrand_top@ukr.net',
+            'karina.youbrand@gmail.com'
             ])->send(new Order($name, $phone));
         }
     }
