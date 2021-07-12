@@ -11,19 +11,10 @@
             @slot('subsidiary')Детали заказа от {{$order->name}}@endslot
         @endcomponent
         <hr>
-
-            <order-edit user-name="{{\Illuminate\Support\Facades\Auth::user()->name}}"></order-edit>
-{{--        <div class="row">--}}
-{{--            <div class="col-12">--}}
-{{--                <form action="{{route('admin.orders.update', $order->id)}}" method="post">--}}
-{{--                    @csrf--}}
-{{--                    @method('PATCH')--}}
-{{--                    <input type="hidden" value="{{\Illuminate\Support\Facades\Auth::user()}}">--}}
-{{--                    --}}{{-- Form include --}}
-{{--                    @include('admin.orders.partials.form')--}}
-{{--                    <button type="submit" class="btn btn-success">Сохранить</button>--}}
-{{--                </form>--}}
-{{--            </div>--}}
-{{--        </div>--}}
+        <order-edit
+            user-name="{{\Illuminate\Support\Facades\Auth::user()->name}}"
+            colors-old="{!!  json_decode($order->colors)[0] ?? null !!}"
+            sizes-old="{!!  json_decode($order->sizes)[0] ?? null  !!}">
+        </order-edit>
     </div>
 @endsection

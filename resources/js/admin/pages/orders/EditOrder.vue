@@ -220,12 +220,8 @@
                         <li>ID товара:
                             <a v-bind:href="host + 'product/' + order.product_id" target="_blank">{{ order.product_id }}</a>
                         </li>
-                        <li v-if="order.colors !== null">Цвет товара:
-                            <span v-for="colors_old in order.colors">{{colors_old}}</span>
-                        </li>
-                        <li v-if="order.sizes !== null">Размер товара:
-                            <span v-for="sizes_old in order.sizes">{{sizes_old}}</span>
-                        </li>
+                        <li v-if="this.colorsOld !== null">Цвет: {{this.colorsOld}}</li>
+                        <li v-if="this.sizesOld !== null">Размер: {{this.sizesOld}}</li>
                     </ul>
                 </b-col>
             </b-row>
@@ -290,6 +286,8 @@ export default {
     },
     props: {
         userName: String,
+        colorsOld: String,
+        sizesOld: String,
     },
     mounted() {
         let str = window.location.pathname;
