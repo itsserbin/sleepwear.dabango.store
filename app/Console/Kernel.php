@@ -136,7 +136,7 @@ class Kernel extends ConsoleKernel
                         $item->status = 'Возврат';
                     } elseif (in_array((int)$result['data'][0]['StatusCode'], [7, 8], true)) {
                         $item->status = 'На почте';
-                    } elseif (in_array((int)$result['data'][0]['StatusCode'], [9, 11], true)) {
+                    } elseif (in_array((int)$result['data'][0]['StatusCode'], [9, 10, 11], true)) {
                         $item->status = 'Выполнен';
                     }
                     $item->update();
