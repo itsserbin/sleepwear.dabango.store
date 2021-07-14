@@ -128,8 +128,6 @@
 </template>
 
 <script>
-import {swal} from "vue-swal";
-
 export default {
     data() {
         return {
@@ -150,7 +148,8 @@ export default {
                 postal_office: '',
                 product_id: '',
                 sale_price: '',
-            }
+            },
+            cart: this.$store.state,
         };
     },
     mounted() {
@@ -173,7 +172,6 @@ export default {
         axios.get('/api/product/colors/' + id)
             .then(({data}) => this.productColors = data.result)
             .catch(({response}) => console.log(response));
-
     },
     methods: {
         onIncrement() {
@@ -190,20 +188,19 @@ export default {
                 .catch(({response}) => this.setErrorResponse(response));
         },
         addToCart() {
-            document.getElementsByClassName("cart-count")[0].value = parseInt(document.getElementsByClassName("cart-count")[0].value) + 1;
             axios.post('/api/cart/add', this.item)
-                .then(({data}) => this.setSuccessResponse(data))
-                .catch(({response}) => this.setErrorResponse(response));
+                .then(() => this.setSuccessResponse())
+                .catch(() => this.setErrorResponse());
         },
-        setSuccessResponse(data) {
-            this.$store.commit('loadCart');
+        setSuccessResponse() {
+            this.$store.commit('loadCart')
             swal({
                 title: 'Добавлено!',
                 text: 'Товар в корзине :)',
                 icon: 'success',
             });
         },
-        setErrorResponse(response) {
+        setErrorResponse() {
             swal({
                 title: 'Ошибка!',
                 text: 'Что то сломалось :(',

@@ -15,6 +15,7 @@ Vue.component('paginate', Paginate)
 
 
 window.axios = require('axios');
+window.swal = require('sweetalert');
 
 Vue.use(Vuex)
 

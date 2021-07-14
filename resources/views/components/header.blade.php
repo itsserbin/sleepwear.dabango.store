@@ -6,10 +6,7 @@
             </a>
         </div>
         <div class="col">
-            <a href="{{route('checkout')}}" class="cart-count text-decoration-none text-dark">
-                ({{$cartCount}})
-                <b-icon icon="cart3" size="lg" variant="dark"></b-icon>
-            </a>
+            <cart></cart>
         </div>
         <div class="header-burger col-1 p-0">
             <span></span>
