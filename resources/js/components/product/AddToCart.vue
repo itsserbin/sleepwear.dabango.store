@@ -11,6 +11,7 @@
                 </b-button>
 
                 <b-modal id="modal-order"
+                         ref="modal-order"
                          title="Добавление товара к заказу"
                          centered
                          hide-footer>
@@ -189,11 +190,12 @@ export default {
         },
         addToCart() {
             axios.post('/api/cart/add', this.item)
-                .then(() => this.setSuccessResponse())
+                .then(({data}) => this.setSuccessResponse(data))
                 .catch(() => this.setErrorResponse());
         },
-        setSuccessResponse() {
-            this.$store.commit('loadCart')
+        setSuccessResponse(data) {
+            this.$refs['modal-order'].hide();
+            this.$store.commit('loadCart');
             swal({
                 title: 'Добавлено!',
                 text: 'Товар в корзине :)',

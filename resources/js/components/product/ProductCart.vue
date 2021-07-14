@@ -54,7 +54,7 @@ export default {
     data() {
         return {
             host: window.location.origin,
-            isLoading: false,
+            isLoading: true,
             products: [],
             pageCount: 1,
             showingFrom: 1,
@@ -64,7 +64,6 @@ export default {
         }
     },
     mounted() {
-        this.isLoading = true;
         axios.get('/api/product/')
             .then(({data}) => this.deleteCartListSuccessResponse(data))
             .catch((response) => this.deleteCartListErrorResponse(response));

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReviewCreateRequest;
 use App\Mail\OrderShipped;
 use App\Models\ProductsPhoto;
 use App\Models\Reviews;
@@ -234,10 +235,10 @@ class HomeController extends Controller
         ]);
     }
 
-    public function send_review_post(Request $request)
+    public function send_review_post(ReviewCreateRequest $reviewCreateRequest)
     {
         $reviews = new Reviews();
-        $data = $request->all();
+        $data = $reviewCreateRequest->all();
         $reviews->create($data);
     }
 
