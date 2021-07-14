@@ -90,7 +90,7 @@ export default {
     methods: {
         sendReview() {
             this.isLoading = true;
-            axios.post('/send-review/', this.review)
+            axios.post('/send-review', this.review)
                 .then(({data}) => this.setSuccessResponse(data))
                 .catch(({response}) => this.setErrorResponse(response));
         },
