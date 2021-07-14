@@ -47,8 +47,9 @@
                     </tbody>
                 </table>
             </b-col>
-            <b-col cols="12" md="6" class="mb-3">
-                <b-form @submit.stop.prevent="sendOrder">
+            <b-col cols="12" md="6" class="mb-3 align-items-center justify-content-center d-flex">
+                <loader v-if="isLoading"></loader>
+                <b-form @submit.stop.prevent="sendOrder" v-if="!isLoading" class="w-100">
                     <div class="h3">Контактные данные</div>
                     <b-form-group class="mb-3">
                         <label>ФИО</label>
@@ -133,6 +134,7 @@ export default {
     data() {
         return {
             host: window.location.origin + '/',
+            isLoading: false,
             cart: this.$store.state,
             errors: [],
             order: {
@@ -145,9 +147,9 @@ export default {
     },
     mounted() {
         this.$store.commit('loadCart');
+        $('.input-phone').mask('+38 (999) 999-99-99');
     },
     methods: {
-
         removeFromCart(id) {
             axios.delete('/api/cart/delete/' + id)
                 .then(() => this.deleteCartListSuccessResponse())
@@ -160,11 +162,13 @@ export default {
             console.log(response);
         },
         sendOrder() {
+            this.isLoading = true;
             axios.post('/api/order/create', this.order)
                 .then(() => this.sendFormSuccessResponse())
                 .catch(({response}) => this.sendFormErrorResponse(response));
         },
         sendFormSuccessResponse() {
+            this.isLoading = false;
             swal({
                 title: 'Отправлено!',
                 text: 'Ваша заявка отправлена :)',
@@ -174,7 +178,12 @@ export default {
         },
         sendFormErrorResponse(response) {
             this.errors = response.data;
-            console.log(response)
+            this.isLoading = false;
+            swal({
+                title: 'Произошла ошибка :(',
+                text: 'Проверьте корректность введенных данных, или же обратитесь по контактным данным',
+                icon: 'error',
+            });
         },
         goHomePage() {
             window.location.href = window.location.origin;

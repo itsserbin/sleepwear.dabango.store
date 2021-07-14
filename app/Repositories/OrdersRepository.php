@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Orders as Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Carbon;
@@ -28,7 +29,7 @@ class OrdersRepository extends CoreRepository
      *
      * @param int @id
      *
-     * @return Model|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|Collection|\Illuminate\Database\Eloquent\Model
+     * @return Builder|Builder[]|Collection|\Illuminate\Database\Eloquent\Model
      */
     public function getById($id)
     {

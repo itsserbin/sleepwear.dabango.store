@@ -29,7 +29,7 @@ if (token) {
 require('./components/menu')
 // require('slick-carousel/slick/slick.min')
 require('./components/jquery.maskedinput')
-require('./components/mask-input')
+// require('./components/mask-input')
 require('./components/slider')
 // require('./components/modal')
 // require('./components/alert')
@@ -39,6 +39,7 @@ require('./components/scroll-box-shadow')
 /**
  * Vue Cart components
  */
+Vue.component('loader', require('./components/LoaderComponent').default);
 Vue.component('cart', require('./components/cart/CartComponent').default);
 Vue.component('cart-list', require('./components/cart/CartTableComponent').default);
 // Vue.component('cart-total', require('./components/cart/CartTotalComponent').default);

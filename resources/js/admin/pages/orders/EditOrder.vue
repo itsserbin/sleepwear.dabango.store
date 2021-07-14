@@ -218,10 +218,12 @@
                     <div class="h5">Данные до обновления:</div>
                     <ul>
                         <li>ID товара:
-                            <a v-bind:href="host + 'product/' + order.product_id" target="_blank">{{ order.product_id }}</a>
+                            <a v-bind:href="host + 'product/' + order.product_id" target="_blank">
+                                {{order.product_id }}
+                            </a>
                         </li>
-                        <li v-if="this.colorsOld !== null">Цвет: {{this.colorsOld}}</li>
-                        <li v-if="this.sizesOld !== null">Размер: {{this.sizesOld}}</li>
+                        <li v-if="this.colorsOld !== null">Цвет: {{ this.colorsOld }}</li>
+                        <li v-if="this.sizesOld !== null">Размер: {{ this.sizesOld }}</li>
                     </ul>
                 </b-col>
             </b-row>
@@ -299,6 +301,7 @@ export default {
             .catch((response) => this.getOrderErrorResponse(response));
 
         this.getItems(id);
+        console.log(this.items);
     },
     methods: {
         getItems(id) {
