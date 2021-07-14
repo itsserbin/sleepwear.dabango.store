@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="row justify-content-center">
-
+        <loader v-if="isLoading"></loader>
+        <div class="row justify-content-center" v-if="!isLoading">
             <a v-for="product in products"
                v-if="product.published === 1"
                v-bind:href="host + '/product/' + product.id"
@@ -54,6 +54,7 @@ export default {
     data() {
         return {
             host: window.location.origin,
+            isLoading: false,
             products: [],
             pageCount: 1,
             showingFrom: 1,
@@ -63,12 +64,14 @@ export default {
         }
     },
     mounted() {
+        this.isLoading = true;
         axios.get('/api/product/')
             .then(({data}) => this.deleteCartListSuccessResponse(data))
             .catch((response) => this.deleteCartListErrorResponse(response));
     },
     methods: {
         deleteCartListSuccessResponse(data) {
+            this.isLoading = false;
             this.products = data.result.data;
             this.total = data.result.total;
             this.showingFrom = data.result.from;
@@ -79,8 +82,10 @@ export default {
             console.log(response);
         },
         fetch(page = 1) {
+            this.isLoading = true;
             axios.get(this.endpoint + page)
                 .then(({data}) => {
+                    this.isLoading = false;
                     this.products = data.result.data;
                     this.total = data.result.total;
                     this.showingFrom = data.result.from;
