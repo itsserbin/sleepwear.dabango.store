@@ -228,6 +228,7 @@ class OrdersRepository extends CoreRepository
             'product_id',
             'sale_price',
             'created_at',
+            'updated_at',
         ];
 
         return $this
@@ -235,7 +236,7 @@ class OrdersRepository extends CoreRepository
             ->where('status', 'Возврат')
             ->with('Clients', 'Product')
             ->select($columns)
-            ->orderBy('created_at', 'desc')
+            ->orderBy('updated_at', 'desc')
             ->paginate($perPage);
     }
 

@@ -14,6 +14,7 @@ use App\Repositories\OrderItemsRepository;
 use App\Repositories\OrdersRepository;
 use App\Repositories\Products\ProductRepository;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class OrderCheckout
@@ -84,14 +85,18 @@ class OrderCheckout
                 $this->deleteCartItems($cart->id);
             }
 
-
-
-            Mail::to(['serbin.ssd@gmail.com',
-            'youbrand_top@ukr.net',
-            'karina.youbrand@gmail.com'
-            ])->send(new Order($name, $phone));
+            try {
+                Mail::to(['serbin.ssd@gmail.com',
+                    'youbrand_top@ukr.net',
+                    'karina.youbrand@gmail.com'
+                ])->send(new Order($name, $phone));
+            } catch (\Throwable $exception) {
+                Log::error($exception->getMessage());
+            }
         }
+
     }
+
 
     public function findCart()
     {

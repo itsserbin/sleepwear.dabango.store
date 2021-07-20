@@ -140,7 +140,6 @@ class Kernel extends ConsoleKernel
                         $item->status = 'Выполнен';
                     }
                     $item->update();
-                    echo 'done';
                 }
             }
 
