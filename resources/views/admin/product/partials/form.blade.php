@@ -45,7 +45,7 @@
 
     <div class="col-12 col-md-6">
         @include('admin.product.partials.product-sizes')
-        <div class="form-group  my-5">
+        <div class="form-group  mt-3">
             <label for="provider">Поставщик</label>
             <select class="form-control" id="provider" name="provider">
                 @foreach($providers as $provider)
@@ -62,6 +62,26 @@
     </div>
 </div>
 
+<div class="form-group my-3">
+    <label for="category_id">Категория</label>
+    <select class="form-control" id="category_id" name="category_id">
+        <option value="" selected>Без категории</option>
+        @foreach($categories as $category)
+            <option value="{{$category->id}}"
+
+                @isset($product->id)
+                    @foreach ($product->categories as $category_product)
+                        @if ($category->id == $category_product->id)
+                        selected
+                        @endif
+                    @endforeach
+                @endisset
+            >
+                {{$category->title}}
+            </option>
+        @endforeach
+    </select>
+</div>
 
 <div class="form-group my-3">
     <label for="name">Title</label>

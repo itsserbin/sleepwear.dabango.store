@@ -4,9 +4,11 @@ use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\Bookkeeping\DailyStatisticsController;
 use App\Http\Controllers\Api\Bookkeeping\SupplierPaymentsController;
 use App\Http\Controllers\Api\CartController;
+use App\Http\Controllers\Api\CategoriesController;
 use App\Http\Controllers\Api\OrderItemsController;
 use App\Http\Controllers\Api\OrdersController;
 use App\Http\Controllers\Api\ProductsController;
+use App\Http\Controllers\Api\UploadController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ClientsController;
@@ -22,9 +24,7 @@ use App\Http\Controllers\Api\ClientsController;
 |
 */
 
-/**
- * Группа маршрутов API для авторизованных пользователей.
- */
+/** Группа маршрутов API для авторизованных пользователей. */
 Route::middleware('auth:api')->group(function () {
 
     /**
@@ -35,15 +35,13 @@ Route::middleware('auth:api')->group(function () {
     Route::get('dashboard', [AdminController::class, 'dashboard'])
         ->name('api.dashboard');
 
-    /**
-     * Группа маршрутов для клиентского раздела.
-     */
+    /** Группа маршрутов для клиентского раздела */
     Route::prefix('clients')->group(function () {
 
         /**
          * Получить всех клиентов.
          *
-         * GET /api/clients/
+         * GET /api/clients
          */
         Route::get('/', [ClientsController::class, 'index'])
             ->name('api.clients.index');
@@ -65,15 +63,13 @@ Route::middleware('auth:api')->group(function () {
             ->name('api.clients.destroy');
     });
 
-    /**
-     * Группа маршрутов для заказов.
-     */
+    /** Группа маршрутов для заказов */
     Route::prefix('orders')->group(function () {
 
         /**
          * Получить все заказы.
          *
-         * GET /api/orders/
+         * GET /api/orders
          */
         Route::get('/', [OrdersController::class, 'index'])
             ->name('api.orders.index');
@@ -111,9 +107,7 @@ Route::middleware('auth:api')->group(function () {
             ->name('api.orders.update');
     });
 
-    /**
-     * Группа маршрутов для элементов заказа.
-     */
+    /** Группа маршрутов для элементов заказа */
     Route::prefix('order-items')->group(function () {
 
         /**
@@ -157,9 +151,7 @@ Route::middleware('auth:api')->group(function () {
             ->name('api.order-items.edit');
     });
 
-    /**
-     * Группа маршрутов для бухгалтерии.
-     */
+    /** Группа маршрутов для бухгалтерии */
     Route::prefix('bookkeeping')->group(function () {
 
         Route::prefix('daily-statistics')->group(function () {
@@ -167,7 +159,7 @@ Route::middleware('auth:api')->group(function () {
             /**
              * Получить всю статистику по дням.
              *
-             * GET /api/bookkeeping/daily-statistics/
+             * GET /api/bookkeeping/daily-statistics
              */
             Route::get('/', [DailyStatisticsController::class, 'index'])
                 ->name('api.bookkeeping.daily_statistics.index');
@@ -175,7 +167,7 @@ Route::middleware('auth:api')->group(function () {
             /**
              * Добавить новую дату в статистику.
              *
-             * GET /api/bookkeeping/daily-statistics/create/
+             * GET /api/bookkeeping/daily-statistics/create
              */
             Route::get('create', [DailyStatisticsController::class, 'create'])
                 ->name('api.bookkeeping.daily_statistics.create');
@@ -183,22 +175,20 @@ Route::middleware('auth:api')->group(function () {
             /**
              * Сортировать статистику по диапазону дат.
              *
-             * GET /api/bookkeeping/daily-statistics/date-range/
+             * GET /api/bookkeeping/daily-statistics/date-range
              */
             Route::get('date-range', [DailyStatisticsController::class, 'dateRange'])
                 ->name('api.bookkeeping.daily_statistics.dateRange');
 
         });
 
-        /**
-         * Группа маршрутов для страницы с информацией о выплатах.
-         */
+        /** Группа маршрутов для страницы с информацией о выплатах. */
         Route::prefix('supplier-payments')->group(function () {
 
             /**
              * Получить все заказы, ожидающие выплаты.
              *
-             * GET /api/bookkeeping/supplier-payments/
+             * GET /api/bookkeeping/supplier-payments
              */
             Route::get('/', [SupplierPaymentsController::class, 'index'])
                 ->name('api.bookkeeping.supplier-payments.index');
@@ -206,7 +196,7 @@ Route::middleware('auth:api')->group(function () {
             /**
              * Получить все заказы, ожидающие выплаты от поставщика.
              *
-             * GET /api/bookkeeping/supplier-payments/payments-awaiting/
+             * GET /api/bookkeeping/supplier-payments/payments-awaiting
              */
             Route::get('payments-awaiting', [SupplierPaymentsController::class, 'paymentsAwaiting'])
                 ->name('api.bookkeeping.supplier-payments.paymentsAwaiting');
@@ -214,28 +204,92 @@ Route::middleware('auth:api')->group(function () {
             /**
              * Получить все заказы, ожидающие выплаты от поставщика.
              *
-             * GET /api/bookkeeping/supplier-payments/payments-received/
+             * GET /api/bookkeeping/supplier-payments/payments-received
              */
             Route::get('payments-received', [SupplierPaymentsController::class, 'paymentsReceived'])
                 ->name('api.bookkeeping.supplier-payments.paymentsReceived');
         });
     });
+
+    /** Группа маршрутов для категорий в аодминке */
+    Route::prefix('categories')->group(function () {
+
+        /**
+         * Получить список всех категорий в пагинации
+         *
+         * GET /api/categories
+         */
+        Route::get('/', [CategoriesController::class, 'index'])
+            ->name('api.categories.index');
+
+        /**
+         * Получить список всех категорий
+         *
+         * GET /api/categories/all
+         */
+        Route::get('all', [CategoriesController::class, 'all'])
+            ->name('api.categories.all');
+
+        /**
+         * Создать новую категорию.
+         *
+         * POST /api/categories/create
+         */
+        Route::post('create', [CategoriesController::class, 'create'])
+            ->name('api.categories.create');
+
+        /**
+         * Открыть страницу редактирования категории.
+         *
+         * GET /api/categories/edit/{id}
+         */
+        Route::get('edit/{id}', [CategoriesController::class, 'edit'])
+            ->name('api.categories.edit');
+
+        /**
+         * Обновить данные категории.
+         *
+         * PUT /api/categories/update/{id}
+         */
+        Route::put('update/{id}', [CategoriesController::class, 'update'])
+            ->name('api.categories.update');
+
+        /**
+         * Удалить категорию.
+         *
+         * DELETE /api/categories/destroy/{id}
+         */
+        Route::delete('destroy/{id}', [CategoriesController::class, 'destroy'])
+            ->name('api.categories.destroy');
+    });
+
+    /** Группа маргрутов для изображений */
+    Route::prefix('images')->group(function () {
+
+        /** Группа маршрутов для превью */
+        Route::prefix('preview-update')->group(function () {
+
+            /**
+             * Загрузить превью для категорий.
+             *
+             * POST /api/images/preview-update/categories
+             */
+            Route::post('categories', [UploadController::class, 'uploadCategoryPreview'])
+                ->name('api.images.upload.preview');
+        });
+    });
 });
 
-/**
- * Группа маршрутов API для неавторизованных пользователей
- */
+/** Группа маршрутов API для неавторизованных пользователей */
 Route::middleware('api')->group(function () {
 
-    /**
-     * Группа маршрутов для товаров.
-     */
+    /** Группа маршрутов для товаров */
     Route::prefix('product')->group(function () {
 
         /**
          * Вывести все товары в пагинации.
          *
-         * GET /api/product/
+         * GET /api/product
          */
         Route::get('/', [ProductsController::class, 'index'])
             ->name('api.product.index');
@@ -257,15 +311,13 @@ Route::middleware('api')->group(function () {
             ->name('api.product.colors.show');
     });
 
-    /**
-     * Группа маршрутов для корзины.
-     */
+    /** Группа маршрутов для корзины */
     Route::prefix('cart')->group(function () {
 
         /**
          * Показать товары в корзину.
          *
-         * GET /api/cart/list/
+         * GET /api/cart/list
          */
         Route::get('list', [CartController::class, 'list'])
             ->name('api.cart.list');
@@ -273,7 +325,7 @@ Route::middleware('api')->group(function () {
         /**
          * Добавить товар в корзину.
          *
-         * POST /api/cart/add/
+         * POST /api/cart/add
          */
         Route::post('add', [CartController::class, 'add'])
             ->name('api.cart.add');
@@ -281,7 +333,7 @@ Route::middleware('api')->group(function () {
         /**
          * Удалить товар из корзины.
          *
-         * DELETE /api/cart/delete/{item}/
+         * DELETE /api/cart/delete/{item}
          */
         Route::delete('delete/{item}', [CartController::class, 'delete'])
             ->name('api.cart.delete');
@@ -295,18 +347,43 @@ Route::middleware('api')->group(function () {
             ->name('api.cart.update');
     });
 
-    /**
-     * Группа маршрутов для заказов.
-     */
+    /** Группа маршрутов для заказов */
     Route::prefix('order')->group(function () {
 
         /**
          * Создание нового заказа.
          *
-         * POST /api/order/create/
+         * POST /api/order/create
          */
         Route::post('create', [OrdersController::class, 'create'])
             ->name('api.orders.create');
     });
 
+    /** Группа маршрутов для категорий */
+    Route::prefix('category')->group(function () {
+
+        /**
+         * Получить категории для вывода на продакшн.
+         *
+         * GET /api/category/all-on-prod
+         */
+        Route::get('all-on-prod', [CategoriesController::class, 'getAllOnProd'])
+            ->name('api.category.getAllOnProd');
+
+        /**
+         * Получить отдельную категорию.
+         *
+         * GET /api/category/{slug}
+         */
+        Route::get('{slug}', [CategoriesController::class, 'getCategoryOnProduction'])
+            ->name('api.category.getCategoryOnProduction');
+
+        /**
+         * Получить товары из определенной категории..
+         *
+         * GET /api/category/products/{slug}
+         */
+        Route::get('products/{slug}', [CategoriesController::class, 'getCategoryProductsOnProduction'])
+            ->name('api.category.getCategoryProductsOnProduction');
+    });
 });

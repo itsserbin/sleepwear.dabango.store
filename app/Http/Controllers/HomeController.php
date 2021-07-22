@@ -274,4 +274,37 @@ class HomeController extends Controller
             'cartCount' => $cartCount,
         ]);
     }
+
+    public function category()
+    {
+        $settings = Options::find(1)->get();
+        $cartCount = $this->cartCount();
+
+        foreach ($settings as $setting) {
+            $phone = $setting->phone;
+            $email = $setting->email;
+            $facebook = $setting->facebook;
+            $instagram = $setting->instagram;
+            $schedule = $setting->schedule;
+            $telegram = $setting->telegram;
+            $viber = $setting->viber;
+            $head_scripts = $setting->head_scripts;
+            $after_body_scripts = $setting->after_body_scripts;
+            $footer_scripts = $setting->footer_scripts;
+        }
+
+        return view('pages.category.index',[
+            'phone' => $phone,
+            'email' => $email,
+            'facebook' => $facebook,
+            'instagram' => $instagram,
+            'schedule' => $schedule,
+            'telegram' => $telegram,
+            'viber' => $viber,
+            'head_scripts' => $head_scripts,
+            'after_body_scripts' => $after_body_scripts,
+            'footer_scripts' => $footer_scripts,
+            'cartCount' => $cartCount,
+        ]);
+    }
 }

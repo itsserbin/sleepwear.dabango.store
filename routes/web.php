@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\ClientsController;
 use App\Http\Controllers\Admin\ColorsController;
 use App\Http\Controllers\Admin\OrdersController;
@@ -63,6 +64,14 @@ Route::get('/product/{id?}', [HomeController::class, 'product'])
     ->name('product');
 
 /**
+ * Открыть страницу категории.
+ *
+ * GET /category/{slug}
+ */
+Route::get('/category/{slug}', [HomeController::class, 'category'])
+    ->name('category');
+
+/**
  * Отправить форму заявки.
  *
  * POST /send-form/
@@ -87,10 +96,44 @@ Route::post('send-review', [HomeController::class, 'send_review_post'])
     ->name('send.review.post');
 
 
-
+/** Группа маршрутов для админ.панели */
 Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
 
-    Route::get('dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    /**
+     * Открыть главную страницу админки.
+     *
+     * GET /admin/dashboard
+     */
+    Route::get('dashboard', [AdminController::class, 'index'])
+        ->name('admin.dashboard');
+
+    /** Группа маршрутов для картегорий */
+    Route::prefix('categories')->group(function (){
+
+        /**
+         * Открыть страницу со всеми категориями.
+         *
+         * GET /admin/categories
+         */
+        Route::get('/',[CategoriesController::class,'index'])
+            ->name('admin.categories.index');
+
+        /**
+         * Открыть страницу создания категории.
+         *
+         * GET /admin/categories/create
+         */
+        Route::get('create',[CategoriesController::class,'create'])
+            ->name('admin.categories.create');
+
+        /**
+         * Открыть страницу редактирования категории.
+         *
+         * GET /admin/categories/edit
+         */
+        Route::get('edit/{id}',[CategoriesController::class,'edit'])
+            ->name('admin.categories.edit');
+    });
 
     Route::resource('products', ProductsController::class)->names('admin.products');
 

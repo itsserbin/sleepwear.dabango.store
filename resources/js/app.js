@@ -28,7 +28,7 @@ if (token) {
 }
 
 require('./components/menu')
-// require('slick-carousel/slick/slick.min')
+require('slick-carousel/slick/slick.min')
 require('./components/jquery.maskedinput')
 // require('./components/mask-input')
 require('./components/slider')
@@ -55,6 +55,13 @@ Vue.component('sizes-table', require('./components/product/SizesTable').default)
 Vue.component('review-form', require('./components/product/ReviewForm').default);
 Vue.component('available-size', require('./components/product/AvailableSizes').default);
 Vue.component('available-colors', require('./components/product/AvailableColors').default);
+
+/**
+ * Vue categories components
+ */
+Vue.component('categories-grid', require('./components/category/CategoriesGrid').default);
+Vue.component('category', require('./components/category/ShowCategory').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

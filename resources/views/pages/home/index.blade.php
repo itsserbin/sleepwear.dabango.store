@@ -7,6 +7,7 @@
     <section class="product-list card pt-3">
         <div class="container">
             <div class="product-list__title">Трендовые женские купальники 2021</div>
+            <categories-grid></categories-grid>
             <product-cards></product-cards>
         </div>
     </section>

@@ -8,6 +8,7 @@ use App\Models\Products;
 use App\Models\ProductsColor;
 use App\Models\ProductsPhoto;
 use App\Repositories\Bookkeeping\ProvidersRepository;
+use App\Repositories\CategoriesRepository;
 use App\Repositories\Products\ProductRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -17,20 +18,31 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
+/**
+ * Class ProductsController
+ * @package App\Http\Controllers\Admin
+ */
 class ProductsController extends Controller
 {
+    /** @var ProductRepository */
     private $ProductRepository;
+
+    /** @var ProvidersRepository */
     private $ProvidersRepository;
+
+    /** @var CategoriesRepository */
+    private $CategoriesRepository;
 
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return void
      */
     public function __construct()
     {
         parent::__construct();
         $this->ProductRepository = app(ProductRepository::class);
+        $this->CategoriesRepository = app(CategoriesRepository::class);
         $this->ProvidersRepository = app(ProvidersRepository::class);
     }
 
@@ -57,12 +69,14 @@ class ProductsController extends Controller
     {
         $product = new Products();
         $colors = Colors::all();
+        $categories = $this->CategoriesRepository->getAll();
         $providers = $this->ProvidersRepository->getProvidersToProduct();
 
         return view('admin.product.create', [
             'product' => $product,
             'colors' => $colors,
-            'providers' => $providers
+            'providers' => $providers,
+            'categories' => $categories
         ]);
     }
 
@@ -95,6 +109,8 @@ class ProductsController extends Controller
         $product->trade_price = $request->input('trade_price');
         $product->content = $request->input('content');
         $product->vendor_code = $request->input('vendor_code');
+
+//        $product->category_id = $request->input('category_id');
         $product->save();
 
         $colors = $request->input('colors');
@@ -159,6 +175,7 @@ class ProductsController extends Controller
         $productPhoto = ProductsPhoto::where('product_id', '=', $id)->get();
         $ProductsColor = ProductsColor::where('product_id', '=', $id)->get();
         $colors = Colors::all();
+        $categories = $this->CategoriesRepository->getAll();
         $providers = $this->ProvidersRepository->getProvidersToProduct();
 
         return view('admin.product.edit', [
@@ -166,7 +183,8 @@ class ProductsController extends Controller
             'productPhoto' => $productPhoto,
             'ProductsColor' => $ProductsColor,
             'providers' => $providers,
-            'colors' => $colors
+            'colors' => $colors,
+            'categories' => $categories
         ]);
     }
 
@@ -203,6 +221,10 @@ class ProductsController extends Controller
         $product->trade_price = $request->input('trade_price');
         $product->content = $request->input('content');
         $product->vendor_code = $request->input('vendor_code');
+        if($request->input('category_id')) :
+            $product->categories()->detach();
+            $product->categories()->attach($request->input('category_id'));
+        endif;
         $colors = $request->input('colors');
         $check = ProductsColor::where('product_id', $id)->get();
         if ($check) {
@@ -284,7 +306,9 @@ class ProductsController extends Controller
      */
     public function destroy(Products $products, $id)
     {
-        $product = Products::destroy($id);
+        $product = Products::where('id',$id)->first();
+        $product->categories()->detach();
+        $product->destroy($id);
 
         if ($product) {
             return back()->with('success', 'Статья успешно удалена');

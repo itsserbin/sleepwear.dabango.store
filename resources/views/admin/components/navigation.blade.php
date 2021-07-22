@@ -15,6 +15,8 @@
                    href="{{route('admin.dashboard')}}">Dashboard</a>
                 <a class="nav-link {{ request()->routeIs('admin.products.index') ? 'active' : null }}"
                    href="{{route('admin.products.index')}}">Товары</a>
+                <a class="nav-link {{ request()->routeIs('admin.categories.index') ? 'active' : null }}"
+                   href="{{route('admin.categories.index')}}">Категории</a>
                 <a class="nav-link {{ request()->routeIs('admin.reviews.index') ? 'active' : null }}"
                    href="{{route('admin.reviews.index')}}">Отзывы</a>
 
