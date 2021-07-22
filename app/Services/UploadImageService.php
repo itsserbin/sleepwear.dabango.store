@@ -21,14 +21,15 @@ class UploadImageService
     public function uploadCategoryPreview($request)
     {
         $preview = $request['preview'];
-
         $filename = $preview->getClientOriginalName();
+        $preview->move(public_path('storage/category'), $filename);
 
-        try {
-            Image::make($preview)->save(public_path('storage/category/') . $filename);
-        } catch (\Throwable $exception) {
-            Log::error($exception->getMessage());
-        }
+
+//        try {
+//            Image::make($preview)->save(public_path('storage/category/') . $filename);
+//        } catch (\Throwable $exception) {
+//            Log::error($exception->getMessage());
+//        }
 
         return asset('storage/category/' . $filename);
     }
