@@ -11,7 +11,7 @@
                 <item>
                     <id>{{ $item->id }}</id>
                     <title>{{ $item->h1 }}</title>
-                    <description>{{$item->description ?  : $item->content}}</description>
+                    <description>{{$item->content}}</description>
                     <availability>
                         @if($item->status == 'Нет в наличии')
                             out of stock
