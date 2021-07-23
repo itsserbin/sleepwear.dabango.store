@@ -74,11 +74,12 @@ Route::get('/category/{slug}', [HomeController::class, 'category'])
 /**
  * Открыть товарный фид для фейсбука.
  *
- * GET /fb/product-feed
+ * GET /xml/fb/feed/products
  */
-Route::get('fb-product-feed', [HomeController::class,'fbProductFeed'])
-    ->name('fb.product.feed');
-
+Route::prefix('xml')->group(function (){
+    Route::get('fb/feed/products',[HomeController::class,'fbProductFeed'])
+        ->name('fb.product.feed');
+});
 /**
  * Показать страницу благодарности после отправки заявки.
  *
