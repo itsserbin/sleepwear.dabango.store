@@ -22,7 +22,7 @@ class UploadImageService
     {
         $preview = $request['preview'];
         $filename = $preview->getClientOriginalName();
-        $preview->move(public_path('storage/category'), $filename);
+        $preview->move(public_path().'/storage/category', $filename);
 
 
 //        try {
