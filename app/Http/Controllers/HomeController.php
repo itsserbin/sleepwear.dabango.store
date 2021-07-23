@@ -7,6 +7,7 @@ use App\Mail\OrderShipped;
 use App\Models\ProductsPhoto;
 use App\Models\Reviews;
 use App\Models\Options;
+use App\Repositories\CategoriesRepository;
 use App\Repositories\Products\ProductRepository;
 use App\Services\OrderCheckout;
 use App\Services\ShoppingCart;
@@ -24,6 +25,9 @@ class HomeController extends Controller
     /** @var ShoppingCart */
     private $ShoppingCart;
 
+    /** @var CategoriesRepository */
+    private $CategoriesRepository;
+
     /**
      * Display a listing of the resource.
      *
@@ -37,6 +41,7 @@ class HomeController extends Controller
     {
         parent::__construct();
         $this->ProductRepository = app(ProductRepository::class);
+        $this->CategoriesRepository = app(CategoriesRepository::class);
         $this->OrderCheckout = $orderCheckout;
         $this->ShoppingCart = $shoppingCart;
     }
@@ -232,12 +237,33 @@ class HomeController extends Controller
         ]);
     }
 
+    /**
+     * Открыть товарный фид для фейсбука.
+     *
+     * @return Response
+     */
     public function fbProductFeed()
     {
         $products = $this->ProductRepository->getAll();
 
         return response()->view('xml.fb-product-feed', [
             'products' => $products
+        ])->header('Content-Type', 'application/xml');
+    }
+
+    /**
+     * Открыть товарный фид для prom.ua.
+     *
+     * @return Response
+     */
+    public function promProductFeed()
+    {
+        $products = $this->ProductRepository->getAll();
+        $categories = $this->CategoriesRepository->getAllToFeed();
+
+        return response()->view('xml.prom-product-feed', [
+            'products' => $products,
+            'categories' => $categories,
         ])->header('Content-Type', 'application/xml');
     }
 }
