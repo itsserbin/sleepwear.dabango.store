@@ -4,15 +4,22 @@
         <title>Dabango Products Feed</title>
         <description>Product Feed for Facebook</description>
         <link>{{asset('/')}}</link>
-        <atom:link href="{{route('fb.product.feed')}}" rel="self" type="application/rss+xml" />
+        <atom:link href="{{route('fb.product.feed')}}" rel="self" type="application/rss+xml"/>
 
-    @if (!empty($products))
+        @if (!empty($products))
             @foreach ($products as $item)
                 <item>
                     <id>{{ $item->id }}</id>
                     <title>{{ $item->h1 }}</title>
                     <description>{{$item->description}}</description>
-                    <availability>{{$item->status}}</availability>
+                    <availability>
+                        @if($item->status == 'Нет в наличии')
+                            out of stock
+                        @else
+                            in stock
+                        @endif
+                    </availability>
+                    <brand>Dabango</brand>
                     <condition>new</condition>
                     @if($item->discount_price !== null)
                         <price>{{$item->price}}</price>@endif
