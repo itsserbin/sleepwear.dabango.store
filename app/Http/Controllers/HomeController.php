@@ -18,7 +18,7 @@ class HomeController extends Controller
     /** @var ProductRepository */
     private $ProductRepository;
 
-    /** @var OrderCheckout  */
+    /** @var OrderCheckout */
     private $OrderCheckout;
 
     /** @var ShoppingCart */
@@ -45,6 +45,7 @@ class HomeController extends Controller
     {
         return $this->ShoppingCart->cartList()['totalCount'];
     }
+
     public function index()
     {
         $settings = Options::find(1)->get();
@@ -125,83 +126,6 @@ class HomeController extends Controller
         ]);
     }
 
-//    public function send_form_post(OrderCreateRequest $orderCreateRequest)
-//    {
-////        $this->CreateOrder->newOrder($request->all());
-//        $this->OrderCheckout->createOrder($orderCreateRequest->all());
-////        $product = Products::where('id', $request->input('product_id'))->get();
-////
-////        $name = $request->input('name');
-////        $sale_price = $request->input('sale_price');
-////        $colors = $request->input('colors');
-////        $sizes = $request->input('sizes');
-////
-////        $phone = preg_replace('/[^0-9]/', '', $request->input('phone'));
-////        $phone = '+'.$phone;
-////        $check = Clients::where('phone', $phone)->get();
-////
-////        foreach ($product as $product) {
-////            if (count($check)) {
-////                foreach ($check as $item) {
-////                    ++$item->number_of_purchases;
-////                    $item->whole_check = Orders::where('phone', $phone)->sum('sale_price') + $sale_price;
-////                    $item->average_check = $item->whole_check / $item->number_of_purchases;
-////                    $item->update();
-////                    $item->Orders()->create([
-////                        'name' => $name,
-////                        'phone' => $phone,
-////                        'status' => 'Новый',
-////                        'product_id' => $product->id,
-////                        'trade_price' => $product->trade_price,
-////                        'sale_price' => $sale_price,
-////                        'profit' => $sale_price - $product->trade_price,
-////                        'product_name' => $product->h1,
-////                        'colors' => $colors,
-////                        'sizes' => $sizes,
-////                    ]);
-////                }
-////            } else {
-////                $client = new Clients();
-////
-////                $client->name = $name;
-////                $client->status = 'Новый';
-////                $client->phone = $phone;
-////                $client->number_of_purchases = 1;
-////                $client->whole_check = $sale_price;
-////                $client->average_check = $sale_price;
-////                $client->save();
-////                $client->Orders()->create([
-////                    'name' => $name,
-////                    'phone' => $phone,
-////                    'status' => 'Новый',
-////                    'product_id' => $product->id,
-////                    'trade_price' => $product->trade_price,
-////                    'sale_price' => $sale_price,
-////                    'profit' => $sale_price - $product->trade_price,
-////                    'product_name' => $product->h1,
-////                    'colors' => $colors,
-////                    'sizes' => $sizes,
-////                ]);
-////            }
-////            ++$product->total_sales;
-////            $product->update();
-////        }
-////
-////        $name = $request->name;
-////        $phone = $request->phone;
-////        $sizes = $request->sizes;
-////        $url = $request->url;
-////        $product = $request->product_id;
-////        $product_name = $request->product_name;
-////        $colors = $request->colors;
-////
-////        Mail::to(['serbin.ssd@gmail.com',
-////            'youbrand_top@ukr.net',
-////            'karina.youbrand@gmail.com'
-////        ])->send(new Order($name, $phone, $sizes, $url, $product_name, $product, $colors));
-//
-//    }
-
     public function send_form_get()
     {
         $settings = Options::find(1)->get();
@@ -220,7 +144,7 @@ class HomeController extends Controller
             $footer_scripts = $setting->footer_scripts;
         }
 
-        return view('pages.order.index',[
+        return view('pages.order.index', [
             'phone' => $phone,
             'email' => $email,
             'facebook' => $facebook,
@@ -260,7 +184,7 @@ class HomeController extends Controller
             $footer_scripts = $setting->footer_scripts;
         }
 
-        return view('pages.checkout.index',[
+        return view('pages.checkout.index', [
             'phone' => $phone,
             'email' => $email,
             'facebook' => $facebook,
@@ -293,7 +217,7 @@ class HomeController extends Controller
             $footer_scripts = $setting->footer_scripts;
         }
 
-        return view('pages.category.index',[
+        return view('pages.category.index', [
             'phone' => $phone,
             'email' => $email,
             'facebook' => $facebook,
@@ -306,5 +230,14 @@ class HomeController extends Controller
             'footer_scripts' => $footer_scripts,
             'cartCount' => $cartCount,
         ]);
+    }
+
+    public function fbProductFeed()
+    {
+        $products = $this->ProductRepository->getAll();
+
+        return response()->view('xml.fb-product-feed', [
+            'products' => $products
+        ])->header('Content-Type', 'application/xml');
     }
 }

@@ -72,17 +72,17 @@ Route::get('/category/{slug}', [HomeController::class, 'category'])
     ->name('category');
 
 /**
- * Отправить форму заявки.
+ * Открыть товарный фид для фейсбука.
  *
- * POST /send-form/
+ * GET /fb/product-feed
  */
-Route::post('send-form', [HomeController::class, 'send_form_post'])
-    ->name('send.form.post');
+Route::get('fb-product-feed', [HomeController::class,'fbProductFeed'])
+    ->name('fb.product.feed');
 
 /**
  * Показать страницу благодарности после отправки заявки.
  *
- * GET /send-form/
+ * GET /send-form
  */
 Route::get('send-form', [HomeController::class, 'send_form_get'])
     ->name('send.form.get');

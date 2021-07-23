@@ -35,6 +35,16 @@ class ProductRepository extends CoreRepository
     }
 
     /**
+     * Получить все товары.
+     *
+     * @return mixed
+     */
+    public function getAll()
+    {
+        return $this->model->where('published',1)->get();
+    }
+
+    /**
      * Получить все продукты вывести в пагинации по 15 шт.
      *
      * @param int|null $perPage
