@@ -41,7 +41,10 @@ class ProductRepository extends CoreRepository
      */
     public function getAll()
     {
-        return $this->model->where('published',1)->get();
+        return $this
+            ->model
+            ->where('published', 1)
+            ->get();
     }
 
     /**

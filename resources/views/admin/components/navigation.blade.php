@@ -45,33 +45,34 @@
 
             </ul>
         </div>
-
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-            <ul class="navbar-nav">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        {{ Auth::user()->name }}
+        @if(Auth::user())
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ Auth::user()->name}}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li class="dropdown-item">
+                                <button class="btn" disabled>
+                                    <i>@foreach(auth()->user()->roles as $item){{$item->name}}@endforeach</i>
+                                </button>
+                            </li>
+                            <li>
+                                <form action="{{route('logout')}}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">Выйти</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                    <a class="nav-link"
+                       href="{{route('home')}}" target="_blank">
+                        На сайт
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li class="dropdown-item">
-                            <button class="btn" disabled>
-                                <i>@foreach(auth()->user()->roles as $item){{$item->name}}@endforeach</i>
-                            </button>
-                        </li>
-                        <li>
-                            <form action="{{route('logout')}}" method="POST">
-                                @csrf
-                                <button type="submit" class="dropdown-item">Выйти</button>
-                            </form>
-                        </li>
-                    </ul>
-                </li>
-                <a class="nav-link"
-                   href="{{route('home')}}" target="_blank">
-                    На сайт
-                </a>
-            </ul>
-        </div>
+                </ul>
+            </div>
+        @endif
     </div>
 </nav>

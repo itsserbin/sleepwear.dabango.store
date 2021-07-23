@@ -71,7 +71,25 @@ class CategoriesRepository extends CoreRepository
             ->startConditions()
             ->select(
                 'id',
-                'title'
+                'title',
+                'parent_id'
+            )->get();
+    }
+
+    /**
+     * Получаем ID и название всех категорий для вывода в фид.
+     *
+     * @return mixed
+     */
+    public function getAllToFeed()
+    {
+        return $this
+            ->startConditions()
+            ->where('published', true)
+            ->select(
+                'id',
+                'title',
+                'parent_id'
             )->get();
     }
 

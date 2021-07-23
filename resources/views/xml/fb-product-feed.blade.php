@@ -22,9 +22,11 @@
                     <brand>Dabango</brand>
                     <condition>new</condition>
                     @if($item->discount_price !== null)
-                        <price>{{$item->price}}</price>@endif
+                        <price>{{$item->price}}</price>
+                    @endif
                     @if($item->discount_price)
-                        <sale_price>{{$item->discount_price}}</sale_price>@endif
+                        <sale_price>{{$item->discount_price}}</sale_price>
+                    @endif
                     <link>{{asset(route('product',$item->id))}}</link>
                     <image_link>{{asset($item->preview)}}</image_link>
                 </item>

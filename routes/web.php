@@ -71,14 +71,24 @@ Route::get('/product/{id?}', [HomeController::class, 'product'])
 Route::get('/category/{slug}', [HomeController::class, 'category'])
     ->name('category');
 
-/**
- * Открыть товарный фид для фейсбука.
- *
- * GET /xml/fb/feed/products
- */
+/** Группа маршрутов для XML */
 Route::prefix('xml')->group(function (){
+
+    /**
+     * Открыть товарный фид для фейсбука.
+     *
+     * GET /xml/fb/feed/products
+     */
     Route::get('fb/feed/products',[HomeController::class,'fbProductFeed'])
         ->name('fb.product.feed');
+
+    /**
+     * Открыть товарный фид для prom.ua.
+     *
+     * GET /xml/prom/feed/products
+     */
+    Route::get('prom/feed/products',[HomeController::class,'promProductFeed'])
+        ->name('prom.product.feed');
 });
 /**
  * Показать страницу благодарности после отправки заявки.
