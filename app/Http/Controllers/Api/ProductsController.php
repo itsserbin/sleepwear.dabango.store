@@ -25,7 +25,7 @@ class ProductsController extends Controller
 
     public function index()
     {
-        $result = $this->ProductRepository->getAllWithPaginate(15);
+        $result = $this->ProductRepository->getItemsWithPaginateOnProduction(15);
 
         return $this->returnResponse([
             'success' => true,

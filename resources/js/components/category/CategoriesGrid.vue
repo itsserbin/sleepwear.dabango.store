@@ -34,7 +34,6 @@ export default {
     methods: {
         getCategoriesProdSuccessResponse(data) {
             this.categories = data.result;
-            console.log(this.categories);
             this.isLoading = false;
         },
         getCategoriesProdErrorResponse(response) {

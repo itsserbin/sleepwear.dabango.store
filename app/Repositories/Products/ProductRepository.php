@@ -102,7 +102,7 @@ class ProductRepository extends CoreRepository
             ->startConditions()
             ->where('published', '1')
             ->select($columns)
-            ->orderBy('total_sales', 'DESC')
+            ->orderBy('total_sales','desc')
             ->paginate($perPage);
     }
 
