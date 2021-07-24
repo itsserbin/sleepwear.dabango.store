@@ -179,6 +179,7 @@ class CategoriesRepository extends CoreRepository
     {
         return $this
             ->startConditions()
+            ->with('products')
             ->where('slug', $slug)
             ->first();
     }
