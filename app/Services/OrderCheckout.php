@@ -82,6 +82,9 @@ class OrderCheckout
 
 
             if ($this->orderItemsRepository->create($items, $order->id)) {
+                foreach ($items as $item){
+                    $this->productRepository->updateProductTotalSales($item->product_id);
+                }
                 $this->deleteCartItems($cart->id);
             }
 

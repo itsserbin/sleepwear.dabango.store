@@ -89,6 +89,7 @@ class ProductRepository extends CoreRepository
             'status',
             'description',
             'price',
+            'published',
             'discount_price',
             'preview',
             'total_sales',
@@ -109,13 +110,12 @@ class ProductRepository extends CoreRepository
      * Увеличить кол-во покупок товара на 1.
      *
      * @param $id
-     * @param $data
      * @return mixed
      */
-    public function updateProductTotalSales($id, $data)
+    public function updateProductTotalSales($id)
     {
-        return $this
-            ->model::where('id', $id)
-            ->update(['total_sales' => ++$data]);
+        $model = $this->model::where('id',$id)->select('total_sales')->first();
+
+        return $this->model::where('id', $id)->update(['total_sales' => ++$model->total_sales]);
     }
 }

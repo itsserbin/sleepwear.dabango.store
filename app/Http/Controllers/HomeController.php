@@ -67,7 +67,7 @@ class HomeController extends Controller
             $footer_scripts = $setting->footer_scripts;
         }
 
-        $products = $this->ProductRepository->getItemsWithPaginateOnProduction(100);
+        $products = $this->ProductRepository->getItemsWithPaginateOnProduction(15);
         $reviews = Reviews::orderBy('created_at')->get();
         $cartCount = $this->cartCount();
 

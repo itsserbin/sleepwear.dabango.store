@@ -42,6 +42,7 @@ class Products extends Model
         'preview',
         'images',
         'category_id',
+        'total_sales',
     ];
 
     /**

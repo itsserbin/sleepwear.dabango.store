@@ -3,16 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Bookkeeping\Costs;
 use App\Models\Bookkeeping\OrdersDay;
-use App\Models\Bookkeeping\Profit;
 use App\Models\Clients;
 use App\Models\Orders;
 use App\Repositories\OrdersRepository;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class AdminController extends Controller
 {
