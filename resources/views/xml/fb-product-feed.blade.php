@@ -21,9 +21,7 @@
                     </availability>
                     <brand>Dabango</brand>
                     <condition>new</condition>
-                    @if($item->discount_price !== null)
-                        <price>{{$item->price}}</price>
-                    @endif
+                    <price>{{$item->price}}</price>
                     @if($item->discount_price)
                         <sale_price>{{$item->discount_price}}</sale_price>
                     @endif
