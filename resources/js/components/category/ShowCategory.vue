@@ -64,7 +64,7 @@ export default {
             showingFrom: 1,
             showingTo: 1,
             total: 1,
-            endpoint: '/api/category/products/${slug}?page='
+            endpoint: `/api/category/products/?page=`
         }
     },
     mounted() {
@@ -73,6 +73,7 @@ export default {
         let slug = str.substring(n + 1);
 
         this.isLoading = true;
+        this.endpoint = `/api/category/products/${slug}?page=`;
 
         axios.get('/api/category/' + slug)
             .then(({data}) => this.getCategorySuccessResponse(data))

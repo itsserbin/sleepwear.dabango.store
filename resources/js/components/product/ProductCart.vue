@@ -64,7 +64,7 @@ export default {
         }
     },
     mounted() {
-        axios.get('/api/product/')
+        axios.get('/api/product')
             .then(({data}) => this.deleteCartListSuccessResponse(data))
             .catch((response) => this.deleteCartListErrorResponse(response));
     },
