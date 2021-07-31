@@ -18,7 +18,7 @@ class CacheControl
     public function handle(Request $request, Closure $next)
     {
         $response = $next($request);
-        $response->header(['Cache-Control', 'private, max-age=0, no-cache']);
+        $response->header('Cache-Control', 'private, max-age=0, no-cache');
         return $response;
     }
 }
