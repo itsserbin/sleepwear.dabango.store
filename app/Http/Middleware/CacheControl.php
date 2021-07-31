@@ -21,6 +21,7 @@ class CacheControl
         $response->header('Cache-Control', 'private, max-age=0, no-cache');
         $response->header('Expires', Carbon::now()->addDay()->format('r'));
         $response->header('Last-Modified', Carbon::today()->format('r'));
+        $response->header('Vary', 'User-Agent');
         return $response;
     }
 }
