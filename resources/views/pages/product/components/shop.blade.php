@@ -4,21 +4,21 @@
             <div class="shop__col">
                 <div class="shop-products-slider-small">
                     <div class="shop-products-slider-small__image">
-                        <img src="{{asset($product->preview)}}" alt="">
+                        <img src="{{asset($product->preview)}}" alt="{{$product->h1}} {{$product->id}} - превью">
                     </div>
                     @foreach($productsPhoto as $photo)
                         <div class="shop-products-slider-small__image">
-                            <img src="{{asset($photo->image)}}" alt="">
+                            <img src="{{asset($photo->image)}}" alt="{{$product->h1}} {{$photo->id}} - превью">
                         </div>
                     @endforeach
                 </div>
                 <div class="shop-products-slider-big">
                     <div class="shop-products-slider-big__image">
-                        <img data-lazy="{{asset($product->preview)}}" alt="">
+                        <img data-lazy="{{asset($product->preview)}}" alt="{{$product->h1}} {{$product->id}}">
                     </div>
                     @foreach($productsPhoto as $photo)
                         <div class="shop-products-slider-big__image">
-                            <img data-lazy="{{asset($photo->image)}}" alt="">
+                            <img data-lazy="{{asset($photo->image)}}" alt="{{$product->h1}} {{$photo->id}}">
                         </div>
                     @endforeach
                 </div>

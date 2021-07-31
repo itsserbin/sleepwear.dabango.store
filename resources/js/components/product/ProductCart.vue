@@ -8,7 +8,7 @@
                class="card__product text-decoration-none my-3">
 
                 <div class="card__image">
-                    <img :src="host + '/' + product.preview" alt="">
+                    <img :src="host + '/' + product.preview" :alt="product.h1">
                 </div>
 
                 <div class="card__body">

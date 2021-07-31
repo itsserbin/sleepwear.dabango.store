@@ -7,7 +7,7 @@
                     @if($product->status)
                         <a href="{{route('product', $product->id)}}" class="card__product text-decoration-none">
                             <div class="card__image">
-                                <img src="{{asset($product->preview)}}" alt="">
+                                <img src="{{asset($product->preview)}}" alt="{{$product->h1}}">
                             </div>
                             <div class="card__body">
                                 <h5 class="card__label">{{$product->h1}}</h5>

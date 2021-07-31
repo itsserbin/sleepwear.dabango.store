@@ -5,7 +5,7 @@
             <div class="col-12 col-xs-6 col-md-3" v-for="item in categories" :key="item.id">
                 <a v-bind:href="'/category/' + item.slug" class="card__product text-decoration-none my-3">
                     <div class="card__image" style="max-height: 300px;">
-                        <img :src="item.preview" alt="">
+                        <img :src="item.preview" :alt="item.title">
                     </div>
 
                     <div class="card__body h-75">
