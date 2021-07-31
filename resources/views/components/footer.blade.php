@@ -95,6 +95,7 @@
         @endif
     </div>
     <div class="row text-center">
+        <a href="{{route('exchange-policy')}}" class="text-decoration-none text-white mb-3">Обмен и возврат</a>
         <a href="{{route('privacy-policy')}}" class="text-decoration-none text-white">Политика Конфиденциальности</a>
     </div>
 </div>

@@ -80,6 +80,14 @@ Route::get('privacy-policy', [HomeController::class, 'privacyPolicy'])
     ->name('privacy-policy');
 
 /**
+ * Открыть политику обмена и возврата.
+ *
+ * GET /exchange-policy
+ */
+Route::get('exchange-policy', [HomeController::class, 'exchangePolicy'])
+    ->name('exchange-policy');
+
+/**
  * Открыть карту сайта XML
  *
  * GET /sitemap

@@ -13,7 +13,7 @@
         @include('components.header')
     </header>
     <main class="main">
-        @include('components.flash-message')
+        @include('components.modal-burger-menu')
         @yield('content')
     </main>
     <footer class="footer">

@@ -3,11 +3,10 @@
 @section('description')Женские купальники премиум качества с доставкой по всей Украине ✓ Лучшие коллекции 2021 года ✓ Доступные цены @endsection
 
 @section('content')
-    @include('components.modal-burger-menu')
     <section class="product-list card pt-3">
         <div class="container">
-            <div class="product-list__title">Трендовые женские купальники 2021</div>
             <categories-grid></categories-grid>
+            <div class="product-list__title">Трендовые женские купальники 2021</div>
             <product-cards></product-cards>
         </div>
     </section>

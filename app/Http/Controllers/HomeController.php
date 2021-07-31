@@ -45,11 +45,6 @@ class HomeController extends Controller
         $this->ShoppingCart = $shoppingCart;
     }
 
-    public function cartCount()
-    {
-        return $this->ShoppingCart->cartList()['totalCount'];
-    }
-
     public function index()
     {
         $settings = Options::find(1)->get();
@@ -316,5 +311,48 @@ class HomeController extends Controller
             'footer_scripts' => $footer_scripts,
             'cartCount' => $cartCount,
         ]);
+    }
+
+    public function exchangePolicy()
+    {
+        $settings = Options::find(1)->get();
+        $cartCount = $this->cartCount();
+
+        foreach ($settings as $setting) {
+            $phone = $setting->phone;
+            $email = $setting->email;
+            $facebook = $setting->facebook;
+            $instagram = $setting->instagram;
+            $schedule = $setting->schedule;
+            $telegram = $setting->telegram;
+            $viber = $setting->viber;
+            $head_scripts = $setting->head_scripts;
+            $after_body_scripts = $setting->after_body_scripts;
+            $footer_scripts = $setting->footer_scripts;
+        }
+
+        return view('pages.exchange-policy',[
+            'phone' => $phone,
+            'email' => $email,
+            'facebook' => $facebook,
+            'instagram' => $instagram,
+            'schedule' => $schedule,
+            'telegram' => $telegram,
+            'viber' => $viber,
+            'head_scripts' => $head_scripts,
+            'after_body_scripts' => $after_body_scripts,
+            'footer_scripts' => $footer_scripts,
+            'cartCount' => $cartCount,
+        ]);
+    }
+
+    /**
+     * Получить кол-во товаров в корзине.
+     *
+     * @return mixed
+     */
+    public function cartCount()
+    {
+        return $this->ShoppingCart->cartList()['totalCount'];
     }
 }

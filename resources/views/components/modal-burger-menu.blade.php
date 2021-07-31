@@ -2,13 +2,9 @@
     <nav class="menu">
         <ul class="menu__list">
 
-            @if(\Illuminate\Support\Facades\Route::is('product'))
                 <li><a href="{{route('home')}}" class="menu__link text-decoration-none">Главная</a></li>
-                <li><a href="#specifications" class="menu__link text-decoration-none">Характеристики</a></li>
-                <li><a href="#advantages" class="menu__link text-decoration-none">Наши преимущества</a></li>
-                <li><a href="#shipping-and-payment" class="menu__link text-decoration-none">Доставка и оплата</a></li>
-                <li><a href="#reviews" class="menu__link text-decoration-none">Отзывы</a></li>
-            @endif
+                <li><a href="{{route('exchange-policy')}}" class="menu__link text-decoration-none">Обмен и возврат</a></li>
+                <li><a href="{{route('privacy-policy')}}" class="menu__link text-decoration-none">Политика Конфиденциальности</a></li>
 
         </ul>
     </nav>
