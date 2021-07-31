@@ -10,6 +10,9 @@ use App\Repositories\CategoriesRepository;
 use App\Repositories\Products\ProductRepository;
 use App\Services\OrderCheckout;
 use App\Services\ShoppingCart;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -277,6 +280,14 @@ class HomeController extends Controller
         ])->header('Content-Type', 'application/xml');
     }
 
+    public function imagesSitemap()
+    {
+        $products = $this->ProductRepository->getAll();
+
+        return response()->view('xml.images-sitemap', [
+            'products' => $products,
+        ])->header('Content-Type', 'application/xml');
+    }
     /**
      * Открыть политику конфеденциальности
      */
@@ -313,6 +324,11 @@ class HomeController extends Controller
         ]);
     }
 
+    /**
+     * Открыть политику обмена и возврата.
+     *
+     * @return Application|Factory|View
+     */
     public function exchangePolicy()
     {
         $settings = Options::find(1)->get();
@@ -353,7 +369,7 @@ class HomeController extends Controller
      */
     public function robots()
     {
-        return response()->view('robots')->header('Content-Type', 'text/plain');;
+        return response()->view('robots')->header('Content-Type', 'text/plain');
     }
 
     /**

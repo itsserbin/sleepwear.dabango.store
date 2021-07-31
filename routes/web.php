@@ -90,10 +90,18 @@ Route::get('exchange-policy', [HomeController::class, 'exchangePolicy'])
 /**
  * Открыть карту сайта XML
  *
- * GET /sitemap
+ * GET /sitemap.xml
  */
 Route::get('sitemap.xml', [HomeController::class, 'sitemap'])
     ->name('sitemap');
+
+/**
+ * Открыть карту изображений XML
+ *
+ * GET /images_sitemap.xml
+ */
+Route::get('images_sitemap.xml', [HomeController::class, 'imagesSitemap'])
+    ->name('images-sitemap');
 
 /**
  * Открыть robots.txt
