@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\DB;
 
 class Kernel extends ConsoleKernel
 {
@@ -42,10 +43,21 @@ class Kernel extends ConsoleKernel
             foreach ($profit_old as $item) {
                 $created_at = $item->date->format('Y-m-d');
 
-                $item->profit = $ProfitProfit = Orders::whereDate('created_at', $created_at)
+//            $item->profit = $ProfitProfit = Orders::whereDate('created_at', $created_at)
+//                ->where('status', 'Выполнен')
+//                ->select('profit')
+//                ->sum('profit');
+
+                $item->profit = $ProfitProfit = DB::table('orders')
+                    ->whereDate('orders.created_at', $created_at)
                     ->where('status', 'Выполнен')
-                    ->select('profit')
-                    ->sum('profit');
+                    ->join('order_items', 'orders.id', '=', 'order_items.order_id')
+                    ->select([
+                        'orders.id',
+                        'order_items.order_id',
+                        'order_items.profit',
+                    ])
+                    ->sum('order_items.profit');
 
                 $item->cost = $ProfitCost = Costs::whereDate('date', $created_at)
                     ->select('total')
@@ -60,14 +72,23 @@ class Kernel extends ConsoleKernel
 
             if (count($profit_now)) {
                 foreach ($profit_now as $item) {
-                    $item->profit = $ProfitProfit = Orders::whereDate('created_at', $date_now)
-                        ->where('status', 'Выполнен')
-                        ->select('profit')
-                        ->sum('profit');
+
+                    $item->profit = $ProfitProfit =
+                        DB::table('orders')
+                            ->whereDate('orders.created_at', $date_now)
+                            ->where('status', 'Выполнен')
+                            ->join('order_items', 'orders.id', '=', 'order_items.order_id')
+                            ->select([
+                                'orders.id',
+                                'order_items.order_id',
+                                'order_items.profit',
+                            ])
+                            ->sum('order_items.profit');
 
                     $item->cost = $ProfitCost = Costs::whereDate('date', $date_now)
                         ->select('total')
                         ->sum('total');
+
                     $item->marginality = $ProfitProfit - $ProfitCost;
                     $item->turnover = $ProfitProfit + $ProfitCost;
                     $item->update();
@@ -79,10 +100,20 @@ class Kernel extends ConsoleKernel
                     ->select('total')
                     ->sum('total');
 
-                $profit->profit = $ProfitProfit = Orders::whereDate('created_at', $date_now)
+//            $profit->profit = $ProfitProfit = Orders::whereDate('created_at', $date_now)
+//                ->where('status', 'Выполнен')
+//                ->select('profit')
+//                ->sum('profit');
+                $profit->profit = $ProfitProfit = DB::table('orders')
+                    ->whereDate('orders.created_at', $date_now)
                     ->where('status', 'Выполнен')
-                    ->select('profit')
-                    ->sum('profit');
+                    ->join('order_items', 'orders.id', '=', 'order_items.order_id')
+                    ->select([
+                        'orders.id',
+                        'order_items.order_id',
+                        'order_items.profit',
+                    ])
+                    ->sum('order_items.profit');
 
                 $profit->marginality = $ProfitProfit - $ProfitCost;
                 $profit->turnover = $ProfitProfit + $ProfitCost;
@@ -100,7 +131,7 @@ class Kernel extends ConsoleKernel
             $orders = Orders::where([
                 ['waybill', '!=', null],
                 ['status', '!=', 'Выполнен'],
-            ])->select('id','status', 'waybill')->get();
+            ])->select('id', 'status', 'waybill')->get();
 
             foreach ($orders as $item) {
                 $curl = curl_init();
