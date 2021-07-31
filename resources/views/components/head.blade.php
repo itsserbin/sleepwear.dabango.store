@@ -46,10 +46,11 @@
 @endif
 
 <script type="application/ld+json">
-{
-    "@context": "http://schema.org",
-    "@type": "WebSite",
-    "name": "Dabango",
-    "url": "{{route('home')}}",
-}
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Dabango",
+      "url": "{{route('home')}}",
+      "logo": "{{asset('storage/img/content/logo.png')}}"
+    }
 </script>
