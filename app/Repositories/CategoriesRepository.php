@@ -33,6 +33,17 @@ class CategoriesRepository extends CoreRepository
     }
 
     /**
+     * Найти категории по slug.
+     *
+     * @param $slug
+     * @return mixed
+     */
+    public function findFySlug($slug)
+    {
+        return $this->startConditions()->where('slug',$slug)->first();
+    }
+
+    /**
      * Получить все категории и вывести в пагинации по 15 шт.
      *
      * @param int|null $perPage

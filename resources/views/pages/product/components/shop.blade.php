@@ -14,7 +14,7 @@
                 </div>
                 <div class="shop-products-slider-big">
                     <div class="shop-products-slider-big__image">
-                        <img data-lazy="{{asset($product->preview)}}" alt="{{$product->h1}} {{$product->id}}">
+                        <img src="{{asset($product->preview)}}" alt="{{$product->h1}} {{$product->id}}">
                     </div>
                     @foreach($productsPhoto as $photo)
                         <div class="shop-products-slider-big__image">

@@ -201,10 +201,11 @@ class HomeController extends Controller
         ]);
     }
 
-    public function category()
+    public function category($slug)
     {
         $settings = Options::find(1)->get();
         $cartCount = $this->cartCount();
+        $category = $this->CategoriesRepository->findFySlug($slug);
 
         foreach ($settings as $setting) {
             $phone = $setting->phone;
@@ -231,6 +232,7 @@ class HomeController extends Controller
             'after_body_scripts' => $after_body_scripts,
             'footer_scripts' => $footer_scripts,
             'cartCount' => $cartCount,
+            'category' => $category
         ]);
     }
 

@@ -3,8 +3,11 @@
 @section('title','Политика Конфиденциальности')
 
 @section('content')
+    @component('components.breadcrumbs')
+        @slot('active')Политика Конфиденциальности@endslot
+    @endcomponent
     <section>
-        <div class="container">
+        <div class="content">
             <div class="row">
                 <div class="col-12">
                     <h1>ПОЛЬЗОВАТЕЛЬСКОЕ СОГЛАШЕНИЕ</h1>
