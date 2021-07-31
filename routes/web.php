@@ -72,6 +72,14 @@ Route::get('/category/{slug}', [HomeController::class, 'category'])
     ->name('category');
 
 /**
+ * Открыть политику конфеденциальности
+ *
+ * GET /privacy-policy
+ */
+Route::get('privacy-policy', [HomeController::class, 'privacyPolicy'])
+    ->name('privacy-policy');
+
+/**
  * Открыть карту сайта XML
  *
  * GET /sitemap

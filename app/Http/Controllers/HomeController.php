@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ReviewCreateRequest;
-use App\Mail\OrderShipped;
 use App\Models\ProductsPhoto;
 use App\Models\Reviews;
 use App\Models\Options;
@@ -281,5 +280,41 @@ class HomeController extends Controller
             'products' => $products,
             'categories' => $categories,
         ])->header('Content-Type', 'application/xml');
+    }
+
+    /**
+     * Открыть политику конфеденциальности
+     */
+    public function privacyPolicy()
+    {
+        $settings = Options::find(1)->get();
+        $cartCount = $this->cartCount();
+
+        foreach ($settings as $setting) {
+            $phone = $setting->phone;
+            $email = $setting->email;
+            $facebook = $setting->facebook;
+            $instagram = $setting->instagram;
+            $schedule = $setting->schedule;
+            $telegram = $setting->telegram;
+            $viber = $setting->viber;
+            $head_scripts = $setting->head_scripts;
+            $after_body_scripts = $setting->after_body_scripts;
+            $footer_scripts = $setting->footer_scripts;
+        }
+
+        return view('pages.privacy-policy',[
+            'phone' => $phone,
+            'email' => $email,
+            'facebook' => $facebook,
+            'instagram' => $instagram,
+            'schedule' => $schedule,
+            'telegram' => $telegram,
+            'viber' => $viber,
+            'head_scripts' => $head_scripts,
+            'after_body_scripts' => $after_body_scripts,
+            'footer_scripts' => $footer_scripts,
+            'cartCount' => $cartCount,
+        ]);
     }
 }

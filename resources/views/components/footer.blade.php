@@ -94,4 +94,7 @@
             </div>
         @endif
     </div>
+    <div class="row text-center">
+        <a href="{{route('privacy-policy')}}" class="text-decoration-none text-white">Политика Конфиденциальности</a>
+    </div>
 </div>
