@@ -1,0 +1,7 @@
+User-agent:*
+Disallow: /login
+Disallow: /register
+
+Host: https://dabango.store
+
+Sitemap: https://dabango.store/sitemap.xml
