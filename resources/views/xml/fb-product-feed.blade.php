@@ -27,6 +27,14 @@
                     @endif
                     <link>{{asset(route('product',$item->id))}}</link>
                     <image_link>{{asset($item->preview)}}</image_link>
+                    <additional_image_link>
+                        @foreach($item->ProductsPhoto as $item)
+                            {{asset($item->image).',' }}
+                        @endforeach
+                    </additional_image_link>
+                    <gender>female</gender>
+                    <fb_product_category>Clothing & Accessories > Clothing > Women's Clothing</fb_product_category>
+                    <google_product_category>Apparel & Accessories > Clothing</google_product_category>
                 </item>
             @endforeach
         @endif

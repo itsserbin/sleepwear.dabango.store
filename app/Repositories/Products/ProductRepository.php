@@ -43,6 +43,7 @@ class ProductRepository extends CoreRepository
     {
         return $this
             ->model
+            ->with('categories')
             ->where('published', 1)
             ->get();
     }
