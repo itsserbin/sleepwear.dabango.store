@@ -19,8 +19,8 @@ class CacheControl
     {
         $response = $next($request);
         $response->header('Cache-Control', 'private, max-age=0, no-cache');
-        $response->header('Expires', Carbon::now()->addDay());
-        $response->header('Last-Modified', Carbon::today());
+        $response->header('Expires', Carbon::now()->addDay()->format('r'));
+        $response->header('Last-Modified', Carbon::today()->format('r'));
         return $response;
     }
 }
