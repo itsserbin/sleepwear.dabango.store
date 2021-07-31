@@ -96,6 +96,14 @@ Route::get('sitemap.xml', [HomeController::class, 'sitemap'])
     ->name('sitemap');
 
 /**
+ * Открыть robots.txt
+ *
+ * GET /robots.txt
+ */
+Route::get('robots.txt', [HomeController::class, 'robots'])
+    ->name('robots');
+
+/**
  * Открыть товарный фид для фейсбука.
  *
  * GET /xml/fb/feed/products

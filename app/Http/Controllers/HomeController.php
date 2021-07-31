@@ -347,6 +347,16 @@ class HomeController extends Controller
     }
 
     /**
+     * Открыть robots.txt
+     *
+     * @return Response
+     */
+    public function robots()
+    {
+        return response()->view('robots')->header('Content-Type', 'text/plain');;
+    }
+
+    /**
      * Получить кол-во товаров в корзине.
      *
      * @return mixed
