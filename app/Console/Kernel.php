@@ -43,11 +43,6 @@ class Kernel extends ConsoleKernel
             foreach ($profit_old as $item) {
                 $created_at = $item->date->format('Y-m-d');
 
-//            $item->profit = $ProfitProfit = Orders::whereDate('created_at', $created_at)
-//                ->where('status', 'Выполнен')
-//                ->select('profit')
-//                ->sum('profit');
-
                 $item->profit = $ProfitProfit = DB::table('orders')
                     ->whereDate('orders.created_at', $created_at)
                     ->where('status', 'Выполнен')
@@ -100,10 +95,6 @@ class Kernel extends ConsoleKernel
                     ->select('total')
                     ->sum('total');
 
-//            $profit->profit = $ProfitProfit = Orders::whereDate('created_at', $date_now)
-//                ->where('status', 'Выполнен')
-//                ->select('profit')
-//                ->sum('profit');
                 $profit->profit = $ProfitProfit = DB::table('orders')
                     ->whereDate('orders.created_at', $date_now)
                     ->where('status', 'Выполнен')

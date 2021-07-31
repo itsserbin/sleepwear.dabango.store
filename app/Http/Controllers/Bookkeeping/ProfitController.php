@@ -18,55 +18,89 @@ class ProfitController extends Controller
 
         $profitOrders = Orders::where('status', 'Выполнен')->paginate(15);
 
-        $SaleSumInJustAThreeDays = Orders::where('status', 'Выполнен')
-            ->orderBy('created_at', 'desc')
-            ->select('sale_price')
-            ->get(3)
-            ->sum('sale_price');
+        $SaleSumInJustAThreeDays =
+            Orders::whereDate('orders.created_at', '>=', Carbon::today()->subDays(3))
+                ->where('status', 'Выполнен')
+                ->join('order_items', 'orders.id', '=', 'order_items.order_id')
+                ->select([
+                    'orders.id',
+                    'order_items.order_id',
+                    'order_items.sale_price',
+                ])
+                ->sum('order_items.sale_price');
 
-        $TradeSumInJustAThreeDays = Orders::where('status', 'Выполнен')
-            ->orderBy('created_at', 'desc')
-            ->select('trade_price')
-            ->get(3)
-            ->sum('trade_price');
+        $TradeSumInJustAThreeDays =
+            Orders::whereDate('orders.created_at', '>=', Carbon::today()->subDays(3))
+                ->where('status', 'Выполнен')
+                ->join('order_items', 'orders.id', '=', 'order_items.order_id')
+                ->select([
+                    'orders.id',
+                    'order_items.order_id',
+                    'order_items.trade_price',
+                ])
+                ->sum('order_items.trade_price');
+
+
         $ProfitOrdersInJustAThreeDays = $SaleSumInJustAThreeDays - $TradeSumInJustAThreeDays;
 
-        $SaleSumInJustAWeek = Orders::where('status', 'Выполнен')
-            ->orderBy('created_at', 'desc')
-            ->select('sale_price')
-            ->get(7)
-            ->sum('sale_price');
+        $SaleSumInJustAWeek =
+            Orders::whereDate('orders.created_at', '>=', Carbon::today()->subDays(7))
+                ->where('status', 'Выполнен')
+                ->join('order_items', 'orders.id', '=', 'order_items.order_id')
+                ->select([
+                    'orders.id',
+                    'order_items.order_id',
+                    'order_items.sale_price',
+                ])
+                ->sum('order_items.sale_price');
 
-        $TradeSumInJustAWeek = Orders::where('status', 'Выполнен')
-            ->orderBy('created_at', 'desc')
-            ->select('trade_price')
-            ->get(7)
-            ->sum('trade_price');
+        $TradeSumInJustAWeek =
+            Orders::whereDate('orders.created_at', '>=', Carbon::today()->subDays(7))
+                ->where('status', 'Выполнен')
+                ->join('order_items', 'orders.id', '=', 'order_items.order_id')
+                ->select([
+                    'orders.id',
+                    'order_items.order_id',
+                    'order_items.trade_price',
+                ])
+                ->sum('order_items.trade_price');
+
         $ProfitOrdersInJustAWeek = $SaleSumInJustAWeek - $TradeSumInJustAWeek;
 
-        $SaleSumInJustAMonth = Orders::whereMonth('created_at', Carbon::now()->format('m'))
-            ->where('status', 'Выполнен')
-            ->select('sale_price')
-            ->get()
-            ->sum('sale_price');
+        $SaleSumInJustAMonth =
+            Orders::whereDate('orders.created_at', '>=', Carbon::today()->subDays(7))
+                ->where('status', 'Выполнен')
+                ->join('order_items', 'orders.id', '=', 'order_items.order_id')
+                ->select([
+                    'orders.id',
+                    'order_items.order_id',
+                    'order_items.sale_price',
+                ])
+                ->sum('order_items.sale_price');
 
-        $TradeSumInJustAMonth = Orders::whereMonth('created_at', Carbon::now()->format('m'))
-            ->where('status', 'Выполнен')
-            ->select('trade_price')
-            ->get()
-            ->sum('trade_price');
+        $TradeSumInJustAMonth =
+            Orders::whereDate('orders.created_at', '>=', Carbon::today()->subDays(7))
+                ->where('status', 'Выполнен')
+                ->join('order_items', 'orders.id', '=', 'order_items.order_id')
+                ->select([
+                    'orders.id',
+                    'order_items.order_id',
+                    'order_items.trade_price',
+                ])
+                ->sum('order_items.trade_price');
+
+
         $ProfitOrdersInJustAMonth = $SaleSumInJustAMonth - $TradeSumInJustAMonth;
 
-        $profits = Profit::paginate(15);
+        $profits = Profit::orderBy('created_at', 'desc')->paginate(15);
 
-        $ProfitInJustAThreeDays = Profit::orderBy('created_at', 'desc')
-            ->select('marginality')
-            ->get(3)
-            ->sum('marginality');
+        $ProfitInJustAThreeDays =
+            Profit::whereDate('created_at', '>=', Carbon::today()->subDays(3))
+                ->select('marginality')
+                ->sum('marginality');
 
-        $ProfitInJustAWeek = Profit::orderBy('created_at', 'desc')
+        $ProfitInJustAWeek = Profit::whereDate('created_at', '>=', Carbon::today()->subDays(7))
             ->select('marginality')
-            ->get(7)
             ->sum('marginality');
 
         $ProfitInJustAMonth = Profit::whereMonth('created_at', Carbon::now()->format('m'))
@@ -91,7 +125,7 @@ class ProfitController extends Controller
     {
         $profit = new Profit();
 
-        return view('admin.bookkeeping.profit.create',[
+        return view('admin.bookkeeping.profit.create', [
             'profit' => $profit,
         ]);
     }
