@@ -16,15 +16,13 @@
         @endforeach
     @endif
     @if (!empty($products))
-        <items>
-            @foreach ($products as $item)
-                <url>
-                    <loc>{{route('product',$item->id)}}</loc>
-                    <lastmod>{{$item->updated_at->toAtomString()}}</lastmod>
-                    <changefreq>daily</changefreq>
-                    <priority>1</priority>
-                </url>
-            @endforeach
-        </items>
+        @foreach ($products as $item)
+            <url>
+                <loc>{{route('product',$item->id)}}</loc>
+                <lastmod>{{$item->updated_at->toAtomString()}}</lastmod>
+                <changefreq>daily</changefreq>
+                <priority>1</priority>
+            </url>
+        @endforeach
     @endif
 </urlset>
