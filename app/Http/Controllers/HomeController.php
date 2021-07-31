@@ -280,6 +280,11 @@ class HomeController extends Controller
         ])->header('Content-Type', 'application/xml');
     }
 
+    /**
+     * Открыть карту изображений XML.
+     *
+     * @return Response
+     */
     public function imagesSitemap()
     {
         $products = $this->ProductRepository->getAll();
