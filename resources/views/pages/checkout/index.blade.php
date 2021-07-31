@@ -1,7 +1,11 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="container">
+    @component('components.breadcrumbs')
+        @slot('active')Оформление заказа@endslot
+    @endcomponent
+
+    <div class="content">
         <div class="row">
             <div class="col-12">
                 <checkout></checkout>
