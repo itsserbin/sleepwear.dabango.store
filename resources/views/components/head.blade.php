@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" sizes="144x144" href="{{asset('storage/favicon/apple-icon-144x144.png')}}">
 <link rel="apple-touch-icon" sizes="152x152" href="{{asset('storage/favicon/apple-icon-152x152.png')}}">
 <link rel="apple-touch-icon" sizes="180x180" href="{{asset('storage/favicon/apple-icon-180x180.png')}}">
-<link rel="icon" type="image/png" sizes="192x192"  href="{{asset('storage/favicon/android-icon-192x192.png')}}">
+<link rel="icon" type="image/png" sizes="192x192" href="{{asset('storage/favicon/android-icon-192x192.png')}}">
 <link rel="icon" type="image/png" sizes="32x32" href="{{asset('storage/favicon/favicon-32x32.png')}}">
 <link rel="icon" type="image/png" sizes="96x96" href="{{asset('storage/favicon/favicon-96x96.png')}}">
 <link rel="icon" type="image/png" sizes="16x16" href="{{asset('storage/favicon/favicon-16x16.png')}}">
@@ -37,9 +37,19 @@
 <meta property="og:site_name" content="Dabango">
 
 @if(Route::is('product') )
-    <meta property="product:price:amount" content="@if($product->sale_price){{$product->sale_price}}@else{{$product->price}}@endif"/>
+    <meta property="product:price:amount"
+          content="@if($product->sale_price){{$product->sale_price}}@else{{$product->price}}@endif"/>
     <meta property="product:price:currency" content="UAH"/>
     <meta property="og:image" content="{{asset($product->preview)}}">
 @else
     <meta property="og:image" content="{{asset('storage/img/content/logo.png')}}">
 @endif
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Dabango",
+    "url": "{{route('home')}}",
+}
+</script>

@@ -19,4 +19,36 @@
         </nav>
         <hr>
     </div>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Dabango",
+        "item": "{{route('home')}}"
+      },
+      @if(isset($subsidiary))
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "{{$active}}",
+        "item": "{{$active_link}}"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "{{$subsidiary}}"
+      }
+      @else
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "{{$active}}"
+      }
+      @endif
+      ]
+    }
+    </script>
 </div>
