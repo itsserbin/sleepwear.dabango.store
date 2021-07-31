@@ -89,7 +89,9 @@ class CategoriesRepository extends CoreRepository
             ->select(
                 'id',
                 'title',
-                'parent_id'
+                'parent_id',
+                'slug',
+                'updated_at',
             )->get();
     }
 

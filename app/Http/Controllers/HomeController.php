@@ -35,7 +35,7 @@ class HomeController extends Controller
      */
     public function __construct(
         OrderCheckout $orderCheckout,
-        ShoppingCart $shoppingCart
+        ShoppingCart  $shoppingCart
 
     )
     {
@@ -262,6 +262,22 @@ class HomeController extends Controller
         $categories = $this->CategoriesRepository->getAllToFeed();
 
         return response()->view('xml.prom-product-feed', [
+            'products' => $products,
+            'categories' => $categories,
+        ])->header('Content-Type', 'application/xml');
+    }
+
+    /**
+     * Открыть карту сайта XML.
+     *
+     * @return Response
+     */
+    public function sitemap()
+    {
+        $products = $this->ProductRepository->getAll();
+        $categories = $this->CategoriesRepository->getAllToFeed();
+
+        return response()->view('xml.sitemap', [
             'products' => $products,
             'categories' => $categories,
         ])->header('Content-Type', 'application/xml');

@@ -46,13 +46,13 @@ Route::get('/', [HomeController::class, 'index'])
  *
  * GET /cart/
  */
-Route::get('cart',[CartController::class,'index'])
+Route::get('cart', [CartController::class, 'index'])
     ->name('cart');
 
 /**
  * Открыть страницу подтверждения заказа.
  */
-Route::get('checkout',[HomeController::class,'checkout'])
+Route::get('checkout', [HomeController::class, 'checkout'])
     ->name('checkout');
 
 /**
@@ -71,25 +71,30 @@ Route::get('/product/{id?}', [HomeController::class, 'product'])
 Route::get('/category/{slug}', [HomeController::class, 'category'])
     ->name('category');
 
-/** Группа маршрутов для XML */
-Route::prefix('xml')->group(function (){
+/**
+ * Открыть карту сайта XML
+ *
+ * GET /sitemap
+ */
+Route::get('sitemap.xml', [HomeController::class, 'sitemap'])
+    ->name('sitemap');
 
-    /**
-     * Открыть товарный фид для фейсбука.
-     *
-     * GET /xml/fb/feed/products
-     */
-    Route::get('fb/feed/products',[HomeController::class,'fbProductFeed'])
-        ->name('fb.product.feed');
+/**
+ * Открыть товарный фид для фейсбука.
+ *
+ * GET /xml/fb/feed/products
+ */
+Route::get('xml/fb/feed/products', [HomeController::class, 'fbProductFeed'])
+    ->name('fb.product.feed');
 
-    /**
-     * Открыть товарный фид для prom.ua.
-     *
-     * GET /xml/prom/feed/products
-     */
-    Route::get('prom/feed/products',[HomeController::class,'promProductFeed'])
-        ->name('prom.product.feed');
-});
+/**
+ * Открыть товарный фид для prom.ua.
+ *
+ * GET /xml/prom/feed/products
+ */
+Route::get('xml/prom/feed/products', [HomeController::class, 'promProductFeed'])
+    ->name('prom.product.feed');
+
 /**
  * Показать страницу благодарности после отправки заявки.
  *
@@ -119,14 +124,14 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
         ->name('admin.dashboard');
 
     /** Группа маршрутов для картегорий */
-    Route::prefix('categories')->group(function (){
+    Route::prefix('categories')->group(function () {
 
         /**
          * Открыть страницу со всеми категориями.
          *
          * GET /admin/categories
          */
-        Route::get('/',[CategoriesController::class,'index'])
+        Route::get('/', [CategoriesController::class, 'index'])
             ->name('admin.categories.index');
 
         /**
@@ -134,7 +139,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
          *
          * GET /admin/categories/create
          */
-        Route::get('create',[CategoriesController::class,'create'])
+        Route::get('create', [CategoriesController::class, 'create'])
             ->name('admin.categories.create');
 
         /**
@@ -142,7 +147,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
          *
          * GET /admin/categories/edit
          */
-        Route::get('edit/{id}',[CategoriesController::class,'edit'])
+        Route::get('edit/{id}', [CategoriesController::class, 'edit'])
             ->name('admin.categories.edit');
     });
 
@@ -215,7 +220,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
         Route::resource('providers', ProvidersController::class)
             ->names('admin.bookkeeping.providers');
 
-        Route::get('supplier-payments',[SupplierPaymentsController::class,'index'])
+        Route::get('supplier-payments', [SupplierPaymentsController::class, 'index'])
             ->name('admin.bookkeeping.supplier-payments.index');
     });
 
