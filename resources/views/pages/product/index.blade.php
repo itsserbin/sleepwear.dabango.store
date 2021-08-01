@@ -8,7 +8,7 @@
       "@context": "https://schema.org/",
       "@type": "Product",
       "name": "{{$product->h1}}",
-      "image": "{{$product->preview}}",
+      "image": "{{asset($product->preview)}}",
       "description": "{{$product->description}}",
       "sku": "{{$product->vendor_code}}",
       "mpn": "{{$product->id}}",
