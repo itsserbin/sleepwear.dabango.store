@@ -5,14 +5,12 @@ namespace App\Console;
 use App\Models\Bookkeeping\Costs;
 use App\Models\Bookkeeping\OrdersDay;
 use App\Models\Bookkeeping\Profit;
-use App\Models\BookkeepingCosts;
-use App\Models\Clients;
 use App\Models\Orders;
 use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\DB;
+use App\Models\Enum\OrderStatus;
 
 class Kernel extends ConsoleKernel
 {
@@ -45,7 +43,7 @@ class Kernel extends ConsoleKernel
 
                 $item->profit = $ProfitProfit = DB::table('orders')
                     ->whereDate('orders.created_at', $created_at)
-                    ->where('status', 'Выполнен')
+                    ->where('status', OrderStatus::STATUS_DONE)
                     ->join('order_items', 'orders.id', '=', 'order_items.order_id')
                     ->select([
                         'orders.id',
@@ -71,7 +69,7 @@ class Kernel extends ConsoleKernel
                     $item->profit = $ProfitProfit =
                         DB::table('orders')
                             ->whereDate('orders.created_at', $date_now)
-                            ->where('status', 'Выполнен')
+                            ->where('status', OrderStatus::STATUS_DONE)
                             ->join('order_items', 'orders.id', '=', 'order_items.order_id')
                             ->select([
                                 'orders.id',
@@ -97,7 +95,7 @@ class Kernel extends ConsoleKernel
 
                 $profit->profit = $ProfitProfit = DB::table('orders')
                     ->whereDate('orders.created_at', $date_now)
-                    ->where('status', 'Выполнен')
+                    ->where('status', OrderStatus::STATUS_DONE)
                     ->join('order_items', 'orders.id', '=', 'order_items.order_id')
                     ->select([
                         'orders.id',
@@ -114,14 +112,15 @@ class Kernel extends ConsoleKernel
         })->everyMinute();
 
         /**
-         * Интергация API с НоваПошта
+         * Интеграция API с НоваПошта
          *
          * Обновление раз в 5 минут.
          */
         $schedule->call(function () {
             $orders = Orders::where([
                 ['waybill', '!=', null],
-                ['status', '!=', 'Выполнен'],
+                ['status', '!=', OrderStatus::STATUS_DONE],
+                ['status', '!=', OrderStatus::STATUS_AWAITING_PREPAYMENT],
             ])->select('id', 'status', 'waybill')->get();
 
             foreach ($orders as $item) {
@@ -152,14 +151,16 @@ class Kernel extends ConsoleKernel
                 } else {
                     $result = json_decode($response, true);
 
-                    if (in_array((int)$result['data'][0]['StatusCode'], [1], true)) {
-                        $item->status = 'Ожидает отправки';
+                    if ((int)$result['data'][0]['StatusCode'] === 1) {
+                        $item->status = OrderStatus::STATUS_AWAITING_DISPATCH;
                     } elseif (in_array((int)$result['data'][0]['StatusCode'], [102, 103, 108], true)) {
-                        $item->status = 'Возврат';
+                        $item->status = OrderStatus::STATUS_RETURN;
                     } elseif (in_array((int)$result['data'][0]['StatusCode'], [7, 8], true)) {
-                        $item->status = 'На почте';
+                        $item->status = OrderStatus::STATUS_AT_THE_POST_OFFICE;
+                    } elseif (in_array((int)$result['data'][0]['StatusCode'], [5, 6, 101], true)) {
+                        $item->status = OrderStatus::STATUS_ON_THE_ROAD;
                     } elseif (in_array((int)$result['data'][0]['StatusCode'], [9, 10, 11], true)) {
-                        $item->status = 'Выполнен';
+                        $item->status = OrderStatus::STATUS_DONE;
                     }
                     $item->update();
                 }
@@ -182,11 +183,11 @@ class Kernel extends ConsoleKernel
                 ->count();
 
             $DoneOrdersCountNow = Orders::whereDate('created_at', $date_now)
-                ->where('status', 'Выполнен')
+                ->where('status', OrderStatus::STATUS_DONE)
                 ->count();
 
             $CancelOrdersCountNow = Orders::whereDate('created_at', $date_now)
-                ->where('status', 'Отменен')
+                ->where('status', OrderStatus::STATUS_CANCELED)
                 ->count();
 
             $SumCostsNow = Costs::whereDate('date', $date_now)
@@ -207,7 +208,7 @@ class Kernel extends ConsoleKernel
                 ->sum('cost');
 
             $ReturnOrdersCountNow = Orders::whereDate('created_at', $date_now)
-                ->where('status', 'Возврат')
+                ->where('status', OrderStatus::STATUS_RETURN)
                 ->count();
 
             if ($orders_days == null) {
@@ -229,31 +230,43 @@ class Kernel extends ConsoleKernel
                 }
 
                 $orders_days->in_process = Orders::whereDate('created_at', $date_now)
-                    ->where('status', 'В процессе')
+                    ->where('status', OrderStatus::STATUS_PROCESSED)
                     ->count();
 
                 $orders_days->transferred_to_supplier = Orders::whereDate('created_at', $date_now)
-                    ->where('status', 'Передан поставщику')
+                    ->where('status', OrderStatus::STATUS_TRANSFERRED_TO_SUPPLIER)
                     ->count();
 
                 $orders_days->unprocessed = Orders::whereDate('created_at', $date_now)
-                    ->where('status', 'Новый')
+                    ->where('status', OrderStatus::STATUS_NEW)
                     ->count();
 
                 $orders_days->at_the_post_office = Orders::whereDate('created_at', $date_now)
-                    ->where('status', 'На почте')
+                    ->where('status', OrderStatus::STATUS_AT_THE_POST_OFFICE)
                     ->count();
 
                 $orders_days->completed_applications = Orders::whereDate('created_at', $date_now)
-                    ->where('status', 'Выполнен')
+                    ->where('status', OrderStatus::STATUS_DONE)
                     ->count();
 
                 $orders_days->refunds = Orders::whereDate('created_at', $date_now)
-                    ->where('status', 'Возврат')
+                    ->where('status', OrderStatus::STATUS_RETURN)
                     ->count();
 
                 $orders_days->cancel = Orders::whereDate('created_at', $date_now)
-                    ->where('status', 'Отменен')
+                    ->where('status', OrderStatus::STATUS_CANCELED)
+                    ->count();
+
+                $orders_days->awaiting_dispatch = Orders::whereDate('created_at', $date_now)
+                    ->where('status', OrderStatus::STATUS_AWAITING_DISPATCH)
+                    ->count();
+
+                $orders_days->awaiting_prepayment = Orders::whereDate('created_at', $date_now)
+                    ->where('status', OrderStatus::STATUS_AWAITING_PREPAYMENT)
+                    ->count();
+
+                $orders_days->on_the_road = Orders::whereDate('created_at', $date_now)
+                    ->where('status', OrderStatus::STATUS_ON_THE_ROAD)
                     ->count();
 
                 if ($OrdersCountNow !== 0) {
@@ -289,11 +302,11 @@ class Kernel extends ConsoleKernel
                         ->count();
 
                     $DoneOrdersCount = Orders::whereDate('created_at', $date)
-                        ->where('status', 'Выполнен')
+                        ->where('status', OrderStatus::STATUS_DONE)
                         ->count();
 
                     $CancelOrdersCount = Orders::whereDate('created_at', $date)
-                        ->where('status', 'Отменен')
+                        ->where('status', OrderStatus::STATUS_CANCELED)
                         ->count();
 
                     $SumCosts = Costs::whereDate('date', $date)
@@ -310,7 +323,7 @@ class Kernel extends ConsoleKernel
                         ->sum('cost');
 
                     $ReturnOrdersCount = Orders::whereDate('created_at', $date)
-                        ->where('status', 'Возврат')
+                        ->where('status', OrderStatus::STATUS_RETURN)
                         ->count();
 
                     $item->advertising = Costs::whereDate('date', $date)
@@ -328,31 +341,43 @@ class Kernel extends ConsoleKernel
                     }
 
                     $item->in_process = Orders::whereDate('created_at', $date)
-                        ->where('status', 'В процессе')
+                        ->where('status', OrderStatus::STATUS_PROCESSED)
                         ->count();
 
                     $item->transferred_to_supplier = Orders::whereDate('created_at', $date)
-                        ->where('status', 'Передан поставщику')
+                        ->where('status', OrderStatus::STATUS_TRANSFERRED_TO_SUPPLIER)
                         ->count();
 
                     $item->at_the_post_office = Orders::whereDate('created_at', $date)
-                        ->where('status', 'На почте')
+                        ->where('status', OrderStatus::STATUS_AT_THE_POST_OFFICE)
                         ->count();
 
                     $item->completed_applications = Orders::whereDate('created_at', $date)
-                        ->where('status', 'Выполнен')
+                        ->where('status', OrderStatus::STATUS_DONE)
                         ->count();
 
                     $item->unprocessed = Orders::whereDate('created_at', $date)
-                        ->where('status', 'Новый')
+                        ->where('status', OrderStatus::STATUS_NEW)
                         ->count();
 
                     $item->refunds = Orders::whereDate('created_at', $date)
-                        ->where('status', 'Возврат')
+                        ->where('status', OrderStatus::STATUS_RETURN)
                         ->count();
 
                     $item->cancel = Orders::whereDate('created_at', $date)
-                        ->where('status', 'Отменен')
+                        ->where('status', OrderStatus::STATUS_CANCELED)
+                        ->count();
+
+                    $item->awaiting_dispatch = Orders::whereDate('created_at', $date)
+                        ->where('status', OrderStatus::STATUS_AWAITING_DISPATCH)
+                        ->count();
+
+                    $item->awaiting_prepayment = Orders::whereDate('created_at', $date)
+                        ->where('status', OrderStatus::STATUS_AWAITING_PREPAYMENT)
+                        ->count();
+
+                    $item->on_the_road = Orders::whereDate('created_at', $date)
+                        ->where('status', OrderStatus::STATUS_ON_THE_ROAD)
                         ->count();
 
                     if ($OrdersCount !== 0) {

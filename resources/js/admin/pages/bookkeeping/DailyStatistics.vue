@@ -210,6 +210,27 @@
 
                             <b-th>
                                 <b-button v-b-tooltip.hover variant="btn"
+                                          title="Количество заявок ожидающих отправки">
+                                    <b>Ожидают отправки</b>
+                                </b-button>
+                            </b-th>
+
+                            <b-th>
+                                <b-button v-b-tooltip.hover variant="btn"
+                                          title="Количество заявок ожидающих предоплаты">
+                                    <b>Ожидают предоплаты</b>
+                                </b-button>
+                            </b-th>
+
+                            <b-th>
+                                <b-button v-b-tooltip.hover variant="btn"
+                                          title="Количество заявок в дороге">
+                                    <b>В дороге</b>
+                                </b-button>
+                            </b-th>
+
+                            <b-th>
+                                <b-button v-b-tooltip.hover variant="btn"
                                           title="Количество заявок в процессе">
                                     <b>В процессе</b>
                                 </b-button>
@@ -328,6 +349,9 @@
                             <b-td>{{ item.advertising }}</b-td>
                             <b-td>{{ item.applications }}</b-td>
                             <b-td>{{ item.transferred_to_supplier }}</b-td>
+                            <b-td>{{ item.awaiting_dispatch }}</b-td>
+                            <b-td>{{ item.awaiting_prepayment }}</b-td>
+                            <b-td>{{ item.on_the_road }}</b-td>
                             <b-td>{{ item.in_process }}</b-td>
                             <b-td>{{ item.at_the_post_office }}</b-td>
                             <b-td>{{ item.completed_applications }}</b-td>
