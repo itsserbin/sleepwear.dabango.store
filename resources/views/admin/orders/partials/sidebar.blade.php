@@ -38,4 +38,9 @@
         <a class="nav-link {{ request()->routeIs('admin.orders.showCancelOrders') ? 'active' : null }}" aria-current="page"
            href="{{route('admin.orders.showCancelOrders')}}">Отмененные</a>
     </li>
+
+    <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('admin.orders.getAllPhones') ? 'active' : null }}" aria-current="page"
+           href="{{route('admin.orders.getAllPhones')}}">Номера телефонов</a>
+    </li>
 </ul>

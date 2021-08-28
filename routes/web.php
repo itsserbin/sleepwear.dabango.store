@@ -206,18 +206,32 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     });
 
     Route::group(['prefix' => '/orders'], function () {
-        Route::get('/', [OrdersController::class, 'index'])->name('admin.orders.index');
-        Route::get('/edit/{id}', [OrdersController::class, 'edit'])->name('admin.orders.edit');
-        Route::patch('/update/{id}', [OrdersController::class, 'update'])->name('admin.orders.update');
-        Route::delete('/destroy/{id}', [OrdersController::class, 'destroy'])->name('admin.orders.destroy');
+        Route::get('/', [OrdersController::class, 'index'])
+            ->name('admin.orders.index');
+        Route::get('/edit/{id}', [OrdersController::class, 'edit'])
+            ->name('admin.orders.edit');
+        Route::patch('/update/{id}', [OrdersController::class, 'update'])
+            ->name('admin.orders.update');
+        Route::delete('/destroy/{id}', [OrdersController::class, 'destroy'])
+            ->name('admin.orders.destroy');
 
-        Route::get('new', [OrdersController::class, 'showNewOrders'])->name('admin.orders.showNewOrders');
-        Route::get('done', [OrdersController::class, 'showDoneOrders'])->name('admin.orders.showDoneOrders');
-        Route::get('cancel', [OrdersController::class, 'showCancelOrders'])->name('admin.orders.showCancelOrders');
-        Route::get('process', [OrdersController::class, 'showProcessOrders'])->name('admin.orders.showProcessOrders');
-        Route::get('return', [OrdersController::class, 'showReturnOrders'])->name('admin.orders.showReturnOrders');
-        Route::get('post-office', [OrdersController::class, 'showPostOfficeOrders'])->name('admin.orders.showPostOfficeOrders');
-        Route::get('transferred-to-supplier-orders', [OrdersController::class, 'showTransferredToSupplierOrders'])->name('admin.orders.showTransferredToSupplierOrders');
+        Route::get('new', [OrdersController::class, 'showNewOrders'])
+            ->name('admin.orders.showNewOrders');
+        Route::get('done', [OrdersController::class, 'showDoneOrders'])
+            ->name('admin.orders.showDoneOrders');
+        Route::get('cancel', [OrdersController::class, 'showCancelOrders'])
+            ->name('admin.orders.showCancelOrders');
+        Route::get('process', [OrdersController::class, 'showProcessOrders'])
+            ->name('admin.orders.showProcessOrders');
+        Route::get('return', [OrdersController::class, 'showReturnOrders'])
+            ->name('admin.orders.showReturnOrders');
+        Route::get('post-office', [OrdersController::class, 'showPostOfficeOrders'])
+            ->name('admin.orders.showPostOfficeOrders');
+        Route::get('transferred-to-supplier-orders', [OrdersController::class, 'showTransferredToSupplierOrders'])
+            ->name('admin.orders.showTransferredToSupplierOrders');
+
+        Route::get('all-phone', [OrdersController::class, 'getAllPhones'])
+            ->name('admin.orders.getAllPhones');
     });
 
     Route::group(['middleware' => 'role:administrator', 'prefix' => '/bookkeeping'], function () {

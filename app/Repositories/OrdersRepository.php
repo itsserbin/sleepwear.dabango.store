@@ -392,4 +392,14 @@ class OrdersRepository extends CoreRepository
                 ->where('phone', $phone)
                 ->sum('sale_price') + $sale_price;
     }
+
+    /**
+     * Получить все номера телефонов из заказа.
+     *
+     * @return mixed
+     */
+    public function getAllPhones()
+    {
+        return $this->startConditions()->select('phone','created_at')->orderBy('created_at')->get();
+    }
 }

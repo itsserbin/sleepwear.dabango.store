@@ -184,4 +184,13 @@ class OrdersController extends Controller
         ]);
     }
 
+    public function getAllPhones()
+    {
+        $phones = $this->OrdersRepository->getAllPhones();
+
+        return view('admin.orders.phones', [
+            'phones' => $phones
+        ]);
+    }
+
 }
