@@ -18,7 +18,7 @@
 
             <div class="col-12 col-md-10">
                 @foreach($phones as $phone)
-                    {{$phone->phone}}
+                    {{preg_replace('/[^0-9]/', '', $phone->phone)}}
                     <br>
                 @endforeach
             </div>

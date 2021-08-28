@@ -400,6 +400,6 @@ class OrdersRepository extends CoreRepository
      */
     public function getAllPhones()
     {
-        return $this->startConditions()->select('phone','created_at')->orderBy('created_at')->get();
+        return $this->model::select('phone','created_at')->orderBy('created_at')->get();
     }
 }
