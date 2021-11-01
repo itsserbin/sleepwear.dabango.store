@@ -11,7 +11,7 @@
                 >
 
                     <div class="card__image">
-                        <img :src="host + '/' + product.preview" :alt="product.h1" style="object-fit: cover;">
+                        <img :src="host + '/' + product.preview" :alt="product.h1" style="object-fit: cover">
                     </div>
 
                     <div class="card__body">
