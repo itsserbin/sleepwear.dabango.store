@@ -10,12 +10,12 @@ class SecuredHttp
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  \Closure  $next
      * @return mixed
      */
     public function handle($request, Closure $next){
-        if (!$request->secure()) {
+        if (!$request->secure() && env('APP_ENV') !== 'local') {
             return redirect()->secure($request->path());
         }
         return $next($request);
