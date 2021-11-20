@@ -65,6 +65,7 @@ class Kernel extends HttpKernel
             VerifyCsrfToken::class,
             SubstituteBindings::class,
             CreateFreshApiToken::class,
+            \App\Http\Middleware\RedirectToNonWwwMiddleware::class
         ],
 
         'api' => [
