@@ -20,10 +20,7 @@
                     </availability>
                     <brand>Dabango</brand>
                     <condition>new</condition>
-                    <price>{{$item->price}}</price>
-                    @if($item->discount_price)
-                        <sale_price>{{$item->discount_price}}</sale_price>
-                    @endif
+                    <price>{{$item->discount_price ?: $item->price}}</price>
                     <link>{{asset(route('product',$item->id))}}</link>
                     <image_link>{{asset($item->preview)}}</image_link>
                     <additional_image_link>
