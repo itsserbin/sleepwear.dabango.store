@@ -1,7 +1,7 @@
 <template>
     <div>
         <loader v-if="isLoading"></loader>
-        <div class="row" v-if="categories != 0 && !isLoading">
+        <div class="row justify-content-center" v-if="categories != 0 && !isLoading">
             <div class="col-12 col-xs-6 col-md-3" v-for="item in categories" :key="item.id">
                 <div class="card__product my-3">
                     <a v-bind:href="'/category/' + item.slug" class="text-decoration-none">

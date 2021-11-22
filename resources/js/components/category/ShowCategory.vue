@@ -6,9 +6,9 @@
             <div class="row justify-content-center" v-if="!isLoading">
                 <div v-for="product in products"
                      v-if="product.published === 1"
-                     class="card__product text-decoration-none my-3"
+                     class="card__product my-3"
                 >
-                    <a v-bind:href="host + '/product/' + product.id">
+                    <a v-bind:href="host + '/product/' + product.id" class="text-decoration-none">
 
                         <div class="card__image">
                             <img :src="host + '/' + product.preview" :alt="product.h1" style="object-fit: cover">
