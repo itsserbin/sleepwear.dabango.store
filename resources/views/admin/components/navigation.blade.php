@@ -29,6 +29,10 @@
                     <a class="nav-link {{ request()->routeIs('admin.orders.index') ? 'active' : null }}"
                        href="{{route('admin.orders.index')}}">Заказы</a>
                 @endif
+                @if(Gate::allows('show-bookkeeping') OR Gate::allows('admin'))
+                    <a class="nav-link {{ request()->routeIs('admin.bookkeeping.index') ? 'active' : null }}"
+                       href="{{route('admin.bookkeeping.index')}}">Бухгалтерия</a>
+                @endif
                 @endrole
 
                 @role('administrator')
@@ -37,10 +41,7 @@
                        href="{{route('admin.options.index')}}">Настройки</a>
                 @endif
 
-                @if(Gate::allows('show-bookkeeping') OR Gate::allows('admin'))
-                    <a class="nav-link {{ request()->routeIs('admin.bookkeeping.index') ? 'active' : null }}"
-                       href="{{route('admin.bookkeeping.index')}}">Бухгалтерия</a>
-                @endif
+
                 @endrole
 
             </ul>

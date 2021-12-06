@@ -234,7 +234,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
             ->name('admin.orders.getAllPhones');
     });
 
-    Route::group(['middleware' => 'role:administrator', 'prefix' => '/bookkeeping'], function () {
+    Route::group(['prefix' => '/bookkeeping'], function () {
         Route::resource('all', App\Http\Controllers\Bookkeeping\BookkeepingController::class)
             ->names('admin.bookkeeping');
 
