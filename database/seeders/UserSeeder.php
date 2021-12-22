@@ -23,18 +23,25 @@ class UserSeeder extends Seeder
         $showOrders = Permission::where('slug', 'show-orders')->first();
         $admin = Permission::where('slug', 'admin')->first();
 
-//        $user1 = new User();
-//        $user1->name = 'Admin';
-//        $user1->email = 'serbin.ssd@gmail.com';
-//        $user1->password = bcrypt('secret');;
-//        $user1->save();
-//        $user1->roles()->attach($administrator);
-//        $user1->permissions()->attach($admin);
-//
+       $user1 = new User();
+       $user1->name = 'Admin';
+       $user1->email = 'serbin.ssd@gmail.com';
+       $user1->password = bcrypt('secret');;
+       $user1->save();
+       $user1->roles()->attach($administrator);
+       $user1->permissions()->attach($admin);
+
+        $user3 = new User();
+        $user3->name = 'Karina';
+        $user3->email = 'katina.youbrandtop@gmail.com';
+        $user3->password = bcrypt('secret');
+        $user3->save();
+        $user3->roles()->attach($administrator);
+        $user3->permissions()->attach($admin);
 
         $user4 = new User();
-        $user4->name = 'Manager2';
-        $user4->email = 'Ftor1315@gmail.com';
+        $user4->name = 'Andrew';
+        $user4->email = 'kalmykov.biz3@gmail.com';
         $user4->password = bcrypt('secret');
         $user4->save();
         $user4->roles()->attach($administrator);
