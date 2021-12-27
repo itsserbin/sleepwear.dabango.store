@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
 
         $user3 = new User();
         $user3->name = 'Karina';
-        $user3->email = 'katina.youbrandtop@gmail.com';
+        $user3->email = 'anastasia.dabango@gmail.com';
         $user3->password = bcrypt('secret');
         $user3->save();
         $user3->roles()->attach($administrator);
